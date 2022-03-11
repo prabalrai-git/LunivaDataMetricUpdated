@@ -8,6 +8,7 @@ import PageHeader from '../Common/pageHeader'
 import { getItemVsRatioApi } from '../../services/itemVsRatioService';
 import Edit from '../Common/Edit';
 import Filter from '../Common/Filter';
+import { ItemName } from '../Common/ItemToReagent';
 
 const Index = () => {
   const history = useHistory();
@@ -29,14 +30,27 @@ const Index = () => {
       key: 'Testname',
     },
     {
-      title: 'Item Name',
+      title: `${ItemName} Name`,
       dataIndex: 'ItemName',
-      key: 'itemName'
+      key: 'itemName',
+      render: (text, record) => (
+        `${text} ${record.Unit !== null ? `(${record.Unit})` : ''}`
+      )
     },
     {
-      title: 'Item Per Unit Test',
+      title: `${ItemName} Per Unit Test`,
       dataIndex: 'ItemPerUnitTest',
       key: 'ItemPerUnitTest'
+    },
+    {
+      title: `Test Per Unit`,
+      dataIndex: 'TestPerUnit',
+      key: 'TestPerUnit'
+    },
+    {
+      title: 'Sub Unit',
+      dataIndex: 'SubUnit',
+      key: 'SubUnit'
     },
     {
       title: 'Is Active',
@@ -111,14 +125,14 @@ const Index = () => {
     <ItemContainer>
       <div className="maiTopContainer">
       <PageHeader
-        buttonTitle='Add Item Vs Ratio'
-        pageTitle='Item Vs Ratio'
+        buttonTitle={`Add ${ItemName} Vs Ratio`}
+        pageTitle={`${ItemName} Vs Ratio`}
         buttonOnClick={() => history.push('./itemvsratio/add')}
 
-        forGroup="Add Group Item Vs Ratio"
+        forGroup={`Add Group ${ItemName} Vs Ratio`}
         forGroupButtonClick={() => history.push('./itemvsratio/add/group')}
 
-        forCon="Add Group Item Vs Consumption"
+        forCon={`Add Group ${ItemName} Vs Consumption`}
         forConButtonClick={() => history.push('./itemvsratio/add/itemconsumption')}
 
       ></PageHeader>

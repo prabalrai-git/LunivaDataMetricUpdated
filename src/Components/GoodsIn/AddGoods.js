@@ -160,19 +160,19 @@ const AddGoods = (props) => {
           >
 
             <Form.Item
-              label="Item name"
+              label="Reagent name"
               name="ItemId"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item name!',
+                  message: 'Please select reagent name!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select an item"
+                placeholder="Select A Reagent"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -188,7 +188,7 @@ const AddGoods = (props) => {
                       title={iTy?.ItemName}
                       key={iTy?.TId}
                       value={iTy?.TId}>
-                      {iTy?.ItemName}
+                      {iTy?.ItemName} ({iTy?.Unit})
                     </Option>
                   )
                 })
@@ -244,12 +244,12 @@ const AddGoods = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item Track"
+              label="Reagent Track"
               name="ItmTrackId"
               rules={[
                 {
                   required: true,
-                  message: 'Please input Item Track!',
+                  message: 'Please Input Reagent Track!',
                 },
               ]}
             >
@@ -301,7 +301,7 @@ const AddGoods = (props) => {
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select manufacturer"
+                placeholder="Select manufacturer"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -324,12 +324,12 @@ const AddGoods = (props) => {
             </Form.Item>
 
             <Form.Item
-              label={forEdit ? "Current Item Status" : "Item Status"}
+              label={forEdit ? "Current Reagent Status" : "Reagent Status"}
               name="ItemStatus"
               rules={[
                 {
                   // required: true,
-                  message: 'Please input Item Status!',
+                  message: 'Please input Reagent Status!',
                 },
               ]}
             >

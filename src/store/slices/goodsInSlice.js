@@ -17,7 +17,6 @@ const goodsin = createSlice({
     getAllGoodsInSucess: (state, action) => {
       const {GetGoodReceivedDetailsByDate} = action.payload;
       let normalizedGoodsData = normalize(GetGoodReceivedDetailsByDate, goodsListSchema);
-      // console.log(normalizedGoodsData);
       state.goodsin = normalizedGoodsData.entities.goodsin
       
     }

@@ -34,22 +34,25 @@ ChartJS.register(
 
 const columns = [
   {
-    title: 'Item Id',
+    title: 'Reagent Id',
     dataIndex: 'ItemId',
     key: 'itemId',
   },
   {
-    title: 'Item Name',
+    title: 'Reagent Name',
     dataIndex: 'ItemName',
     key: 'itemName',
   },
   {
-    title: 'Goods In Count',
+    title: 'Reagent In Count',
     dataIndex: 'GoodsInCount',
     key: 'Total',
+    render: (text, record) => (
+      `${text} ${record.Unit !== null ? record.Unit : ''}`
+    )
   },
   {
-    title: 'Goods In Date',
+    title: 'Reagent In Date',
     dataIndex: 'GoodsInDate',
     key: 'GoodsInDate',
     render: (text) => {
@@ -115,7 +118,6 @@ const NewGoodsInReport = () => {
   }
 
   const groupData = (d) => {
-    // console.log(d);
     let g = Object.entries(d.reduce((r, c) => (r[c.ItemName] = [...r[c.ItemName] || [], c], r), {}))
     return g.reduce((r, c) => (
       r.children.push(
@@ -127,7 +129,6 @@ const NewGoodsInReport = () => {
     // let finalData = []
     d.forEach(ele => {
       ele.forEach(el => {
-        // console.log(Object.entries(el));
       })
     })
     // let g = Object.entries(d.reduce((r, c) => (r[c.label] = [...r[c.label] || [], c], r), {}))
@@ -151,7 +152,7 @@ const NewGoodsInReport = () => {
     labels,
     datasets: [
       {
-        label: 'Goods In',
+        label: 'Reagent In',
         backgroundColor: ChartColor,
         data: goodLister,
         borderColor: [
@@ -166,7 +167,7 @@ const NewGoodsInReport = () => {
     datasets: [
       {
         type: 'bar',
-        label: 'Goods In',
+        label: 'Reagent In',
         backgroundColor: 'rgb(53, 162, 235)',
         data: goodLister,
         borderWidth: 2
@@ -187,10 +188,10 @@ const NewGoodsInReport = () => {
       <div className="maiTopContainer">
         <PageHeader
 
-          pageTitle='Goods In Report'
+          pageTitle='Reagent In Report'
           csvLinkTitle='Export csv'
           csvData={newGoodsList}
-          csvDataName='goodsInReport.csv'
+          csvDataName='ReagentInReport.csv'
         />
         <Filter
           dateRange

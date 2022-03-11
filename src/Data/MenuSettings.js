@@ -6,6 +6,7 @@ export const MenuSettings = {
     goodsin: true,
     goodsout: true,
     wastage: true,
+    reagentused: true,
     reports: true,
     misreports: false,
     finance: false,
@@ -34,4 +35,5 @@ export const MenuSettings = {
     datechange : false,
     bulknegative : false,
     sms : false,
+    manufacture: true,
 }

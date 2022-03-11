@@ -46,7 +46,7 @@ const ConsumableReport = () => {
 
       tableKeys.forEach(ele => {
         data.push({
-          title: ele,
+          title: ele === 'ItemName' ? 'Reagent Name' : ele,
           dataIndex: ele,
           key: ele,
         })

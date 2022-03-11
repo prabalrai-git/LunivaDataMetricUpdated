@@ -1,4 +1,4 @@
-import { Form, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch } from 'antd';
+import { Form, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -9,6 +9,7 @@ import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { consumptionGroupApi } from '../../services/consumptionService';
+import { ItemName } from '../Common/ItemToReagent';
 
 const GroupAddItemVsRatioVsConsumtion = (props) => {
   const { forEdit, forGroup, forCon } = props;
@@ -83,6 +84,8 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
       "CreatedBy": tokenString.UId,
       "IsGroup": forGroup ? true : false,
       "IsConsumptionGroup": forCon ? true : false,
+      "TestPerUnit": values?.TestPerUnit,
+      "SubUnit": values?.SubUnit
     }
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -108,8 +111,6 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
       ...previousValues,
       CreatedDate: moment(previousValues?.CreatedDate)
     }
-
-    // console.log(prevVal);
   }
 
   return (
@@ -131,14 +132,14 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please selset Group!',
+                  message: 'Please select Group!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp='children'
-                placeholder='slect group'
+                placeholder='select group'
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -163,19 +164,19 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
 
 
             <Form.Item
-              label="Item Name"
+              label={`${ItemName} Name`}
               name="ItemId"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item name!',
+                  message: `Select ${ItemName} Name`,
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select an item"
+                placeholder={`Select ${ItemName} Name`}
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -189,7 +190,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
                       title={iTy?.ItemName}
                       key={iTy?.TId}
                       value={iTy?.TId}>
-                      {iTy?.ItemName}
+                      {iTy?.ItemName} ({iTy?.Unit})
                     </Option>
                   )
                 })
@@ -198,17 +199,48 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item Per Unit Test"
+              label={`${ItemName} Per Unit Test`}
               name="ItemPerUnitTest"
               rules={[
                 {
                   required: true,
-                  message: 'Please input Item Per Unit Test!',
+                  message: `Select ${ItemName} Per Unit Test`,
                 },
               ]}
             >
               <InputNumber
                 min={0}
+                style={{ width: '100%' }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="TestPerUnit"
+              name="TestPerUnit"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input Test Per Unit!',
+                },
+              ]}
+            >
+              <InputNumber
+                min={0}
+                style={{ width: '100%' }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="SubUnit"
+              name="SubUnit"
+              rules={[
+                {
+                  required: true,
+                  message: `Please input Sub ${ItemName}!`,
+                },
+              ]}
+            >
+              <Input
                 style={{ width: '100%' }}
               />
             </Form.Item>

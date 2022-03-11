@@ -8,7 +8,6 @@ import { getWastageApi, insertWastageApi } from '../../services/wastageService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
-// import { SearchSelect } from '../Common/SearchSelect';
 
 const AddWastage = (props) => {
   const { forEdit } = props;
@@ -38,8 +37,6 @@ const AddWastage = (props) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-
 
   useEffect(() => {
     getAllLabItem(0, 0)
@@ -119,19 +116,19 @@ const AddWastage = (props) => {
           >
 
             <Form.Item
-              label="Item Name"
+              label="Reagent Name"
               name="ItemId"
               rules={[
                 {
                   required: true,
-                  message: 'Please select item name!',
+                  message: 'Please select reagent name!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder='Select an item'
+                placeholder='Select A Reagent'
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -145,7 +142,7 @@ const AddWastage = (props) => {
                       title={iTy?.ItemName}
                       key={iTy?.TId}
                       value={iTy?.TId}>
-                      {iTy?.ItemName}
+                      {iTy?.ItemName} ({iTy?.Unit})
                     </Option>
                   )
                 })}
@@ -158,7 +155,7 @@ const AddWastage = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input wastage number!',
+                  message: 'Please input wastage amount!',
                 },
               ]}
             >

@@ -1,8 +1,12 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
-// export const DEV_URL = 'https://lunivacare.ddns.net/CarelabDataMetricService_qc/';
-export const DEV_URL = 'https://lunivat.ddns.net/crystal/CarelabDataMetricServiceCrystal/';
+export const DEV_URL = 'https://lunivacare.ddns.net/CarelabDataMetricService_qc/';
+// export const DEV_URL = 'https://lunivat.ddns.net/crystal/CarelabDataMetricServiceCrystal/';
 // http://192.168.100.34/CarelabDataMetricServiceCrystal/
+// export const DEV_URL = 'https://lunivatech.ddns.net/LunivaSamjhana/LunivaInventory/';
+// export const DEV_URL = 'http://lunivatech.ddns.net/LunivaSamjhana/LunivaInventory/';
+
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
+
 // for inventory lab only
 //GET
 /**
@@ -55,6 +59,10 @@ export const GetlistOfwastageDetailsByDate = 'GetlistOfwastageDetailsByDate';
  * @param: ?id={id}
  */
 export const GetListOfItemVsTestRatio = 'GetListOfItemVsTestRatio';
+/**
+ * @desc:
+ * @param:
+ */
 export const GetListOfGroupTestForInventory = 'GetListOfGroupTestForInventory'
 /**
  * @desc: get list of goods out record by date
@@ -174,8 +182,13 @@ export const GetListOfUserForMetric = 'GetListOfUserForMetric';
  */
 export const GetCompanyDetials = 'GetCompanyDetials';
 
-export const GetDataMetricReportByReportTypeAndDateRange ='GetDataMetricReportByReportTypeAndDateRange';
+export const GetDataMetricReportByReportTypeAndDateRange = 'GetDataMetricReportByReportTypeAndDateRange';
 //carelabdatametric services only dont mix up
+/**
+ * @descL get reagent used for control by date
+ * @param: ?fromdate={fromdate}&todate={todate}
+ */
+export const GetReagentUsedForControlByDate = 'GetReagentUsedForControlByDate';
 
 //POST
 /**
@@ -212,8 +225,7 @@ export const InsertUpdateUnits = 'InsertUpdateUnits';
   "ManufactureBY": "string",
   "IsActive": true
 }
- */
-export const InsertUpdateManufacture = 'InsertUpdateManufacture';
+ */export const InsertUpdateManufacture = 'InsertUpdateManufacture';
 /**
  * @desc: insert update location
  * @param: {
@@ -332,3 +344,17 @@ export const InsertUpdateConsumptionTestLookUp = 'InsertUpdateConsumptionTestLoo
  }
  */
 export const InsertUpdateConsumptionGroup = 'InsertUpdateConsumptionGroup';
+/**
+ * @desc: insert update control reagent details
+ * @param: {
+  "CId": 1,
+  "ItemId": 2,
+  "ControlAmount": 3.1,
+  "Reason": "sample string 4",
+  "Remarks": "sample string 5",
+  "CreatedDate": "2022-02-18T15:31:04.7442891+05:45",
+  "CreatedBy": 7,
+  "IsActive": true
+  }
+ */
+export const InsertUpdateControlReagentDetails = 'InsertUpdateControlReagentDetails';

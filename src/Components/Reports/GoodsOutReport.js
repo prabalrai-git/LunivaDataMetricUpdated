@@ -1,6 +1,5 @@
 import { Table } from 'antd'
 import React, { useState } from 'react'
-// import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import Filter from '../Common/Filter'
@@ -43,7 +42,7 @@ const columns = [
       }
       return 'Inactive'
     }
-  }, 
+  },
   {
     title: 'Remarks',
     dataIndex: 'Remarks',
@@ -67,14 +66,13 @@ const Index = () => {
       itemid: 0
     }
     dispatch(getGoodsOutCountApi(newData, (val) => {
-      // console.log(val);
     }))
   }
-  const getGoodsOutList =(data) => {
+  const getGoodsOutList = (data) => {
     dispatch(getGoodsOutCountApi(data, (val) => {
-      let pushedArr =[]
+      let pushedArr = []
       let pushedGoodsOut = []
-      
+
       val.forEach(ele => {
         pushedArr.push(ele?.GoodsInDate.split('T')[0])
         pushedGoodsOut.push(ele?.GoodsInCount)
@@ -111,13 +109,13 @@ const Index = () => {
     labels,
     datasets: [
       {
-        
+
         label: 'Goods Out',
         backgroundColor: ChartColor,
         data: goodsOutList,
         borderColor: [
           'rgba(255, 255, 132, 1)',
-          
+
         ],
         borderWidth: 1,
       },
@@ -128,8 +126,8 @@ const Index = () => {
     <GoodsOutContainer>
       <PageHeader
         pageTitle='Goods Out Report'
-        // csvLinkTitle='Export csv'
-        // goodsOut
+      // csvLinkTitle='Export csv'
+      // goodsOut
       ></PageHeader>
       <Filter
         dateRange
@@ -143,11 +141,11 @@ const Index = () => {
         />
       </div>
       {goodsLabel.length !== 0 ?
-        <ReportChart 
-        dataBar={dataBar}
-        dataDo={dataDo}
-      ></ReportChart>
-       : ''}
+        <ReportChart
+          dataBar={dataBar}
+          dataDo={dataDo}
+        ></ReportChart>
+        : ''}
     </GoodsOutContainer>
   )
 }

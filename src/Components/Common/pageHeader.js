@@ -37,8 +37,6 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
         var converteNpToDate = `${converterNepalitoDate.en.year}-${converterNepalitoDate.en.month}-${converterNepalitoDate.en.day} `
         neaplaiFromToDateString.push(converteNpFromDate, converteNpToDate);
       }
-      console.log(neaplaiFromToDateString);
-
 
       let newStyle = ``
       if (removetwo)
@@ -121,7 +119,8 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
       <Row justify='space-between align-center'>
 
         <span className='pageTtitle'>{pageTitle}</span>
-        <Row style={{ gap: '10px' }}>
+        {/* style={{ gap: '10px' }} */}
+        <Row>
           {forCon && <AppButton buttonTitle={forCon} buttonOnClick={forConButtonClick} primaryBtn ></AppButton>}
 
           {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}

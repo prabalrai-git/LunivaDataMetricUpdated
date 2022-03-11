@@ -32,22 +32,25 @@ ChartJS.register(
 
 const columns = [
   {
-    title: 'Item Id',
+    title: 'Reagent Id',
     dataIndex: 'ItemId',
     key: 'itemId',
   },
   {
-    title: 'Item Name',
+    title: 'Reagent Name',
     dataIndex: 'ItemName',
     key: 'itemName',
   },
   {
-    title: 'Goods Out Count',
+    title: 'Reagent Out Count',
     dataIndex: 'GoodsInCount',
     key: 'Total',
+    render: (text, record) => (
+      `${text} ${record.Unit !== null ? record.Unit : ''}`
+    )
   },
   {
-    title: 'Goods Out Date',
+    title: 'Reagent Out Date',
     dataIndex: 'GoodsInDate',
     key: 'GoodsInDate',
     render: (text) => {
@@ -79,8 +82,6 @@ const NewGoodsOutReport = () => {
       setGoodsOutName(filteredArray)
     }))
   }
-
-  // console.log("this is goods in name",goodsOutName)
 
   useEffect(() => {
     retunDa()
@@ -126,7 +127,7 @@ const NewGoodsOutReport = () => {
     labels,
     datasets: [
       {
-        label: 'Goods Out',
+        label: 'Reagent Out',
         backgroundColor: ChartColor,
         data: goodLister,
         borderColor: [
@@ -142,7 +143,7 @@ const NewGoodsOutReport = () => {
     datasets: [
       {
         type: 'bar',
-        label: 'Goods Out',
+        label: 'Reagent Out',
         backgroundColor: 'rgb(53, 162, 235)',
         data: goodLister,
         borderWidth: 2
@@ -153,7 +154,7 @@ const NewGoodsOutReport = () => {
   const options = {
     title: {
       display: true,
-      text: "Chart Title"
+      text: ""
     },
     scales: {
       yAxes: [
@@ -178,10 +179,10 @@ const NewGoodsOutReport = () => {
     <NewGoodsOutContainer>
       <div className="maiTopContainer">
         <PageHeader
-          pageTitle='Goods Out Report'
+          pageTitle='Reagent Out Report'
           csvLinkTitle='Export csv'
           csvData={newGoodsList}
-          csvDataName='goodsOutReport.csv'
+          csvDataName='ReagentOutReport.csv'
         />
         <Filter
           dateRange

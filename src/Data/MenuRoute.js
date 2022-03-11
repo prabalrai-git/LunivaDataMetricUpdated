@@ -1,3 +1,4 @@
+import { ItemName } from "../Components/Common/ItemToReagent"
 import { MenuSettings } from "./MenuSettings"
 
 export const MenuRoute = [
@@ -12,14 +13,14 @@ export const MenuRoute = [
   {
     icon: 'icon-line-bag',
     key: 'goodsin',
-    name: 'goods in',
+    name: 'Reagent in',
     path: '/goodsin',
     isactive: MenuSettings.goodsin,
   },
   {
     icon: 'icon-line-shopping-bag',
     key: 'goodsOut',
-    name: 'Goods Out',
+    name: 'Reagent Out',
     path: '/goodsout',
     isactive: MenuSettings.goodsout,
   },
@@ -37,6 +38,13 @@ export const MenuRoute = [
     name: 'Reports',
     path: '/reports',
     isactive: MenuSettings.reports,
+  },
+  {
+    icon: 'icon-archive2',
+    key: 'reagentused',
+    name: 'Reagent Control',
+    path: '/reagentused',
+    isactive: MenuSettings.reagentused,
   },
   // {
   //   icon: 'icon-graph',
@@ -58,14 +66,14 @@ export const settingsMenu = [
   {
     icon: 'icon-line-box',
     key: 'item',
-    name: 'Item',
+    name: ItemName,
     path: '/item',
     isactive: MenuSettings.item,
   },
   {
     icon: 'icon-lab2',
     key: 'itemVsRatio',
-    name: 'Item Vs Ratio',
+    name: `${ItemName} Ratio`,
     path: '/itemvsratio',
     isactive: MenuSettings.itemvsratio,
   },
@@ -106,6 +114,13 @@ export const settingsMenu = [
   },
   {
     icon: 'icon-bar-chart',
+    key: 'Manufacture',
+    name: 'Manufacture',
+    path: '/manufacture',
+    isactive: MenuSettings.manufacture,
+  },
+  {
+    icon: 'icon-bar-chart',
     key: 'consumption',
     name: 'consumption',
     path: '/consumption',
@@ -118,13 +133,13 @@ export const settingsMenu = [
     path: '/consumptionlook',
     isactive: MenuSettings.consumptionlook,
   },
-  {
-    icon: 'icon-line2-screen-desktop',
-    key: 'theme',
-    name: 'theme',
-    path: '/theme',
-    isactive: MenuSettings.theme,
-  },
+  // {
+  //   icon: 'icon-line2-screen-desktop',
+  //   key: 'theme',
+  //   name: 'theme',
+  //   path: '/theme',
+  //   isactive: MenuSettings.theme,
+  // },
 ]
 
 export const dataMetricCon = [

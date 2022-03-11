@@ -21,20 +21,20 @@ const DashBoardContainer = () => {
 
   const [date, setDate] = useState(new Date());
   const [cardBkg, setcardBkg] = useState();
-  const daysNames = ['sunday', 'monday', 'tuesday', 'wedesday', 'thirsday', 'friday', 'saturday'];
+  const daysNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   const monthsNames = [
-    'january',
-    'february',
-    'march',
-    'april',
+    'jan',
+    'feb',
+    'mar',
+    'apr',
     'may',
     'jun',
-    'july',
-    'august',
-    'september',
-    'october',
-    'november',
-    'december'
+    'jul',
+    'aug',
+    'sep',
+    'oct',
+    'nov',
+    'dec'
   ]
 
   useEffect(() => {
@@ -71,9 +71,9 @@ const DashBoardContainer = () => {
 
         </Row>
 
-
       </div>
       <Row gutter={[16, 16]}>
+        
         <Col sm={24} md={8} xs={24} lg={6}>
           <div className={`dContainer ${cardBkg}`}>
             <div className="detail ">
@@ -81,10 +81,9 @@ const DashBoardContainer = () => {
               <h2>{date.getHours()} : {date.getMinutes()}</h2>
               <p>{date.getFullYear()} {monthsNames[date.getMonth()]} {date.getDate()} </p>
             </div>
-
-
           </div>
         </Col>
+
         <Col sm={24} md={16} xs={24} lg={18}>
           <Row gutter={[16, 16]}>
             {data.map(e => (
@@ -231,7 +230,8 @@ const DashbordContainer = styled.div`
     }
     }
     @media(max-width: 500px){
-      height: 80px;
+      // height: 80px;
+      text-align: center;
     }
    
   }

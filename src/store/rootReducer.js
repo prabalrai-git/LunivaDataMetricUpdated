@@ -5,9 +5,11 @@ import goodsInSlice from './slices/goodsInSlice';
 import goodsOutSlice from './slices/goodsOutSlice';
 import itemRatioSlice from './slices/itemRatioSlice';
 import locationSlice from './slices/locationSlice';
+import manufactureSlice from './slices/manufactureSlice';
 import newItemSlice from './slices/newItemSlice';
 import printSlice from './slices/printSlice';
 import rackSlice from './slices/rackSlice';
+import reagentSlice from './slices/reagentSlice';
 import typeSlice from './slices/typeSlice';
 import unitSlice from './slices/unitSlice';
 import userSlice from './slices/userSlice';
@@ -26,7 +28,9 @@ const rootReducer = combineReducers({
     user: userSlice,
     wastage: wastageSlice,
     consumption: consumptionSlice,
-    printdata: printSlice
+    printdata: printSlice,
+    reagent: reagentSlice,
+    manu: manufactureSlice
 })
 
 export default rootReducer

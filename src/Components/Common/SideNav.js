@@ -34,7 +34,6 @@ const SideNav = (props) => {
     setdataMetric(!dataMetricdata.every(vendor => vendor['isactive'] === false));
   }, [])
 
-  // console.log(dataMetric);
   return (
     <SideNavContainer>
       <Scrollbars

@@ -6,11 +6,11 @@ import { Col, Row } from 'antd'
 
 const data = [
   {
-    name: 'Goods in Report',
+    name: 'Reagent in Report',
     pathName: 'goodsin'
   },
   {
-    name: 'Goods Out reports',
+    name: 'Reagent Out reports',
     pathName: 'goodsout'
   },
   {

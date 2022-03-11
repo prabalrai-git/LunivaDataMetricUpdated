@@ -1,4 +1,3 @@
-// import { notification } from 'antd';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Popover } from 'antd';
@@ -27,7 +26,7 @@ const Notification = () => {
     <NotificationContainer>
       <Popover
         placement="bottom"
-        content={tableData.length > 0?
+        content={tableData.length > 0 ?
           <NotificationContent data={tableData} /> : 'no new notification'
         }
         trigger="click">
@@ -63,7 +62,8 @@ const NotificationContainer = styled.div`
     top: 2%;
     height: 1rem;
     left: 10%;
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: bold;
   }
   &:hover{
       /* background-color: transparent; */

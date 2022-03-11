@@ -1,5 +1,5 @@
 import { Space, Table, Tag } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import PageHeader from '../Common/pageHeader'
 import { getGoodsOutApi } from '../../services/labGoodsOutService';
 // import Edit from '../Common/Edit';
 import Cancle from '../Common/Cancle';
+import { todaydate } from '../Common/TodayDate';
 
 const Index = () => {
   const history = useHistory();
@@ -22,7 +23,7 @@ const Index = () => {
       key: 'Testname',
     },
     {
-      title: 'Item Name',
+      title: 'Reagent Name',
       dataIndex: 'ItemName',
       key: 'itemName',
       // responsive: ['sm'],
@@ -32,6 +33,9 @@ const Index = () => {
       dataIndex: 'Quantity',
       key: 'Quantity',
       // responsive: ['md'],
+      render: (text, record) => (
+        `${text} ${record.Unit !== null ? record.Unit : ''}`
+      )
     },
     {
       title: 'Goods Out Date',
@@ -81,6 +85,14 @@ const Index = () => {
     }))
   }
 
+  useEffect(() => {
+    let data = {
+      fromdate: todaydate,
+      todate: todaydate,
+    }
+    getLabData(data)
+  }, [])
+
   const dataRet = (val) => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
@@ -101,8 +113,8 @@ const Index = () => {
     <GoodsOutContainer>
       <div className="maiTopContainer">
         <PageHeader
-          buttonTitle='Add Goods out'
-          pageTitle='Goods Out'
+          buttonTitle='Add Reagent out'
+          pageTitle='Reagent Out'
           buttonOnClick={() => history.push('./goodsout/add')}
         />
         <Filter

@@ -15,7 +15,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router basename={'/crystal/crystalinventory/'}>
+      <Router basename={'/samjhana/inventory/'}>
         {/* ReportEntry/linkname */}
         <App />
       </Router>

@@ -26,7 +26,7 @@ const LocationStockReport = () => {
       let data = []
       tableKeys.forEach(ele => {
         data.push({
-          title: ele,
+          title: ele === 'Item' ? 'Reagent Name' : ele,
           dataIndex: ele,
           key: ele,
         })

@@ -11,9 +11,11 @@ import moment from 'moment';
 import { getLabItemsApi } from '../../services/itemNewItemService'
 import FilterTable from './FilterTable'
 import { getGetRequestorList, getGetRefererList, getListofUser } from '../../services/datametricService'
+import { careLabFiscalCodeApi, careLabDiagnosisApi } from '../../services/careLabService'
+import { ItemName } from './ItemToReagent'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist, forRequestorReport, forRefererReport, forDailyReport, forDailyTrasection, forReportSalesReport, getFiscalYear } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist, forRequestorReport, forRefererReport, forDailyReport, forDailyTrasection, forReportSalesReport, getFiscalYear, fiscalService, showDiagList } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -31,6 +33,11 @@ const Filter = ({ dataReturn, ...props }) => {
   const [requestorId, setrequestorId] = useState()
   const [userLister, setuserLister] = useState([])
   const [userListId, setuserListId] = useState(0)
+  const [diagnosisList, setdiagnosisList] = useState([])
+  const [diagList, setdiagList] = useState([])
+
+  //
+  const [fiscalList, setFiscalList] = useState([]);
 
   const handleClicker = () => {
     if (dateRange !== undefined) {
@@ -40,6 +47,8 @@ const Filter = ({ dataReturn, ...props }) => {
         dateRet({ ...fromDate, reqid: requestorId })
       } else if (getuserslist !== undefined) {
         dateRet({ ...fromDate, userId: userListId })
+      } else if (fiscalService !== undefined) {
+        dateRet({ ...fromDate, fiscalId: userListId, diaList: diagList })
       } else if (fromDate !== null) {
         dateRet(fromDate)
       }
@@ -113,7 +122,21 @@ const Filter = ({ dataReturn, ...props }) => {
       )
     }
 
+    if (fiscalService !== undefined) {
+      getFiscalYearApi()
+    }
+
   }, [])
+
+  useEffect(() => {
+    if (showDiagList === true && diagnosisList.length === 0) {
+      dispatch(
+        careLabDiagnosisApi(val => {
+          setdiagnosisList(val)
+        })
+      )
+    }
+  }, [showDiagList])
 
   const handleSerch = searchText => {
     searchText = searchText.toLowerCase();
@@ -301,6 +324,12 @@ const Filter = ({ dataReturn, ...props }) => {
     dataReturn(pushedArr)
   }
 
+  const getFiscalYearApi = () => {
+    dispatch(careLabFiscalCodeApi((res) => {
+      setFiscalList(res)
+    }))
+  }
+
   return (
     <FilterContainer>
       <Row justify='space-between' align='bottom'>
@@ -308,7 +337,7 @@ const Filter = ({ dataReturn, ...props }) => {
           <Row className="filterRow" align='bottom'>
             {itemType &&
               <Col lg={8} md={12} sm={11} xs={24}>
-                <span className='labelTop'>Item Type</span>
+                <span className='labelTop'>{ItemName} Type</span>
                 <Select style={{ width: '100%' }} defaultValue="0" onChange={(val) => { setiType(val) }}>
                   <Option value="0">All</Option>
                   {itemList?.map(iTy => {
@@ -370,13 +399,13 @@ const Filter = ({ dataReturn, ...props }) => {
                 <Datepicker
                   defaultValuer={fromDate}
                   onChanger={(value) => { setfromDate(value) }}
-                  
+
                 />
               </Col>
             }
             {itemName &&
               <Col lg={8} md={10} sm={12} xs={24}>
-                <span className='labelTop'>Item Name</span>
+                <span className='labelTop'>Reagent Name</span>
                 <Select style={{ width: '100%' }} onChange={(val) => { setitemNameList(val) }} size='default'>
                   {notAll === undefined ? (
                     <Option value='0'>
@@ -513,8 +542,65 @@ const Filter = ({ dataReturn, ...props }) => {
                     key="0" value="0">2021/2022</Option>
                   <Option title="All"
                     key="0" value="0">2019/2020</Option>
-                    <Option title="All"
+                  <Option title="All"
                     key="0" value="0">2018/2019</Option>
+                </Select>
+              </Col>
+            }
+
+            {
+              fiscalService && <Col lg={8} md={10} sm={12} xs={24}>
+                <span className='labelTop'>Fiscal Year</span>
+                <Select
+                  style={{ width: '100%' }}
+                  onChange={(val) => { setuserListId(val) }}
+                  size='default'
+                >
+                  {
+                    fiscalList.map(lis => (
+                      <Option
+                        title={lis?.Year}
+                        key={lis?.Id}
+                        value={lis?.Id}>
+                        {lis?.Year}
+                      </Option>
+                    ))
+                  }
+                </Select>
+              </Col>
+            }
+
+            {
+              // max
+              // note
+              showDiagList === true && <Col lg={8} md={10} sm={12} xs={24}>
+                <span className='labelTop'>Diagnosis In</span>
+                <Select
+                  mode="multiple"
+                  allowClear
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select Diagnosis In"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    );
+                  }}
+                  style={{ width: '100%' }}
+                  onChange={(val) => { setdiagList(val) }}
+                  size='default'
+                >
+                  {
+                    diagnosisList.map(lis => (
+                      <Option
+                        title={lis?.Diagnosis}
+                        key={lis?.Id}
+                        value={lis?.Id}>
+                        {lis?.Diagnosis}
+                      </Option>
+                    ))
+                  }
                 </Select>
               </Col>
             }

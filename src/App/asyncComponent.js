@@ -85,3 +85,11 @@ export const AsyncEditBill = lazy(() => pMinDelay(import('../Components/dataMetr
 
 export const AsyncNotFound = lazy(() => pMinDelay(import('../Components/Common/ErrorPage'), 300));
 export const AsycAboutLuniva = lazy(() => pMinDelay(import('../Components/Common/AboutLuniva'), 300))
+
+export const AsyncReagentUsed = lazy(() => pMinDelay(import('../Components/ReagentUsed/index'), 300));
+export const AsyncAddReagentUsed = lazy(() => pMinDelay(import('../Components/ReagentUsed/AddUsedReagent'), 300));
+
+export const AsyncCareLabIndex = lazy(() => pMinDelay(import('../Components/Carelab/index'), 300));
+
+export const AsyncManufacture = lazy(() => pMinDelay(import('../Components/Manufacture/index'), 300));
+export const AsyncAddManufacture = lazy(() => pMinDelay(import('../Components/Manufacture/AddManufacture'), 300));

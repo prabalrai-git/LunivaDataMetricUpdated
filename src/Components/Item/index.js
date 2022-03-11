@@ -20,19 +20,22 @@ const Index = () => {
 
   const columns = [
     {
-      title: 'Item Code',
+      title: 'Reagent Code',
       dataIndex: 'ItemCode',
       key: 'itemCode'
     },
     {
-      title: 'Item Name',
+      title: 'Reagent Name',
       dataIndex: 'ItemName',
       key: 'itemName'
     },
     {
       title: 'MinQty',
       dataIndex: 'MinQty',
-      key: 'minQty'
+      key: 'minQty',
+      render: (text, record) => (
+        `${text} ${record.Unit !== null ? record.Unit : ''}`
+      )
     },
     {
       title: 'Location',
@@ -40,7 +43,7 @@ const Index = () => {
       key: 'Location',
       render: (text, record) => {
         if (text !== null) {
-          return `${text} (${record.Rack})`;
+          return `${text} ${record.Rack !== null ? `(${record.Rack})` : ''}`;
         }
         return '';
       }
@@ -89,8 +92,8 @@ const Index = () => {
     <ItemContainer>
       <div className="maiTopContainer">
         <PageHeader
-          buttonTitle='Add Item'
-          pageTitle='Item'
+          buttonTitle='Add Reagent'
+          pageTitle='Reagent'
           buttonOnClick={() => history.push('./item/add')}
         ></PageHeader>
         <Filter

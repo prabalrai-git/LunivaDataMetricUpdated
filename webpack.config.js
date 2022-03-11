@@ -7,8 +7,9 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'index_bundle.js',
-    // publicPath: '/'
-    publicPath: '/crystal/crystalinventory/'
+    publicPath: '/'
+    // publicPath: '/samjhana/inventory/'
+    // publicPath: '/crystal/crystalinventory/'
     // publicPath: 'http://103.233.58.52:8080/carelabinventory/'
   },
   module: {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
 import { Space, Table, Tag } from 'antd'
@@ -10,6 +10,7 @@ import ReportChart from '../Common/ReportChart'
 import { ChartColor } from '../Common/ChartColor'
 // import Edit from '../Common/Edit'
 import Cancle from '../Common/Cancle'
+import { todaydate } from '../Common/TodayDate'
 
 
 
@@ -29,14 +30,17 @@ const Index = () => {
       // fixed: 'left',
     },
     {
-      title: 'Item Name',
+      title: 'Reagent Name',
       dataIndex: 'ItemName',
       key: 'itemName'
     },
     {
-      title: 'Wastage Amount',
+      title: 'Reagent Wastage Amount',
       dataIndex: 'WastageAmount',
-      key: 'WastageAmount'
+      key: 'WastageAmount',
+      render: (text, record) => (
+        `${text} ${record.Unit !== null ? record.Unit : ''}`
+      )
     },
     {
       title: 'Reason',
@@ -87,7 +91,15 @@ const Index = () => {
       setWastage(pushedWastage);
     }))
   }
-  // console.log(label);
+
+  useEffect(() => {
+    let data = {
+      fromdate: todaydate,
+      todate: todaydate,
+    }
+    getWastage(data)
+  }, [])
+  
   const dateRet = (val) => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
@@ -126,7 +138,6 @@ const Index = () => {
     ],
   };
   const handleSearch = (val) => {
-    console.log(val);
     if (val === undefined || val === '') {
       setnewTableData(setTableData)
     } else {

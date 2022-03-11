@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import loadlogo from './assets/images/logo1.png';
-import { AsyncAddCategory, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncMinQuantityReport, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption, AsyncRequestorReport, AsyncTestTypeReport, AsyncReferReport, AsyncCareLab, AsyncRequestorSalesReport, AsyncDailySummary, AsyncDailyTransaction, AsyncLogin, AsyncPublicLayout, AsyncNotFound, AsyncFinance, AsyncTheme, AsyncOutSourcing, AsyncEditBill, AsycAboutLuniva } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncMinQuantityReport, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption, AsyncRequestorReport, AsyncTestTypeReport, AsyncReferReport, AsyncCareLab, AsyncRequestorSalesReport, AsyncDailySummary, AsyncDailyTransaction, AsyncLogin, AsyncPublicLayout, AsyncNotFound, AsyncFinance, AsyncTheme, AsyncOutSourcing, AsyncEditBill, AsycAboutLuniva, AsyncReagentUsed, AsyncAddReagentUsed, AsyncCareLabIndex, AsyncAddManufacture, AsyncManufacture } from './App/asyncComponent';
 import PublicRoute from './Routes/PublicRoute';
 import { MenuSettings } from './Data/MenuSettings';
 import PrivateRouter from './Routes/PrivateRouter';
@@ -49,7 +49,6 @@ function App() {
   //   useEffect(() => {
   //     if(socket !== null){
   //       socket.on("updateNotification", (data) => {
-  //         console.log(data);
   //     });
 
   //     onClickEvent()
@@ -730,6 +729,69 @@ function App() {
             ] : ''
           }
 
+          {
+            MenuSettings.reagentused ? [
+              <PrivateRouter
+                exact
+                key='thisSet/58'
+                path='/reagentused'
+                component={AsyncReagentUsed}
+                layout={AsyncAppLayout}
+                showSider
+              />,
+
+              <PrivateRouter
+                exact
+                key='thisSet/59'
+                path='/reagentused/add'
+                component={AsyncAddReagentUsed}
+                layout={AsyncAppLayout}
+                showSider
+              />,
+
+              <PrivateRouter
+                exact
+                key='thisSet/60'
+                path='/reagentused/edit/:id/:from'
+                component={AsyncAddReagentUsed}
+                layout={AsyncAppLayout}
+                forEdit
+                showSider
+              />,
+            ] : ''
+          }
+
+{
+            MenuSettings.units ? [
+              <PrivateRouter
+                exact
+                key='thisSet/61'
+                path='/manufacture'
+                component={AsyncManufacture}
+                layout={AsyncAppLayout}
+                showSider
+              />,
+
+              <PrivateRouter
+                exact
+                key='thisSet/62'
+                path='/manufacture/add'
+                component={AsyncAddManufacture}
+                layout={AsyncAppLayout}
+                showSider
+              />,
+
+              <PrivateRouter
+                exact
+                key='thisSet/63'
+                path='/manufacture/edit/:id'
+                component={AsyncAddManufacture}
+                layout={AsyncAppLayout}
+                forEdit
+                showSider
+              />,
+            ] : ''
+          }
 
           <PrivateRouter
             exact
@@ -747,6 +809,14 @@ function App() {
             showSider
           />
 
+          <PrivateRouter
+            exact
+            path='/carelab'
+            component={AsyncCareLabIndex}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
           <Route
             component={AsyncNotFound}
           />
@@ -758,4 +828,3 @@ function App() {
 }
 
 export default App;
-

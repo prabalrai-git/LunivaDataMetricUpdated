@@ -4,7 +4,6 @@ const ItemFilter = () => {
     const { Option } = Select;
 
     const onFinish = (values) => {
-        // console.log(values);
     }
 
     return (

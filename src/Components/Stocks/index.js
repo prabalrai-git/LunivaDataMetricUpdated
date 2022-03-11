@@ -68,7 +68,7 @@ const Index = () => {
       let data = [];
       tableKeys.forEach(ele => {
         data.push({
-          title: ele,
+          title: ele === 'ItemName' ? 'Reagent Name' : ele === 'ItemId' ? 'Reagent Id' : ele,
           dataIndex: ele,
           key: ele,
         })
@@ -104,6 +104,7 @@ const Index = () => {
         <Table
           columns={tableHead}
           dataSource={newTableData}
+          rowClassName={(record) => ( record.RemainingCount < record.MinQty ? 'redback' : '' )}
         />
       </div>
     </StocksContainer>

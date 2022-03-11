@@ -1,5 +1,5 @@
 import { Space, Table, Tag } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import Filter from '../Common/Filter'
 import PageHeader from '../Common/pageHeader'
 // import Edit from '../Common/Edit';
 import Cancle from '../Common/Cancle';
+import { todaydate } from '../Common/TodayDate';
 
 
 const Index = () => {
@@ -18,7 +19,7 @@ const Index = () => {
 
   const columns = [
     {
-      title: 'Item Name',
+      title: 'Reagent Name',
       dataIndex: 'ItemName',
       key: 'itemName',
     },
@@ -26,6 +27,9 @@ const Index = () => {
       title: 'Quantity',
       dataIndex: 'Quantity',
       key: 'Quantity',
+      render: (text, record) => (
+        `${text} ${record.Unit !== null ? record.Unit : ''}`
+      )
     },
     {
       title: 'Expiry Date',
@@ -36,7 +40,7 @@ const Index = () => {
       }
     },
     {
-      title: 'Item Status',
+      title: 'Reagent Status',
       dataIndex: 'ItemStatus',
       key: 'ItemStatus',
       render: (text) => {
@@ -65,6 +69,14 @@ const Index = () => {
     }))
   }
 
+  useEffect(() => {
+    let data = {
+      fromdate: todaydate,
+      todate: todaydate,
+    }
+    getLabData(data)
+  }, [])
+
   const dataRet = (val) => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
@@ -87,8 +99,8 @@ const Index = () => {
     <GoodsInContainer>
       <div className="maiTopContainer">
         <PageHeader
-          buttonTitle='Add Goods'
-          pageTitle='Goods In'
+          buttonTitle='Add Reagent'
+          pageTitle='Reagent In'
           buttonOnClick={() => history.push('./goodsin/add')}
         ></PageHeader>
         <Filter

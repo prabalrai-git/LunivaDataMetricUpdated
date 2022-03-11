@@ -12,3 +12,70 @@ code {
   
     font-family: 'Montserrat', sans-serif;
 }
+
+/*css for modal for test*/
+.panelClass, .groupHead {
+  text-align: center;
+  font-weight: bolder;
+}
+
+.panelClass {
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.testTable {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.subTestClass>td:first-child {
+  padding-left: 15px;
+}
+
+.testNameHead{
+  width: 25%;
+}
+.testNameResult{
+  width: 20%;
+}
+.testNameUnit{
+  width: 15%;
+}
+.testNameRange{
+  width: 15%;
+}
+/* .testNameNote{
+  width: 25%;
+} */
+.testNameAction{
+  width: 6%;
+}
+/*css for modal for test*/
+
+/*all call*/
+.redback, .qcback {
+  background-color: #ff726f;
+  color: #fff;
+}
+.redback:hover, .qcback:hover, .calback:hover {
+  /* background-color: #ff726f; */
+  color: #000;
+}
+.repeatback {
+  background-color: #a7d8de;
+}
+.rbback {
+  background-color: #fde9b0;
+}
+.calback{
+  background-color: #6a5445;
+  color: #fff;
+}
+.low {
+  background-color: rgb(138, 133, 133);
+}
+.high {
+  background-color: rgb(94, 54, 54);
+}

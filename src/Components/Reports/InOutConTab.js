@@ -46,15 +46,6 @@ export const options = {
       position: 'bottom'
     },
 
-    // tooltip: {
-    //     callbacks: {
-    //         title: function (d, o) {
-    //             console.log(d, o);
-    //             return d;
-    //         }
-    //     }
-    // },
-
   },
 };
 

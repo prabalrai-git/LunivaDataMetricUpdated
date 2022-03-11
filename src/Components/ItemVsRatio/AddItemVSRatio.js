@@ -1,4 +1,4 @@
-import { Form, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch } from 'antd';
+import { Form, Button, DatePicker, Select, InputNumber, message, Row, Col, Switch, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { getItemVsRatioApi, getTestListApi, insertItemVsRatioApi } from '../../s
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { ItemName } from '../Common/ItemToReagent';
 
 const AddItemVsRatio = (props) => {
   const { forEdit } = props;
@@ -66,12 +67,14 @@ const AddItemVsRatio = (props) => {
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
       "CreatedBy": tokenString.UId,
       "IsGroup": false,
-      "IsConsumptionGroup":false, 
+      "IsConsumptionGroup": false,
+      "TestPerUnit": values?.TestPerUnit,
+      "SubUnit": values?.SubUnit
     }
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
-        
+
         setTimeout(() => {
           history.push('/itemvsratio')
         }, 1000);
@@ -92,8 +95,6 @@ const AddItemVsRatio = (props) => {
       ...previousValues,
       CreatedDate: moment(previousValues?.CreatedDate)
     }
-
-    // console.log(prevVal);
   }
 
   return (
@@ -146,19 +147,19 @@ const AddItemVsRatio = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item Name"
+              label={`${ItemName} Name`}
               name="ItemId"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item name!',
+                  message: `Select ${ItemName} Name`,
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="select an item"
+                placeholder={`Select ${ItemName} Name`}
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -172,7 +173,7 @@ const AddItemVsRatio = (props) => {
                       title={iTy?.ItemName}
                       key={iTy?.TId}
                       value={iTy?.TId}>
-                      {iTy?.ItemName}
+                      {iTy?.ItemName} ({iTy?.Unit})
                     </Option>
                   )
                 })
@@ -181,17 +182,48 @@ const AddItemVsRatio = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item Per Unit Test"
+              label={`${ItemName} Per Unit Test`}
               name="ItemPerUnitTest"
               rules={[
                 {
                   required: true,
-                  message: 'Please input Item Per Unit Test!',
+                  message: `Select ${ItemName} Per Unit Test`,
                 },
               ]}
             >
               <InputNumber
                 min={0}
+                style={{ width: '100%' }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="TestPerUnit"
+              name="TestPerUnit"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input Test Per Unit!',
+                },
+              ]}
+            >
+              <InputNumber
+                min={0}
+                style={{ width: '100%' }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="SubUnit"
+              name="SubUnit"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input Sub Item!',
+                },
+              ]}
+            >
+              <Input
                 style={{ width: '100%' }}
               />
             </Form.Item>

@@ -13,6 +13,7 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { ItemName } from '../Common/ItemToReagent';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddItem = (props) => {
@@ -140,12 +141,12 @@ const AddItem = (props) => {
             autoComplete="off"
           >
             <Form.Item
-              label="Item Code"
+              label={`${ItemName} Code`}
               name="ItemCode"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item code!',
+                  message: `Please input ${ItemName} code!`,
                 },
               ]}
             >
@@ -153,12 +154,12 @@ const AddItem = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item name"
+              label={`${ItemName} Name`}
               name="ItemName"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item name!',
+                  message: `Please input ${ItemName} name!`,
                 },
               ]}
             >
@@ -166,19 +167,19 @@ const AddItem = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item Type"
+              label={`${ItemName} Type`}
               name="ItemTypeId"
               rules={[
                 {
                   required: true,
-                  message: 'Please Select item type!',
+                  message: `Please Select ${ItemName} type!`,
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="Select item type"
+                placeholder={`Select ${ItemName} type!`}
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -201,19 +202,19 @@ const AddItem = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item Category"
+              label={`${ItemName} Category`}
               name="ItemCategoryId"
               rules={[
                 {
                   required: true,
-                  message: 'Please Select item category!',
+                  message: `Please Select ${ItemName} Category`,
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="Select item category"
+                placeholder={`Select ${ItemName} Category`}
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -236,19 +237,19 @@ const AddItem = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item unit"
+              label={`${ItemName} Unit`}
               name="UnitId"
               rules={[
                 {
                   required: true,
-                  message: 'Please Select item unit!',
+                  message: `Select ${ItemName} Unit`,
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="Select item unit"
+                placeholder={`Select ${ItemName} Unit`}
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -271,19 +272,19 @@ const AddItem = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Item manufacturer"
+              label={`${ItemName} manufacturer`}
               name="ManufactureId"
               rules={[
                 {
                   required: true,
-                  message: 'Please Select item manufacturer!',
+                  message: `Select ${ItemName} manufacturer`,
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="Select manufacturer"
+                placeholder={`Select ${ItemName} manufacturer`}
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||

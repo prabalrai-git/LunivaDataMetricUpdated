@@ -191,9 +191,6 @@ const AddGoodsOut = (props) => {
       message: 'Quantity going over',
       description:
         `Remaining count is ${maxer}, Entered Quantity is ${val}`,
-      // onClick: () => {
-      //   console.log('Notification Clicked!');
-      // },
     });
   };
 
@@ -205,7 +202,7 @@ const AddGoodsOut = (props) => {
             form={form}
             name="add_items"
             {...formItemLayout}
-            labelAlign="left"
+            // labelAlign="left"
             colon={false}
             initialValues={prevVal}
             onFinish={onFinish}
@@ -252,19 +249,19 @@ const AddGoodsOut = (props) => {
               </Select>
             </Form.Item>
             <Form.Item
-              label="Item Name"
+              label="Reagent Name"
               name="ItemId"
               rules={[
                 {
                   required: true,
-                  message: 'Please input item name!',
+                  message: 'Please Select Reagent name!',
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder="Select an item"
+                placeholder="Select A Reagent"
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
@@ -281,7 +278,7 @@ const AddGoodsOut = (props) => {
                       title={iTy?.ItemName}
                       key={iTy?.TId}
                       value={iTy?.TId}>
-                      {iTy?.ItemName}
+                      {iTy?.ItemName} ({iTy?.Unit})
                     </Option>
                   )
                 })
@@ -290,17 +287,17 @@ const AddGoodsOut = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Goods Received No"
+              label="Reagent Received No"
               name="GoodReceivedNo"
               rules={[
                 {
                   required: true,
-                  message: 'Please input Goods Received No!',
+                  message: 'Please input Reagent Received No!',
                 },
               ]}
             >
               <InputNumber
-                readOnly={true}
+                // readOnly={true}
                 tabIndex={-1}
                 style={{ width: '100%' }}
                 readOnly={editDisabled}
@@ -327,12 +324,12 @@ const AddGoodsOut = (props) => {
             </Form.Item>
 
             <Form.Item
-              label="Goods out Date"
+              label="Reagent out Date"
               name="GoodsOutDate"
               rules={[
                 {
                   required: true,
-                  message: 'Please input Goods out Date!',
+                  message: 'Please input Reagent out Date!',
                 },
               ]}
             >
