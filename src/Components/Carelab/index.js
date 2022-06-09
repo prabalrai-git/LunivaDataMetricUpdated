@@ -1,10 +1,13 @@
-import { Tabs, Table, Button, Switch } from 'antd';
+import { Tabs, Table, Button, Switch, Tag } from 'antd';
 import NewBadge from './NewBadge';
 import { useDispatch } from 'react-redux';
 import { careLabSampleStatusApi, careLabTabApi, careLabFiscalCodeApi } from '../../services/careLabService'
 import Filter from '../Common/Filter';
 import { useState, useEffect } from 'react';
 import ReportModal from './ReportModal'
+import PrintReport from './PrintReport'
+import { Markup } from 'interweave';
+// import AntdUpload from './AntdUpload';
 
 const { TabPane } = Tabs;
 
@@ -23,6 +26,7 @@ const Carelab = () => {
     const [showDiagList, setshowDiagList] = useState(false)
     const [diagList, setDiagList] = useState('');
     const [isMaleFemale, setIsMaleFemale] = useState('');
+    const [isPrint, setIsPrint] = useState(false)
 
     const staticColumn = [
         {
@@ -53,16 +57,62 @@ const Carelab = () => {
             title: 'Payment Type',
             dataIndex: 'BillPaymentType',
             key: 'BillPaymentType',
+            render: (text, record) => {
+                if (text !== null) {
+                    let texter = text.toLowerCase();
+                    if (texter === "cash") {
+                        
+                        return <Tag color="green">{text}</Tag>//<span class="label label-success">{text}</span>;
+                    } else if (texter === "credit") {
+                        return <Tag color="#108ee9">{text}</Tag>//<span class="label label-primary">{text}</span>;
+                    } else if (texter === "creditcollection") {
+                        return <Tag color="gold">{text}</Tag>//<span class="label label-warning">{text}</span>;
+                    } else {
+                        return <Tag>{text}</Tag>//<span class="label label-default">{text}</span>;
+                    }
+                } else {
+                    return "";
+                }
+            }
         },
         {
             title: 'Report Priority',
             dataIndex: 'ReportPriority',
             key: 'ReportPriority',
+            render: (row) => {
+                if (row != null) {
+                    let texter = row.toLowerCase();
+                    if (texter.includes("emergency")) {
+                        return <Tag color="error">{row}</Tag>//<span class="label label-danger">{row}</span>;
+                    } else if (texter === "") {
+                        return <Tag>Normal</Tag>//<span class="label label-default">Normal</span>;
+                    } else {
+                        return <Tag color="green">{row}</Tag>//<span class="label label-success">{row}</span>;
+                    }
+                } else {
+                    return "";
+                }
+            }
         },
         {
             title: 'Report Status',
             dataIndex: 'ReportStatus',
             key: 'ReportStatus',
+            render: (row) => {
+                if (row !== null) {
+                    if (row.toLowerCase() === "not completed") {
+                        return <Tag color="error">{row}</Tag>//<span class="label label-danger">{row}</span>;
+                    } else if (row.toLowerCase() === "report completed") {
+                        return <Tag color="success">{row}</Tag>//<span class="label label-success">{row}</span>;
+                    } else if (row.toLowerCase() === "partially completed") {
+                        return <Tag color="warning">{row}</Tag>//<span class="label label-warning">{row}</span>;
+                    } else {
+                        return <Tag color="warning">{row}</Tag>//<span class="label label-default">{row}</span>;
+                    }
+                } else {
+                    return "";
+                }
+            }
         },
         {
             title: 'Report Delivery',
@@ -79,14 +129,16 @@ const Carelab = () => {
             dataIndex: '',
             key: 'Action',
             render: (text, record) => {
-                return <button data-attr={record?.SampleId} data-gen={record?.Gender} onClick={clickEvent}>View</button>
+                return <Button data-attr={record?.SampleId} data-gen={record?.Gender} onClick={clickEvent}>View</Button>
+                // return <button data-attr={record?.SampleId} data-gen={record?.Gender} onClick={clickEvent}>View</button>
             }
         },
     ]
 
     const clickEvent = (e) => {
-        setClickedId(e.target.dataset.attr);
-        setIsMaleFemale(e.target.dataset.gen.split('-')[0])
+        let eTarget = e.target.closest('td').children[0].dataset
+        setClickedId(eTarget.attr);
+        setIsMaleFemale(eTarget.gen.split('-')[0])
         setIsButtonClicked(true)
     }
 
@@ -149,6 +201,14 @@ const Carelab = () => {
         setshowDiagList(e);
     }
 
+    const printData = () => {
+        setIsPrint(true)
+    }
+
+    const handlePrintClose = () => {
+        setIsPrint(false)
+    }
+
     return (
         <div className='maiTopContainer'>
             <div>
@@ -162,7 +222,7 @@ const Carelab = () => {
                     tabData.map((taber, index) => {
                         let badgeColour = taber?.Code;
                         let tabStat = taber?.Status
-                        let textColour = badgeColour == 'yellow' ? 'black' : 'white'
+                        let textColour = badgeColour === 'yellow' ? 'black' : 'white'
                         return (
                             <TabPane
                                 tab={
@@ -199,6 +259,8 @@ const Carelab = () => {
                 isMaleFemale={isMaleFemale}
             />
             {/* <button data-attr={55} onClick={clickEvent}>View</button> */}
+            {/* <button onClick={printData}>Print</button> */}
+            <PrintReport isPrint={isPrint} handlePrintClose={handlePrintClose} />
         </div>
     )
 };

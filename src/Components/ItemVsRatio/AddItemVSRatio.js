@@ -57,7 +57,7 @@ const AddItemVsRatio = (props) => {
   }
 
   const onFinish = (values) => {
-    setButDis(true)
+    // setButDis(true)
     let data = {
       "RId": forEdit ? RId : 0,
       "ItemId": values?.ItemId,
@@ -71,6 +71,7 @@ const AddItemVsRatio = (props) => {
       "TestPerUnit": values?.TestPerUnit,
       "SubUnit": values?.SubUnit
     }
+    // console.log(data);return;
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
@@ -193,6 +194,8 @@ const AddItemVsRatio = (props) => {
             >
               <InputNumber
                 min={0}
+                step='0.01'
+                keyboard={false}
                 style={{ width: '100%' }}
               />
             </Form.Item>
@@ -209,6 +212,8 @@ const AddItemVsRatio = (props) => {
             >
               <InputNumber
                 min={0}
+                step='0.01'
+                keyboard={false}
                 style={{ width: '100%' }}
               />
             </Form.Item>

@@ -358,3 +358,20 @@ export const InsertUpdateConsumptionGroup = 'InsertUpdateConsumptionGroup';
   }
  */
 export const InsertUpdateControlReagentDetails = 'InsertUpdateControlReagentDetails';
+
+
+/**
+ * @desc: new verfiy report service
+ * @param: {
+  "Id": 1,
+  "RecordId": 2,
+  "CreatedBy": 3,
+  "CreatedOn": "2022-06-09T12:28:42.6410367+05:45",
+  "Remarks": "sample string 5",
+  "IsApproved": 6,
+  "IsVerifier": true,
+  "IsActive": true,
+  "IsCurrent": true
+}
+ */
+ export const VerifyPatientReport  = 'VerifyPatientReport ';

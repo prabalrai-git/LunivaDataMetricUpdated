@@ -46,6 +46,13 @@ export const MenuRoute = [
     path: '/reagentused',
     isactive: MenuSettings.reagentused,
   },
+  {
+    icon: 'icon-line-shopping-bag',
+    key: 'carelabreport',
+    name: 'Report Care',
+    path: '/carelab',
+    isactive: MenuSettings.goodsout,
+  },
   // {
   //   icon: 'icon-graph',
   //   key: 'finance',

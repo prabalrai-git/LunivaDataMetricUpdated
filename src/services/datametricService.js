@@ -1,4 +1,5 @@
-import { GetListOfUserForMetric, GetListOfTestByTypeForBulkUpdate, GetTestType, GetDatewiseRequestorTransactionDetails, GetRequestorList, GetReferedDoctorList, GetRequestorwiseTotalSalesSummaryByDate, GetDatewiseReferredDoctorTransactionDetails, GetDailySummaryTransactionUserWiseByDate, GetDailyTransactionByUserIdAndDate, GetCompanyDetials, GetDataMetricReportByReportTypeAndDateRange } from '../constants/url';
+import { GetListOfUserForMetric, GetListOfTestByTypeForBulkUpdate, GetTestType, GetDatewiseRequestorTransactionDetails, GetRequestorList, GetReferedDoctorList, GetRequestorwiseTotalSalesSummaryByDate, GetDatewiseReferredDoctorTransactionDetails, GetDailySummaryTransactionUserWiseByDate, GetDailyTransactionByUserIdAndDate, GetCompanyDetials, GetDataMetricReportByReportTypeAndDateRange, VerifyPatientReport } from '../constants/url';
+import { generateUrlEncodedData } from '../utils/generateFormData';
 import { fetch, store } from '../utils/httpUtil';
 
 export const getTestTypeReport = (data, successCallback) => {
@@ -172,6 +173,23 @@ export const getDataMetricReportByReportTypeAndDateRange = (data, successCallbac
     return async dispatch => {
         try {
             const response = await fetch(`${GetDataMetricReportByReportTypeAndDateRange}?from=${data.fromdate}&to=${data.todate}&reportType=dashboard`);
+            if (response?.status === 200) {
+                successCallback(response?.data);
+            } else {
+                successCallback([])
+            }
+        } catch (error) {
+
+        }
+    }
+}
+
+//
+export const insertVerifyPatientReport = (data, successCallback) => {
+    return async dispatch => {
+        try {
+            const formData = generateUrlEncodedData(data);
+            const response = await store(VerifyPatientReport, formData);
             if (response?.status === 200) {
                 successCallback(response?.data);
             } else {

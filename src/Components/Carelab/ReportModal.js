@@ -3,12 +3,14 @@ import { Modal, Button } from 'antd';
 // import { careLabTestListApi } from '../../services/careLabService'
 // import { useDispatch } from 'react-redux';
 import DefData from './defData'
+import ImageModal from './ImageModal';
 
 const ReportModal = (props) => {
     const { visible, handleCancel, setClickedId, newFiscalId, isMaleFemale } = props;
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [visibler, setVisibler] = useState(false);
     const [getAllDataHere, setGetAllDataHere] = useState([]);
+    const [showImageModal, setshowImageModal] = useState(false);
     // const dispatch = useDispatch();
 
     const handleOk = () => {
@@ -27,6 +29,15 @@ const ReportModal = (props) => {
     const isDataVerified = (res) => {
         console.log(res);
         setConfirmLoading(!res)
+    }
+
+    const handleFileClick = () => {
+        setshowImageModal(true)
+        // console.log('show files');
+    }
+
+    const handleFileCancel = (res) => {
+        setshowImageModal(false)
     }
 
     useEffect(() => {
@@ -49,6 +60,9 @@ const ReportModal = (props) => {
                         <Button type="primary" loading={confirmLoading} onClick={handleOk}>
                             Verify All
                         </Button>,
+                        <Button type="default" onClick={handleFileClick}>
+                            Upload Files
+                        </Button>,
                         <Button type="default" onClick={handleCancelClick}>
                             Cancel
                         </Button>
@@ -57,6 +71,7 @@ const ReportModal = (props) => {
             >
                 <DefData visible={visibler} setClickedId={setClickedId} newFiscalId={newFiscalId} allDataRet={allDataRet} handleOk={confirmLoading} isDataVerified={isDataVerified} isMaleFemale={isMaleFemale} />
             </Modal>
+            <ImageModal visible={showImageModal} handleFileCancel={handleFileCancel} />
         </>
     );
 };
