@@ -1,13 +1,37 @@
 import { ItemName } from "../Components/Common/ItemToReagent"
 import { MenuSettings } from "./MenuSettings"
 
+export const AfterLoginData = [
+  {
+    icon: 'icon-line2-home',
+    key: 'inventory',
+    name: 'Inventory',
+    path: '/dashbord',
+    isactive: MenuSettings.dashboard,
+  },
+  {
+    icon: 'icon-line2-doc',
+    key: 'misreports',
+    name: 'MIS Reports',
+    path: '/datametric',
+    isactive: MenuSettings.misreports,
+  },
+  {
+    icon: 'icon-line-shopping-bag',
+    key: 'datametric',
+    name: 'Datametric',
+    path: '/carelab',
+    isactive: MenuSettings.goodsout,
+  },
+]
+
 //inventory management
 export const MenuRoute = [
   {
     icon: 'icon-line2-home',
     key: 'dashbord',
     name: 'dashboard',
-    path: '/',
+    path: '/dashboard',
     isactive: MenuSettings.dashboard,
   },
   

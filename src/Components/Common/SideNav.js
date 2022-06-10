@@ -6,11 +6,14 @@ import comlogo from '../../assets/images/logobig.png';
 import comlogo1 from '../../assets/images/logosmall.png';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Layout, Menu } from 'antd';
+import { useLocation } from 'react-router-dom';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const SideNav = (props) => {
+  const location = useLocation()
+  console.log("location location", location.state);
   const { statePass } = props
   const data = MenuRoute;
   const menuData = settingsMenu;
@@ -74,13 +77,19 @@ const SideNav = (props) => {
 
             {
               showinventory ? (
-                <SubMenu key="set0" title='Inventory' icon={<i className='icon-line2-settings'></i>}>
+                // <SubMenu key="set0" title='Inventory' icon={<i className='icon-line2-settings'></i>}>
+                //   {
+                <>
                   {
+                    location.state === 'inventory' &&
                     data.map(e => {
                       if (e.isactive) {
                         return (
                           <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                            <NavLink to={e?.path} className='navLInk' >
+                            <NavLink to={{
+                              pathname: e?.path,
+                              state: location.state
+                            }} className='navLInk' >
                               {e.name}
                             </NavLink>
                           </Menu.Item>
@@ -89,19 +98,27 @@ const SideNav = (props) => {
                     }
                     )
                   }
-                </SubMenu>
+                </>
+                //   }
+                // </SubMenu>
               ) : ''
             }
 
             {
               showSettings ? (
-                <SubMenu key="set1" title='Settings' icon={<i className='icon-line2-settings'></i>}>
+                // <SubMenu key="set1" title='Settings' icon={<i className='icon-line2-settings'></i>}>
+                //   {
+                <>
                   {
+                    location.state === 'inventory' &&
                     menuData.map(e => {
                       if (e.isactive) {
                         return (
                           <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                            <NavLink to={e?.path} className='navLInk' >
+                            <NavLink to={{
+                              pathname: e?.path,
+                              state: location.state
+                            }} className='navLInk' >
                               {e.name}
                             </NavLink>
                           </Menu.Item>
@@ -110,19 +127,27 @@ const SideNav = (props) => {
                     }
                     )
                   }
-                </SubMenu>
+                </>
+                //   }
+                // </SubMenu>
               ) : ''
             }
 
             {
               dataMetric ? (
-                <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+                // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+                //   {
+                  <>
                   {
+                    location.state === 'datametric' &&
                     dataMetricdata.map(e => {
                       if (e.isactive) {
                         return (
                           <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                            <NavLink to={e?.path} className='navLInk' >
+                            <NavLink to={{
+                              pathname: e?.path,
+                              state: location.state
+                            }} className='navLInk' >
                               {e.name}
                             </NavLink>
                           </Menu.Item>
@@ -131,7 +156,9 @@ const SideNav = (props) => {
                     }
                     )
                   }
-                </SubMenu>
+                  </>
+                //   }
+                // </SubMenu>
               ) : ''
             }
 
