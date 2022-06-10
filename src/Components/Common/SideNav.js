@@ -18,6 +18,7 @@ const SideNav = (props) => {
   const [collpsed, setcollpsed] = useState(false);
   const [showSettings, setShowSettings] = useState(true);
   const [dataMetric, setdataMetric] = useState(true);
+  const [showinventory, setshowinventory] = useState(true)
 
 
 
@@ -32,6 +33,7 @@ const SideNav = (props) => {
   useEffect(() => {
     setShowSettings(!menuData.every(vendor => vendor['isactive'] === false));
     setdataMetric(!dataMetricdata.every(vendor => vendor['isactive'] === false));
+    setshowinventory(!MenuRoute.every(vendor => vendor['isactive'] === false))
   }, [])
 
   return (
@@ -40,7 +42,7 @@ const SideNav = (props) => {
         autoHide
         autoHeight
         autoHeightMin={'100vh'}
-        
+
 
       >
         <Sider collapsible collapsed={collpsed} onCollapse={oncollpse} className='sideNav' >
@@ -52,7 +54,7 @@ const SideNav = (props) => {
             }
           </div>
 
-          <Menu mode="inline" defaultSelectedKeys={['1']}  style={{ background: 'var(--secondaryBackground)', paddingBottom: '15%' }}>
+          <Menu mode="inline" defaultSelectedKeys={['1']} style={{ background: 'var(--secondaryBackground)', paddingBottom: '15%' }}>
             {
               data.length !== 0 ?
                 (
@@ -68,6 +70,27 @@ const SideNav = (props) => {
                     }
                   })
                 ) : ''
+            }
+
+            {
+              showinventory ? (
+                <SubMenu key="set1" title='Inventory' icon={<i className='icon-line2-settings'></i>}>
+                  {
+                    menuData.map(e => {
+                      if (e.isactive) {
+                        return (
+                          <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                            <NavLink to={e?.path} className='navLInk' >
+                              {e.name}
+                            </NavLink>
+                          </Menu.Item>
+                        )
+                      }
+                    }
+                    )
+                  }
+                </SubMenu>
+              ) : ''
             }
 
             {
