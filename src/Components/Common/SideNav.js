@@ -55,7 +55,7 @@ const SideNav = (props) => {
           </div>
 
           <Menu mode="inline" defaultSelectedKeys={['1']} style={{ background: 'var(--secondaryBackground)', paddingBottom: '15%' }}>
-            {
+            {/* {
               data.length !== 0 ?
                 (
                   data.map(e => {
@@ -70,13 +70,13 @@ const SideNav = (props) => {
                     }
                   })
                 ) : ''
-            }
+            } */}
 
             {
               showinventory ? (
-                <SubMenu key="set1" title='Inventory' icon={<i className='icon-line2-settings'></i>}>
+                <SubMenu key="set0" title='Inventory' icon={<i className='icon-line2-settings'></i>}>
                   {
-                    menuData.map(e => {
+                    data.map(e => {
                       if (e.isactive) {
                         return (
                           <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>

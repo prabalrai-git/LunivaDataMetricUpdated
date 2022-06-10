@@ -192,7 +192,7 @@ export const dataMetricCon = [
   {
     icon: 'icon-line2-screen-desktop',
     key: 'expesemangement',
-    name: 'expesemangement',
+    name: 'expensemangement',
     path: '/expesemangement',
     isactive: MenuSettings.expesemangement,
   },
@@ -207,7 +207,7 @@ export const dataMetricCon = [
   {
     icon: 'icon-line2-screen-desktop',
     key: 'dynamicreporrt',
-    name: 'dynamicreporrt',
+    name: 'dynamicreport',
     path: '/dynamicreporrt',
     isactive: MenuSettings.dynamicreporrt,
   },
