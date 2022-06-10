@@ -9,9 +9,12 @@ import PageHeader from '../Common/pageHeader'
 // import Edit from '../Common/Edit';
 import Cancle from '../Common/Cancle';
 import { todaydate } from '../Common/TodayDate';
+import { useLocation } from 'react-router-dom';
 
 
 const Index = () => {
+  const location = useLocation()
+  console.log("potato", location.state);
   const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])

@@ -8,6 +8,7 @@ export const AsyncPublicLayout = lazy(() => pMinDelay(import('../layout/publicLa
 export const AsyncAppLayout = lazy(() => pMinDelay(import('../layout/appLayout'), 300));
 
 export const AsyncDashbord = lazy(() => pMinDelay(import('../Containers/DashBoardContainer'), 300));
+export const AsyncAfterLogin = lazy(() => pMinDelay(import('../Containers/AfterLogin'), 300));
 
 export const AsyncGoodsIn = lazy(() => pMinDelay(import('../Components/GoodsIn/index'), 300));
 export const AsyncGoodsInAdd = lazy(() => pMinDelay(import('../Components/GoodsIn/AddGoods'), 300));

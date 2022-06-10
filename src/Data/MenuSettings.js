@@ -2,6 +2,7 @@
  * @desc: control menu route settings from here
  */
 export const MenuSettings = {
+    AfterLogin: true,
     dashboard: true,
     goodsin: true,
     goodsout: true,
