@@ -13,7 +13,6 @@ const { SubMenu } = Menu;
 
 const SideNav = (props) => {
   const location = useLocation()
-  console.log("location location", location.state);
   const { statePass } = props
   const data = MenuRoute;
   const menuData = settingsMenu;
@@ -49,13 +48,15 @@ const SideNav = (props) => {
 
       >
         <Sider collapsible collapsed={collpsed} onCollapse={oncollpse} className='sideNav' >
-          <div className="logo">
-            {
-              collpsed === true ?
-                <img src={comlogo1} alt="luniva" /> :
-                <img src={comlogo} alt="luniva" />
-            }
-          </div>
+          <NavLink to='/afterlogin'>
+            <div className="logo">
+              {
+                collpsed === true ?
+                  <img src={comlogo1} alt="luniva" /> :
+                  <img src={comlogo} alt="luniva" />
+              }
+            </div>
+          </NavLink>
 
           <Menu mode="inline" defaultSelectedKeys={['1']} style={{ background: 'var(--secondaryBackground)', paddingBottom: '15%' }}>
             {/* {
@@ -106,30 +107,31 @@ const SideNav = (props) => {
 
             {
               showSettings ? (
-                // <SubMenu key="set1" title='Settings' icon={<i className='icon-line2-settings'></i>}>
-                //   {
                 <>
                   {
                     location.state === 'inventory' &&
-                    menuData.map(e => {
-                      if (e.isactive) {
-                        return (
-                          <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                            <NavLink to={{
-                              pathname: e?.path,
-                              state: location.state
-                            }} className='navLInk' >
-                              {e.name}
-                            </NavLink>
-                          </Menu.Item>
+                    <SubMenu key="set1" title='Settings' icon={<i className='icon-line2-settings'></i>}>
+                      {
+                        menuData.map(e => {
+                          if (e.isactive) {
+                            return (
+                              <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                                <NavLink to={{
+                                  pathname: e?.path,
+                                  state: location.state
+                                }} className='navLInk' >
+                                  {e.name}
+                                </NavLink>
+                              </Menu.Item>
+                            )
+                          }
+                        }
                         )
+
                       }
-                    }
-                    )
+                    </SubMenu>
                   }
                 </>
-                //   }
-                // </SubMenu>
               ) : ''
             }
 
@@ -137,7 +139,7 @@ const SideNav = (props) => {
               dataMetric ? (
                 // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
                 //   {
-                  <>
+                <>
                   {
                     location.state === 'datametric' &&
                     dataMetricdata.map(e => {
@@ -156,7 +158,7 @@ const SideNav = (props) => {
                     }
                     )
                   }
-                  </>
+                </>
                 //   }
                 // </SubMenu>
               ) : ''

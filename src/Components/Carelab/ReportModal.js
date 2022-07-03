@@ -27,13 +27,12 @@ const ReportModal = (props) => {
     }
 
     const isDataVerified = (res) => {
-        console.log(res);
+        
         setConfirmLoading(!res)
     }
 
     const handleFileClick = () => {
         setshowImageModal(true)
-        // console.log('show files');
     }
 
     const handleFileCancel = (res) => {

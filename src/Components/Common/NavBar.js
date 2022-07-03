@@ -14,7 +14,7 @@ const NavBar = (props) => {
         <Col>
           {/* <SerchBar></SerchBar> */}
           <div className="titleHeading">
-          <h2 className={sideGo} style={{ color: 'var(--primary)' }}>CareLab Inventory Management System</h2>
+          <h2 className={sideGo} style={{ color: 'var(--primary)' }}>Luniva360 LIMS</h2>
           </div>
         </Col>
 

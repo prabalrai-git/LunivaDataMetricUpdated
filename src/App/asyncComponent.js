@@ -94,3 +94,6 @@ export const AsyncCareLabIndex = lazy(() => pMinDelay(import('../Components/Care
 
 export const AsyncManufacture = lazy(() => pMinDelay(import('../Components/Manufacture/index'), 300));
 export const AsyncAddManufacture = lazy(() => pMinDelay(import('../Components/Manufacture/AddManufacture'), 300));
+
+export const AsyncQcControl = lazy(() => pMinDelay(import('../Components/CareLabFolder/QcControl/index'), 300));
+export const AsyncLC = lazy(() => pMinDelay(import('../Components/CareLabFolder/LC/index'), 300));

@@ -172,6 +172,13 @@ export const dataMetricCon = [
     isactive: MenuSettings.goodsout,
   },
   {
+    icon: 'icon-line-shopping-bag',
+    key: 'lcchart',
+    name: 'LC Chart',
+    path: '/lcchart',
+    isactive: MenuSettings.goodsout,
+  },
+  {
     icon: 'icon-building2',
     key: 'department',
     name: 'department',

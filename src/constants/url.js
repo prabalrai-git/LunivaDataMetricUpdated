@@ -375,3 +375,9 @@ export const InsertUpdateControlReagentDetails = 'InsertUpdateControlReagentDeta
 }
  */
  export const VerifyPatientReport  = 'VerifyPatientReport ';
+
+/**
+ * @desc: Update Critical Value And Cut off Time of Test
+ * @param: ?testId={testId}&criticalValue={criticalValue}&cutofftime={cutofftime}&cutoffinHrs={cutoffinHrs}
+ */
+ export const UpdateCriticalValueAndCutoffTimeofTest = 'UpdateCriticalValueAndCutoffTimeofTest'

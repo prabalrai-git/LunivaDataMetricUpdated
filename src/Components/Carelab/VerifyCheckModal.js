@@ -14,12 +14,11 @@ const VerifyCheckModal = (props) => {
 
     const onFinish = (values) => {
         setConfirmLoading(true)
-        // console.log(values);
         form.validateFields().then(values => {
             retUp(values);
             // form.resetFields();
         }).catch(info => {
-          console.log('Validate Failed:', info);
+          
           setConfirmLoading(false)
         });
     }

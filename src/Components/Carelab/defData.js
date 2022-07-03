@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import { careLabTestListApi } from '../../services/careLabService';
 import { Markup } from 'interweave';
@@ -20,6 +20,8 @@ const DefData = (props) => {
     const [showNoteModal, setshowNoteModal] = useState(false);
     const [viewNotes, setviewNotes] = useState('');
     const [showVerifyModal, setshowVerifyModal] = useState(false);
+    const controls = useRef([]);
+    const ref= useRef()
 
     const handleEnterTest = () => {
         setshowSubModal(true)
@@ -30,7 +32,7 @@ const DefData = (props) => {
     };
 
     const handleNoteModal = (e) => {
-        // console.log(e.target);
+        
         // data-value
         setviewNotes(e.target.value);
         setshowNoteModal(true)
@@ -47,7 +49,7 @@ const DefData = (props) => {
             const element = allVerButtonData[index];
             // let singleEleData = element.closest('tr').children[1].children[0].value
             // let allSingleData = JSON.parse(element.dataset.all)
-            // console.log(allSingleData, singleEleData);
+            
             isAllDataVerified = true
         }
         isDataVerified(isAllDataVerified)
@@ -128,7 +130,7 @@ const DefData = (props) => {
         let eTarget = e.target.closest('td').children[0].dataset
         let allData = JSON.parse(eTarget.all)
         let testResultValue = e.target.closest('tr').children[1].children[0].value;
-        // console.log(allData, testResultValue);
+        
 
         let newData = {
             "Id": 0,
@@ -143,13 +145,12 @@ const DefData = (props) => {
         }
 
         dispatch(insertVerifyPatientReport(newData, (res) => {
-            if(res?.SuccessMsg == true){
+            if (res?.SuccessMsg == true) {
                 message.success(res?.Message)
-            }else{
+            } else {
                 message.error('Some error occured. Please try again')
             }
         }))
-        // console.log(newData);
 
         // verifyShowModal()
     }
@@ -235,7 +236,7 @@ const DefData = (props) => {
     }
 
     const retNoteModal = (res) => {
-        console.log(res);
+        
     }
 
     const verifyShowModal = () => {
@@ -247,7 +248,15 @@ const DefData = (props) => {
     }
 
     const retUp = (res) => {
-        console.log(res);
+        
+    }
+
+    const enterPressed = (res) => {
+        if (res.keyCode == 13) {
+            // const index = controls.current.indexOf(res.target);
+            // const next = controls.current[index + 1];
+            // next && next.focus();
+        }
     }
 
     return (
@@ -261,7 +270,7 @@ const DefData = (props) => {
                             <div className='panelClass'>{panelName}</div>
                             <hr />
                             {
-                                panelValue && Object.entries(panelValue).map(pan => {
+                                panelValue && Object.entries(panelValue).map((pan, index) => {
                                     let groupName = pan[1][0][0]?.GroupName
                                     let groupValue = pan[1]
                                     return (
@@ -319,23 +328,25 @@ const DefData = (props) => {
                                                                                         <td className="inputter">
                                                                                             {
                                                                                                 tesLi?.subtestId === null && (tesLi?.IsCulture === true || tesLi?.SubGroupId === true) ?
-                                                                                                    <Button onClick={handleEnterTest}>Enter Test</Button>
+                                                                                                    <Button onClick={handleEnterTest} tabIndex={-1}>Enter Test</Button>
                                                                                                     :
-                                                                                                    <input type={'text'} defaultValue=
-                                                                                                        {
+                                                                                                    <input
+                                                                                                        type={'text'}
+                                                                                                        defaultValue={
                                                                                                             isSubtest ?
                                                                                                                 tesLi?.subresult !== null ? tesLi?.subresult : ''
                                                                                                                 :
                                                                                                                 tesLi?.TestResult !== null ? tesLi?.TestResult : ''
                                                                                                         }
                                                                                                         onChange={testResultChange}
+                                                                                                        onKeyDown={enterPressed}
                                                                                                     />
                                                                                             }
                                                                                         </td>
                                                                                         <td>{tesLi?.Units}</td>
                                                                                         <td className="ranger">{<Markup content={isSubtest ? tesLi?.Range : tesLi?.Max} />}</td>
                                                                                         <td>{<Markup content={tesLi?.Note} />}</td>
-                                                                                        <td><button tabIndex={-1} data-all={JSON.stringify(tesLi)} onClick={verifyOne}>Verify</button></td>
+                                                                                        <td><Button tabIndex={-1} data-all={JSON.stringify(tesLi)} onClick={verifyOne}>Verify</Button></td>
                                                                                     </tr>
                                                                                 )
                                                                             })
@@ -353,9 +364,11 @@ const DefData = (props) => {
                                                                                     <Button onClick={handleEnterTest}>Enter Test</Button>
                                                                                     :
                                                                                     <input
+                                                                                    ref={ref}
                                                                                         type={'text'}
                                                                                         defaultValue={gou[0]?.TestResult !== null ? gou[0]?.TestResult : ''}
                                                                                         onChange={testResultChange}
+                                                                                        onKeyDown={enterPressed}
                                                                                     />
                                                                             }
                                                                         </td>
@@ -367,7 +380,7 @@ const DefData = (props) => {
                                                                                     <Markup content={gou[0]?.Note} />
                                                                                     :
                                                                                     // <Button onClick={handleNoteModal} data-value={gou[0]?.Note}>Add Notes</Button>
-                                                                                    <button onClick={handleNoteModal} value={gou[0]?.Note}>Add Notes</button>
+                                                                                    <button tabIndex={-1} onClick={handleNoteModal} value={gou[0]?.Note}>Add Notes</button>
                                                                             }
                                                                         </td>
                                                                         <td>

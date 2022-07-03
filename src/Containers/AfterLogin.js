@@ -42,9 +42,15 @@ const AfterLogin = () => {
     return function cleanup() {
       clearInterval(timerID);
     };
-
-
   });
+
+  useEffect(() => {
+    if (token === null) {
+      history.push('/login');
+      return
+    }
+  }, [])
+
   function tick() {
     setDate(new Date());
     const temp = date.getHours;
@@ -57,7 +63,7 @@ const AfterLogin = () => {
         <Row gutter={[16, 16]}>
           <Col sm={24} md={16} xs={24} lg={16} >
             <div className="right maiTopContainer">
-              <h3> Welcome back {token.username}</h3>
+              <h3> Welcome back</h3>
               <p><span><i className="icon-quote-left1"></i></span> {randomElement} <span><i className="icon-quote-right1"></i></span></p>
             </div>
           </Col>

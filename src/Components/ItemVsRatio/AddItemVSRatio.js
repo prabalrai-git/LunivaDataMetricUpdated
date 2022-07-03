@@ -71,7 +71,6 @@ const AddItemVsRatio = (props) => {
       "TestPerUnit": values?.TestPerUnit,
       "SubUnit": values?.SubUnit
     }
-    // console.log(data);return;
     dispatch(insertItemVsRatioApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)

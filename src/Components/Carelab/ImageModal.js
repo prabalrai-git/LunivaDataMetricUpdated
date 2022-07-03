@@ -12,7 +12,6 @@ const ImageModal = (props) => {
     const updateUploadedFiles = (files) => setNewUserInfo({ ...newUserInfo, fileLists: files });
 
     useEffect(() => {
-        console.log(newUserInfo)
     }, [newUserInfo])
 
     const handleCancelFiler = () => {

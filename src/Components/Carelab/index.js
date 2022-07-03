@@ -33,11 +33,14 @@ const Carelab = () => {
             title: 'Patient Name',
             dataIndex: 'PatientName',
             key: 'PatientName',
+            width: '15%',
             render: (text, record) => (
                 <>
-                    <div>{text}</div>
-                    <div>{record?.Gender}</div>
-                    <div>Sample Id: {record?.SampleId}</div>
+                    <strong>
+                        <div>{text}</div>
+                        <div><small>{record?.Gender}</small></div>
+                        <div><small>Sample Id: {record?.SampleId}</small></div>
+                    </strong>
                 </>
             )
         },
@@ -54,6 +57,59 @@ const Carelab = () => {
             )
         },
         {
+
+            title: 'Report Status',
+            dataIndex: 'BillPaymentType',
+            key: 'BillPaymentType',
+            render: (text, record) => {
+                const billText = text.toLowerCase();
+                const prioText = record.ReportPriority.toLowerCase();
+                const statText = record.ReportStatus.toLowerCase();
+                let billTag = ''
+                if (billText === "cash") {
+                    billTag = <Tag color="green">{text}</Tag>
+                } else if (billText === "credit") {
+                    billTag = <Tag color="#108ee9">{text}</Tag>
+                } else if (billText === "creditcollection") {
+                    billTag = <Tag color="gold">{text}</Tag>
+                } else {
+                    billTag = <Tag>{text}</Tag>
+                }
+
+                let prioTag = ''
+                if (prioText != null) {
+                    if (prioText.includes("emergency")) {
+                        prioTag = <Tag color="error">{prioText}</Tag>
+                    } else if (prioText === "") {
+                        prioTag = <Tag>Normal</Tag>
+                    } else {
+                        prioTag = <Tag color="green">{prioText}</Tag>
+                    }
+                }
+
+                let statTag = ''
+                if (statText !== null) {
+                    if (statText === "not completed") {
+                        statTag = <Tag color="error">{statText}</Tag>
+                    } else if (statText === "report completed") {
+                        statTag = <Tag color="success">{statText}</Tag>
+                    } else if (statText === "partially completed") {
+                        statTag = <Tag color="warning">{statText}</Tag>
+                    } else {
+                        statTag = <Tag color="warning">{statText}</Tag>
+                    }
+                }
+
+                return (
+                    <div className='allStat'>
+                        <div>{billTag}</div>
+                        <div>{prioTag}</div>
+                        <div>{statTag}</div>
+                    </div>
+                )
+            }
+        },
+        /* {
             title: 'Payment Type',
             dataIndex: 'BillPaymentType',
             key: 'BillPaymentType',
@@ -61,14 +117,14 @@ const Carelab = () => {
                 if (text !== null) {
                     let texter = text.toLowerCase();
                     if (texter === "cash") {
-                        
-                        return <Tag color="green">{text}</Tag>//<span class="label label-success">{text}</span>;
+
+                        return <Tag color="green">{text}</Tag>
                     } else if (texter === "credit") {
-                        return <Tag color="#108ee9">{text}</Tag>//<span class="label label-primary">{text}</span>;
+                        return <Tag color="#108ee9">{text}</Tag>
                     } else if (texter === "creditcollection") {
-                        return <Tag color="gold">{text}</Tag>//<span class="label label-warning">{text}</span>;
+                        return <Tag color="gold">{text}</Tag>
                     } else {
-                        return <Tag>{text}</Tag>//<span class="label label-default">{text}</span>;
+                        return <Tag>{text}</Tag>
                     }
                 } else {
                     return "";
@@ -83,11 +139,11 @@ const Carelab = () => {
                 if (row != null) {
                     let texter = row.toLowerCase();
                     if (texter.includes("emergency")) {
-                        return <Tag color="error">{row}</Tag>//<span class="label label-danger">{row}</span>;
+                        return <Tag color="error">{row}</Tag>
                     } else if (texter === "") {
-                        return <Tag>Normal</Tag>//<span class="label label-default">Normal</span>;
+                        return <Tag>Normal</Tag>
                     } else {
-                        return <Tag color="green">{row}</Tag>//<span class="label label-success">{row}</span>;
+                        return <Tag color="green">{row}</Tag>
                     }
                 } else {
                     return "";
@@ -101,19 +157,19 @@ const Carelab = () => {
             render: (row) => {
                 if (row !== null) {
                     if (row.toLowerCase() === "not completed") {
-                        return <Tag color="error">{row}</Tag>//<span class="label label-danger">{row}</span>;
+                        return <Tag color="error">{row}</Tag>
                     } else if (row.toLowerCase() === "report completed") {
-                        return <Tag color="success">{row}</Tag>//<span class="label label-success">{row}</span>;
+                        return <Tag color="success">{row}</Tag>
                     } else if (row.toLowerCase() === "partially completed") {
-                        return <Tag color="warning">{row}</Tag>//<span class="label label-warning">{row}</span>;
+                        return <Tag color="warning">{row}</Tag>
                     } else {
-                        return <Tag color="warning">{row}</Tag>//<span class="label label-default">{row}</span>;
+                        return <Tag color="warning">{row}</Tag>
                     }
                 } else {
                     return "";
                 }
             }
-        },
+        }, */
         {
             title: 'Report Delivery',
             dataIndex: 'ReportDelivery',
@@ -161,7 +217,7 @@ const Carelab = () => {
 
     const dataRet = (val) => {
         let data = {
-            fromdate: val[0].format("YYYY-MM-DD"),
+            fromdate: '2021-06-22',//val[0].format("YYYY-MM-DD"),
             todate: val[1].format("YYYY-MM-DD"),
         }
         setDiagList(val?.diaList.toString())
@@ -258,8 +314,6 @@ const Carelab = () => {
                 newFiscalId={newFiscalId}
                 isMaleFemale={isMaleFemale}
             />
-            {/* <button data-attr={55} onClick={clickEvent}>View</button> */}
-            {/* <button onClick={printData}>Print</button> */}
             <PrintReport isPrint={isPrint} handlePrintClose={handlePrintClose} />
         </div>
     )

@@ -14,7 +14,6 @@ import { useLocation } from 'react-router-dom';
 
 const Index = () => {
   const location = useLocation()
-  console.log("potato", location.state);
   const history = useHistory();
   const dispatch = useDispatch();
   const [goodsList, setgoodsList] = useState([])

@@ -14,9 +14,7 @@ const TabContentCare = (props) => {
 
     useEffect(() => {
         if(activeTabKeyP !== activeTabKey){
-            console.log(activeTabKey, activeTabKeyP);
             setActiveTabKeyP(activeTabKey)
-            console.log('asdf');
         }
     }, [activeTabKey])
 

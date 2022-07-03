@@ -9,7 +9,6 @@ const MobileNav = () => {
         <img src={loadlogo} alt="" />
       </div>
       <div className="userIcon">
-        Samjhana
       </div>
     </MobileNavContainer>
   )

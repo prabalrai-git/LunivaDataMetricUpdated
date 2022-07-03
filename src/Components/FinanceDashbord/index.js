@@ -137,7 +137,7 @@ const Index = () => {
 
   useEffect(() => {
     const fd = new Date()
-    const date = (`${fd.getFullYear()}-${fd.getMonth() + 1}-${fd.getDate()} `);
+    const date = (`${fd.getFullYear()}-${fd.getMonth() + 1}-${fd.getDate()}`);
     const data = {
       fromdate: date,
       todate: date
