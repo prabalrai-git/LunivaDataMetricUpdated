@@ -13,6 +13,7 @@ import CustomModal from '../Common/CustomModal';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoodsOut = (props) => {
+  // console.log(porps);
   const { forEdit } = props
   const { Option } = Select;
   const { TextArea } = Input;
