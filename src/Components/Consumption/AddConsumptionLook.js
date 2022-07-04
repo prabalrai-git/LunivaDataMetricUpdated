@@ -6,6 +6,7 @@ import { formItemLayout } from '../Common/FormItemLayout';
 import { useHistory } from 'react-router-dom';
 import { consumptionGroupApi, consumptionLookupApi, insertConsumptionLookupApi } from '../../services/consumptionService';
 import { getTestListApi } from '../../services/itemVsRatioService';
+import { inventoryStat } from '../Common/StateList';
 
 const AddConsumptionLook = (props) => {
     const { forEdit } = props
@@ -61,7 +62,10 @@ const AddConsumptionLook = (props) => {
             if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
                 message.success(res?.Message)
                 setTimeout(() => {
-                    history.push('/consumptionlook')
+                    history.push({
+                        pathname: '/consumptionlook',
+                        state: inventoryStat
+                    })
                 }, 1000);
             } else {
                 setButDis(false)

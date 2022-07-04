@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemUnitApi, insertItemUnitApi } from '../../services/itemUnitService';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { inventoryStat } from '../Common/StateList';
 
 const AddUnits = (props) => {
   const [form] = Form.useForm();
@@ -44,7 +45,10 @@ const AddUnits = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          history.push('/units')
+          history.push({
+            pathname: '/units',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

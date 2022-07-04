@@ -9,6 +9,7 @@ import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { useHistory } from 'react-router-dom';
+import { inventoryStat } from '../Common/StateList';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoods = (props) => {
@@ -104,7 +105,10 @@ const AddGoods = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          history.push('/goodsin')
+          history.push({
+            pathname: '/goodsin',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

@@ -10,6 +10,7 @@ import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { consumptionGroupApi } from '../../services/consumptionService';
 import { ItemName } from '../Common/ItemToReagent';
+import { inventoryStat } from '../Common/StateList';
 
 const GroupAddItemVsRatioVsConsumtion = (props) => {
   const { forEdit, forGroup, forCon } = props;
@@ -92,7 +93,10 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
         message.success(res?.Message)
 
         setTimeout(() => {
-          history.push('/itemvsratio')
+          history.push({
+            pathname: '/itemvsratio',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

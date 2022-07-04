@@ -7,6 +7,7 @@ import PageHeader from '../Common/pageHeader'
 import Edit from '../Common/Edit';
 import { consumptionGroupApi } from '../../services/consumptionService';
 import Filter from '../Common/Filter';
+import { inventoryStat } from '../Common/StateList';
 
 const ConsumptionGroupIndex = () => {
   const history = useHistory();
@@ -74,7 +75,10 @@ const ConsumptionGroupIndex = () => {
         <PageHeader
           buttonTitle='Add Group'
           pageTitle='Consumption Group'
-          buttonOnClick={() => history.push('/consumption/add')}
+          buttonOnClick={() => history.push({
+            pathname: '/consumption/add',
+            state: inventoryStat
+          })}
         />
         <Filter
           onSearch

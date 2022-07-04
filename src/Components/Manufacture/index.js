@@ -8,6 +8,7 @@ import PageHeader from '../Common/pageHeader'
 import Edit from '../Common/Edit';
 import Filter from '../Common/Filter';
 import { getManuDetApi } from '../../services/itemManufactureService';
+import { inventoryStat } from '../Common/StateList';
 
 const Index = () => {
 
@@ -71,7 +72,10 @@ const Index = () => {
         <PageHeader
           buttonTitle='Add Manufacturer'
           pageTitle='Manufacturer'
-          buttonOnClick={() => history.push('./manufacture/add')}
+          buttonOnClick={() => history.push({
+            pathname: './manufacture/add',
+            state: inventoryStat
+          })}
         ></PageHeader>
         <Filter
         //   onSearch

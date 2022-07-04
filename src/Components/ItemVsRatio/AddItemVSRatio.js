@@ -9,6 +9,7 @@ import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { ItemName } from '../Common/ItemToReagent';
+import { inventoryStat } from '../Common/StateList';
 
 const AddItemVsRatio = (props) => {
   const { forEdit } = props;
@@ -76,7 +77,10 @@ const AddItemVsRatio = (props) => {
         message.success(res?.Message)
 
         setTimeout(() => {
-          history.push('/itemvsratio')
+          history.push({
+            pathname: '/itemvsratio',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

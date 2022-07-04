@@ -11,6 +11,7 @@ import { ChartColor } from '../Common/ChartColor'
 // import Edit from '../Common/Edit'
 import Cancle from '../Common/Cancle'
 import { todaydate } from '../Common/TodayDate'
+import { inventoryStat } from '../Common/StateList'
 
 
 
@@ -150,7 +151,10 @@ const Index = () => {
   return (
     <ItemContainer>
       <div className="maiTopContainer">
-        <PageHeader pageTitle="Wastage" buttonTitle='Add Wastage' buttonOnClick={() => history.push('./wastage/add')}></PageHeader>
+        <PageHeader pageTitle="Wastage" buttonTitle='Add Wastage' buttonOnClick={() => history.push({
+          pathname: './wastage/add',
+          state: inventoryStat
+        })}></PageHeader>
         <Filter
           dateRange
           dateRet={dateRet}

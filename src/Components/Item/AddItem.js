@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { ItemName } from '../Common/ItemToReagent';
+import { inventoryStat } from '../Common/StateList';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddItem = (props) => {
@@ -112,7 +113,10 @@ const AddItem = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          history.push('/item')
+          history.push({
+            pathname: '/item',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemCategoryApi, insertItemCategoryApi } from '../../services/itemCategoryService';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { inventoryStat } from '../Common/StateList';
 
 const AddCategory = (props) => {
   const history = useHistory();
@@ -45,7 +46,10 @@ const AddCategory = (props) => {
         message.success(res?.Message)
         setTimeout(() => {
           // window.location.reload(false);
-          history.push('/category')
+          history.push({
+            pathname: '/category',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

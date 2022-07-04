@@ -9,6 +9,7 @@ import { getGoodsOutApi } from '../../services/labGoodsOutService';
 // import Edit from '../Common/Edit';
 import Cancle from '../Common/Cancle';
 import { todaydate } from '../Common/TodayDate';
+import { inventoryStat } from '../Common/StateList';
 
 const Index = () => {
   const history = useHistory();
@@ -115,7 +116,10 @@ const Index = () => {
         <PageHeader
           buttonTitle='Add Reagent out'
           pageTitle='Reagent Out'
-          buttonOnClick={() => history.push('./goodsout/add')}
+          buttonOnClick={() => history.push({
+            pathname: './goodsout/add',
+            state: inventoryStat
+          })}
         />
         <Filter
           dataReturn={handleSearch}

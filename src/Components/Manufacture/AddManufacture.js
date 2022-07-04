@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getManuDetApi, insertManufactureApi } from '../../services/itemManufactureService';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { inventoryStat } from '../Common/StateList';
 
 const AddManufacture = (props) => {
     const [form] = Form.useForm();
@@ -43,7 +44,10 @@ const AddManufacture = (props) => {
             if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
                 message.success(res?.Message)
                 setTimeout(() => {
-                    history.push('/manufacture')
+                    history.push({
+                        pathname: '/manufacture',
+                        state: inventoryStat
+                    })
                 }, 1000);
             } else {
                 setButDis(false)

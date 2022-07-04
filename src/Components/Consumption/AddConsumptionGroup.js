@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { useHistory } from 'react-router-dom';
 import { consumptionGroupApi, insertUpdateConsumptionGroupApi } from '../../services/consumptionService';
+import { inventoryStat } from '../Common/StateList';
 
 const AddConsumptionGroup = (props) => {
     const { forEdit } = props
@@ -43,7 +44,10 @@ const AddConsumptionGroup = (props) => {
             if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
                 message.success(res?.Message)
                 setTimeout(() => {
-                    history.push('/consumption')
+                    history.push({
+                        pathname:'/consumption',
+                        state: inventoryStat
+                    })
                 }, 1000);
             } else {
                 setButDis(false)

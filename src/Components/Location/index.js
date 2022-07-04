@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getLocationApi } from '../../services/itemLocationService'
 import Edit from '../Common/Edit'
 import Filter from '../Common/Filter'
+import { inventoryStat } from '../Common/StateList'
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -75,7 +76,10 @@ const Index = () => {
   return (
     <ItemContainer>
       <div className="maiTopContainer">
-        <PageHeader pageTitle="Location" buttonTitle='Add Location' buttonOnClick={() => history.push('./location/add')}></PageHeader>
+        <PageHeader pageTitle="Location" buttonTitle='Add Location' buttonOnClick={() => history.push({
+          pathname: './location/add',
+          state: inventoryStat
+        })}></PageHeader>
         <Filter
           onSearch
           toCompareData={tableData}

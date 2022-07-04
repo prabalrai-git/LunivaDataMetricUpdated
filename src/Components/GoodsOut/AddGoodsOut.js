@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { tokenString } from '../Common/HandleUser';
 import { getGoodsInByIdApi } from '../../services/labGoodsReceivedService';
 import CustomModal from '../Common/CustomModal';
+import { inventoryStat } from '../Common/StateList';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoodsOut = (props) => {
@@ -115,7 +116,10 @@ const AddGoodsOut = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          history.push('/goodsout')
+          history.push({
+            pathname: '/goodsout',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

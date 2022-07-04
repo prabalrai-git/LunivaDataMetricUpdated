@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import {
   Chart as ChartJS,
   LinearScale,
@@ -188,7 +187,7 @@ const LC = () => {
     <>
       <h1>LC Charts</h1>
       <div>
-        <Button type='primary' htmlType='button' onClick={(e) => div2PDF(e)}>Export Chart</Button>
+        <button onClick={(e) => div2PDF(e)}>Export</button>
       </div>
       <div className='div2PDF'>
         <Line options={options} data={dataBar} />

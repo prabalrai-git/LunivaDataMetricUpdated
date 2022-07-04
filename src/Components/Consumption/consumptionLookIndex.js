@@ -7,6 +7,7 @@ import PageHeader from '../Common/pageHeader'
 import Edit from '../Common/Edit';
 import { consumptionLookupApi } from '../../services/consumptionService';
 import Filter from '../Common/Filter';
+import { inventoryStat } from '../Common/StateList';
 
 const ConsumptionLookIndex = () => {
   const history = useHistory();
@@ -80,7 +81,10 @@ const ConsumptionLookIndex = () => {
         <PageHeader
           buttonTitle='Add Look up'
           pageTitle='Consumption Look Up'
-          buttonOnClick={() => history.push('/consumptionlook/add')}
+          buttonOnClick={() => history.push({
+            pathname: '/consumptionlook/add',
+            state: inventoryStat
+          })}
         />
         <Filter
           onSearch

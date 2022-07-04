@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getLocationApi, insertLocationApi } from '../../services/itemLocationService';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { inventoryStat } from '../Common/StateList';
 
 const AddLocation = (props) => {
   // const { Option } = Select;
@@ -45,7 +46,10 @@ const AddLocation = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          history.push('/location')
+          history.push({
+            pathname: '/location',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

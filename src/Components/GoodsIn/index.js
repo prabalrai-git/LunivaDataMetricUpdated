@@ -10,6 +10,7 @@ import PageHeader from '../Common/pageHeader'
 import Cancle from '../Common/Cancle';
 import { todaydate } from '../Common/TodayDate';
 import { useLocation } from 'react-router-dom';
+import { inventoryStat } from '../Common/StateList';
 
 
 const Index = () => {
@@ -103,7 +104,10 @@ const Index = () => {
         <PageHeader
           buttonTitle='Add Reagent'
           pageTitle='Reagent In'
-          buttonOnClick={() => history.push('./goodsin/add')}
+          buttonOnClick={() => history.push({
+            pathname: './goodsin/add',
+            state: inventoryStat
+          })}
         ></PageHeader>
         <Filter
           dataReturn={handleSearch}

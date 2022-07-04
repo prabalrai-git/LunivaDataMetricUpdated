@@ -8,6 +8,7 @@ import Filter from '../Common/Filter';
 import Cancle from '../Common/Cancle';
 import { getReagentUsedApi } from '../../services/reagentService';
 import { todaydate } from '../Common/TodayDate'
+import { inventoryStat } from '../Common/StateList'
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -108,7 +109,10 @@ const Index = () => {
         <PageHeader
           pageTitle="Control Entry"
           buttonTitle='Add Control Entry'
-          buttonOnClick={() => history.push('./reagentused/add')}
+          buttonOnClick={() => history.push({
+            pathname: './reagentused/add',
+            state: inventoryStat
+          })}
         />
         <Filter
           dateRange

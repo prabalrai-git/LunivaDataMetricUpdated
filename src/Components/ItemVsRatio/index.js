@@ -9,6 +9,7 @@ import { getItemVsRatioApi } from '../../services/itemVsRatioService';
 import Edit from '../Common/Edit';
 import Filter from '../Common/Filter';
 import { ItemName } from '../Common/ItemToReagent';
+import { inventoryStat } from '../Common/StateList';
 
 const Index = () => {
   const history = useHistory();
@@ -127,13 +128,22 @@ const Index = () => {
       <PageHeader
         buttonTitle={`Add ${ItemName} Vs Ratio`}
         pageTitle={`${ItemName} Vs Ratio`}
-        buttonOnClick={() => history.push('./itemvsratio/add')}
+        buttonOnClick={() => history.push({
+          pathname: './itemvsratio/add',
+          state: inventoryStat
+        })}
 
         forGroup={`Add Group ${ItemName} Vs Ratio`}
-        forGroupButtonClick={() => history.push('./itemvsratio/add/group')}
+        forGroupButtonClick={() => history.push({
+          pathname: './itemvsratio/add/group',
+          state: inventoryStat
+        })}
 
         forCon={`Add Group ${ItemName} Vs Consumption`}
-        forConButtonClick={() => history.push('./itemvsratio/add/itemconsumption')}
+        forConButtonClick={() => history.push({
+          pathname: './itemvsratio/add/itemconsumption',
+          state: inventoryStat
+        })}
 
       ></PageHeader>
       

@@ -7,6 +7,7 @@ import PageHeader from '../Common/pageHeader'
 import { getItemUnitApi } from '../../services/itemUnitService';
 import Edit from '../Common/Edit';
 import Filter from '../Common/Filter';
+import { inventoryStat } from '../Common/StateList';
 
 const Index = () => {
 
@@ -69,7 +70,10 @@ const Index = () => {
         <PageHeader
           buttonTitle='Add Units'
           pageTitle='Units'
-          buttonOnClick={() => history.push('./units/add')}
+          buttonOnClick={() => history.push({
+            pathname: './units/add',
+            state: inventoryStat
+          })}
         ></PageHeader>
         <Filter
           onSearch

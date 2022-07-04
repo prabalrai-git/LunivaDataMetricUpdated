@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getItemTypeApi } from '../../services/itemItemTypeService'
 import Edit from '../Common/Edit'
 import Filter from '../Common/Filter'
+import { inventoryStat } from '../Common/StateList'
 
 
 
@@ -69,7 +70,10 @@ const Index = () => {
   return (
     <ItemContainer>
       <div className="maiTopContainer">
-        <PageHeader pageTitle="Type" buttonTitle='Add Type' buttonOnClick={() => history.push('./type/add')}></PageHeader>
+        <PageHeader pageTitle="Type" buttonTitle='Add Type' buttonOnClick={() => history.push({
+          pathname: './type/add',
+          state: inventoryStat
+        })}></PageHeader>
           <Filter
             onSearch
             toCompareData={tableData}

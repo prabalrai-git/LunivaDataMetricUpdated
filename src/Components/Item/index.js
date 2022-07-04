@@ -8,6 +8,7 @@ import { getLabItemsApi } from '../../services/itemNewItemService'
 import PageHeader from '../Common/pageHeader'
 import Filter from '../Common/Filter'
 import Edit from '../Common/Edit';
+import { inventoryStat } from '../Common/StateList';
 
 const Index = () => {
   const history = useHistory();
@@ -94,7 +95,10 @@ const Index = () => {
         <PageHeader
           buttonTitle='Add Reagent'
           pageTitle='Reagent'
-          buttonOnClick={() => history.push('./item/add')}
+          buttonOnClick={() => history.push({
+            pathname: './item/add',
+            state: inventoryStat
+          })}
         ></PageHeader>
         <Filter
           itemType

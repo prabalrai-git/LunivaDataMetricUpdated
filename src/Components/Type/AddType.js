@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { getItemTypeApi, insertItemTypeApi } from '../../services/itemItemTypeService';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { inventoryStat } from '../Common/StateList';
 
 const AddType = (props) => {
   const [form] = Form.useForm()
@@ -44,7 +45,10 @@ const AddType = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          history.push('/type')
+          history.push({
+            pathname: '/type',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

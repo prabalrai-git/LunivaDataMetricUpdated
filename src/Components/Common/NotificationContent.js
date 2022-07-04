@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { inventoryStat } from './StateList';
 
 const NotificationContent = ({ data }) => {
   const history = useHistory();
@@ -9,7 +10,10 @@ const NotificationContent = ({ data }) => {
       {
         
         data.slice(0,5).map(e => (
-          <div key={e.ItemName.toString()} className="card" onClick={()=>history.push('/reports/minquantityreport')}>
+          <div key={e.ItemName.toString()} className="card" onClick={()=>history.push({
+            pathname: '/reports/minquantityreport',
+            state: inventoryStat
+          })}>
             <div className="icon">
               <i className='icon-exclamation-sign'></i>
             </div>
@@ -21,7 +25,10 @@ const NotificationContent = ({ data }) => {
         ))
       }
 
-      <a onClick={()=>history.push('/reports/minquantityreport')}>See more</a>
+      <a onClick={()=>history.push({
+        pathname: '/reports/minquantityreport',
+        state: inventoryStat
+      })}>See more</a>
     </NotificationContentContainer>
   )
 }

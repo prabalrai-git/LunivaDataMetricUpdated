@@ -8,6 +8,7 @@ import { getWastageApi, insertWastageApi } from '../../services/wastageService';
 import moment from 'moment';
 import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
+import { inventoryStat } from '../Common/StateList';
 
 const AddWastage = (props) => {
   const { forEdit } = props;
@@ -80,7 +81,10 @@ const AddWastage = (props) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
         message.success(res?.Message)
         setTimeout(() => {
-          history.push('/wastage')
+          history.push({
+            pathname: '/wastage',
+            state: inventoryStat
+          })
         }, 1000);
       } else {
         setButDis(false)

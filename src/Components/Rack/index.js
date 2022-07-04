@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getRackDetApi } from '../../services/itemRackService'
 import Filter from '../Common/Filter'
 import Edit from '../Common/Edit'
+import { inventoryStat } from '../Common/StateList'
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,10 @@ const Index = () => {
   return (
     <ItemContainer>
       <div className="maiTopContainer">
-        <PageHeader pageTitle="Rack" buttonTitle='Add Rack' buttonOnClick={() => history.push('./rack/add')}></PageHeader>
+        <PageHeader pageTitle="Rack" buttonTitle='Add Rack' buttonOnClick={() => history.push({
+          pathname: './rack/add',
+          state: inventoryStat
+        })}></PageHeader>
         <Filter locateRange={locateRange} serchButton></Filter>
         <Filter
           onSearch

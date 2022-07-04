@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getItemCategoryApi } from '../../services/itemCategoryService'
 import Edit from '../Common/Edit'
 import Filter from '../Common/Filter'
+import { inventoryStat } from '../Common/StateList'
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,10 @@ const Index = () => {
   return (
     <ItemContainer>
       <div className="maiTopContainer">
-        <PageHeader pageTitle="Category" buttonTitle='Add Category' buttonOnClick={() => history.push('./category/add')}></PageHeader>
+        <PageHeader pageTitle="Category" buttonTitle='Add Category' buttonOnClick={() => history.push({
+          pathname: './category/add',
+          state: inventoryStat
+        })}></PageHeader>
 
         <Filter
           onSearch
