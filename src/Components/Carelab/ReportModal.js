@@ -4,9 +4,14 @@ import { Modal, Button } from 'antd';
 // import { useDispatch } from 'react-redux';
 import DefData from './defData'
 import ImageModal from './ImageModal';
+import { useHistory } from 'react-router-dom';
+// import data from '../../../appSettings.json'
+import useReadJSON from '../../CustomHook/useReadJSON';
 
 const ReportModal = (props) => {
     const { visible, handleCancel, setClickedId, newFiscalId, isMaleFemale } = props;
+    const history = useHistory()
+    const fileReaderJSON = useReadJSON('appSettings.json')
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [visibler, setVisibler] = useState(false);
     const [getAllDataHere, setGetAllDataHere] = useState([]);
@@ -39,6 +44,13 @@ const ReportModal = (props) => {
         setshowImageModal(false)
     }
 
+    const handlePrintClick = (res) => {
+        if(fileReaderJSON.PrintHTMLReport === true)
+            window.open(`/printtestreport/${setClickedId}/${newFiscalId}`, "_blank");
+        else
+            console.log('print crystal report');
+    }
+
     useEffect(() => {
         setVisibler(visible);
     }, [visible])
@@ -56,6 +68,9 @@ const ReportModal = (props) => {
                 style={{ top: 20 }}
                 footer={
                     [
+                        <Button onClick={handlePrintClick}>
+                            Print Report
+                        </Button>,
                         <Button type="primary" loading={confirmLoading} onClick={handleOk}>
                             Verify All
                         </Button>,

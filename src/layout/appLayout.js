@@ -5,7 +5,9 @@ import styled from 'styled-components'
 import BottomNav from '../Components/Common/BottomNav';
 import MobileNav from '../Components/Common/MobileNav';
 import { Layout } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { carelabStat } from '../Components/Common/StateList';
+import CareLabNav from '../Components/Common/CareLabNav';
 // https://nepal-weather-api.herokuapp.com/api/?place=all
 
 const { Content, Footer } = Layout;
@@ -13,6 +15,7 @@ const date = new Date();
 
 const AppLayout = (props) => {
   const [Value, setValue] = useState();
+  const location = useLocation()
 
   const statePass = (val) => {
     setValue(val);
@@ -36,14 +39,16 @@ const AppLayout = (props) => {
                 {props?.children}
               </Content>
             }
-            {props.showSider ?
-              <Footer className="footer">
-                <h3>All rights reserved &copy; <Link to='/aboutluniva'> <span>Lunivatech Pvt. Ltd {date.getFullYear()} </span></Link></h3>
-              </Footer>
-              : ''
+            {
+              props.showSider ?
+                <Footer className="footer">
+                  <h3>All rights reserved &copy; <Link to='/aboutluniva'> <span>Lunivatech Pvt. Ltd {date.getFullYear()} </span></Link></h3>
+                </Footer>
+                : ''
             }
-            {props.showSider ? <BottomNav/> : ''}
-            
+
+            {props.showSider ? location.state === carelabStat ? <CareLabNav /> : <BottomNav /> : ''}
+
           </Layout>
         </Layout>
       </Layout>

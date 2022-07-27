@@ -1,0 +1,175 @@
+export const useCareLabRoute = () => {
+
+    const sampleStatusNav = [
+        {
+            icon: 'icon-line-file',
+            key: 'carelabreport',
+            name: 'Sample Stat',
+            path: '/carelab',
+        },
+    ]
+
+    const financeNav = [
+        {
+            icon: 'icon-graph',
+            key: 'finance',
+            name: 'Finance',
+            path: '/finance',
+        },
+        {
+            icon: 'icon-line2-doc',
+            key: 'misreports',
+            name: 'MIS Reports',
+            path: '/datametric',
+        },
+    ]
+
+    const marketingNav = [
+        {
+            icon: 'icon-chat-3',
+            key: 'sms',
+            name: 'sms',
+            path: '',
+        },
+    ]
+
+    const reportStatNav = [
+        {
+            icon: 'icon-line-file',
+            key: 'reportlist',
+            name: 'Report List',
+            path: '',
+        },
+    ]
+
+    const tatNav = [
+        {
+            icon: 'icon-chat',
+            key: 'tatanalysis',
+            name: 'tat analysis',
+            path: '',
+        },
+    ]
+
+    const qcControlNav = [
+        {
+            icon: 'icon-bar-chart',
+            key: 'lcchart',
+            name: 'LJ Chart',
+            path: '/lcchart',
+        },
+        {
+            icon: 'icon-lab2',
+            key: 'addtestcontrol',
+            name: 'Test Control',
+            path: '/viewtestcontrol',
+        },
+        {
+            icon: 'icon-lab2',
+            key: 'viewcontroltest',
+            name: 'Control Test',
+            path: '/viewcontroltest',
+        },
+        {
+            icon: 'icon-lab2',
+            key: 'viewcontroltesttest',
+            name: 'Tests',
+            path: '/viewcontroltesttest',
+        },
+        {
+            icon: 'icon-bars1',
+            key: 'viewtestdata',
+            name: 'Test Data',
+            path: '/viewtestdata',
+        },
+        {
+            icon: 'icon-bars1',
+            key: 'viewcontrolsdmean',
+            name: 'SD Mean',
+            path: '/viewcontrolsdmean',
+        },
+    ]
+
+
+    const mainRoute = [
+        {
+            icon: 'icon-line-file',
+            key: 'samplestatus',
+            name: 'Sample Status',
+            path: '/sampledash',
+            hasSubNav: true,
+            subNavData: sampleStatusNav
+        },
+        {
+            icon: 'icon-line-file',
+            key: 'reportstatus',
+            name: 'Report Status',
+            path: '/reportdash',
+            hasSubNav: true,
+            subNavData: reportStatNav
+        },
+        {
+            icon: 'icon-line-bar-graph',
+            key: 'finance1',
+            name: 'Finance',
+            path: '/financedash',
+            hasSubNav: true,
+            subNavData: financeNav
+        },
+        {
+            icon: 'icon-chart',
+            key: 'departmentanalytics',
+            name: 'Department analytics',
+            path: '',
+            hasSubNav: false,
+        },
+        {
+            icon: 'icon-bars1',
+            key: 'outsourceanalytics',
+            name: 'Outsource analytics',
+            path: '',
+            hasSubNav: false,
+        },
+        {
+            icon: 'icon-line-bag',
+            key: 'marketinganalytics',
+            name: 'Marketing analytics',
+            path: '/marketingdash',
+            hasSubNav: true,
+            subNavData: marketingNav
+        },
+        {
+            icon: 'icon-line-alt',
+            key: 'tatanalytics',
+            name: 'TAT analytics',
+            path: '/tatdash',
+            hasSubNav: true,
+            subNavData: tatNav
+        },
+        {
+            icon: 'icon-lab',
+            key: 'testanalytics',
+            name: 'Test analytics',
+            path: '',
+            hasSubNav: false,
+        },
+        {
+            icon: 'icon-stack2',
+            key: 'qcmanagement',
+            name: 'QC Management',
+            path: '/qcdash',
+            hasSubNav: true,
+            subNavData: qcControlNav
+        },
+    ]
+
+    return {
+        mainRoute: mainRoute,
+        sampleStatusNav: sampleStatusNav,
+        financeNav: financeNav,
+        tatNav: tatNav,
+        marketingNav: marketingNav,
+        reportStatNav: reportStatNav,
+        qcControlNav: qcControlNav,
+    }
+}

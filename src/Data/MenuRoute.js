@@ -20,7 +20,7 @@ export const AfterLoginData = [
     icon: 'icon-line-shopping-bag',
     key: 'datametric',
     name: 'Datametric',
-    path: '/carelab',
+    path: '/caredashboard',
     isactive: MenuSettings.goodsout,
   },
 ]
@@ -31,10 +31,10 @@ export const MenuRoute = [
     icon: 'icon-line2-home',
     key: 'dashbord',
     name: 'dashboard',
-    path: '/dashboard',
+    path: '/dashbord',
     isactive: MenuSettings.dashboard,
   },
-  
+
   {
     icon: 'icon-line-bag',
     key: 'goodsin',
@@ -49,7 +49,7 @@ export const MenuRoute = [
     path: '/goodsout',
     isactive: MenuSettings.goodsout,
   },
-  
+
   {
     icon: 'icon-line-trash',
     key: 'wastage',
@@ -71,8 +71,8 @@ export const MenuRoute = [
     path: '/reagentused',
     isactive: MenuSettings.reagentused,
   },
-  
- 
+
+
   {
     icon: 'icon-line2-doc',
     key: 'misreports',
@@ -172,13 +172,6 @@ export const dataMetricCon = [
     isactive: MenuSettings.goodsout,
   },
   {
-    icon: 'icon-line-shopping-bag',
-    key: 'lcchart',
-    name: 'LC Chart',
-    path: '/lcchart',
-    isactive: MenuSettings.goodsout,
-  },
-  {
     icon: 'icon-building2',
     key: 'department',
     name: 'department',
@@ -192,7 +185,7 @@ export const dataMetricCon = [
     path: '/outsourcing',
     isactive: MenuSettings.outsourcing,
   },
-   {
+  {
     icon: 'icon-graph',
     key: 'finance',
     name: 'Finance',
@@ -227,55 +220,85 @@ export const dataMetricCon = [
     path: '/expesemangement',
     isactive: MenuSettings.expesemangement,
   },
-  
-  {
-    icon: 'icon-line2-screen-desktop',
-    key: 'qccontrol',
-    name: 'qccontrol',
-    path: '/qccontrol',
-    isactive: MenuSettings.qccontrol,
-  },
-  {
-    icon: 'icon-line2-screen-desktop',
-    key: 'dynamicreporrt',
-    name: 'dynamicreport',
-    path: '/dynamicreporrt',
-    isactive: MenuSettings.dynamicreporrt,
-  },
+  // {
+  //   icon: 'icon-line2-screen-desktop',
+  //   key: 'qccontrol',
+  //   name: 'qccontrol',
+  //   path: '/qccontrol',
+  //   isactive: MenuSettings.qccontrol,
+  // },
+  // {
+  //   icon: 'icon-line2-screen-desktop',
+  //   key: 'dynamicreporrt',
+  //   name: 'dynamicreport',
+  //   path: '/dynamicreporrt',
+  //   isactive: MenuSettings.dynamicreporrt,
+  // },
 
+  // {
+  //   icon: 'icon-line2-screen-desktop',
+  //   key: 'editbill',
+  //   name: 'editbill',
+  //   path: '/editbill',
+  //   isactive: MenuSettings.editbill,
+  // },
+  // {
+  //   icon: 'icon-chat-3',
+  //   key: 'sms',
+  //   name: 'sms',
+  //   path: '/sms',
+  //   isactive: MenuSettings.sms,
+  // },
+  // {
+  //   icon: 'icon-line2-screen-desktop',
+  //   key: 'datechange',
+  //   name: 'datechange',
+  //   path: '/datechange',
+  //   isactive: MenuSettings.datechange,
+  // },
+  // {
+  //   icon: 'icon-line2-screen-desktop',
+  //   key: 'bulknegative',
+  //   name: 'bulknegative',
+  //   path: '/bulknegative',
+  //   isactive: MenuSettings.bulknegative,
+  // },
+]
+
+export const qcControlNav = [
   {
-    icon: 'icon-line2-screen-desktop',
-    key: 'editbill',
-    name: 'editbill',
-    path: '/editbill',
-    isactive: MenuSettings.editbill,
+    icon: 'icon-line-shopping-bag',
+    key: 'lcchart',
+    name: 'LJ Chart',
+    path: '/lcchart',
+    isactive: MenuSettings.goodsout,
   },
   {
-    icon: 'icon-chat-3',
-    key: 'sms',
-    name: 'sms',
-    path: '/sms',
-    isactive: MenuSettings.sms,
+    icon: 'icon-line-shopping-bag',
+    key: 'addtestcontrol',
+    name: 'Test Control',
+    path: '/viewtestcontrol',
+    isactive: MenuSettings.goodsout,
   },
   {
-    icon: 'icon-line2-screen-desktop',
-    key: 'datechange',
-    name: 'datechange',
-    path: '/datechange',
-    isactive: MenuSettings.datechange,
+    icon: 'icon-line-shopping-bag',
+    key: 'viewcontroltest',
+    name: 'Control Test',
+    path: '/viewcontroltest',
+    isactive: MenuSettings.goodsout,
   },
   {
-    icon: 'icon-line2-screen-desktop',
-    key: 'bulknegative',
-    name: 'bulknegative',
-    path: '/bulknegative',
-    isactive: MenuSettings.bulknegative,
+    icon: 'icon-line-shopping-bag',
+    key: 'viewcontroltesttest',
+    name: 'Tests',
+    path: '/viewcontroltesttest',
+    isactive: MenuSettings.goodsout,
   },
   {
-    icon: 'icon-line2-screen-desktop',
-    key: 'sms',
-    name: 'sms',
-    path: '/sms',
-    isactive: MenuSettings.sms,
+    icon: 'icon-line-shopping-bag',
+    key: 'viewtestdata',
+    name: 'Test Data',
+    path: '/viewtestdata',
+    isactive: MenuSettings.goodsout,
   },
 ]

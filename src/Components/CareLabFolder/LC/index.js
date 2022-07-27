@@ -15,7 +15,13 @@ import { jsPDF } from "jspdf";
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { chData } from '../../../Data/chartStData';
-// import { ChartColor } from '../../Common/ChartColor';
+import PageHeader from '../../Common/pageHeader';
+import { carelabStat } from '../../Common/StateList';
+import { useHistory } from 'react-router-dom'
+import { Table } from 'antd'
+import CarelabFilter from '../../Common/CarelabFilter';
+import { getControlValueForLJApi, getListOfControlWiseSDApi } from '../../../services/qcService';
+import { useDispatch } from 'react-redux';
 
 ChartJS.register(
   LinearScale,
@@ -37,63 +43,94 @@ export const options = {
   },
   scales: {
     y: {
-      min: 0
+      min: 0,
+      ticks: {
+        // callback: function(val, index, ticks) {
+        //   console.log(val, index, ticks, this);
+        //   return index % 2 === 0 ? this.getLabelForValue(val) : '';
+        // },
+        type: 'category',
+        reverse: true,
+        color: 'red',
+      }
     }
   }
 };
 
 const LC = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [plottedSd, setplottedSd] = useState([]);
+  const [plottedAverage, setplottedAverage] = useState([])
+  const [labels, setlabels] = useState([])
   const [sdMin1, setSdMin1] = useState([])
   const [sdMin2, setSdMin2] = useState([])
+  const [sdMin3, setSdMin3] = useState([])
   const [sdMax1, setSdMax1] = useState([])
   const [sdMax2, setSdMax2] = useState([])
+  const [sdMax3, setSdMax3] = useState([])
+  const [columnsData, setColumnsData] = useState([])
 
   const newCh = chData
-  const plottedSd = newCh.map((res) => {
-    return res['plottedSd']
-  })
 
-  const plottedAverage = newCh.map((res) => {
-    return res['averageValue']
-  })
+  const columns = [
+    {
+      title: 'QCDate',
+      dataIndex: 'QCDate',
+      key: 'QCDate',
+      render: function (text) {
+        return text.split('T')[0]
+      }
+    },
+    {
+      title: 'AverageValue',
+      dataIndex: 'AverageValue',
+      key: 'AverageValue'
+    },
+    {
+      title: 'ControlValue',
+      dataIndex: 'ControlValue',
+      key: 'ControlValue'
+    },
+  ]
 
-  const labels = newCh.map((res) => {
-    return res['date']
-  })
+  function calculateSdMinMax(newCh) {
+    var avg = 0, /*average value*/
+      sd1s = 0,
+      sd2s = 0,
+      sd1min = 0,
+      sd2min = 0,
+      sdmin1 = 0,
+      sdmin2 = 0,
+      sdmin3 = 0,
+      sdmax1 = 0,
+      sdmax2 = 0,
+      sdmax3 = 0;
 
-  useEffect(() => {
-    var avg = 0; /*average value*/
-    var sd1s = 0;
-    var sd2s = 0;
-    var sd1min = 0;
-    var sd2min = 0;
-
-    var sdmin1 = 0;
-    var sdmax1 = 0;
-    var sdmin2 = 0;
-    var sdmax2 = 0;
-
-    sdmin2 = parseFloat(newCh[0].plottedSd);
+    sdmin2 = parseFloat(newCh[0].ControlValue);
     sdmax2 = sdmin2;
 
     newCh.forEach(val => {
-      if (sdmax2 < parseFloat(val.plottedSd)) {
-        sdmax2 = parseFloat(val.plottedSd);
+      if (sdmax2 < parseFloat(val.ControlValue)) {
+        sdmax2 = parseFloat(val.ControlValue);
       }
 
       /*   to find minimum deviation */
-      if (sdmin2 > parseFloat(val.plottedSd)) {
-        sdmin2 = parseFloat(val.plottedSd);
+      if (sdmin2 > parseFloat(val.ControlValue)) {
+        sdmin2 = parseFloat(val.ControlValue);
       }
 
-      avg = val.averageValue;
+      sdmax3 = parseFloat(val.IIISDMax)
+      sdmin3 = parseFloat(val.IIISDMin)
 
-      sd1s = val.c1sd;
-      sd2s = parseFloat(val.c2sd);
+      avg = val.AverageValue;
+
+      sd1s = val.ISDMax;
+      sd2s = parseFloat(val.IISDMax);
       //sd2s = (sd2s<0) ? sd2s-2 : sd2s + 2;
 
-      sd1min = val.c1sdmin;
-      sd2min = parseFloat(val.c2sdmin);
+      sd1min = val.ISDMin;
+      sd2min = parseFloat(val.IISDMin);
     });
 
     sdmax2 = (sdmax2 <= 0) ? sdmax2 - 4.0 : sdmax2 + 4.0;
@@ -104,20 +141,29 @@ const LC = () => {
     let newSdMin1 = [],
       newSdMin2 = [],
       newSdMax1 = [],
-      newSdMax2 = []
+      newSdMax3 = [],
+      newSdMax2 = [],
+      newSdMin3 = []
+
     for (let index = 0; index < newCh.length; index++) {
       newSdMin1.push(sdmin1)
       newSdMin2.push(sdmin2)
 
       newSdMax1.push(sdmax1)
       newSdMax2.push(sdmax2)
+
+      newSdMax3.push(sdmax3)
+      newSdMin3.push(sdmin3)
     }
     setSdMin1(newSdMin1)
     setSdMin2(newSdMin2)
 
     setSdMax1(newSdMax1)
     setSdMax2(newSdMax2)
-  }, [])
+
+    setSdMax3(newSdMax3)
+    setSdMin3(newSdMin3)
+  }
 
   const dataBar = {
     labels,
@@ -134,12 +180,12 @@ const LC = () => {
         label: 'Average',
         data: plottedAverage,
         borderColor: [
-          '#7992a2',
+          '#3efe82',
         ],
         borderWidth: 3,
       },
       {
-        label: 'SD Max 1',
+        label: '+1',
         data: sdMax1,
         borderColor: [
           '#FFFF66',
@@ -147,7 +193,7 @@ const LC = () => {
         borderWidth: 3,
       },
       {
-        label: 'SD Max 2',
+        label: '+2',
         data: sdMax2,
         borderColor: [
           '#f00',
@@ -155,7 +201,15 @@ const LC = () => {
         borderWidth: 3,
       },
       {
-        label: 'SD Min 1',
+        label: '+3',
+        data: sdMax3,
+        borderColor: [
+          '#db9f87',
+        ],
+        borderWidth: 3,
+      },
+      {
+        label: '-1',
         data: sdMin1,
         borderColor: [
           '#FFFF66',
@@ -163,10 +217,18 @@ const LC = () => {
         borderWidth: 3,
       },
       {
-        label: 'SD Min 2',
+        label: '-2',
         data: sdMin2,
         borderColor: [
           '#f00',
+        ],
+        borderWidth: 3,
+      },
+      {
+        label: '-3',
+        data: sdMin3,
+        borderColor: [
+          '#db9f87',
         ],
         borderWidth: 3,
       },
@@ -179,18 +241,101 @@ const LC = () => {
       const img = canvas.toDataURL("image/png");
       const pdf = new jsPDF("l", "mm", "a4");
       pdf.addImage(img, 'png', 1, 2)
-      pdf.save('lcchart.pdf')
+      pdf.save('ljchart.pdf')
     });
+  }
+
+  const returnFilterData = (res) => {
+    let newData = {
+      analyzerId: res.controlId,
+      testId: res.testId,
+      from: res.FromTo[0].format('YYYY-MM-DD'),
+      to: res.FromTo[1].format('YYYY-MM-DD')
+    }
+    dispatch(getControlValueForLJApi(newData, (re) => {
+      if (re.length > 0) {
+        let newLabel = [],
+          newAvg = [],
+          newSD = []
+        setColumnsData(re)
+        re.forEach(ele => {
+          newLabel.push(ele.QCDate.split('T')[0])
+          newSD.push(ele.ControlValue);
+          newAvg.push(ele.AverageValue);
+        });
+        setplottedSd(newSD)
+        setplottedAverage(newAvg)
+        setlabels(newLabel)
+        calculateSdMinMax(re)
+      } else {
+        setColumnsData([])
+        setplottedSd([])
+        setplottedAverage([])
+        setlabels([])
+        setSdMin1([])
+        setSdMin2([])
+
+        setSdMax1([])
+        setSdMax2([])
+
+        setSdMax3([])
+        setSdMin3([])
+      }
+    }))
   }
 
   return (
     <>
-      <h1>LC Charts</h1>
-      <div>
-        <button onClick={(e) => div2PDF(e)}>Export</button>
+      <div className='maiTopContainer'>
+        <PageHeader
+          pageTitle="LJ Charts"
+          buttonTitle='Add Test Control'
+          buttonOnClick={() => history.push({
+            pathname: '/addtestcontrol',
+            state: carelabStat
+          })}
+
+          forCon={'Add Control'}
+          forConButtonClick={() => history.push({
+            pathname: '/addcontroltest',
+            state: carelabStat
+          })}
+
+          forGroup={`Add Test`}
+          forGroupButtonClick={() => history.push({
+            pathname: '/addcontroltesttest',
+            state: carelabStat
+          })}
+
+          forData={`Add Data`}
+          forDataButtonClick={() => history.push({
+            pathname: '/addcontroldata',
+            state: carelabStat
+          })}
+        />
+        <CarelabFilter
+          returnFilterData={returnFilterData}
+          showFromToDate={true}
+          showTestControlList={true}
+          showControlDetails={true}
+          showLevel={true}
+        />
       </div>
-      <div className='div2PDF'>
-        <Line options={options} data={dataBar} />
+      {
+        columnsData.length > 0 &&
+        <div>
+          <button onClick={(e) => div2PDF(e)}>Export</button>
+        </div>
+      }
+      <div className="financeCards">
+        <div className='div2PDF'>
+          <Line options={options} data={dataBar} />
+        </div>
+      </div>
+      <div className='lineTable financeCards'>
+        <div className='tableisRes'>
+          <Table columns={columns} dataSource={columnsData} />
+        </div>
       </div>
     </>
   )

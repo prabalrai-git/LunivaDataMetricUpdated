@@ -10,6 +10,7 @@ import newItemSlice from './slices/newItemSlice';
 import printSlice from './slices/printSlice';
 import rackSlice from './slices/rackSlice';
 import reagentSlice from './slices/reagentSlice';
+import sdControlSlice from './slices/sdControlSlice';
 import typeSlice from './slices/typeSlice';
 import unitSlice from './slices/unitSlice';
 import userSlice from './slices/userSlice';
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
     consumption: consumptionSlice,
     printdata: printSlice,
     reagent: reagentSlice,
-    manu: manufactureSlice
+    manu: manufactureSlice,
+    testcontrol: sdControlSlice
 })
 
 export default rootReducer

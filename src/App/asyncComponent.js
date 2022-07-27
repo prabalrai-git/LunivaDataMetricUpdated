@@ -96,4 +96,20 @@ export const AsyncManufacture = lazy(() => pMinDelay(import('../Components/Manuf
 export const AsyncAddManufacture = lazy(() => pMinDelay(import('../Components/Manufacture/AddManufacture'), 300));
 
 export const AsyncQcControl = lazy(() => pMinDelay(import('../Components/CareLabFolder/QcControl/index'), 300));
-export const AsyncLC = lazy(() => pMinDelay(import('../Components/CareLabFolder/LC/index'), 300));
+// export const AsyncLC = lazy(() => pMinDelay(import('../Components/CareLabFolder/LC/index'), 300));
+export const AsyncLC = lazy(() => pMinDelay(import('../Components/CareLabFolder/LC/NewLJChart'), 300));
+export const AsyncViewTestControl = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/ControlTable'), 300));
+export const AsyncAddTestControl = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/AddControl'), 300));
+export const AsyncViewTestControlTest = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/ControlTestTable'), 300));
+export const AsyncAddTestControlTest = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/AddControlTest'), 300));
+export const AsyncViewTestControlList = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/TestControlTable'), 300));
+export const AsyncAddTestData = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/AddData'), 300));
+export const AsyncViewTestData = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/DataTable'), 300));
+export const AsyncTestControl = lazy(() => pMinDelay(import('../Components/CareLabFolder/LC/TestControl'), 300));
+
+export const AsyncAddControlSDMean = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/AddControlSDMean'), 300));
+export const AsyncControlSDMeanTable = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestControl/ControlSDMeanTable'), 300));
+
+export const AsyncViewCareDashboard = lazy(() => pMinDelay(import('../Components/CareLabFolder/CareLabNav/CarelabNav'), 300));
+
+export const AsyncPrintTestReport = lazy(() => pMinDelay(import('../Components/Carelab/PrintTestReport'), 300));

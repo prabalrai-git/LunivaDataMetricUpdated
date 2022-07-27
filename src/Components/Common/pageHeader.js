@@ -1,4 +1,4 @@
-import { message, Row } from 'antd'
+import { message, Row, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import AppButton from './AppButton'
@@ -6,9 +6,8 @@ import { CSVLink } from 'react-csv';
 import { useDispatch } from "react-redux"
 import { getListofcompany } from '../../services/datametricService';
 import { newTableStyles } from './TableStyles';
-import { Link } from 'react-router-dom';
 
-const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData, forGroup, forGroupButtonClick, forCon, forConButtonClick, printFileName, reportName, tableHead, fromToDate, removetwo, selctorr }) => {
+const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData, forGroup, forGroupButtonClick, forCon, forConButtonClick, printFileName, reportName, tableHead, fromToDate, removetwo, selctorr, forData, forDataButtonClick }) => {
   const dispatch = useDispatch();
   const [companyDetail, setcompanyDetail] = useState([]);
 
@@ -121,12 +120,15 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
         <span className='pageTtitle'>{pageTitle}</span>
         {/* style={{ gap: '10px' }} */}
         <Row>
-          {forCon && <AppButton buttonTitle={forCon} buttonOnClick={forConButtonClick} primaryBtn ></AppButton>}
+          <Space size={[8, 16]} wrap>
+            {forCon && <AppButton buttonTitle={forCon} buttonOnClick={forConButtonClick} primaryBtn ></AppButton>}
 
-          {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
+            {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
 
-          {forGroup && <AppButton buttonTitle={forGroup} buttonOnClick={forGroupButtonClick} primaryBtn ></AppButton>}
+            {forGroup && <AppButton buttonTitle={forGroup} buttonOnClick={forGroupButtonClick} primaryBtn ></AppButton>}
 
+            {forData && <AppButton buttonTitle={forData} buttonOnClick={forDataButtonClick} primaryBtn ></AppButton>}
+          </Space>
           {
             csvDataName &&
             <div className='link'>

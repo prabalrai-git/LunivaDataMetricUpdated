@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { MenuRoute, settingsMenu, dataMetricCon } from '../../Data/MenuRoute'
+import { MenuRoute, settingsMenu, dataMetricCon, qcControlNav } from '../../Data/MenuRoute'
 import { NavLink } from 'react-router-dom'
 import comlogo from '../../assets/images/logobig.png';
 import comlogo1 from '../../assets/images/logosmall.png';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Layout, Menu } from 'antd';
 import { useLocation } from 'react-router-dom';
+import { useCareLabRoute } from '../../Data/CareLabRoute';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -21,8 +22,7 @@ const SideNav = (props) => {
   const [showSettings, setShowSettings] = useState(true);
   const [dataMetric, setdataMetric] = useState(true);
   const [showinventory, setshowinventory] = useState(true)
-
-
+  const carelabNavData = useCareLabRoute()
 
   function oncollpse() {
     setcollpsed(!collpsed);
@@ -136,33 +136,85 @@ const SideNav = (props) => {
             }
 
             {
+              dataMetric && location.state === 'datametric' &&
+              carelabNavData.mainRoute.map(e => (
+                e.hasSubNav === true ?
+                  <SubMenu key={e.key} title={e.name} icon={<i className={e.icon}></i>}>
+                    {
+                      e.subNavData.map(res => (
+                        <Menu.Item key={res.key} icon={<i className={res.icon}></i>}>
+                          <NavLink to={{
+                            pathname: res?.path,
+                            state: location.state
+                          }} className='navLInk' >
+                            {res.name}
+                          </NavLink>
+                        </Menu.Item>
+                      ))
+                    }
+                  </SubMenu>
+                  :
+                  <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                    <NavLink to={{
+                      pathname: e?.path,
+                      state: location.state
+                    }} className='navLInk' >
+                      {e.name}
+                    </NavLink>
+                  </Menu.Item>
+              ))
+            }
+
+            {/* {
               dataMetric ? (
                 // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
                 //   {
                 <>
                   {
                     location.state === 'datametric' &&
-                    dataMetricdata.map(e => {
-                      if (e.isactive) {
-                        return (
-                          <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                            <NavLink to={{
-                              pathname: e?.path,
-                              state: location.state
-                            }} className='navLInk' >
-                              {e.name}
-                            </NavLink>
-                          </Menu.Item>
+                    <>
+                    <SubMenu key="set4" title='Qc Control' icon={<i className='icon-line2-settings'></i>}>
+                        {
+                          qcControlNav.map(e => {
+                            if (e.isactive) {
+                              return (
+                                <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                                  <NavLink to={{
+                                    pathname: e?.path,
+                                    state: location.state
+                                  }} className='navLInk' >
+                                    {e.name}
+                                  </NavLink>
+                                </Menu.Item>
+                              )
+                            }
+                          })
+                        }
+                      </SubMenu>
+                      {
+                        dataMetricdata.map(e => {
+                          if (e.isactive) {
+                            return (
+                              <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                                <NavLink to={{
+                                  pathname: e?.path,
+                                  state: location.state
+                                }} className='navLInk' >
+                                  {e.name}
+                                </NavLink>
+                              </Menu.Item>
+                            )
+                          }
+                        }
                         )
                       }
-                    }
-                    )
+                    </>
                   }
                 </>
                 //   }
                 // </SubMenu>
               ) : ''
-            }
+            } */}
 
           </Menu>
         </Sider>

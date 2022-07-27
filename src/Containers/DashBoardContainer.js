@@ -11,6 +11,7 @@ import night from '../assets/images/night.jpg'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useMemo } from 'react'
+import { inventoryStat } from '../Components/Common/StateList'
 
 
 const DashBoardContainer = () => {
@@ -90,7 +91,10 @@ const DashBoardContainer = () => {
               <>
                 {e.key !== "dashbord" ?
                   <Col sm={24} md={12} xs={12} lg={12} xl={8}>
-                    <NavLink to={e.path} key={e.name}>
+                    <NavLink to={{
+                      pathname: e.path,
+                      state: inventoryStat
+                    }} key={e.name}>
                       <div className='cButton' >
                         <span><i className={e.icon}></i> </span>
                         <span>{e.name}</span>

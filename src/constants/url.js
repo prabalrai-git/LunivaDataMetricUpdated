@@ -374,10 +374,123 @@ export const InsertUpdateControlReagentDetails = 'InsertUpdateControlReagentDeta
   "IsCurrent": true
 }
  */
- export const VerifyPatientReport  = 'VerifyPatientReport ';
+export const VerifyPatientReport = 'VerifyPatientReport ';
 
 /**
  * @desc: Update Critical Value And Cut off Time of Test
  * @param: ?testId={testId}&criticalValue={criticalValue}&cutofftime={cutofftime}&cutoffinHrs={cutoffinHrs}
  */
- export const UpdateCriticalValueAndCutoffTimeofTest = 'UpdateCriticalValueAndCutoffTimeofTest'
+export const UpdateCriticalValueAndCutoffTimeofTest = 'UpdateCriticalValueAndCutoffTimeofTest'
+
+/**
+ * @desc: Insert Update Control Details
+ * @param: {
+ "CId": 1,
+ "ControlCode": "sample string 2",
+ "ControlName": "sample string 3",
+ "ControlDescription": "sample string 4",
+ "UserId": 5,
+ "EntryDate": "2022-07-05T12:00:37.6481523+05:45",
+ "IsActive": true
+}
+ */
+export const InsertUpdateControlDetails = 'InsertUpdateControlDetails'
+
+/**
+ * @desc: Get Control Details
+ */
+export const GetControlDetails = 'GetControlDetails'
+
+/**
+ * @desc: Get Control Value By Control TestId
+ * @param: ?analyzerId={analyzerId}
+ */
+export const GetControlValueByControlTestId = 'GetControlValueByControlTestId'
+
+/**
+ * @desc: Get List Of Control Wise SD
+ * @param: ?analyzerId={analyzerId}
+ */
+export const GetListOfControlWiseSD = 'GetListOfControlWiseSD'
+
+/**
+ * @desc: Get Control Test List
+ * @param: ?analyzerId={analyzerId}
+ */
+export const GetControlTestList = 'GetControlTestList'
+
+/**
+ * @desc: Insert Update Control Wise SD
+ * @param: {
+  "SId": 1,
+  "TestId": 2,
+  "ControlId": 3,
+  "AverageValue": 4.1,
+  "ISDMax": 5.1,
+  "IISDMax": 6.1,
+  "ISDMin": 7.1,
+  "IISDMin": 8.1,
+  "EntryDate": "2022-07-05T12:01:32.1722723+05:45",
+  "UserId": 10,
+  "IsActive": true
+}
+ */
+export const InsertUpdateControlWiseSD = 'InsertUpdateControlWiseSD'
+
+/**
+ * @desc: Get List Of Control value By Analyzer And Date For LJ Chart
+ * @param: ?analyzerId={analyzerId}&testId={testId}&from={from}&to={to}
+ */
+export const GetListOfControlvalueByAnalyzerAndDateForLJChart = 'GetListOfControlvalueByAnalyzerAndDateForLJChart'
+
+/**
+ * @desc: InsertUpdateTestControl
+ * @param: {
+  "TId": 1,
+  "TestCode": "sample string 2",
+  "TestName": "sample string 3",
+  "TestDescription": "sample string 4",
+  "LabTestId": 5,
+  "UserId": 6,
+  "EntryDate": "2022-07-06T12:27:23.1129523+05:45",
+  "IsActive": true
+}
+ */
+export const InsertUpdateTestControl = 'InsertUpdateTestControl'
+
+/**
+ * @desc: Insert Update Control Value
+ * @param: 
+ * {
+  "QId": 1,
+  "ControlTestId": 2,
+  "ControlValue": 3.1,
+  "QCDate": "2022-07-07T10:51:15.5915765+05:45",
+  "UserId": 5,
+  "IsActive": true
+}
+ */
+export const InsertUpdateControlValue = 'InsertUpdateControlValue'
+
+/**
+ * @desc: Insert Update Control Wise SD Mean CV
+ * @param: {
+  "CId": 1,
+  "ControlId": 2,
+  "TestId": 3,
+  "Mean": 4.1,
+  "SD": 5.1,
+  "CV": 6.1,
+  "EntryDate": "2022-07-10T16:15:23.8118534+05:45",
+  "UserId": 8,
+  "IsActive": true,
+  "QcLevel": "sample string 10"
+  }
+ */
+export const InsertUpdateControlWiseSDMeanCV = 'InsertUpdateControlWiseSDMeanCV'
+
+/**
+ * @desc: Get Control Wise SD Mean CV
+ * @param: ?analyzerId={analyzerId}&testid={testid}&from={from}&to={to}
+ */
+export const GetControlWiseSDMeanCV = 'GetControlWiseSDMeanCV'

@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import loadlogo from './assets/images/logo1.png';
-import { AsyncAddCategory, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncMinQuantityReport, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption, AsyncRequestorReport, AsyncTestTypeReport, AsyncReferReport, AsyncCareLab, AsyncRequestorSalesReport, AsyncDailySummary, AsyncDailyTransaction, AsyncLogin, AsyncPublicLayout, AsyncNotFound, AsyncFinance, AsyncTheme, AsyncOutSourcing, AsyncEditBill, AsycAboutLuniva, AsyncReagentUsed, AsyncAddReagentUsed, AsyncCareLabIndex, AsyncAddManufacture, AsyncManufacture, AsyncAfterLogin, AsyncQcControl, AsyncLC } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncMinQuantityReport, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption, AsyncRequestorReport, AsyncTestTypeReport, AsyncReferReport, AsyncCareLab, AsyncRequestorSalesReport, AsyncDailySummary, AsyncDailyTransaction, AsyncLogin, AsyncPublicLayout, AsyncNotFound, AsyncFinance, AsyncTheme, AsyncOutSourcing, AsyncEditBill, AsycAboutLuniva, AsyncReagentUsed, AsyncAddReagentUsed, AsyncCareLabIndex, AsyncAddManufacture, AsyncManufacture, AsyncAfterLogin, AsyncQcControl, AsyncLC, AsyncTestControl, AsyncViewTestControl, AsyncAddTestControl, AsyncViewTestControlList, AsyncAddTestControlTest, AsyncViewTestControlTest, AsyncAddTestData, AsyncViewTestData, AsyncViewCareDashboard, AsyncAddControlSDMean, AsyncControlSDMeanTable, AsyncPrintTestReport } from './App/asyncComponent';
 import PublicRoute from './Routes/PublicRoute';
 import { MenuSettings } from './Data/MenuSettings';
 import PrivateRouter from './Routes/PrivateRouter';
@@ -836,6 +836,219 @@ function App() {
             component={AsyncLC}
             layout={AsyncAppLayout}
             showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/viewtestcontrol'
+            component={AsyncViewTestControl}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/addtestcontrol'
+            component={AsyncTestControl}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/edittestcontrol/:id/:SId'
+            component={AsyncTestControl}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/viewcontroltest/'
+            component={AsyncViewTestControlList}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/addcontroltest/'
+            component={AsyncAddTestControl}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/editcontroltest/:id'
+            component={AsyncAddTestControl}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+
+
+          <PrivateRouter
+            exact
+            path='/viewcontroltesttest/'
+            component={AsyncViewTestControlTest}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/addcontroltesttest/'
+            component={AsyncAddTestControlTest}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/editcontroltesttest/:id'
+            component={AsyncAddTestControlTest}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/viewtestdata/'
+            component={AsyncViewTestData}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/addcontroldata/'
+            component={AsyncAddTestData}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/editcontroldata/:id/:tid'
+            component={AsyncAddTestData}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/caredashboard/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/sampledash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/reportdash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/financedash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/departmentdash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/outsourcedash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/marketingdash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/tatdash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/testdash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/qcdash/'
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/viewcontrolsdmean/'
+            component={AsyncControlSDMeanTable}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/addcontrolsdmean/'
+            component={AsyncAddControlSDMean}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path='/editcontrolsdmean/:cid/:id/:tid/:ent'
+            component={AsyncAddControlSDMean}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+
+          <PublicRoute
+            exact
+            path='/printtestreport/:sid/:fid'
+            component={AsyncPrintTestReport}
+            layout={AsyncPublicLayout}
           />
 
           <Route

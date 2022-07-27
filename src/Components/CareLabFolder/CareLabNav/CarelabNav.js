@@ -1,29 +1,54 @@
 import { Col, Row } from 'antd';
-import React from 'react'
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { settingsMenu } from '../../Data/MenuRoute'
-import { inventoryStat } from './StateList';
+import { useCareLabRoute } from '../../../Data/CareLabRoute';
+import { carelabStat } from '../../Common/StateList';
 
-const Settings = () => {
-  const data = settingsMenu;
+const CarelabNavSettings = () => {
+  const carelabNavData = useCareLabRoute()
+  const [returnName, setReturnName] = useState('')
+  const newPa = window.location.pathname.split('/')[2];
+
+  const handleClick = (e) => {
+    // setNewPath(window.location.pathname.split('/')[2])
+  }
+
+  useEffect(() => {
+    let rName = ''
+    if (newPa === 'caredashboard') {
+      rName = 'mainRoute'
+    } else if (newPa === 'sampledash') {
+      rName = 'sampleStatusNav'
+    } else if (newPa === 'reportdash') {
+      rName = 'reportStatNav'
+    } else if (newPa === 'financedash') {
+      rName = 'financeNav'
+    } else if (newPa === 'marketingdash') {
+      rName = 'marketingNav'
+    } else if (newPa === 'tatdash') {
+      rName = 'tatNav'
+    } else if (newPa === 'qcdash') {
+      rName = 'qcControlNav'
+    }
+    setReturnName(rName);
+  }, [newPa])
+
   return (
     <SettingsContainer>
-      <Row gutter={[16, 16]}>
-        {data.map(e => (
+      <Row gutter={[16, 16]} className='fullWidth'>
+        {carelabNavData[returnName] !== undefined && carelabNavData[returnName].map(e => (
           <Col sm={24} md={12} xs={12} lg={12} xl={8}>
-            <div key={e.name}>
-              {e.key !== "dashbord" ?
-                <NavLink to={{
-                  pathname: e.path,
-                  state: inventoryStat
-                }}>
-                  <div className='cButton'>
-                    <span><i className={e.icon}></i> </span>
-                    <span>{e.name}</span>
-                  </div>
-                </NavLink>
-                : ''}
+            <div key={e.name} onClick={() => handleClick(e.path)}>
+              <NavLink to={{
+                pathname: e.path,
+                state: carelabStat
+              }}>
+                <div className='cButton'>
+                  <span><i className={e.icon}></i> </span>
+                  <span>{e.name}</span>
+                </div>
+              </NavLink>
             </div>
           </Col>
         ))}
@@ -32,7 +57,7 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default CarelabNavSettings
 
 const SettingsContainer = styled.div`
    padding: 20px;
@@ -41,6 +66,9 @@ const SettingsContainer = styled.div`
   gap: 25px;
   width: 100%;
   
+  .fullWidth {
+    width: 100%;
+  }
   
   @media(max-width: 500px){
     padding: 0px;
@@ -75,7 +103,6 @@ const SettingsContainer = styled.div`
     }
     
     @media(max-width: 768px){
-      /* width: 200px; */
       flex-direction: column;
       gap: 10px;  
       span{
@@ -91,7 +118,6 @@ const SettingsContainer = styled.div`
     }
     }
     @media(max-width: 500px){
-      /* width: 310px; */
       height: 100px;
       padding: 0 20px;
       text-align: center;

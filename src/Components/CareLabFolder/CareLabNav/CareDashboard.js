@@ -3,9 +3,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { settingsMenu } from '../../Data/MenuRoute'
+import { useCarelabReturn } from './returnNewHook';
 import { inventoryStat } from './StateList';
 
-const Settings = () => {
+const CarelabNavSettings = () => {
+  const carelabNavData = useCareLabRoute()
+  console.log(carelabNavData['sampleStatusNav']);
+  const dataNew = useCarelabReturn()
   const data = settingsMenu;
   return (
     <SettingsContainer>
@@ -13,7 +17,6 @@ const Settings = () => {
         {data.map(e => (
           <Col sm={24} md={12} xs={12} lg={12} xl={8}>
             <div key={e.name}>
-              {e.key !== "dashbord" ?
                 <NavLink to={{
                   pathname: e.path,
                   state: inventoryStat
@@ -23,7 +26,6 @@ const Settings = () => {
                     <span>{e.name}</span>
                   </div>
                 </NavLink>
-                : ''}
             </div>
           </Col>
         ))}
@@ -32,7 +34,7 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default CarelabNavSettings
 
 const SettingsContainer = styled.div`
    padding: 20px;

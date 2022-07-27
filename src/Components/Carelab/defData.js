@@ -253,6 +253,7 @@ const DefData = (props) => {
 
     const enterPressed = (res) => {
         if (res.keyCode == 13) {
+            console.log(res);
             // const index = controls.current.indexOf(res.target);
             // const next = controls.current[index + 1];
             // next && next.focus();

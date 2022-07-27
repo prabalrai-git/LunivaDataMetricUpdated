@@ -2,13 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Popover } from 'antd';
-import { inventoryStat } from './StateList';
+import { carelabStat } from './StateList';
 
 const handleLogout = () => {
   sessionStorage.clear()
 }
-
-
 
 const content = (
   <div style={{
@@ -22,27 +20,27 @@ const content = (
   </div>
 );
 
-const BottomNav = () => {
+const CareLabNav = () => {
  
   return (
     <BottomNavContainer>
       <li>
         <Link to={{
-          pathname: '/',
-          state: inventoryStat
+            pathname: '/caredashboard',
+            state: carelabStat
         }}><i className='icon-line2-home'></i></Link>
       </li>
       <li>
         <Link to={{
-          pathname: '/reports/minquantityreport',
-          state: inventoryStat
-        }}><i className='icon-line-bell'></i></Link>
+            pathname: '/carelab',
+            state: carelabStat
+        }}><i className='icon-line-file'></i></Link>
       </li>
       <li>
         <Link to={{
-          pathname: '/settings',
-          state: inventoryStat
-        }}><i className='icon-line2-settings'></i></Link>
+            pathname: '/lcchart',
+            state: carelabStat
+        }}><i className='icon-stack2'></i></Link>
       </li>
       <li>
         <Popover placement="top" content={content} trigger="click">
@@ -54,7 +52,7 @@ const BottomNav = () => {
   )
 }
 
-export default BottomNav
+export default CareLabNav
 
 const BottomNavContainer = styled.div`
   display: none;
