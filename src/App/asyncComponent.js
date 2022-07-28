@@ -113,3 +113,5 @@ export const AsyncControlSDMeanTable = lazy(() => pMinDelay(import('../Component
 export const AsyncViewCareDashboard = lazy(() => pMinDelay(import('../Components/CareLabFolder/CareLabNav/CarelabNav'), 300));
 
 export const AsyncPrintTestReport = lazy(() => pMinDelay(import('../Components/Carelab/PrintTestReport'), 300));
+
+export const AsyncDyReport = lazy(() => pMinDelay(import('../Components/CareLabFolder/ReportList/DyReport'), 300));

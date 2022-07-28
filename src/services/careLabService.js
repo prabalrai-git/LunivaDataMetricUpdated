@@ -69,3 +69,17 @@ export const careLabDiagnosisApi = (successCallback) => {
         }
     }
 }
+
+export const dateWiseTestApi = (data, successCallback) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(`GetDatewiseIncompleteSampleTestDetails?fromdate=${data.fromdate}&todate=${data.todate}`);
+            if (response?.status === 200) {
+                successCallback(response?.data?.IncompleteSampleList)
+            } else
+                successCallback([])
+        } catch (error) {
+
+        }
+    }
+}

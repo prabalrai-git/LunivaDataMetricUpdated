@@ -40,6 +40,12 @@ export const useCareLabRoute = () => {
             name: 'Report List',
             path: '',
         },
+        {
+            icon: 'icon-file-alt',
+            key: 'dynareportlist',
+            name: 'Test Status',
+            path: '/dynarep',
+        },
     ]
 
     const tatNav = [

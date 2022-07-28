@@ -88,7 +88,7 @@ const PrintTestReport = (props) => {
         if (checkerData) {
             if (checkerData.FirstCheckerId) {
                 checkers.FirstChecker = new CheckerInfo();
-                checkers.FirstChecker.Id = checkerData.FirstCheckerId; checkers.SecondChecker
+                checkers.FirstChecker.Id = checkerData.FirstCheckerId; //checkers.SecondChecker
                 checkers.FirstChecker.Name = checkerData.FirstCheckerName
                 checkers.FirstChecker.Designation = checkerData.FirstCheckerDesignation
                 checkers.FirstChecker.RegNo = checkerData.FirstCheckerRegNo
@@ -280,7 +280,7 @@ const PrintTestReport = (props) => {
 
     const Components = {
         normal: NormalFormat,
-        crystal: CrystalFormat
+        crystal: CrystalFormat,
     }
 
     return React.createElement(Components[reportType])
