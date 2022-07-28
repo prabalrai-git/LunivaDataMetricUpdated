@@ -65,12 +65,14 @@ const MainAppContentComponentContainer = styled.div`
   .costomeContent1{
     
     padding: 90px 20px 60px 220px;
+    transition: 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
     @media(max-width: 576px){
       padding: 90px 10px 70px 10px;
     }
   }
   .costomeContent2{
     padding: 90px 20px 60px 100px;
+    transition: 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
     @media(max-width: 576px){
       padding: 90px 20px 70px 20px;
     }
