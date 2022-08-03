@@ -115,3 +115,9 @@ export const AsyncViewCareDashboard = lazy(() => pMinDelay(import('../Components
 export const AsyncPrintTestReport = lazy(() => pMinDelay(import('../Components/Carelab/PrintTestReport'), 300));
 
 export const AsyncDyReport = lazy(() => pMinDelay(import('../Components/CareLabFolder/ReportList/DyReport'), 300));
+
+export const AsyncTestAnalytics = lazy(() => pMinDelay(import('../Components/CareLabFolder/TestAnalytics/TestAnalytics'), 300));
+
+// export const AsyncSampleStatus = lazy(() => pMinDelay(import('../Components/CareLabFolder/SampleStatus/SampleStatus'), 300));
+
+

@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import loadlogo from './assets/images/logo1.png';
-import { AsyncAddCategory, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncMinQuantityReport, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption, AsyncRequestorReport, AsyncTestTypeReport, AsyncReferReport, AsyncCareLab, AsyncRequestorSalesReport, AsyncDailySummary, AsyncDailyTransaction, AsyncLogin, AsyncPublicLayout, AsyncNotFound, AsyncFinance, AsyncTheme, AsyncOutSourcing, AsyncEditBill, AsycAboutLuniva, AsyncReagentUsed, AsyncAddReagentUsed, AsyncCareLabIndex, AsyncAddManufacture, AsyncManufacture, AsyncAfterLogin, AsyncQcControl, AsyncLC, AsyncTestControl, AsyncViewTestControl, AsyncAddTestControl, AsyncViewTestControlList, AsyncAddTestControlTest, AsyncViewTestControlTest, AsyncAddTestData, AsyncViewTestData, AsyncViewCareDashboard, AsyncAddControlSDMean, AsyncControlSDMeanTable, AsyncPrintTestReport, AsyncDyReport } from './App/asyncComponent';
+import { AsyncAddCategory, AsyncAddConsumptionGroup, AsyncAddConsumptionLookGroup, AsyncAddItems, AsyncAddItemVsRatio, AsyncAddLocation, AsyncAddRack, AsyncAddType, AsyncAddUnits, AsyncAddWastage, AsyncAppLayout, AsyncCategory, AsyncConsumableReports, AsyncConsumptionIndex, AsyncConsumptionLookIndex, AsyncDashbord, AsyncGoodOut, AsyncGoodsIn, AsyncGoodsInAdd, AsyncGoodsInReports, AsyncGoodsOutAdd, AsyncGoodsOutReports, AsyncInOutConReports, AsyncinvsReports, AsyncItems, AsyncItemVsRatio, AsyncLocation, AsyncLocationStockReport, AsyncMinQuantityReport, AsyncRack, AsyncReports, AsyncSettings, AsyncStocks, AsyncType, AsyncUnits, AsyncWastage, AsyncAddGroupItemVsRatioVsConsumption, AsyncRequestorReport, AsyncTestTypeReport, AsyncReferReport, AsyncCareLab, AsyncRequestorSalesReport, AsyncDailySummary, AsyncDailyTransaction, AsyncLogin, AsyncPublicLayout, AsyncNotFound, AsyncFinance, AsyncTheme, AsyncOutSourcing, AsyncEditBill, AsycAboutLuniva, AsyncReagentUsed, AsyncAddReagentUsed, AsyncCareLabIndex, AsyncAddManufacture, AsyncManufacture, AsyncAfterLogin, AsyncQcControl, AsyncLC, AsyncTestControl, AsyncViewTestControl, AsyncAddTestControl, AsyncViewTestControlList, AsyncAddTestControlTest, AsyncViewTestControlTest, AsyncAddTestData, AsyncViewTestData, AsyncViewCareDashboard, AsyncAddControlSDMean, AsyncControlSDMeanTable, AsyncPrintTestReport, AsyncDyReport, AsyncTestAnalytics, AsyncSampleStatus } from './App/asyncComponent';
 import PublicRoute from './Routes/PublicRoute';
 import { MenuSettings } from './Data/MenuSettings';
 import PrivateRouter from './Routes/PrivateRouter';
@@ -1060,9 +1060,30 @@ function App() {
             showSider
           />
 
+          <PrivateRouter
+            exact
+            path='/testanalytics'
+            component={AsyncTestAnalytics}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          {/* <PrivateRouter
+            exact
+            path='/samplestatus'
+            component={AsyncSampleStatus}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          /> */}
+
+
           <Route
             component={AsyncNotFound}
           />
+
+
+
 
         </Switch>
       </Suspense>

@@ -46,6 +46,13 @@ export const useCareLabRoute = () => {
             name: 'Test Status',
             path: '/dynarep',
         },
+        {
+            icon: 'icon-lab',
+            key: 'testanalytics',
+            name: 'Test Name',
+            path: '/testanalytics',
+            hasSubNav: false,
+        },
     ]
 
     const tatNav = [
@@ -152,13 +159,21 @@ export const useCareLabRoute = () => {
             hasSubNav: true,
             subNavData: tatNav
         },
-        {
-            icon: 'icon-lab',
-            key: 'testanalytics',
-            name: 'Test analytics',
-            path: '',
-            hasSubNav: false,
-        },
+        // {
+        //     icon: 'icon-lab',
+        //     key: 'testanalytics',
+        //     name: 'Test analytics',
+        //     path: '/testanalytics',
+        //     hasSubNav: false,
+        // },
+        
+        // {
+        //     icon: 'icon-lab',
+        //     key: 'samplestatus',
+        //     name: 'Sample Status',
+        //     path: '/samplestatus',
+        //     hasSubNav: false,
+        // },
         {
             icon: 'icon-stack2',
             key: 'qcmanagement',
@@ -177,5 +192,6 @@ export const useCareLabRoute = () => {
         marketingNav: marketingNav,
         reportStatNav: reportStatNav,
         qcControlNav: qcControlNav,
+        
     }
 }

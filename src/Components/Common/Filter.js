@@ -1,4 +1,4 @@
-import { Col, Row, Select } from 'antd'
+import { Col, Input, Row, Select } from 'antd'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import AppButton from './AppButton'
@@ -15,7 +15,7 @@ import { careLabFiscalCodeApi, careLabDiagnosisApi } from '../../services/careLa
 import { ItemName } from './ItemToReagent'
 
 const Filter = ({ dataReturn, ...props }) => {
-  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist, forRequestorReport, forRefererReport, forDailyReport, forDailyTrasection, forReportSalesReport, getFiscalYear, fiscalService, showDiagList } = props
+  const { serchButton, itemType, categroryType, dateRange, dataRet, dateRet, locateRange, itemName, notAll, notAllLocate, toCompareData, forGoodsIn, forGoodsOut, onSearch, forConsumptionReport, forItem, forItemVsRatio, forItemType, forCategory, forLocation, forRack, forUnits, forConsumption, forConsumptionLookUp, getrequestorlist, getrefererlist, getuserslist, forRequestorReport, forRefererReport, forDailyReport, forDailyTrasection, forReportSalesReport, getFiscalYear, fiscalService, showDiagList, forTestAnalytics, forTestStatus } = props
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -35,11 +35,16 @@ const Filter = ({ dataReturn, ...props }) => {
   const [userListId, setuserListId] = useState(0)
   const [diagnosisList, setdiagnosisList] = useState([])
   const [diagList, setdiagList] = useState([])
+  const [SearchTestName, setSearchTestName] = useState();
+  const [SearchType, setSearchType] = useState();
 
   //
   const [fiscalList, setFiscalList] = useState([]);
 
+  // console.log("serch test name", SearchTestName)SearchType
+
   const handleClicker = () => {
+    // console.log("asda", userListId)
     if (dateRange !== undefined) {
       if (itemName !== undefined) {
         dateRet({ ...fromDate, itemid: itemNameList })
@@ -49,7 +54,13 @@ const Filter = ({ dataReturn, ...props }) => {
         dateRet({ ...fromDate, userId: userListId })
       } else if (fiscalService !== undefined) {
         dateRet({ ...fromDate, fiscalId: userListId, diaList: diagList })
-      } else if (fromDate !== null) {
+      } else if (SearchTestName !== undefined) {
+        dateRet({ ...fromDate, testName: SearchTestName })
+      } else if (SearchType !== undefined) {
+        dateRet({ ...fromDate, SearchType: SearchType })
+
+      }
+      else if (fromDate !== null) {
         dateRet(fromDate)
       }
     } else if (locateRange !== undefined) {
@@ -60,6 +71,7 @@ const Filter = ({ dataReturn, ...props }) => {
         iType: iType
       }
       dataRet(data);
+      // console.log('errop')
     }
   }
 
@@ -549,7 +561,7 @@ const Filter = ({ dataReturn, ...props }) => {
             }
 
             {
-              fiscalService && <Col lg={8} md={10} sm={12} xs={24}>
+              fiscalService && <Col lg={4} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Fiscal Year</span>
                 <Select
                   style={{ width: '100%' }}
@@ -573,7 +585,7 @@ const Filter = ({ dataReturn, ...props }) => {
             {
               // max
               // note
-              showDiagList === true && <Col lg={8} md={10} sm={12} xs={24}>
+              showDiagList === true && <Col lg={8} md={10} sm={12} xs={24} style={{marginRight: '4px'}}>
                 <span className='labelTop'>Diagnosis In</span>
                 <Select
                   mode="multiple"
@@ -603,6 +615,43 @@ const Filter = ({ dataReturn, ...props }) => {
                   }
                 </Select>
               </Col>
+            }
+
+            {/* forTestAnalytics */}
+
+            {forTestAnalytics &&
+              <Col lg={8} md={10} sm={12} xs={24}>
+                <span className='labelTop'>Test name</span>
+                <Input placeholder='Test name' onChange={(e) => setSearchTestName(e.target.value)}></Input>
+              </Col>
+            }
+            {/*  */}
+            {/* rest wise sample status */}
+            {forTestStatus &&
+
+              <Col lg={8} md={10} sm={12} xs={24}>
+                <span className='labelTop'>Search Type</span>
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select User"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    );
+                  }}
+                  style={{ width: '100%' }}
+                  onChange={(val) => { setSearchType(val) }}
+                  size='default'
+                >
+                  <Option title="Date wise"
+                    key="1" value={1}>Pending Status</Option>
+                  <Option title="Test wise Sample Status"
+                    key="2" value={2}>Test wise Sample Status</Option>
+                </Select>
+              </Col>
+
             }
 
             <Col>

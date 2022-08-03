@@ -10,15 +10,23 @@ import { newTableStyles } from './TableStyles';
 const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData, forGroup, forGroupButtonClick, forCon, forConButtonClick, printFileName, reportName, tableHead, fromToDate, removetwo, selctorr, forData, forDataButtonClick }) => {
   const dispatch = useDispatch();
   const [companyDetail, setcompanyDetail] = useState([]);
+  
 
   useEffect(() => {
     dispatch(getListofcompany(data => {
       setcompanyDetail(data[0])
     }))
   }, [])
+  // console.log("col", tableHead)
+  // console.log('data', csvData)
 
   //print handler
   //needs csvData, tableHead, fromTodate
+
+  //company details
+  //<h2> ${companyDetail.CompanyName} </h2>
+  //<p> ${companyDetail.COmpanyAddress} </p>
+  //<p>Contact no:${companyDetail.COmpanyContactNo} </p>
   const printHandle = () => {
     if (csvData.length !== 0) {
       let newWindow = window.open()
@@ -51,9 +59,10 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
 
       let refName = `
       <div class="gocenter">
-          <h2> ${companyDetail.CompanyName} </h2>
-          <p> ${companyDetail.COmpanyAddress} </p>
-          <p>Contact no:${companyDetail.COmpanyContactNo} </p>
+          
+          <h2> Crystal Diagonistic Lab </h2>
+          <p> Kathmandu, sankhamul </p>
+          <p>Contact no:9009090 </p>
           <h2>${reportName} Report</h2>
       </div>
       <div class="headingContent">
@@ -141,6 +150,9 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
             <button
               onClick={printHandle}
               className="btn ant-btn btn-primary btn-primary--outline"
+              style={{
+                marginLeft: "8px",
+              }}
             >
               Print
             </button>

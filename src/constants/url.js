@@ -494,3 +494,19 @@ export const InsertUpdateControlWiseSDMeanCV = 'InsertUpdateControlWiseSDMeanCV'
  * @param: ?analyzerId={analyzerId}&testid={testid}&from={from}&to={to}
  */
 export const GetControlWiseSDMeanCV = 'GetControlWiseSDMeanCV'
+
+
+// GetListOfPatientDetailsBydateAndTestDone?fromdate={fromdate}&todate={todate}&testname={testname}
+export const GetListOfPatientDetailsBydateAndTestDone = `GetListOfPatientDetailsBydateAndTestDone`
+
+/**
+ * @desc: Get Patient Details by date and test done
+ * @param: ?fromdate={fromdate}&todate={todate}&testname={testname}
+ */
+
+// GetDatewiseSampleStatusOfEachTest?fromdate={fromdate}&todate={todate}
+export const GetDatewiseSampleStatusOfEachTest = `GetDatewiseSampleStatusOfEachTest`
+/**
+ * @desc: Get datewise sample status of each test
+ * @param: ?fromdate={fromdate}&todate={todate}
+ */
