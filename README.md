@@ -1,20 +1,8 @@
 # lunivacarelab-inventory
-Item - anib
-Unit - suman
-type - suman
-category - suman
-manufacture - suman
-goods in - anib
-item vs test ratio - not imporant currently
-location - suman
-rack - no
-wastage - no
 
 CURD operation http://lunivacare.ddns.net/CarelabDataMetricService_qc
 
 in Inventory
-
-Currently suman(design) anib(service/operation)
 
 git clone <link>
 
