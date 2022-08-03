@@ -561,7 +561,7 @@ const Filter = ({ dataReturn, ...props }) => {
             }
 
             {
-              fiscalService && <Col lg={8} md={10} sm={12} xs={24}>
+              fiscalService && <Col lg={4} md={10} sm={12} xs={24}>
                 <span className='labelTop'>Fiscal Year</span>
                 <Select
                   style={{ width: '100%' }}
@@ -585,7 +585,7 @@ const Filter = ({ dataReturn, ...props }) => {
             {
               // max
               // note
-              showDiagList === true && <Col lg={8} md={10} sm={12} xs={24}>
+              showDiagList === true && <Col lg={8} md={10} sm={12} xs={24} style={{marginRight: '4px'}}>
                 <span className='labelTop'>Diagnosis In</span>
                 <Select
                   mode="multiple"
@@ -646,7 +646,7 @@ const Filter = ({ dataReturn, ...props }) => {
                   size='default'
                 >
                   <Option title="Date wise"
-                    key="1" value={1}>Date wise</Option>
+                    key="1" value={1}>Pending Status</Option>
                   <Option title="Test wise Sample Status"
                     key="2" value={2}>Test wise Sample Status</Option>
                 </Select>
