@@ -1,5 +1,6 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
-export const DEV_URL = 'https://lunivacare.ddns.net/CarelabDataMetricService_qc/';
+export const DEV_URL =
+  "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
 // export const DEV_URL = 'https://lunivat.ddns.net/crystal/CarelabDataMetricServiceCrystal/';
 // http://192.168.100.34/CarelabDataMetricServiceCrystal/
 // export const DEV_URL = 'https://lunivatech.ddns.net/LunivaSamjhana/LunivaInventory/';
@@ -13,182 +14,196 @@ export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
  * @desc: get item category
  * @param: ?id={id}
  */
-export const GetItemCategory = 'GetItemCategory';
+export const GetItemCategory = "GetItemCategory";
 /**
  * @desc: get item type
  * @param: ?id={id}
  */
-export const GetItemType = 'GetItemType';
+export const GetItemType = "GetItemType";
 /**
  * @desc: get units details
  * @param: ?id={id}
  */
-export const GetUnitsDetails = 'GetUnitsDetails';
+export const GetUnitsDetails = "GetUnitsDetails";
 /**
  * @desc: get manufacture details
  * @param: ?id={id}
  */
-export const GetManufactureDetails = 'GetManufactureDetails';
+export const GetManufactureDetails = "GetManufactureDetails";
 /**
  * @desc: get location details
  * @param: ?id={id}
  */
-export const GetLocationDetails = 'LocationDetails';
+export const GetLocationDetails = "LocationDetails";
 /**
  * @desc: get good received details by date
  * @param: ?fromdate=2021-11-01&todate=2021-11-28
  */
-export const GetGoodReceivedDetailsByDate = 'GetGoodReceivedDetailsByDate';
+export const GetGoodReceivedDetailsByDate = "GetGoodReceivedDetailsByDate";
 /**
  * @desc: get list of lab intems detail by type id
  * @param: ?itemtypeId=1&CategoryId=1
  */
-export const GetListOfLabItemsDetailsByTypeId = 'GetListOfLabItemsDetailsByTypeId';
+export const GetListOfLabItemsDetailsByTypeId =
+  "GetListOfLabItemsDetailsByTypeId";
 /**
  * @desc: rack details by location id
  * @param: ?locationId=1
  */
-export const RackDetailsByLocationId = 'RackDetailsByLocationId';
+export const RackDetailsByLocationId = "RackDetailsByLocationId";
 /**
  * @desc: get list of wastage details by date
  * @param: ?fromdate=2021-11-01&todate=2021-11-28
  */
-export const GetlistOfwastageDetailsByDate = 'GetlistOfwastageDetailsByDate';
+export const GetlistOfwastageDetailsByDate = "GetlistOfwastageDetailsByDate";
 /**
  * @desc: get list of item vs test ratio
  * @param: ?id={id}
  */
-export const GetListOfItemVsTestRatio = 'GetListOfItemVsTestRatio';
+export const GetListOfItemVsTestRatio = "GetListOfItemVsTestRatio";
 /**
  * @desc:
  * @param:
  */
-export const GetListOfGroupTestForInventory = 'GetListOfGroupTestForInventory'
+export const GetListOfGroupTestForInventory = "GetListOfGroupTestForInventory";
 /**
  * @desc: get list of goods out record by date
  * @param: ?fromdate={fromdate}&todate={todate}
  */
-export const GetListofGoodsOutRecordByDate = 'GetListofGoodsOutRecordByDate';
+export const GetListofGoodsOutRecordByDate = "GetListofGoodsOutRecordByDate";
 /**
  * @desc: get list of test for inventory
  * @param:
  */
-export const GetListOfTestForInventory = 'GetListOfTestForInventory';
+export const GetListOfTestForInventory = "GetListOfTestForInventory";
 /**
  * @desc: get goods out count by date wise and item wise
  * @param: ?fromdate={fromdate}&todate={todate}&itemid={itemid}
  */
-export const GetGoodsOutCountByDateWiseandItemWise = 'GetGoodsOutCountByDateWiseandItemWise';
+export const GetGoodsOutCountByDateWiseandItemWise =
+  "GetGoodsOutCountByDateWiseandItemWise";
 /**
  * @desc: get goods in count by date wise and item wise
  * @param: ?fromdate={fromdate}&todate={todate}&itemid={itemid}
  */
-export const GetGoodsInCountByDateWiseandItemWise = 'GetGoodsInCountByDateWiseandItemWise';
+export const GetGoodsInCountByDateWiseandItemWise =
+  "GetGoodsInCountByDateWiseandItemWise";
 /**
  * @desc: get current remaining stock count by id
- * @param: 
+ * @param:
  */
-export const GetCurrentRemainingStockCountById = 'GetCurrentRemainingStockCountById'
+export const GetCurrentRemainingStockCountById =
+  "GetCurrentRemainingStockCountById";
 /**
  * @desc: get list of items near to min quantity
- * @param: 
+ * @param:
  */
-export const GetListOfItemsNearToMinQuantity = 'GetListOfItemsNearToMinQuantity';
+export const GetListOfItemsNearToMinQuantity =
+  "GetListOfItemsNearToMinQuantity";
 /**
  * @desc: get total goods in and out by item
- * @param: 
+ * @param:
  */
-export const GetTotalGoodsInAndOutByItem = 'GetTotalGoodsInAndOutByItem';
+export const GetTotalGoodsInAndOutByItem = "GetTotalGoodsInAndOutByItem";
 /**
  * @desc: get good received details by item id
  * @param: ?itemId={itemId}
  */
-export const GetGoodReceivedDetailsbyItemId = 'GetGoodReceivedDetailsbyItemId';
+export const GetGoodReceivedDetailsbyItemId = "GetGoodReceivedDetailsbyItemId";
 /**
  * @desc: get location wise remaining stock details
  * @param: ?location={location}
  */
-export const GetLocationWiseRemainingStockDetails = 'GetLocationWiseRemainingStockDetails';
+export const GetLocationWiseRemainingStockDetails =
+  "GetLocationWiseRemainingStockDetails";
 /**
  * @desc: get actual consuption report by date range
  * @param: ?from={from}&to={to}
  */
-export const GetActualConsumptionReportByDateRange = 'GetActualConsumptionReportByDateRange';
+export const GetActualConsumptionReportByDateRange =
+  "GetActualConsumptionReportByDateRange";
 /**
  * @desc: get consumption group
  * @param:
  */
-export const GetConsumptionGroup = 'GetConsumptionGroup';
+export const GetConsumptionGroup = "GetConsumptionGroup";
 /**
-* @desc: get consumption group test look up
-* @param:
-*/
-export const GetConsumptionGroupTestLookUp = 'GetConsumptionGroupTestLookUp';
+ * @desc: get consumption group test look up
+ * @param:
+ */
+export const GetConsumptionGroupTestLookUp = "GetConsumptionGroupTestLookUp";
 
 //carelabdatametric services only dont mix up
 /**
-* @desc: get requestor list
-* @param: 
+ * @desc: get requestor list
+ * @param:
  */
-export const GetRequestorList = 'GetRequestorList'
+export const GetRequestorList = "GetRequestorList";
 /**
-* @desc: get refered doctor list
-* @param: 
+ * @desc: get refered doctor list
+ * @param:
  */
-export const GetReferedDoctorList = 'GetReferedDoctorList'
+export const GetReferedDoctorList = "GetReferedDoctorList";
 /**
-* @desc: get date wise requestor transaction details
-* @param: ?from={from}&to={to}&reqId={reqId}
-*/
-export const GetDatewiseRequestorTransactionDetails = 'GetDatewiseRequestorTransactionDetails'
+ * @desc: get date wise requestor transaction details
+ * @param: ?from={from}&to={to}&reqId={reqId}
+ */
+export const GetDatewiseRequestorTransactionDetails =
+  "GetDatewiseRequestorTransactionDetails";
 /**
-* @desc: get date wise refrered doctor transaction details
-* @param: ?from={from}&to={to}&refId={refId}
-*/
-export const GetDatewiseReferredDoctorTransactionDetails = 'GetDatewiseReferredDoctorTransactionDetails';
+ * @desc: get date wise refrered doctor transaction details
+ * @param: ?from={from}&to={to}&refId={refId}
+ */
+export const GetDatewiseReferredDoctorTransactionDetails =
+  "GetDatewiseReferredDoctorTransactionDetails";
 /**
-* @desc: get test type
-* @param: 
-*/
-export const GetTestType = 'GetTestType';
+ * @desc: get test type
+ * @param:
+ */
+export const GetTestType = "GetTestType";
 /**
-* @desc: get list of test by type for bulk update
-* @param: ?testTypeId={testTypeId} for some reason this post lol
-*/
-export const GetListOfTestByTypeForBulkUpdate = 'GetListOfTestByTypeForBulkUpdate';
+ * @desc: get list of test by type for bulk update
+ * @param: ?testTypeId={testTypeId} for some reason this post lol
+ */
+export const GetListOfTestByTypeForBulkUpdate =
+  "GetListOfTestByTypeForBulkUpdate";
 /**
-* @desc: get requestor wise total sales summary by date
-* @param: ?from={from}&to={to}
-*/
-export const GetRequestorwiseTotalSalesSummaryByDate = 'GetRequestorwiseTotalSalesSummaryByDate';
+ * @desc: get requestor wise total sales summary by date
+ * @param: ?from={from}&to={to}
+ */
+export const GetRequestorwiseTotalSalesSummaryByDate =
+  "GetRequestorwiseTotalSalesSummaryByDate";
 /**
-* @desc: get daily summary transaction user wise by date
-* @param: ?from={from}&to={to}&userId={userId}
-*/
-export const GetDailySummaryTransactionUserWiseByDate = 'GetDailySummaryTransactionUserWiseByDate';
+ * @desc: get daily summary transaction user wise by date
+ * @param: ?from={from}&to={to}&userId={userId}
+ */
+export const GetDailySummaryTransactionUserWiseByDate =
+  "GetDailySummaryTransactionUserWiseByDate";
 /**
-* @desc: get daily transaction by userid and date
-* @param: ?from={from}&to={to}&userId={userId}
-*/
-export const GetDailyTransactionByUserIdAndDate = 'GetDailyTransactionByUserIdAndDate';
+ * @desc: get daily transaction by userid and date
+ * @param: ?from={from}&to={to}&userId={userId}
+ */
+export const GetDailyTransactionByUserIdAndDate =
+  "GetDailyTransactionByUserIdAndDate";
 /**
-* @desc: get list of user for metric
-* @param: 
-*/
-export const GetListOfUserForMetric = 'GetListOfUserForMetric';
+ * @desc: get list of user for metric
+ * @param:
+ */
+export const GetListOfUserForMetric = "GetListOfUserForMetric";
 /**
  * @desc: get list of company details
  * @param:
  */
-export const GetCompanyDetials = 'GetCompanyDetials';
+export const GetCompanyDetials = "GetCompanyDetials";
 
-export const GetDataMetricReportByReportTypeAndDateRange = 'GetDataMetricReportByReportTypeAndDateRange';
+export const GetDataMetricReportByReportTypeAndDateRange =
+  "GetDataMetricReportByReportTypeAndDateRange";
 //carelabdatametric services only dont mix up
 /**
  * @descL get reagent used for control by date
  * @param: ?fromdate={fromdate}&todate={todate}
  */
-export const GetReagentUsedForControlByDate = 'GetReagentUsedForControlByDate';
+export const GetReagentUsedForControlByDate = "GetReagentUsedForControlByDate";
 
 //POST
 /**
@@ -199,7 +214,7 @@ export const GetReagentUsedForControlByDate = 'GetReagentUsedForControlByDate';
   "IsActive": true
 }
  */
-export const InsertUpdateItemCategory = 'InsertUpdateItemCategory';
+export const InsertUpdateItemCategory = "InsertUpdateItemCategory";
 /**
  * @desc: insert update item type
  * @param: {
@@ -208,7 +223,7 @@ export const InsertUpdateItemCategory = 'InsertUpdateItemCategory';
   "IsActive": true
 }
  */
-export const InsertUpdateItemType = 'InsertUdpateItemType';
+export const InsertUpdateItemType = "InsertUdpateItemType";
 /**
  * @desc: insert update units
  * @param: {
@@ -217,7 +232,7 @@ export const InsertUpdateItemType = 'InsertUdpateItemType';
   "IsActive": true
 }
  */
-export const InsertUpdateUnits = 'InsertUpdateUnits';
+export const InsertUpdateUnits = "InsertUpdateUnits";
 /**
  * @desc: insert update manufacture
  * @param: {
@@ -225,7 +240,7 @@ export const InsertUpdateUnits = 'InsertUpdateUnits';
   "ManufactureBY": "string",
   "IsActive": true
 }
- */export const InsertUpdateManufacture = 'InsertUpdateManufacture';
+ */ export const InsertUpdateManufacture = "InsertUpdateManufacture";
 /**
  * @desc: insert update location
  * @param: {
@@ -235,7 +250,7 @@ export const InsertUpdateUnits = 'InsertUpdateUnits';
   "IsActive": true
 }
  */
-export const InsertUpdateLocation = 'InsertUpdateLocation';
+export const InsertUpdateLocation = "InsertUpdateLocation";
 /**
  * @desc: insert update rack details
  * @param: {
@@ -246,7 +261,7 @@ export const InsertUpdateLocation = 'InsertUpdateLocation';
   "IsActive": true
 }
  */
-export const InsertUpdatRackDetails = 'InsertUdpatRackDetails';
+export const InsertUpdatRackDetails = "InsertUdpatRackDetails";
 /**
  * @desc: insert update lab good received
  * @param: {
@@ -264,7 +279,7 @@ export const InsertUpdatRackDetails = 'InsertUdpatRackDetails';
   "ItemStatus": 0
 }
  */
-export const InsertUpdateLabGoodReceived = 'InsertUpdateLabGoodReceived';
+export const InsertUpdateLabGoodReceived = "InsertUpdateLabGoodReceived";
 /**
  * @desc: insert update wastage details
  * @param: {
@@ -277,7 +292,7 @@ export const InsertUpdateLabGoodReceived = 'InsertUpdateLabGoodReceived';
   "CreatedBy": 0
 }
  */
-export const InsertUpdateWastageDetails = 'InsertUpdateWastageDetails';
+export const InsertUpdateWastageDetails = "InsertUpdateWastageDetails";
 /**
  * @desc: insert update item vs test ratio
  * @param: {
@@ -290,7 +305,7 @@ export const InsertUpdateWastageDetails = 'InsertUpdateWastageDetails';
   "CreatedBy": 0
 }
  */
-export const InsertUpdateItemVsTestRatio = 'InsertUpdateItemVsTestRatio';
+export const InsertUpdateItemVsTestRatio = "InsertUpdateItemVsTestRatio";
 /**
  * @desc: insert update new items details
  * @param: {
@@ -309,7 +324,7 @@ export const InsertUpdateItemVsTestRatio = 'InsertUpdateItemVsTestRatio';
   "IsActive": true
 }
  */
-export const InsertUpdateNewItemsDetails = 'InsertUpdateNewItemsDetails';
+export const InsertUpdateNewItemsDetails = "InsertUpdateNewItemsDetails";
 /**
  * @desc: insert update goods out details
  * @param: {
@@ -324,7 +339,7 @@ export const InsertUpdateNewItemsDetails = 'InsertUpdateNewItemsDetails';
   "Remarks": "sample string 9"
 }
  */
-export const InsertUpdateGoodsoutRecord = 'InsertUpdateGoodsoutRecord'
+export const InsertUpdateGoodsoutRecord = "InsertUpdateGoodsoutRecord";
 /**
  * @desc: insert update consumption test look up
  * @param: {
@@ -334,7 +349,8 @@ export const InsertUpdateGoodsoutRecord = 'InsertUpdateGoodsoutRecord'
   "IsActive": true
  }
  */
-export const InsertUpdateConsumptionTestLookUp = 'InsertUpdateConsumptionTestLookUp';
+export const InsertUpdateConsumptionTestLookUp =
+  "InsertUpdateConsumptionTestLookUp";
 /**
  * @desc: insert update consumption group
  * @param: {
@@ -343,7 +359,7 @@ export const InsertUpdateConsumptionTestLookUp = 'InsertUpdateConsumptionTestLoo
   "IsActive": true
  }
  */
-export const InsertUpdateConsumptionGroup = 'InsertUpdateConsumptionGroup';
+export const InsertUpdateConsumptionGroup = "InsertUpdateConsumptionGroup";
 /**
  * @desc: insert update control reagent details
  * @param: {
@@ -357,8 +373,8 @@ export const InsertUpdateConsumptionGroup = 'InsertUpdateConsumptionGroup';
   "IsActive": true
   }
  */
-export const InsertUpdateControlReagentDetails = 'InsertUpdateControlReagentDetails';
-
+export const InsertUpdateControlReagentDetails =
+  "InsertUpdateControlReagentDetails";
 
 /**
  * @desc: new verfiy report service
@@ -374,50 +390,37 @@ export const InsertUpdateControlReagentDetails = 'InsertUpdateControlReagentDeta
   "IsCurrent": true
 }
  */
-export const VerifyPatientReport = 'VerifyPatientReport ';
+export const VerifyPatientReport = "VerifyPatientReport ";
 
 /**
  * @desc: Update Critical Value And Cut off Time of Test
  * @param: ?testId={testId}&criticalValue={criticalValue}&cutofftime={cutofftime}&cutoffinHrs={cutoffinHrs}
  */
-export const UpdateCriticalValueAndCutoffTimeofTest = 'UpdateCriticalValueAndCutoffTimeofTest'
 
-/**
- * @desc: Insert Update Control Details
- * @param: {
- "CId": 1,
- "ControlCode": "sample string 2",
- "ControlName": "sample string 3",
- "ControlDescription": "sample string 4",
- "UserId": 5,
- "EntryDate": "2022-07-05T12:00:37.6481523+05:45",
- "IsActive": true
-}
- */
-export const InsertUpdateControlDetails = 'InsertUpdateControlDetails'
+export const InsertUpdateControlDetails = "InsertUpdateControlDetails";
 
 /**
  * @desc: Get Control Details
  */
-export const GetControlDetails = 'GetControlDetails'
+export const GetControlDetails = "GetControlDetails";
 
 /**
  * @desc: Get Control Value By Control TestId
  * @param: ?analyzerId={analyzerId}
  */
-export const GetControlValueByControlTestId = 'GetControlValueByControlTestId'
+export const GetControlValueByControlTestId = "GetControlValueByControlTestId";
 
 /**
  * @desc: Get List Of Control Wise SD
  * @param: ?analyzerId={analyzerId}
  */
-export const GetListOfControlWiseSD = 'GetListOfControlWiseSD'
+export const GetListOfControlWiseSD = "GetListOfControlWiseSD";
 
 /**
  * @desc: Get Control Test List
  * @param: ?analyzerId={analyzerId}
  */
-export const GetControlTestList = 'GetControlTestList'
+export const GetControlTestList = "GetControlTestList";
 
 /**
  * @desc: Insert Update Control Wise SD
@@ -435,13 +438,14 @@ export const GetControlTestList = 'GetControlTestList'
   "IsActive": true
 }
  */
-export const InsertUpdateControlWiseSD = 'InsertUpdateControlWiseSD'
+export const InsertUpdateControlWiseSD = "InsertUpdateControlWiseSD";
 
 /**
  * @desc: Get List Of Control value By Analyzer And Date For LJ Chart
  * @param: ?analyzerId={analyzerId}&testId={testId}&from={from}&to={to}
  */
-export const GetListOfControlvalueByAnalyzerAndDateForLJChart = 'GetListOfControlvalueByAnalyzerAndDateForLJChart'
+export const GetListOfControlvalueByAnalyzerAndDateForLJChart =
+  "GetListOfControlvalueByAnalyzerAndDateForLJChart";
 
 /**
  * @desc: InsertUpdateTestControl
@@ -456,7 +460,7 @@ export const GetListOfControlvalueByAnalyzerAndDateForLJChart = 'GetListOfContro
   "IsActive": true
 }
  */
-export const InsertUpdateTestControl = 'InsertUpdateTestControl'
+export const InsertUpdateTestControl = "InsertUpdateTestControl";
 
 /**
  * @desc: Insert Update Control Value
@@ -470,7 +474,7 @@ export const InsertUpdateTestControl = 'InsertUpdateTestControl'
   "IsActive": true
 }
  */
-export const InsertUpdateControlValue = 'InsertUpdateControlValue'
+export const InsertUpdateControlValue = "InsertUpdateControlValue";
 
 /**
  * @desc: Insert Update Control Wise SD Mean CV
@@ -487,17 +491,17 @@ export const InsertUpdateControlValue = 'InsertUpdateControlValue'
   "QcLevel": "sample string 10"
   }
  */
-export const InsertUpdateControlWiseSDMeanCV = 'InsertUpdateControlWiseSDMeanCV'
+export const InsertUpdateControlWiseSDMeanCV =
+  "InsertUpdateControlWiseSDMeanCV";
 
 /**
  * @desc: Get Control Wise SD Mean CV
  * @param: ?analyzerId={analyzerId}&testid={testid}&from={from}&to={to}
  */
-export const GetControlWiseSDMeanCV = 'GetControlWiseSDMeanCV'
-
+export const GetControlWiseSDMeanCV = "GetControlWiseSDMeanCV";
 
 // GetListOfPatientDetailsBydateAndTestDone?fromdate={fromdate}&todate={todate}&testname={testname}
-export const GetListOfPatientDetailsBydateAndTestDone = `GetListOfPatientDetailsBydateAndTestDone`
+export const GetListOfPatientDetailsBydateAndTestDone = `GetListOfPatientDetailsBydateAndTestDone`;
 
 /**
  * @desc: Get Patient Details by date and test done
@@ -505,8 +509,42 @@ export const GetListOfPatientDetailsBydateAndTestDone = `GetListOfPatientDetails
  */
 
 // GetDatewiseSampleStatusOfEachTest?fromdate={fromdate}&todate={todate}
-export const GetDatewiseSampleStatusOfEachTest = `GetDatewiseSampleStatusOfEachTest`
+export const GetDatewiseSampleStatusOfEachTest = `GetDatewiseSampleStatusOfEachTest`;
 /**
  * @desc: Get datewise sample status of each test
  * @param: ?fromdate={fromdate}&todate={todate}
+ */
+
+export const GetListOfTestToInsertUpdateCutoffTimeAndCriticalValues = `GetListOfTestToInsertUpdateCutoffTimeAndCriticalValues`;
+/**
+ * @desc: Get List Of Test To Insert Update Cutoff Time And CriticalValues
+ * @param:   {
+            "Id": 1,
+            "TestCode": "A1",
+            "TestName": "Absolute Basophil Count",
+            "Specimen": "WB EDTA(2ml)",
+            "Method": "Cell Counter",
+            "Units": "cells/cumm",
+            "LISCOde": "11",
+            "AnalyzerId": 1,
+            "CriticalValues": "123",
+            "CutOfftime": "3hrs",
+            "CutOffTimeInHrs": 2.0
+        },
+ */
+
+export const UpdateCriticalValueAndCutoffTimeofTest =
+  "UpdateCriticalValueAndCutoffTimeofTest";
+
+/**
+ * @desc: Insert Update Control Details
+ * @param: {
+ "CId": 1,
+ "ControlCode": "sample string 2",
+ "ControlName": "sample string 3",
+ "ControlDescription": "sample string 4",
+ "UserId": 5,
+ "EntryDate": "2022-07-05T12:00:37.6481523+05:45",
+ "IsActive": true
+}
  */
