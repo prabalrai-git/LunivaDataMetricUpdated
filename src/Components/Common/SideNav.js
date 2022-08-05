@@ -138,10 +138,12 @@ const SideNav = (props) => {
             {
               dataMetric && location.state === 'datametric' &&
               carelabNavData.mainRoute.map(e => (
+                e?.showTab !== false ? 
                 e.hasSubNav === true ?
                   <SubMenu key={e.key} title={e.name} icon={<i className={e.icon}></i>}>
                     {
                       e.subNavData.map(res => (
+                        res?.showTab !== false ?
                         <Menu.Item key={res.key} icon={<i className={res.icon}></i>}>
                           <NavLink to={{
                             pathname: res?.path,
@@ -150,6 +152,8 @@ const SideNav = (props) => {
                             {res.name}
                           </NavLink>
                         </Menu.Item>
+                        :
+                        <></>
                       ))
                     }
                   </SubMenu>
@@ -162,6 +166,8 @@ const SideNav = (props) => {
                       {e.name}
                     </NavLink>
                   </Menu.Item>
+                  :
+                  <></>
               ))
             }
 

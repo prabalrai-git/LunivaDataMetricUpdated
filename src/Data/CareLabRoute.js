@@ -1,4 +1,8 @@
+import useTokenHook from "../CustomHook/useTokenHook";
+
 export const useCareLabRoute = () => {
+    const { token } = useTokenHook();
+    console.log(token);
 
     const sampleStatusNav = [
         {
@@ -6,6 +10,13 @@ export const useCareLabRoute = () => {
             key: 'carelabreport',
             name: 'Sample Stat',
             path: '/carelab',
+            showTab: false
+        },
+        {
+            icon: 'icon-file-alt',
+            key: 'dynareportlist',
+            name: 'Test Status',
+            path: '/dynarep',
         },
     ]
 
@@ -40,19 +51,13 @@ export const useCareLabRoute = () => {
             name: 'Report List',
             path: '',
         },
-        {
-            icon: 'icon-file-alt',
-            key: 'dynareportlist',
-            name: 'Test Status',
-            path: '/dynarep',
-        },
-        {
-            icon: 'icon-lab',
-            key: 'testanalytics',
-            name: 'Test Name',
-            path: '/testanalytics',
-            hasSubNav: false,
-        },
+        // {
+        //     icon: 'icon-lab',
+        //     key: 'testanalytics',
+        //     name: 'Test Name',
+        //     path: '/testanalytics',
+        //     hasSubNav: false,
+        // },
     ]
 
     const tatNav = [
@@ -159,21 +164,14 @@ export const useCareLabRoute = () => {
             hasSubNav: true,
             subNavData: tatNav
         },
-        // {
-        //     icon: 'icon-lab',
-        //     key: 'testanalytics',
-        //     name: 'Test analytics',
-        //     path: '/testanalytics',
-        //     hasSubNav: false,
-        // },
-        
-        // {
-        //     icon: 'icon-lab',
-        //     key: 'samplestatus',
-        //     name: 'Sample Status',
-        //     path: '/samplestatus',
-        //     hasSubNav: false,
-        // },
+        {
+            icon: 'icon-lab',
+            key: 'testanalytics',
+            name: 'Test Name',
+            path: '/testanalytics',
+            hasSubNav: false,
+            // subNavData: qcControlNav
+        },
         {
             icon: 'icon-stack2',
             key: 'qcmanagement',
