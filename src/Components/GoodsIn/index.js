@@ -1,113 +1,119 @@
-import { Space, Table, Tag } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
-import { useDispatch } from 'react-redux';
-import { getGoodsReceivedApi } from '../../services/labGoodsReceivedService'
-import Filter from '../Common/Filter'
-import PageHeader from '../Common/pageHeader'
+import { Space, Table, Tag } from "antd";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { getGoodsReceivedApi } from "../../services/labGoodsReceivedService";
+import Filter from "../Common/Filter";
+import PageHeader from "../Common/pageHeader";
 // import Edit from '../Common/Edit';
-import Cancle from '../Common/Cancle';
-import { todaydate } from '../Common/TodayDate';
-import { useLocation } from 'react-router-dom';
-import { inventoryStat } from '../Common/StateList';
-
+import Cancle from "../Common/Cancle";
+import { todaydate } from "../Common/TodayDate";
+import { useLocation } from "react-router-dom";
+import { inventoryStat } from "../Common/StateList";
 
 const Index = () => {
-  const location = useLocation()
+  const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const [goodsList, setgoodsList] = useState([])
+  const [goodsList, setgoodsList] = useState([]);
   const [newGoodsList, setnewGoodsList] = useState([]);
 
   const columns = [
     {
-      title: 'Reagent Name',
-      dataIndex: 'ItemName',
-      key: 'itemName',
+      title: "Reagent Name",
+      dataIndex: "ItemName",
+      key: "itemName",
     },
     {
-      title: 'Quantity',
-      dataIndex: 'Quantity',
-      key: 'Quantity',
-      render: (text, record) => (
-        `${text} ${record.Unit !== null ? record.Unit : ''}`
-      )
+      title: "Quantity",
+      dataIndex: "Quantity",
+      key: "Quantity",
+      render: (text, record) =>
+        `${text} ${record.Unit !== null ? record.Unit : ""}`,
     },
     {
-      title: 'Expiry Date',
-      dataIndex: 'ExpiryDate',
-      key: 'ExpiryDate',
+      title: "Expiry Date",
+      dataIndex: "ExpiryDate",
+      key: "ExpiryDate",
       render: (text) => {
-        return text.split('T')[0]
-      }
+        return text.split("T")[0];
+      },
     },
     {
-      title: 'Reagent Status',
-      dataIndex: 'ItemStatus',
-      key: 'ItemStatus',
+      title: "Reagent Status",
+      dataIndex: "ItemStatus",
+      key: "ItemStatus",
       render: (text) => {
-        let retColor = 'red'
-        if (text === 'Available') {
-          retColor = 'green'
+        let retColor = "red";
+        if (text === "Available") {
+          retColor = "green";
         }
-        return <Tag color={retColor}>{text}</Tag>
-      }
+        return <Tag color={retColor}>{text}</Tag>;
+      },
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Action",
+      key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <Cancle onClick={() => history.push(`/goodsin/edit/${record.GId}/${record.CreatedDate}`)}>Cancle</Cancle>
+          <Cancle
+            onClick={() =>
+              history.push(`/goodsin/edit/${record.GId}/${record.CreatedDate}`)
+            }
+          >
+            Cancle
+          </Cancle>
         </Space>
-      )
-    }
-  ]
+      ),
+    },
+  ];
 
   const getLabData = (data) => {
-    dispatch(getGoodsReceivedApi(data, (val) => {
-      setgoodsList(val)
-      setnewGoodsList(val)
-    }))
-  }
+    dispatch(
+      getGoodsReceivedApi(data, (val) => {
+        setgoodsList(val);
+        setnewGoodsList(val);
+      })
+    );
+  };
 
   useEffect(() => {
     let data = {
       fromdate: todaydate,
       todate: todaydate,
-    }
-    getLabData(data)
-  }, [])
+    };
+    getLabData(data);
+  }, []);
 
   const dataRet = (val) => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
       todate: val[1].format("YYYY-MM-DD"),
-    }
-    getLabData(data)
-  }
+    };
+    getLabData(data);
+  };
 
   const handleSearch = (val) => {
-    if (val === undefined || val === '') {
-      setnewGoodsList(goodsList)
+    if (val === undefined || val === "") {
+      setnewGoodsList(goodsList);
     } else {
-      setnewGoodsList(val)
+      setnewGoodsList(val);
     }
-  }
-
-
+  };
 
   return (
     <GoodsInContainer>
       <div className="maiTopContainer">
         <PageHeader
-          buttonTitle='Add Reagent'
-          pageTitle='Reagent In'
-          buttonOnClick={() => history.push({
-            pathname: './goodsin/add',
-            state: inventoryStat
-          })}
+          buttonTitle="Add Reagent"
+          pageTitle="Reagent In"
+          buttonOnClick={() =>
+            history.push({
+              pathname: "./goodsin/add",
+              state: inventoryStat,
+            })
+          }
         ></PageHeader>
         <Filter
           dataReturn={handleSearch}
@@ -122,19 +128,16 @@ const Index = () => {
       </div>
 
       <div className="tableisRes">
-        <Table className='tableWidth'
+        <Table
+          className="tableWidth"
           columns={columns}
           dataSource={newGoodsList}
         />
-
       </div>
-
     </GoodsInContainer>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
 
-const GoodsInContainer = styled.div`
-
-`
+const GoodsInContainer = styled.div``;

@@ -84,6 +84,7 @@ import {
   AsyncOutsourceAnalytics,
   AsyncSms,
   AsyncTatAnalysis,
+  AsyncAddSms,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1171,6 +1172,14 @@ function App() {
             exact
             path="/sms"
             component={AsyncSms}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/sms/add"
+            component={AsyncAddSms}
             layout={AsyncAppLayout}
             // forEdit
             showSider

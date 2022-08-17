@@ -305,7 +305,10 @@ export const AsyncOutsourceAnalytics = lazy(() =>
   )
 );
 export const AsyncSms = lazy(() =>
-  pMinDelay(import("../Components/CareLabFolder/NotCompleted/Sms"), 300)
+  pMinDelay(import("../Components/CareLabFolder/SMS/Sms"), 300)
+);
+export const AsyncAddSms = lazy(() =>
+  pMinDelay(import("../Components/CareLabFolder/SMS/AddSMSDetails"), 300)
 );
 export const AsyncTatAnalysis = lazy(() =>
   pMinDelay(import("../Components/CareLabFolder/NotCompleted/TatAnalysis"), 300)
