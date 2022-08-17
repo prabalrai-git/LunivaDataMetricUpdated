@@ -123,9 +123,11 @@ const SideNav = (props) => {
               ""
             )}
 
-            {showSettings ? (
+            {
+            showSettings ? (
               <>
-                {location.state === "inventory" && (
+                {
+                location.state === "inventory" && (
                   <SubMenu
                     key="set1"
                     title="Settings"
@@ -151,61 +153,113 @@ const SideNav = (props) => {
                         );
                       }
                     })}
+                    </SubMenu>
+                    )
+                    }
+                    </>
+              )
+
+          }
+            
+            
+
+            {
+              showSettings ? (
+                <>
+                  {
+                    location.state === 'inventory' &&
+                    <SubMenu key="set1" title='Settings' icon={<i className='icon-line2-settings'></i>}>
+                      {
+                        menuData.map(e => {
+                          if (e.isactive) {
+                            return (
+                              <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                                <NavLink to={{
+                                  pathname: e?.path,
+                                  state: location.state
+                                }} className='navLInk' >
+                                  {e.name}
+                                </NavLink>
+                              </Menu.Item>
+                            )
+                          }
+                        }
+                        )
+
+                      }
+                    </SubMenu>
+                  }
+                </>
+              ) : ''
+            }
+
+            {
+              dataMetric && location.state === 'datametric' &&
+              carelabNavData.mainRoute.map(e => (
+                e?.showTab !== false ? 
+                e.hasSubNav === true ?
+                  <SubMenu key={e.key} title={e.name} icon={<i className={e.icon}></i>}>
+                    {
+                      e.subNavData.map(res => (
+                        res?.showTab !== false ?
+                        <Menu.Item key={res.key} icon={<i className={res.icon}></i>}>
+                          <NavLink to={{
+                            pathname: res?.path,
+                            state: location.state
+                          }} className='navLInk' >
+                            {res.name}
+                          </NavLink>
+                        </Menu.Item>
+                        :
+                        <></>
+                      ))
+                    }
                   </SubMenu>
-                )}
-              </>
-            ) : (
-              ""
-            )}
+            ))
+            }
 
             {dataMetric &&
               location.state === "datametric" &&
               carelabNavData.mainRoute.map((e) =>
-                e?.showTab !== false ? (
-                  e.hasSubNav === true ? (
-                    <SubMenu
-                      key={e.key}
-                      title={e.name}
-                      icon={<i className={e.icon}></i>}
-                    >
-                      {e.subNavData.map((res) =>
-                        res?.showTab !== false ? (
-                          <Menu.Item
-                            key={res.key}
-                            icon={<i className={res.icon}></i>}
-                          >
-                            <NavLink
-                              to={{
-                                pathname: res?.path,
-                                state: location.state,
-                              }}
-                              className="navLInk"
-                            >
-                              {res.name}
-                            </NavLink>
-                          </Menu.Item>
-                        ) : (
-                          <></>
-                        )
-                      )}
-                    </SubMenu>
-                  ) : (
-                    <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                      <NavLink
-                        to={{
-                          pathname: e?.path,
-                          state: location.state,
-                        }}
-                        className="navLInk"
+                e.hasSubNav === true ? (
+                  <SubMenu
+                    key={e.key}
+                    title={e.name}
+                    icon={<i className={e.icon}></i>}
+                  >
+                    {e.subNavData.map((res) => (
+                      <Menu.Item
+                        key={res.key}
+                        icon={<i className={res.icon}></i>}
                       >
-                        {e.name}
-                      </NavLink>
-                    </Menu.Item>
-                  )
+                        <NavLink
+                          to={{
+                            pathname: res?.path,
+                            state: location.state,
+                          }}
+                          className="navLInk"
+                        >
+                          {res.name}
+                        </NavLink>
+                      </Menu.Item>
+                    ))}
+                  </SubMenu>
                 ) : (
-                  <></>
+                  <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
+                    <NavLink
+                      to={{
+                        pathname: e?.path,
+                        state: location.state,
+                      }}
+                      className="navLInk"
+                    >
+                      {e.name}
+                    </NavLink>
+                  </Menu.Item>
                 )
               )}
+                  :
+                  <></>
 
             {/* {
               dataMetric ? (
@@ -290,7 +344,7 @@ const SideNavContainer = styled.div`
   .navLInk {
     display: flex;
     gap: 20px;
-    font-size: 16px;
+    font-size: 14px;
     align-items: center;
     text-transform: capitalize;
 
@@ -306,7 +360,7 @@ const SideNavContainer = styled.div`
     background-color: var(--primary);
   }
   .ant-menu-title-content {
-    font-size: 16px;
+    font-size: 14px;
   }
   .ant-menu-item:active {
     color: var(--primary);
