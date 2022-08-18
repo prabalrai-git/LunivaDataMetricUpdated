@@ -304,6 +304,24 @@ export const AsyncOutsourceAnalytics = lazy(() =>
     300
   )
 );
+export const AsyncExpenseManagement = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/ExpenseManagement/ExpenseManagement"),
+    300
+  )
+);
+export const AsyncBulkNegative = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/BulkNegative/BulkNegative"),
+    300
+  )
+);
+export const AsyncRequestorWiseNegative = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/BulkNegative/RequestorWiseNegative"),
+    300
+  )
+);
 export const AsyncSms = lazy(() =>
   pMinDelay(import("../Components/CareLabFolder/SMS/Sms"), 300)
 );

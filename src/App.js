@@ -3,6 +3,9 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import loadlogo from "./assets/images/logo1.png";
 import {
+  AsyncRequestorWiseNegative,
+  AsyncBulkNegative,
+  AsyncExpenseManagement,
   AsyncAddCategory,
   AsyncAddConsumptionGroup,
   AsyncAddConsumptionLookGroup,
@@ -1164,6 +1167,30 @@ function App() {
             exact
             path="/outsourceanalytics"
             component={AsyncOutsourceAnalytics}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/expensemanagement"
+            component={AsyncExpenseManagement}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/negative"
+            component={AsyncBulkNegative}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/rsnegative"
+            component={AsyncRequestorWiseNegative}
             layout={AsyncAppLayout}
             // forEdit
             showSider

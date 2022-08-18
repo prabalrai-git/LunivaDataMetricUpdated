@@ -112,6 +112,21 @@ export const useCareLabRoute = () => {
     },
   ];
 
+  const bulkNegativeNav = [
+    {
+      icon: "icon-sticky-note1",
+      key: "bulknegative",
+      name: "Bulk Negative",
+      path: "/negative",
+    },
+    {
+      icon: "icon-sticky-note1",
+      key: "requestorwisenegative",
+      name: "Requestor wise negative",
+      path: "/rsnegative",
+    },
+  ];
+
   const mainRoute = [
     {
       icon: "icon-line-file",
@@ -120,6 +135,14 @@ export const useCareLabRoute = () => {
       path: "/sampledash",
       hasSubNav: true,
       subNavData: sampleStatusNav,
+    },
+    {
+      icon: "icon-sticky-note1",
+      key: "bulknegative",
+      name: "Bulk Negative",
+      path: "/bulknegative",
+      hasSubNav: true,
+      subNavData: bulkNegativeNav,
     },
     {
       icon: "icon-line-file",
@@ -149,6 +172,13 @@ export const useCareLabRoute = () => {
       key: "outsourceanalytics",
       name: "Outsource analytics",
       path: "/outsourceanalytics",
+      hasSubNav: false,
+    },
+    {
+      icon: "icon-money",
+      key: "expensemanagement",
+      name: "Expense Management",
+      path: "/expensemanagement",
       hasSubNav: false,
     },
     {
