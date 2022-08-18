@@ -88,6 +88,9 @@ import {
   AsyncSms,
   AsyncTatAnalysis,
   AsyncAddSms,
+  AsyncBulkDateChange,
+  AsyncRequestorWiseDateChange,
+  AsyncDateChanges,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1207,6 +1210,39 @@ function App() {
             exact
             path="/sms/add"
             component={AsyncAddSms}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/bulkdatechange"
+            component={AsyncBulkDateChange}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path="/datechanges"
+            component={AsyncDateChanges}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/requestorwisedatechange"
+            component={AsyncRequestorWiseDateChange}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/datedash"
+            component={AsyncViewCareDashboard}
             layout={AsyncAppLayout}
             // forEdit
             showSider

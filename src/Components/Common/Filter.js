@@ -36,7 +36,7 @@ const Filter = ({ dataReturn, ...props }) => {
     toCompareData,
     forGoodsIn,
     forGoodsOut,
-    onSearch,
+
     forConsumptionReport,
     forItem,
     forItemVsRatio,
@@ -60,6 +60,9 @@ const Filter = ({ dataReturn, ...props }) => {
     showDiagList,
     forTestAnalytics,
     forTestStatus,
+    onSearch,
+
+    dateChangeSampleId,
   } = props;
   const dispatch = useDispatch();
 
@@ -560,7 +563,7 @@ const Filter = ({ dataReturn, ...props }) => {
                 <Select
                   showSearch
                   optionFilterProp="children"
-                  placeholder="Select User"
+                  placeholder="Select Fiscal Year"
                   filterOption={(input, option) => {
                     return (
                       option.key.toLowerCase().indexOf(input.toLowerCase()) >=
@@ -665,6 +668,17 @@ const Filter = ({ dataReturn, ...props }) => {
                 ></Input>
               </Col>
             )}
+
+            {dateChangeSampleId && (
+              <Col lg={8} md={10} sm={12} xs={24}>
+                <span className="labelTop">Sample Id</span>
+                <Input
+                  placeholder="Sample Id"
+                  onChange={(e) => setSearchTestName(e.target.value)}
+                ></Input>
+              </Col>
+            )}
+
             {/*  */}
             {/* rest wise sample status */}
             {forTestStatus && (

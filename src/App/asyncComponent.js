@@ -331,5 +331,21 @@ export const AsyncAddSms = lazy(() =>
 export const AsyncTatAnalysis = lazy(() =>
   pMinDelay(import("../Components/CareLabFolder/NotCompleted/TatAnalysis"), 300)
 );
+export const AsyncBulkDateChange = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/DateChange/BulkDateChange"),
+    300
+  )
+);
+export const AsyncDateChanges = lazy(() =>
+  pMinDelay(import("../Components/CareLabFolder/DateChange/DateChanges"), 300)
+);
+
+export const AsyncRequestorWiseDateChange = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/DateChange/RequestorWiseDateChange"),
+    300
+  )
+);
 
 // export const AsyncSampleStatus = lazy(() => pMinDelay(import('../Components/CareLabFolder/SampleStatus/SampleStatus'), 300));
