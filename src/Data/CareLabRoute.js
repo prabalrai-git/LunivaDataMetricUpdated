@@ -72,6 +72,27 @@ export const useCareLabRoute = () => {
       path: "/testList",
     },
   ];
+  const dateChangeNav = [
+    {
+      icon: "icon-calendar2",
+      key: "datechanges",
+      name: "Date Change",
+      path: "/datechanges",
+    },
+
+    {
+      icon: "icon-calendar3",
+      key: "bulkdatechange",
+      name: "Bulk Date Change",
+      path: "/bulkdatechange",
+    },
+    {
+      icon: "icon-calendar-plus",
+      key: "requestorwisedatechange",
+      name: "Requestor wise Date Change",
+      path: "/requestorwisedatechange",
+    },
+  ];
 
   const qcControlNav = [
     {
@@ -190,6 +211,22 @@ export const useCareLabRoute = () => {
       hasSubNav: true,
       subNavData: qcControlNav,
     },
+    {
+      icon: "icon-line-calendar",
+      key: "datedash",
+      name: "Date Change",
+      path: "/datedash",
+      hasSubNav: true,
+      subNavData: dateChangeNav,
+    },
+
+    {
+      icon: "icon-receipt",
+      key: "editbill",
+      name: "Edit Bill",
+      path: "/editbill",
+      hasSubNav: false,
+    },
   ];
 
   return {
@@ -200,5 +237,6 @@ export const useCareLabRoute = () => {
     marketingNav: marketingNav,
     reportStatNav: reportStatNav,
     qcControlNav: qcControlNav,
+    dateChangeNav: dateChangeNav,
   };
 };
