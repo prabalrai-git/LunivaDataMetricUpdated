@@ -1,17 +1,17 @@
-import React from 'react'
-import { Input, Row, col } from 'antd'
+import React from "react";
+import { Input, Row, col } from "antd";
 
 const Search = Input.Search;
 const FilterTable = ({ onSearch, ...props }) => {
   return (
-    <div className='filter' {...props} style={{ float: 'right' }}>
+    <div className="filter" {...props} style={{ float: "right" }}>
       <Input
-        placeholder='Search'
+        placeholder="Search"
         onSearch={Search}
-        style={{ width: 200 }}
+        style={{ width: 200, border: "1px solid black" }}
       ></Input>
     </div>
-  )
-}
+  );
+};
 
-export default FilterTable
+export default FilterTable;
