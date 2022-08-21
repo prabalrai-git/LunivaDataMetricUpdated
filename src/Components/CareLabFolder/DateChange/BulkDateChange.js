@@ -1,5 +1,6 @@
 import { Table } from "antd";
 import React from "react";
+import CarelabFilter from "../../Common/CarelabFilter";
 import Filter from "../../Common/Filter";
 import PageHeader from "../../Common/pageHeader";
 
@@ -33,11 +34,18 @@ function BulkDateChange() {
       title: "Result Action",
     },
   ];
+  const returnFilterData = (res) => {
+    console.log(res);
+  };
   return (
     <>
       <div className="maiTopContainer">
         <PageHeader pageTitle={"Bulk Date Change"} />
-        <Filter dateChangeSampleIdFromTo getFiscalYear serchButton />
+        <CarelabFilter
+          showSampleIdFromTo
+          fiscalService
+          returnFilterData={returnFilterData}
+        />
       </div>
       <div className="financeCards">
         <h3>Patient Details</h3>

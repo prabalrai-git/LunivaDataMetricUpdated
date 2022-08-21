@@ -1,5 +1,6 @@
 import { Table } from "antd";
 import React from "react";
+import CarelabFilter from "../../Common/CarelabFilter";
 import Filter from "../../Common/Filter";
 import PageHeader from "../../Common/pageHeader";
 
@@ -33,16 +34,17 @@ function RequestorWiseDateChange() {
       title: "Result Action",
     },
   ];
-
+  const returnFilterData = (res) => {
+    console.log(res);
+  };
   return (
     <>
       <div className="maiTopContainer">
         <PageHeader pageTitle={"Requestor Wise Date Change"} />
-        <Filter
-          dateChangeSampleIdFromTo
-          getFiscalYear
+        <CarelabFilter
+          fiscalService
           getRequestor
-          serchButton
+          returnFilterData={returnFilterData}
         />
       </div>
       <div className="financeCards">

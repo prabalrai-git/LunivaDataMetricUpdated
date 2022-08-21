@@ -61,9 +61,6 @@ const Filter = ({ dataReturn, ...props }) => {
     forTestAnalytics,
     forTestStatus,
     onSearch,
-    dateChangeSampleId,
-    dateChangeSampleIdFromTo,
-    getRequestor,
   } = props;
   const dispatch = useDispatch();
 
@@ -667,62 +664,6 @@ const Filter = ({ dataReturn, ...props }) => {
                   placeholder="Test name"
                   onChange={(e) => setSearchTestName(e.target.value)}
                 ></Input>
-              </Col>
-            )}
-
-            {dateChangeSampleId && (
-              <Col lg={8} md={10} sm={12} xs={24}>
-                <span className="labelTop">Sample Id</span>
-                <Input placeholder="Sample Id"></Input>
-              </Col>
-            )}
-            {dateChangeSampleIdFromTo && (
-              <Col lg={8} md={10} sm={12} xs={24}>
-                <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                  <span className="labelTop">Sample Id From </span>
-                  <span className="labelTop" style={{ marginLeft: "48px" }}>
-                    Sample Id To{" "}
-                  </span>
-                </div>
-
-                <div style={{ display: "flex" }}>
-                  <Input placeholder="Sample Id From"></Input>
-
-                  <Input
-                    style={{ marginLeft: "10px" }}
-                    placeholder="Sample Id To"
-                  ></Input>
-                </div>
-              </Col>
-            )}
-            {getRequestor && (
-              <Col lg={6} md={9} sm={11} xs={22} style={{ width: "50%" }}>
-                <span className="labelTop">Requestor</span>
-                <Select
-                  showSearch
-                  optionFilterProp="children"
-                  placeholder="Select Requestor"
-                  filterOption={(input, option) => {
-                    return (
-                      option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0 ||
-                      option.title.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0
-                    );
-                  }}
-                  style={{ width: "100%" }}
-                  size="default"
-                >
-                  <Option title="All" key="0" value="0">
-                    Self
-                  </Option>
-                  <Option title="All" key="0" value="0">
-                    Sukrim Pharmacy
-                  </Option>
-                  <Option title="All" key="0" value="0">
-                    Everest Hospital Pvt.Ltd
-                  </Option>
-                </Select>
               </Col>
             )}
 

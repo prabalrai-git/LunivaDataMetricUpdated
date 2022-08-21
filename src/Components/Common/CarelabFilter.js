@@ -1,4 +1,5 @@
 import { Row, Col, Select, Button, Form, DatePicker, Input } from "antd";
+import FormItem from "antd/lib/form/FormItem";
 import moment from "moment";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,8 +16,10 @@ const CarelabFilter = (props) => {
     showControlDetails,
     showFromToDate,
     showLevel,
-    showSampleIdFrom,
+    showSampleIdFromTo,
     fiscalService,
+    showSampleId,
+    getRequestor,
   } = props;
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -180,33 +183,81 @@ const CarelabFilter = (props) => {
                   </Form.Item>
                 </Col>
               )}
-              {showSampleIdFrom && (
+
+              {fiscalService && (
+                <>
+                  <Col lg={4} md={10} sm={12} xs={24}>
+                    <Form.Item name="fiscalYear" label="Fiscal Year">
+                      <Select style={{ width: "100%" }} size="default">
+                        {fiscalYear.map((lis) => (
+                          <Option
+                            title={lis?.Year}
+                            key={lis?.Id}
+                            value={lis?.Id}
+                          >
+                            {lis?.Year}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                </>
+              )}
+              {showSampleIdFromTo && (
                 <>
                   <Col lg={4} md={12} sm={12} xs={24}>
-                    <Form.Item>
+                    <Form.Item name="sampleIdFrom" label="Sample Id From">
                       <Input placeholder="Sample Id From" />
                     </Form.Item>
                   </Col>
                   <Col lg={4} md={12} sm={12} xs={24}>
-                    <Form.Item>
+                    <Form.Item name="sampleIdTo" label="Sample Id To">
                       <Input placeholder="Sample Id to" />
                     </Form.Item>
                   </Col>
                 </>
               )}
-              {fiscalService && (
+              {showSampleId && (
                 <>
-                  <Col lg={4} md={10} sm={12} xs={24}>
-                    <span className="labelTop">Fiscal Year</span>
-                    <Select style={{ width: "100%" }} size="default">
-                      {fiscalYear.map((lis) => (
-                        <Option title={lis?.Year} key={lis?.Id} value={lis?.Id}>
-                          {lis?.Year}
-                        </Option>
-                      ))}
-                    </Select>
+                  <Col lg={4} md={12} sm={12} xs={24}>
+                    <Form.Item name="sampleId" label="Sample Id">
+                      <Input placeholder="Sample Id" />
+                    </Form.Item>
                   </Col>
                 </>
+              )}
+              {getRequestor && (
+                <Col lg={6} md={9} sm={11} xs={22}>
+                  <Form.Item name="requestor" label="Requestor">
+                    <Select
+                      showSearch
+                      optionFilterProp="children"
+                      placeholder="Select Requestor"
+                      filterOption={(input, option) => {
+                        return (
+                          option.key
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0 ||
+                          option.title
+                            .toLowerCase()
+                            .indexOf(input.toLowerCase()) >= 0
+                        );
+                      }}
+                      style={{ width: "100%" }}
+                      size="default"
+                    >
+                      <Option title="All" key="0" value="0">
+                        Self
+                      </Option>
+                      <Option title="All" key="0" value="0">
+                        Sukrim Pharmacy
+                      </Option>
+                      <Option title="All" key="0" value="0">
+                        Everest Hospital Pvt.Ltd
+                      </Option>
+                    </Select>
+                  </Form.Item>
+                </Col>
               )}
 
               <Col>
