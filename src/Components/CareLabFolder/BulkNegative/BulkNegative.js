@@ -14,7 +14,21 @@ function BulkNegative() {
       </div>
 
       <div className="tableisRes">
-        <Table className="tableWidth" />
+        <div className="financeCards">
+          <h3>Patient Details</h3>
+          <Row justify="space-between" style={{ listStyleType: "none" }}>
+            <Col>
+              <li>Sample no: </li>
+              <li>Name: </li>
+              <li>Test Lists: </li>
+            </Col>
+            <Col style={{ marginRight: "50px" }}>
+              <li>Gender: </li>
+              <li>Age: </li>
+              <li>Contact No: </li>
+            </Col>
+          </Row>
+        </div>
       </div>
     </>
   );
