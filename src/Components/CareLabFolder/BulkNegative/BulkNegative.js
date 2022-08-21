@@ -10,7 +10,7 @@ function BulkNegative() {
       <div className="maiTopContainer">
         <PageHeader pageTitle={"Bulk Negative"} />
 
-        <CarelabFilter showSampleIdFrom fiscalService />
+        <CarelabFilter showSampleIdFromTo fiscalService />
       </div>
 
       <div className="tableisRes">

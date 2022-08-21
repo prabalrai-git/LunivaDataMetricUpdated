@@ -5,11 +5,18 @@ const Search = Input.Search;
 const FilterTable = ({ onSearch, ...props }) => {
   return (
     <div className="filter" {...props} style={{ float: "right" }}>
-      <Input
+      {/* <Input
         placeholder="Search"
         onSearch={Search}
-        style={{ width: 200, border: "1px solid black" }}
-      ></Input>
+        style={{ width: 200, border: "1px solid #adadad " }}
+      ></Input> */}
+      <Search
+        placeholder="Search "
+        onSearch={Search}
+        style={{
+          width: 200,
+        }}
+      />
     </div>
   );
 };

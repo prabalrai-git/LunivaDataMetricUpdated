@@ -4,6 +4,7 @@ import Filter from "../../Common/Filter";
 import PageHeader from "../../Common/pageHeader";
 import { carelabStat, inventoryStat } from "../../Common/StateList";
 import { Table } from "antd";
+import CarelabFilter from "../../Common/CarelabFilter";
 
 function Sms() {
   const history = useHistory();
@@ -30,6 +31,9 @@ function Sms() {
       title: "UserId",
     },
   ];
+  const returnFilterData = (res) => {
+    console.log(res);
+  };
   return (
     <>
       <div className="maiTopContainer">
@@ -43,7 +47,8 @@ function Sms() {
             })
           }
         />
-        <Filter dateRange serchButton onSearch></Filter>
+        <CarelabFilter showFromToDate returnFilterData={returnFilterData} />
+        <Filter onSearch />
       </div>
       <div className="tableisRes">
         <Table className="tableWidth" columns={columns} />

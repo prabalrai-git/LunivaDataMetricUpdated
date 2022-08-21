@@ -1,9 +1,9 @@
 import { Button, Col, DatePicker, Form, Input, Row, TimePicker } from "antd";
 import React from "react";
 import styled from "styled-components";
-import Filter from "../../Common/Filter";
 import PageHeader from "../../Common/pageHeader";
 import moment from "moment";
+import CarelabFilter from "../../Common/CarelabFilter";
 
 function DateChange() {
   const onFinish = (values) => {
@@ -13,11 +13,19 @@ function DateChange() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const returnFilterData = (res) => {
+    console.log(res);
+  };
   return (
     <>
       <div className="maiTopContainer">
         <PageHeader pageTitle={"Date Change"} />
-        <Filter getFiscalYear serchButton dateChangeSampleId />
+        <CarelabFilter
+          fiscalService
+          showSampleId
+          returnFilterData={returnFilterData}
+        />
       </div>
 
       <div className="financeCards">
