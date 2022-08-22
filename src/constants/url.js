@@ -1,12 +1,16 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
 export const DEV_URL =
   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
+
+export const Carelab_Url =
+  "http://192.168.100.34/CarelabDataMetricServiceCrystal/";
 // export const DEV_URL = 'https://lunivat.ddns.net/crystal/CarelabDataMetricServiceCrystal/';
 // http://192.168.100.34/CarelabDataMetricServiceCrystal/
 // export const DEV_URL = 'https://lunivatech.ddns.net/LunivaSamjhana/LunivaInventory/';
 // export const DEV_URL = 'http://lunivatech.ddns.net/LunivaSamjhana/LunivaInventory/';
 
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
+export const CarelabBase_Url = `${Carelab_Url}Api/`;
 
 // for inventory lab only
 //GET
@@ -548,3 +552,20 @@ export const UpdateCriticalValueAndCutoffTimeofTest =
  "IsActive": true
 }
  */
+
+export const GetListOfPCRsampleByRequestorForBulkNegative =
+  "GetListOfPCRsampleByRequestorForBulkNegative";
+
+// {
+//     "SampleId": 248,
+//     "FirstName": "Deniel ",
+//     "MiddleName": "",
+//     "LastName": "Gm",
+//     "Sex": "Male",
+//     "Age": "32 yrs",
+//     "ContactNo": "9813734685",
+//     "CollectionDate": "2021-03-07T17:00:48",
+//     "CollectionNepaliDate": "2077/11/23     ",
+//     "FiscalYearId": 1,
+//     "RequestorId": 1
+// },
