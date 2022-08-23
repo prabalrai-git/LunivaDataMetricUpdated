@@ -1,7 +1,7 @@
 import { CarelabBase_Url } from "../constants/url";
 import axios from "axios";
 
-export const httpBase = () => {
+export const httpCareLabBase = () => {
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
     // 'Access-Control-Allow-Origin': '*',

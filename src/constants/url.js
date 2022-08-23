@@ -569,3 +569,16 @@ export const GetListOfPCRsampleByRequestorForBulkNegative =
 //     "FiscalYearId": 1,
 //     "RequestorId": 1
 // },
+export const GetSMSConsumptionDetails = "GetSMSConsumptionDetails";
+// /**
+//  * @desc: Get SMS Consumption Details
+//  * @param:
+// // {
+// //             "PId": 1,
+// //             "SMSAddedCount": 20000,
+// //             "PerSMSCharge": 1.6000,
+// //             "DiscountAmt": 0.0000,
+// //             "TotalCharge": 32000.0000,
+// //             "AddedDate": "2021-03-20T13:15:57",
+// //             "UserId": 1
+// //

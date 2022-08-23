@@ -27,15 +27,20 @@ const CarelabFilter = (props) => {
   const dispatch = useDispatch();
   const controlList = useControlDetails();
   const [testList, setTestList] = useState([]);
+  const [dateRange, setDateRange] = useState([moment(), moment()]);
   const fiscalYear = useFiscalYear();
-  console.log(fiscalYear);
+  // console.log(fiscalYear);
 
   const initialValues = {
     SingleDate: moment(),
   };
 
   const onFilterReturn = (res) => {
-    returnFilterData(res);
+    if (dateRange !== null && undefined) {
+      returnFilterData(dateRange);
+    } else {
+      returnFilterData(res);
+    }
   };
 
   const callTestData = (res) => {
@@ -68,7 +73,14 @@ const CarelabFilter = (props) => {
               {showFromToDate && (
                 <Col lg={6} md={12} sm={12} xs={24}>
                   <Form.Item name="FromTo" label="From - To">
-                    <RangePicker style={{ width: "100%" }} />
+                    <RangePicker
+                      initialValues={dateRange}
+                      onChange={(value) => {
+                        setDateRange(value);
+                        // console.log(dateRange);
+                      }}
+                      style={{ width: "100%" }}
+                    />
                   </Form.Item>
                 </Col>
               )}

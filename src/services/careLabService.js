@@ -1,7 +1,10 @@
 import {
   GetDatewiseSampleStatusOfEachTest,
   GetListOfPatientDetailsBydateAndTestDone,
+  GetListOfPCRsampleByRequestorForBulkNegative,
+  GetSMSConsumptionDetails,
 } from "../constants/url";
+import { fetchCarelab } from "../utils/carelabUtil";
 import { fetch } from "../utils/httpUtil";
 
 export const careLabTabApi = (data, successCallback) => {
@@ -129,6 +132,22 @@ export const GetListOfPCRsampleByRequestorForBulkNegatives = (
       if (response?.status === 200) {
         successCallback(response?.data?.CovidDetailsRequestorWise);
         // console.log("response sucess", response?.data)
+      } else {
+        successCallback([]);
+        console.log("error");
+      }
+    } catch (error) {}
+  };
+};
+export const GetSMSConsumptionDetail = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetchCarelab(
+        `${GetSMSConsumptionDetails}?from=${data.fromdate}&to=${data.todate}`
+      );
+      if (response?.status === 200) {
+        successCallback(response?.data?.MessageDetails);
+        // console.log("smsgot!", response?.data);
       } else {
         successCallback([]);
         console.log("error");
