@@ -206,7 +206,6 @@ export const dataMetricCon = [
     isactive: MenuSettings.tatanalysis,
   },
 
-  //=== by me==/
   {
     icon: "icon-list",
     key: "tatGetTestList",
@@ -215,7 +214,6 @@ export const dataMetricCon = [
     isactive: MenuSettings.gettestlist,
   },
 
-  //===end by me==//
   {
     icon: "icon-stethoscope",
     key: "testanalysis",

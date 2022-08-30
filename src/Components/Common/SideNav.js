@@ -28,7 +28,6 @@ const SideNav = (props) => {
   const [dataMetric, setdataMetric] = useState(true);
   const [showinventory, setshowinventory] = useState(true);
   const carelabNavData = useCareLabRoute();
-
   function oncollpse() {
     setcollpsed(!collpsed);
   }
@@ -69,6 +68,7 @@ const SideNav = (props) => {
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
+            theme="light"
             style={{
               background: "var(--secondaryBackground)",
               paddingBottom: "15%",
@@ -282,6 +282,10 @@ const SideNavContainer = styled.div`
     align-items: center;
     height: 55px;
     padding-bottom: 10px;
+    position: sticky;
+    top: 0;
+    background-color: var(--secondaryBackground);
+    z-index: 1;
 
     img {
       height: 100%;
