@@ -1038,6 +1038,15 @@ function App() {
 
           <PrivateRouter
             exact
+            path="/bulknegativedash/"
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+
+          <PrivateRouter
+            exact
             path="/financedash/"
             component={AsyncViewCareDashboard}
             layout={AsyncAppLayout}
@@ -1182,22 +1191,7 @@ function App() {
             // forEdit
             showSider
           />
-          <PrivateRouter
-            exact
-            path="/negative"
-            component={AsyncBulkNegative}
-            layout={AsyncAppLayout}
-            // forEdit
-            showSider
-          />
-          <PrivateRouter
-            exact
-            path="/rsnegative"
-            component={AsyncRequestorWiseNegative}
-            layout={AsyncAppLayout}
-            // forEdit
-            showSider
-          />
+
           <PrivateRouter
             exact
             path="/sms"
@@ -1241,12 +1235,29 @@ function App() {
           />
           <PrivateRouter
             exact
+            path="/negative"
+            component={AsyncBulkNegative}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/rsnegative"
+            component={AsyncRequestorWiseNegative}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
             path="/datedash"
             component={AsyncViewCareDashboard}
             layout={AsyncAppLayout}
             // forEdit
             showSider
           />
+
           <PrivateRouter
             exact
             path="/tatanalysis"

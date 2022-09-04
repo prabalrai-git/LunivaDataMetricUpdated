@@ -55,6 +55,20 @@ export const useCareLabRoute = () => {
       hasSubNav: false,
     },
   ];
+  const bulkNegativeNav = [
+    {
+      icon: "icon-sticky-note1",
+      key: "negative",
+      name: "Bulk Negative",
+      path: "/negative",
+    },
+    {
+      icon: "icon-sticky-note1",
+      key: "requestorwisenegative",
+      name: "Requestor wise negative",
+      path: "/rsnegative",
+    },
+  ];
 
   const tatNav = [
     {
@@ -133,21 +147,6 @@ export const useCareLabRoute = () => {
     },
   ];
 
-  const bulkNegativeNav = [
-    {
-      icon: "icon-sticky-note1",
-      key: "bulknegative",
-      name: "Bulk Negative",
-      path: "/negative",
-    },
-    {
-      icon: "icon-sticky-note1",
-      key: "requestorwisenegative",
-      name: "Requestor wise negative",
-      path: "/rsnegative",
-    },
-  ];
-
   const mainRoute = [
     {
       icon: "icon-line-file",
@@ -161,7 +160,7 @@ export const useCareLabRoute = () => {
       icon: "icon-sticky-note1",
       key: "bulknegative",
       name: "Bulk Negative",
-      path: "/bulknegative",
+      path: "/bulknegativedash",
       hasSubNav: true,
       subNavData: bulkNegativeNav,
     },
@@ -268,5 +267,6 @@ export const useCareLabRoute = () => {
     reportStatNav: reportStatNav,
     qcControlNav: qcControlNav,
     dateChangeNav: dateChangeNav,
+    bulkNegativeNav: bulkNegativeNav,
   };
 };

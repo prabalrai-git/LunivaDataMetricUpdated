@@ -263,7 +263,7 @@ export const dataMetricCon = [
   //   icon: 'icon-line2-screen-desktop',
   //   key: 'datechange',
   //   name: 'datechange',
-  //   path: '/datechange',
+  //   path: '/',
   //   isactive: MenuSettings.datechange,
   // },
   // {

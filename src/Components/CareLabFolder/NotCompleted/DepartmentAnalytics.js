@@ -29,7 +29,7 @@ function DepartmentAnalytics() {
   return (
     <>
       <div className="maiTopContainer">
-        <PageHeader pageTitle={"Bulk Negative"} />
+        <PageHeader pageTitle={"Department Analytics"} />
 
         <CarelabFilter showSampleIdFromTo fiscalService />
       </div>

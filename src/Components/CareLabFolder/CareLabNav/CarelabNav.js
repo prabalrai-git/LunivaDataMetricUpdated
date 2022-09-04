@@ -32,6 +32,8 @@ const CarelabNavSettings = () => {
       rName = "qcControlNav";
     } else if (newPa === "datedash") {
       rName = "dateChangeNav";
+    } else if (newPa === "bulknegativedash") {
+      rName = "bulkNegativeNav";
     }
     setReturnName(rName);
   }, [newPa]);
