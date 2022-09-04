@@ -101,12 +101,12 @@ const SettingsContainer = styled.div`
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     span {
-      font-size: 20px;
+      font-size: 15px;
       letter-spacing: 1.4px;
       text-transform: uppercase;
       color: var(--titleTxt);
       i {
-        font-size: 25px;
+        font-size: 20px;
         color: var(--primary);
       }
     }

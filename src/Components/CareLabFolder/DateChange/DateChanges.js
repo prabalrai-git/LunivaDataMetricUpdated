@@ -1,13 +1,31 @@
-import { Button, Col, DatePicker, Form, Input, Row, TimePicker } from "antd";
-import React from "react";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  TimePicker,
+} from "antd";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PageHeader from "../../Common/pageHeader";
 import moment from "moment";
 import CarelabFilter from "../../Common/CarelabFilter";
+import { adToBs } from "@sbmdkl/nepali-date-converter";
 
 function DateChange() {
+  const [collectionDate, setCollectionDate] = useState();
+  const [nepaliDate, setNepaliDate] = useState();
+  const [nepaliDateResult, setNepaliDateResult] = useState();
+  const [resultDate, setResultDate] = useState();
+
+  const [form] = Form.useForm();
+
   const onFinish = (values) => {
     console.log("Success:", values);
+    // console.log("collection", collectionDate);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -17,6 +35,32 @@ function DateChange() {
   const returnFilterData = (res) => {
     console.log(res);
   };
+
+  // nepali date converter
+
+  const convertToNepali = () => {
+    if (collectionDate !== undefined) {
+      let dateInString = collectionDate.toString();
+      let nDate = adToBs(dateInString);
+      // console.log(nDate, "ndatesdfdsfjk");
+      setNepaliDate(nDate);
+    }
+    if (resultDate !== undefined) {
+      let dateInStrings = resultDate.toString();
+      let rDate = adToBs(dateInStrings);
+      setNepaliDateResult(rDate);
+    }
+  };
+  useEffect(() => {
+    convertToNepali();
+    // console.log(nepaliDate, "helllloljfkljldksf");
+    // console.log(totalCharge);
+    // form.setFieldsValue(to);
+    form.setFieldsValue({
+      nepCollectionDate: nepaliDate,
+      nepCollectionDateResult: nepaliDateResult,
+    });
+  }, [collectionDate, nepaliDate, resultDate, nepaliDateResult]);
   return (
     <>
       <div className="maiTopContainer">
@@ -62,10 +106,11 @@ function DateChange() {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            form={form}
           >
             <Form.Item
               label="Collection Date"
-              name="collection date"
+              name="collectionDate"
               // rules={[
               //   {
               //     required: true,
@@ -77,12 +122,17 @@ function DateChange() {
                 span: 12,
               }}
             >
-              <DatePicker style={{ width: "100%", marginLeft: "12px" }} />
+              <DatePicker
+                style={{ width: "100%", marginLeft: "12px" }}
+                onChange={(e) => {
+                  setCollectionDate(e.format("YYYY-MM-DD"));
+                }}
+              />
             </Form.Item>
 
             <Form.Item
               label="Collection Time"
-              name="collection time"
+              name="collectionTime"
               // rules={[
               //   {
               //     required: true,
@@ -95,13 +145,13 @@ function DateChange() {
               }}
             >
               <TimePicker
-                defaultValue={moment("12:08:23", "HH:mm:ss")}
+                initialValue={moment("12:08:23", "HH:mm:ss")}
                 style={{ width: "100%", marginLeft: "12px" }}
               />
             </Form.Item>
             <Form.Item
-              label="Nep. Collection Time"
-              name="nep. collection time"
+              label="Nep. Collection Date"
+              name="nepCollectionDate"
               // rules={[
               //   {
               //     required: true,
@@ -113,7 +163,10 @@ function DateChange() {
                 span: 12,
               }}
             >
-              <DatePicker disabled style={{ width: "100%" }} />
+              <InputNumber
+                style={{ width: "100%", backgroundColor: "#dbdbdb" }}
+                readOnly
+              />
             </Form.Item>
 
             <Form.Item
@@ -143,6 +196,7 @@ function DateChange() {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            form={form}
           >
             <Form.Item
               label="Result Date"
@@ -158,7 +212,12 @@ function DateChange() {
                 span: 12,
               }}
             >
-              <DatePicker style={{ width: "100%", marginLeft: "38px" }} />
+              <DatePicker
+                onChange={(e) => {
+                  setResultDate(e.format("YYYY-MM-DD"));
+                }}
+                style={{ width: "100%", marginLeft: "38px" }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -176,13 +235,13 @@ function DateChange() {
               }}
             >
               <TimePicker
-                defaultValue={moment("12:08:23", "HH:mm:ss")}
+                initialValues={moment("12:08:23", "HH:mm:ss")}
                 style={{ width: "100%", marginLeft: "38px" }}
               />
             </Form.Item>
             <Form.Item
               label="Nep. Collection Date"
-              name="nep. collection Date"
+              name="nepCollectionDateResult"
               // rules={[
               //   {
               //     required: true,
@@ -194,7 +253,10 @@ function DateChange() {
                 span: 12,
               }}
             >
-              <DatePicker disabled style={{ width: "100%" }} />
+              <InputNumber
+                style={{ width: "100%", backgroundColor: "#dbdbdb" }}
+                readOnly
+              />
             </Form.Item>
 
             <Form.Item

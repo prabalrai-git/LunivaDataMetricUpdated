@@ -718,6 +718,7 @@ const Filter = ({ dataReturn, ...props }) => {
         <Col lg={4} md={24} sm={24}>
           {onSearch && (
             <FilterTable
+              ble
               className="costomeInput"
               onInput={(e) => handleSerch(e.target.value)}
               dataReturn
