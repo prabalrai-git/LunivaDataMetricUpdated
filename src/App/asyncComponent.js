@@ -343,6 +343,14 @@ export const AsyncBulkNegative = lazy(() =>
     300
   )
 );
+
+export const AsyncMembershipCard = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/Membership/MembershipCard"),
+    300
+  )
+);
+
 export const AsyncRequestorWiseNegative = lazy(() =>
   pMinDelay(
     import("../Components/CareLabFolder/BulkNegative/RequestorWiseNegative"),

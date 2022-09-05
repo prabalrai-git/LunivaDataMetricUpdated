@@ -2,6 +2,7 @@ import {
   GetDatewiseSampleStatusOfEachTest,
   GetListOfPatientDetailsBydateAndTestDone,
   GetListOfPCRsampleByRequestorForBulkNegative,
+  GetMemberShipDetailsByMemberId,
   GetSMSConsumptionDetails,
 } from "../constants/url";
 import { fetchCarelab } from "../utils/carelabUtil";
@@ -147,6 +148,22 @@ export const GetSMSConsumptionDetail = (data, successCallback) => {
       );
       if (response?.status === 200) {
         successCallback(response?.data?.MessageDetails);
+        // console.log("smsgot!", response?.data);
+      } else {
+        successCallback([]);
+        console.log("error");
+      }
+    } catch (error) {}
+  };
+};
+export const getMemberShipDetailsByMemberId = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${GetMemberShipDetailsByMemberId}?mId=${data.mId}`
+      );
+      if (response?.status === 200) {
+        successCallback(response?.data?.MemberDetials);
         // console.log("smsgot!", response?.data);
       } else {
         successCallback([]);

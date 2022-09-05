@@ -582,3 +582,22 @@ export const GetSMSConsumptionDetails = "GetSMSConsumptionDetails";
 // //             "AddedDate": "2021-03-20T13:15:57",
 // //             "UserId": 1
 // //
+
+export const GetMemberShipDetailsByMemberId = "GetMemberShipDetailsByMemberId";
+
+//*@desc: Get Membership Details By Member ID
+//*@param:
+//     {
+//   "Id": 1,
+//   "MemberCode": "M1",
+//   "Name": "Test  Test",
+//   "Age": "2 yrs",
+//   "ContactNo": "1234567890",
+//   "Sex": "Female",
+//   "Date": "2018-01-01T00:00:00",
+//   "EmailId": "",
+//   "NepaliDate": "               ",
+//   "PAN": "         ",
+//   "DateOfBirth": null,
+//   "Address": ""
+// }

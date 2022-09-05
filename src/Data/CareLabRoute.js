@@ -195,6 +195,13 @@ export const useCareLabRoute = () => {
       hasSubNav: false,
     },
     {
+      icon: "icon-line-file",
+      key: "membershipcard",
+      name: "Membership Card",
+      path: "/carddash",
+      hasSubNav: false,
+    },
+    {
       icon: "icon-money",
       key: "expensemanagement",
       name: "Expense Management",

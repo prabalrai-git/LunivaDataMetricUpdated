@@ -91,6 +91,7 @@ import {
   AsyncBulkDateChange,
   AsyncRequestorWiseDateChange,
   AsyncDateChanges,
+  AsyncMembershipCard,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1175,6 +1176,15 @@ function App() {
             // forEdit
             showSider
           />
+          <PrivateRouter
+            exact
+            path="/carddash"
+            component={AsyncMembershipCard}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+
           <PrivateRouter
             exact
             path="/outsourceanalytics"
