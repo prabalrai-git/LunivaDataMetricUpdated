@@ -99,6 +99,12 @@ export const printMembership = (cry, small, data, e) => {
         justify-content: space-between;
         height: 2mm;
       }
+
+      @media print {
+       .noprint {
+        visibility : hidden;
+      } 
+      }
       
     </style>`;
 
@@ -106,10 +112,10 @@ export const printMembership = (cry, small, data, e) => {
     <div class="card">
       <div class="logo">
         <div class="logo-left">
-          <img src="${small}" alt="" />
+          <img src="${small}" alt="" class="noprint"/>
         </div>
         <div class="logo-right">
-          <img src="${cry}" alt="asdf" />
+          <img src="${cry}" alt="asdf" class="noprint" />
           <p
             style="
               font-size: 2mm;
@@ -117,26 +123,27 @@ export const printMembership = (cry, small, data, e) => {
               margin-bottom: 0px;
               color: white;
             "
+            class="noprint"
           >
             An ISO 9001:2015 Certified Laboratory
           </p>
         </div>
       </div>
-      <div class="heading">MEMBERSHIP CARD</div>
+      <div class="heading noprint" >MEMBERSHIP CARD</div>
       <div class="content">
         <div class="content-top">
-          <p style="font-size: 3mm " id="c">Name: ${data.Name}</p>
-          <p id="a" style="font-size: 3mm">Membership No.: ${data.MemberCode}</p>
+          <p style="font-size: 3mm " id="c"><span class="noprint">Name:</span> <span>${data.Name}</span></p>
+          <p id="a" style="font-size: 3mm"><span class="noprint">Membership No.:</span> ${data.MemberCode}</p>
         </div>
         <div class="content-mid" >
-          <p style="font-size: 3mm" id="d">Address:${data.Address}</p>
-          <p id="b" style="font-size: 3mm" >Mobile No.:${data.ContactNo}</p>
+          <p style="font-size: 3mm" id="d"><span class="noprint">Address:</span>${data.Address}</p>
+          <p id="b" style="font-size: 3mm" ><span class="noprint">Mobile No.:</span>${data.ContactNo}</p>
         </div>
         <div class="content-sec">
-          <p style="font-size: 3mm" id="e">DOB:${data.DateOfBirth}</p>
+          <p style="font-size: 3mm" id="e"><span class="noprint">DOB:</span>${data.DateOfBirth}</p>
         </div>
         <div class="content-last" >
-          <p style="font-size: 3mm" id="f">Issue Date:${e}</p>
+          <p style="font-size: 3mm" id="f"><span class="noprint">Issue Date:</span>${e}</p>
         </div>
       </div>
     </div>`;

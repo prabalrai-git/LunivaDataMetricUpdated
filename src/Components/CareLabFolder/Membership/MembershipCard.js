@@ -16,8 +16,13 @@ function MembershipCard() {
   const e = d.toISOString().split("T")[0];
 
   useEffect(() => {
+    //todo
+    const queryString = window.location.search;
+    console.log(queryString);
+    const urlParams = new URLSearchParams(queryString);
+
     let a = {
-      mId: 1,
+      mId: 25,
     };
     dispatch(
       getMemberShipDetailsByMemberId(a, (val) => {
