@@ -1,4 +1,4 @@
-export const printMembership = (cry, small, data) => {
+export const printMembership = (cry, small, data, e) => {
   console.log(cry);
   let newWindow = window.open();
   let newStyle = `
@@ -136,7 +136,7 @@ export const printMembership = (cry, small, data) => {
           <p style="font-size: 3mm" id="e">DOB:${data.DateOfBirth}</p>
         </div>
         <div class="content-last" >
-          <p style="font-size: 3mm" id="f">Issue Date:${data.Date}</p>
+          <p style="font-size: 3mm" id="f">Issue Date:${e}</p>
         </div>
       </div>
     </div>`;

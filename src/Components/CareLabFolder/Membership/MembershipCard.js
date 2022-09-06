@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 function MembershipCard() {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const d = new Date();
+  const e = d.toISOString().split("T")[0];
 
   useEffect(() => {
     let a = {
@@ -32,7 +34,7 @@ function MembershipCard() {
       const small = `${newpath[0]}${logosmall}`;
 
       console.log(data);
-      printMembership(imagePath, small, data[0]);
+      printMembership(imagePath, small, data[0], e);
     }
   };
   return (
