@@ -1104,6 +1104,15 @@ function App() {
 
           <PrivateRouter
             exact
+            path="/testanalysis/"
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+
+          <PrivateRouter
+            exact
             path="/viewcontrolsdmean/"
             component={AsyncControlSDMeanTable}
             layout={AsyncAppLayout}

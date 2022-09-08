@@ -20,6 +20,8 @@ export const useCarelabReturn = () => {
       rName = "tatNav";
     } else if (pathName === "qcdash") {
       rName = "qcControlNav";
+    } else if (newPa === "testanalysis") {
+      rName = "bulkNegativeNav";
     }
     setReturnName(rName);
   }, []);

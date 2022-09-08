@@ -3,10 +3,10 @@ import useTokenHook from "../CustomHook/useTokenHook";
 export const useCareLabRoute = () => {
   const sampleStatusNav = [
     {
-      icon: "icon-line-file",
-      key: "carelabreport",
-      name: "Sample Stat",
-      path: "/carelab",
+      icon: "icon-file-alt",
+      key: "dynareportlist",
+      name: "Test Status",
+      path: "/dynarep",
     },
   ];
 
@@ -37,24 +37,28 @@ export const useCareLabRoute = () => {
   const reportStatNav = [
     {
       icon: "icon-line-file",
+      key: "carelabreport",
+      name: "Sample Stat",
+      path: "/carelab",
+    },
+    {
+      icon: "icon-line-file",
       key: "reportlist",
       name: "Report List",
       path: "/reportlist",
     },
-    {
-      icon: "icon-file-alt",
-      key: "dynareportlist",
-      name: "Test Status",
-      path: "/dynarep",
-    },
+  ];
+
+  const testAnalysisNav = [
     {
       icon: "icon-lab",
       key: "testanalytics",
-      name: "Test Name",
+      name: "Patient by test",
       path: "/testanalytics",
       hasSubNav: false,
     },
-  ];
+  ]
+
   const bulkNegativeNav = [
     {
       icon: "icon-sticky-note1",
@@ -156,14 +160,14 @@ export const useCareLabRoute = () => {
       hasSubNav: true,
       subNavData: sampleStatusNav,
     },
-    {
-      icon: "icon-sticky-note1",
-      key: "bulknegative",
-      name: "Bulk Negative",
-      path: "/bulknegativedash",
-      hasSubNav: true,
-      subNavData: bulkNegativeNav,
-    },
+    // {
+    //   icon: "icon-sticky-note1",
+    //   key: "bulknegative",
+    //   name: "Bulk Negative",
+    //   path: "/bulknegativedash",
+    //   hasSubNav: true,
+    //   subNavData: bulkNegativeNav,
+    // },
     {
       icon: "icon-line-file",
       key: "reportstatus",
@@ -171,6 +175,14 @@ export const useCareLabRoute = () => {
       path: "/reportdash",
       hasSubNav: true,
       subNavData: reportStatNav,
+    },
+    {
+      icon: "icon-stack2",
+      key: "testanalyticss",
+      name: "Test Analysis",
+      path: "/testanalysis",
+      hasSubNav: true,
+      subNavData: testAnalysisNav,
     },
     {
       icon: "icon-line-bar-graph",
@@ -247,22 +259,22 @@ export const useCareLabRoute = () => {
       hasSubNav: true,
       subNavData: qcControlNav,
     },
-    {
-      icon: "icon-line-calendar",
-      key: "datedash",
-      name: "Date Change",
-      path: "/datedash",
-      hasSubNav: true,
-      subNavData: dateChangeNav,
-    },
+    // {
+    //   icon: "icon-line-calendar",
+    //   key: "datedash",
+    //   name: "Date Change",
+    //   path: "/datedash",
+    //   hasSubNav: true,
+    //   subNavData: dateChangeNav,
+    // },
 
-    {
-      icon: "icon-receipt",
-      key: "editbill",
-      name: "Edit Bill",
-      path: "/editbill",
-      hasSubNav: false,
-    },
+    // {
+    //   icon: "icon-receipt",
+    //   key: "editbill",
+    //   name: "Edit Bill",
+    //   path: "/editbill",
+    //   hasSubNav: false,
+    // },
   ];
 
   return {
@@ -273,7 +285,8 @@ export const useCareLabRoute = () => {
     marketingNav: marketingNav,
     reportStatNav: reportStatNav,
     qcControlNav: qcControlNav,
-    dateChangeNav: dateChangeNav,
-    bulkNegativeNav: bulkNegativeNav,
+    testAnalysisNav: testAnalysisNav,
+    // dateChangeNav: dateChangeNav,
+    // bulkNegativeNav: bulkNegativeNav,
   };
 };

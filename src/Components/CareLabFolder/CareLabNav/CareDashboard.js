@@ -8,7 +8,6 @@ import { inventoryStat } from './StateList';
 
 const CarelabNavSettings = () => {
   const carelabNavData = useCareLabRoute()
-  console.log(carelabNavData['sampleStatusNav']);
   const dataNew = useCarelabReturn()
   const data = settingsMenu;
   return (
