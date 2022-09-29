@@ -14,8 +14,6 @@ const DyReport = () => {
   const [dyColumnData, setDyColumnData] = useState([]);
 
   const dataRet = (val) => {
-    // console.log("vaaaaalue", val.SearchType)
-
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
       todate: val[1].format("YYYY-MM-DD"),

@@ -21,7 +21,7 @@ export const AfterLoginData = [
     key: "datametric",
     name: "Datametric",
     path: "/caredashboard",
-    isactive: MenuSettings.goodsout,
+    isactive: MenuSettings.datametrictab,
   },
 ];
 
@@ -72,13 +72,13 @@ export const MenuRoute = [
     isactive: MenuSettings.reagentused,
   },
 
-  {
-    icon: "icon-line2-doc",
-    key: "misreports",
-    name: "MIS Reports",
-    path: "/datametric",
-    isactive: MenuSettings.misreports,
-  },
+  // {
+  //   icon: "icon-line2-doc",
+  //   key: "misreports",
+  //   name: "MIS Reports",
+  //   path: "/datametric",
+  //   isactive: MenuSettings.misreports,
+  // },
 ];
 //inventory settings
 export const settingsMenu = [

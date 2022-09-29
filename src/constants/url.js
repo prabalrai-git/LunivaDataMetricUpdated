@@ -1,13 +1,25 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
 export const DEV_URL =
   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
+// // export const DEV_URL =
+// // "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
 
 export const Carelab_Url =
   "http://192.168.100.34/CarelabDataMetricServiceCrystal/";
+
+// export const Carelab_Url =
+//   "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
+
 // export const DEV_URL = 'https://lunivat.ddns.net/crystal/CarelabDataMetricServiceCrystal/';
 // http://192.168.100.34/CarelabDataMetricServiceCrystal/
 // export const DEV_URL = 'https://lunivatech.ddns.net/LunivaSamjhana/LunivaInventory/';
 // export const DEV_URL = 'http://lunivatech.ddns.net/LunivaSamjhana/LunivaInventory/';
+
+// export const DEV_URL =
+//   "https://lunivacare.ddns.net/CarelabDataMetricServiceBagmatiJanaswasthaLive/";
+
+// export const Carelab_Url =
+//   "https://lunivacare.ddns.net/CarelabDataMetricServiceBagmatiJanaswasthaLive/";
 
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
 export const CarelabBase_Url = `${Carelab_Url}Api/`;

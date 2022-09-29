@@ -217,7 +217,7 @@ const Index = () => {
                       <Input />
                     </Form.Item>
                     <Form.Item
-                      label="Paymet Type"
+                      label="Payment Type"
                       name="ConsumptionGroupName"
                       rules={[
                         {

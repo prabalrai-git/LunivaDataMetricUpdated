@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { MenuRoute } from '../Data/MenuRoute'
@@ -8,9 +8,6 @@ import { quotes } from '../Data/quotesData'
 import bkg from '../assets/images/svg.png'
 import day from '../assets/images/day.jpg'
 import night from '../assets/images/night.jpg'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { useMemo } from 'react'
 import { inventoryStat } from '../Components/Common/StateList'
 
 
@@ -119,6 +116,11 @@ const DashBoardContainer = () => {
 export default DashBoardContainer
 
 const DashbordContainer = styled.div`
+.ant-row {
+  margin-left: unset !important;
+  margin-right: unset !important;
+}
+
 .welcome{
   display: flex;
   h3{

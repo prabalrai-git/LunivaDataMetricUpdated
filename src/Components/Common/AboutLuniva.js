@@ -11,22 +11,22 @@ const AboutLuniva = () => {
             <img src={logo} alt="" />
           </div>
           <div className="right">
-            
+
             <ul>
-              <li><h3>LuivaCare</h3></li>
+              <li><h3>Luniva 360 LIMS</h3></li>
               <li>
                 <i className='icon-line-phone'></i>
                 <span>01-5909085</span>
               </li>
               <li>
-               <i className='icon-mail'></i>
+                <i className='icon-mail'></i>
                 <span>lunivatech@gmail.com</span>
-              </li> 
+              </li>
               <li>
                 <i className='icon-location'></i>
                 <span>Lalitpur, Nepal</span>
               </li>
-              
+
             </ul>
           </div>
         </div>
@@ -44,13 +44,11 @@ const AboutLunivaContainer = styled.div`
     padding: 50px 0;
     .left{
       width: 300px;
-      /* border: 1px solid red; */
       img{
         width: 100%
       }
     }
     .right{
-      /* border: 1px solid red; */
       padding: 20px;
       h3{
         color: var(--primary);

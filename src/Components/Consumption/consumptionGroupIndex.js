@@ -45,7 +45,10 @@ const ConsumptionGroupIndex = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Edit onClick={() => history.push(`/consumption/edit/${record.CGId}`)}>Edit</Edit>
+          <Edit onClick={() => history.push({
+            pathname: `/consumption/edit/${record.CGId}`,
+            state: inventoryStat
+          })}>Edit</Edit>
         </Space>
       )
     }

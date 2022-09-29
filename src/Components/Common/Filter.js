@@ -668,14 +668,14 @@ const Filter = ({ dataReturn, ...props }) => {
             )}
 
             {/*  */}
-            {/* rest wise sample status */}
+            {/* test wise sample status */}
             {forTestStatus && (
               <Col lg={8} md={10} sm={12} xs={24}>
-                <span className="labelTop">Search Type</span>
+                <span className="labelTop">Status</span>
                 <Select
                   showSearch
                   optionFilterProp="children"
-                  placeholder="Select User"
+                  placeholder="Select Status"
                   filterOption={(input, option) => {
                     return (
                       option.key.toLowerCase().indexOf(input.toLowerCase()) >=

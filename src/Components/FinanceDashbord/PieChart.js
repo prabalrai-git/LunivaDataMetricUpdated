@@ -55,7 +55,7 @@ const PieChart = (props) => {
   };
   return (
     <div className='financeCards' >
-      <h3>Paymet Report</h3>
+      <h3>Payment Report</h3>
       <Pie options={options} data={dataPie}/>
     </div>
   )

@@ -66,7 +66,10 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Cancle onClick={() => history.push(`/reagentused/edit/${record.CId}/${record.CreatedDate.split('T')[0]}`)}>Cancel</Cancle>
+          <Cancle onClick={() => history.push({
+            pathname: `/reagentused/edit/${record.CId}/${record.CreatedDate.split('T')[0]}`,
+            state: inventoryStat
+          })}>Cancel</Cancle>
         </Space>
       )
     }

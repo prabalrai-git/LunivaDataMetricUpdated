@@ -1,10 +1,19 @@
-export const ChartColor = 
-[
-  'rgb(53, 162, 235)',
-  'rgba(255, 99, 132, 0.2)',
-  'rgba(54, 162, 235, 0.2)',
-  'rgba(255, 206, 86, 0.2)',
-  'rgba(75, 192, 192, 0.2)',
-  'rgba(153, 102, 255, 0.2)',
-  'rgba(255, 159, 64, 0.2)',
-]
+export const ChartColor =
+  [
+    '#7baba6', //green: 
+    '#e95926', //orange: 
+    '#a94442', //red: 
+    '#ffd800', //yellow: 
+    '#316ea2', //blue: 
+    'rgb(153, 102, 255)', //purple: 
+    '#85C1E9', //lightblue: 
+    '#9A7D0A', //darkyellow: 
+    '#0B5345', //darkgreen: 
+    '#EC7063', //lightred: 
+    '#E59866', //lightorange: 
+    '#9A7D0A', //brown: 
+    '#3300FF', //offblue: 
+    '#A795EF', //lightpurple: 
+    '#D476D5', //lightpink: 
+    '#FF33FF', //pink: 
+  ]

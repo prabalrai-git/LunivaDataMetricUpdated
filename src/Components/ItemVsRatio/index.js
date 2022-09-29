@@ -15,7 +15,7 @@ const Index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
-  const [newTableData,setnewTableData] = useState([]);
+  const [newTableData, setnewTableData] = useState([]);
 
   useEffect(() => {
     dispatch(getItemVsRatioApi((val) => {
@@ -100,13 +100,16 @@ const Index = () => {
       key: 'action',
       render: (text, record) => {
         let pusherName = `/itemvsratio/eidt/${record.RId}`
-        if(record.IsGroup === true)
+        if (record.IsGroup === true)
           pusherName = `/itemvsratio/edit/group/${record.RId}`
-        else if(record.IsConsumptionGroup === true)
+        else if (record.IsConsumptionGroup === true)
           pusherName = `/itemvsratio/edit/itemconsumption/${record.RId}`
         return (
           <Space size="middle">
-            <Edit onClick={() => history.push(pusherName)}>Edit</Edit>
+            <Edit onClick={() => history.push({
+              pathname: pusherName,
+              state: inventoryStat
+            })}>Edit</Edit>
           </Space>
         )
       }
@@ -115,45 +118,45 @@ const Index = () => {
   ]
 
   const handleSearch = (val) => {
-    if(val === undefined || val === ''){
+    if (val === undefined || val === '') {
       setnewTableData(tableData)
-    }else{
-      setnewTableData(val) 
+    } else {
+      setnewTableData(val)
     }
   }
 
   return (
     <ItemContainer>
       <div className="maiTopContainer">
-      <PageHeader
-        buttonTitle={`Add ${ItemName} Vs Ratio`}
-        pageTitle={`${ItemName} Vs Ratio`}
-        buttonOnClick={() => history.push({
-          pathname: './itemvsratio/add',
-          state: inventoryStat
-        })}
+        <PageHeader
+          buttonTitle={`Add ${ItemName} Vs Ratio`}
+          pageTitle={`${ItemName} Vs Ratio`}
+          buttonOnClick={() => history.push({
+            pathname: './itemvsratio/add',
+            state: inventoryStat
+          })}
 
-        forGroup={`Add Group ${ItemName} Vs Ratio`}
-        forGroupButtonClick={() => history.push({
-          pathname: './itemvsratio/add/group',
-          state: inventoryStat
-        })}
+          forGroup={`Add Group ${ItemName} Vs Ratio`}
+          forGroupButtonClick={() => history.push({
+            pathname: './itemvsratio/add/group',
+            state: inventoryStat
+          })}
 
-        forCon={`Add Group ${ItemName} Vs Consumption`}
-        forConButtonClick={() => history.push({
-          pathname: './itemvsratio/add/itemconsumption',
-          state: inventoryStat
-        })}
+          forCon={`Add Group ${ItemName} Vs Consumption`}
+          forConButtonClick={() => history.push({
+            pathname: './itemvsratio/add/itemconsumption',
+            state: inventoryStat
+          })}
 
-      ></PageHeader>
-      
-      <Filter
-        onSearch
-        toCompareData={tableData}
-        // forGoodsIn
-        dataReturn={handleSearch}
-        forItemVsRatio
-      ></Filter>
+        ></PageHeader>
+
+        <Filter
+          onSearch
+          toCompareData={tableData}
+          // forGoodsIn
+          dataReturn={handleSearch}
+          forItemVsRatio
+        ></Filter>
       </div>
       <div className="tableisRes">
         <Table className='tableWidth'

@@ -45,23 +45,25 @@ const CarelabNavSettings = () => {
       <Row gutter={[16, 16]} className="fullWidth">
         {carelabNavData[returnName] !== undefined &&
           carelabNavData[returnName].map((e) => (
-            <Col sm={24} md={12} xs={12} lg={12} xl={8}>
-              <div key={e.name} onClick={() => handleClick(e.path)}>
-                <NavLink
-                  to={{
-                    pathname: e.path,
-                    state: carelabStat,
-                  }}
-                >
-                  <div className="cButton">
-                    <span>
-                      <i className={e.icon}></i>{" "}
-                    </span>
-                    <span>{e.name}</span>
-                  </div>
-                </NavLink>
-              </div>
-            </Col>
+            e.showTab !== false ?
+              <Col sm={24} md={12} xs={12} lg={12} xl={8}>
+                <div key={e.name} onClick={() => handleClick(e.path)}>
+                  <NavLink
+                    to={{
+                      pathname: e.path,
+                      state: carelabStat,
+                    }}
+                  >
+                    <div className="cButton">
+                      <span>
+                        <i className={e.icon}></i>{" "}
+                      </span>
+                      <span>{e.name}</span>
+                    </div>
+                  </NavLink>
+                </div>
+              </Col>
+              : ''
           ))}
       </Row>
     </SettingsContainer>

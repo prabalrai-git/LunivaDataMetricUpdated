@@ -72,7 +72,14 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Cancle onClick={() => history.push(`./wastage/edit/${record.WId}/${record.CreatedDate}`)}>Cancel</Cancle>
+          <Cancle
+            onClick={() => history.push({
+              pathname: `./wastage/edit/${record.WId}/${record.CreatedDate}`,
+              state: inventoryStat
+            })}
+          >
+            Cancel
+          </Cancle>
         </Space>
       )
     }
@@ -100,7 +107,7 @@ const Index = () => {
     }
     getWastage(data)
   }, [])
-  
+
   const dateRet = (val) => {
     let data = {
       fromdate: val[0].format("YYYY-MM-DD"),
@@ -151,10 +158,13 @@ const Index = () => {
   return (
     <ItemContainer>
       <div className="maiTopContainer">
-        <PageHeader pageTitle="Wastage" buttonTitle='Add Wastage' buttonOnClick={() => history.push({
-          pathname: './wastage/add',
-          state: inventoryStat
-        })}></PageHeader>
+        <PageHeader
+          pageTitle="Wastage"
+          buttonTitle='Add Wastage'
+          buttonOnClick={() => history.push({
+            pathname: './wastage/add',
+            state: inventoryStat
+          })} />
         <Filter
           dateRange
           dateRet={dateRet}
@@ -163,12 +173,11 @@ const Index = () => {
           serchButton
           onSearch
           forGoodsIn
-        >
-        </Filter>
+        />
       </div>
       <div className="tableisRes financeCards">
         <Table className='tableWidth' columns={columns} dataSource={newTableData}
-        ></Table>
+        />
       </div>
       {label.length !== 0 ? <div className='financeCards'> <ReportChart dataDo={dataDo} dataBar={dataBar}></ReportChart></div> : ''}
 

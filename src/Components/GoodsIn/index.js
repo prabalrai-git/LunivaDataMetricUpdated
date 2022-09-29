@@ -59,7 +59,10 @@ const Index = () => {
         <Space size="middle">
           <Cancle
             onClick={() =>
-              history.push(`/goodsin/edit/${record.GId}/${record.CreatedDate}`)
+              history.push({
+                pathname: `/goodsin/edit/${record.GId}/${record.CreatedDate}`,
+                state: inventoryStat,
+              })
             }
           >
             Cancle

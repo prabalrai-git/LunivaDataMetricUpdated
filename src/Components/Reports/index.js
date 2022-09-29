@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Col, Row } from 'antd'
+import { inventoryStat } from '../Common/StateList'
 
 const data = [
   {
@@ -47,9 +48,15 @@ const Index = () => {
         {
           data.map(e => (
             <Col sm={24} md={8} xs={24} lg={6} key={e.pathName}>
-              <Link to={`./reports/${e.pathName}`} pathname={e.pathName}>
-                <div className="cButton"><span>{e.name}</span></div>
-              </Link>
+              <NavLink
+                    to={{
+                      pathname: `./reports/${e.pathName}`,
+                      state: inventoryStat,
+                    }}
+                    pathname={e.pathName}
+                  >
+                    <div className="cButton"><span>{e.name}</span></div>
+                  </NavLink>
             </Col>
           ))
         }

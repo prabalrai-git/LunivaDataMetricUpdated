@@ -51,7 +51,10 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Edit onClick={() => history.push(`./location/edit/${record.LId}`)}>Edit</Edit>
+          <Edit onClick={() => history.push({
+          pathname: `./location/edit/${record.LId}`,
+          state: inventoryStat
+        })}>Edit</Edit>
         </Space>
       )
     }

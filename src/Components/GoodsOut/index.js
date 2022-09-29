@@ -73,7 +73,12 @@ const Index = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Cancle onClick={() => history.push(`/goodsout/edit/${record.GOId}/${record.GoodsOutDate}`)}>Cancle</Cancle>
+          <Cancle onClick={() => history.push({
+            pathname: `/goodsout/edit/${record.GOId}/${record.GoodsOutDate}`,
+            state: inventoryStat
+          })}>
+            Cancel
+          </Cancle>
         </Space>
       )
     }

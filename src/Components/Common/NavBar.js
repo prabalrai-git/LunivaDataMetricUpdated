@@ -14,7 +14,8 @@ const NavBar = (props) => {
           {/* <SerchBar></SerchBar> */}
           <div className="titleHeading">
             <h2 className={sideGo} style={{ color: "var(--primary)" }}>
-              Luniva360 LIMS
+              Luniva 360 LIMS
+              {/* Luniva 360 LIMS PPHL Bagmati */}
             </h2>
           </div>
         </Col>

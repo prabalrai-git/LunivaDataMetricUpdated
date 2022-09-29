@@ -159,6 +159,7 @@ export const useCareLabRoute = () => {
       path: "/sampledash",
       hasSubNav: true,
       subNavData: sampleStatusNav,
+      showTab: true,
     },
     // {
     //   icon: "icon-sticky-note1",
@@ -175,6 +176,7 @@ export const useCareLabRoute = () => {
       path: "/reportdash",
       hasSubNav: true,
       subNavData: reportStatNav,
+      showTab: false,
     },
     {
       icon: "icon-stack2",
@@ -183,6 +185,7 @@ export const useCareLabRoute = () => {
       path: "/testanalysis",
       hasSubNav: true,
       subNavData: testAnalysisNav,
+      showTab: false,
     },
     {
       icon: "icon-line-bar-graph",
@@ -191,6 +194,7 @@ export const useCareLabRoute = () => {
       path: "/financedash",
       hasSubNav: true,
       subNavData: financeNav,
+      showTab: false,
     },
     {
       icon: "icon-chart",
@@ -198,6 +202,7 @@ export const useCareLabRoute = () => {
       name: "Department analytics",
       path: "/departmentanalytics",
       hasSubNav: false,
+      showTab: false,
     },
     {
       icon: "icon-bars1",
@@ -205,6 +210,7 @@ export const useCareLabRoute = () => {
       name: "Outsource analytics",
       path: "/outsourceanalytics",
       hasSubNav: false,
+      showTab: false,
     },
     {
       icon: "icon-line-file",
@@ -212,6 +218,7 @@ export const useCareLabRoute = () => {
       name: "Membership Card",
       path: "/carddash",
       hasSubNav: false,
+      showTab: false,
     },
     {
       icon: "icon-money",
@@ -219,6 +226,7 @@ export const useCareLabRoute = () => {
       name: "Expense Management",
       path: "/expensemanagement",
       hasSubNav: false,
+      showTab: false,
     },
     {
       icon: "icon-line-bag",
@@ -227,6 +235,7 @@ export const useCareLabRoute = () => {
       path: "/marketingdash",
       hasSubNav: true,
       subNavData: marketingNav,
+      showTab: false,
     },
     {
       icon: "icon-line-alt",
@@ -235,6 +244,7 @@ export const useCareLabRoute = () => {
       path: "/tatdash",
       hasSubNav: true,
       subNavData: tatNav,
+      showTab: true,
     },
     // {
     //     icon: 'icon-lab',
@@ -258,6 +268,7 @@ export const useCareLabRoute = () => {
       path: "/qcdash",
       hasSubNav: true,
       subNavData: qcControlNav,
+      showTab: true,
     },
     // {
     //   icon: "icon-line-calendar",

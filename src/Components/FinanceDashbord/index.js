@@ -32,9 +32,9 @@ const columns = [
     key: 'NepaliDay'
   },
   {
-    title: 'Total Patiet',
+    title: 'Total Patient',
     dataIndex: 'Total Patient',
-    key: 'TotlaPatiet'
+    key: 'TotalPatient'
   },
   {
     title: 'Total Amount',
@@ -53,15 +53,7 @@ const columns = [
   }
 ]
 
-
 const Index = () => {
-
-  // getDataMetricReportByReportTypeAndDateRange
-  // for pie [payment report] = ReportDetails
-  // for bar [payment report] = Table1
-  //  for referer =Table2
-  // for requestor = Table3
-  // for over all table = Table4
   const dispatch = useDispatch();
   const [PayPie, setPayPie] = useState([]);
   const [PayBar1, setPayBar1] = useState([]);
@@ -97,7 +89,7 @@ const Index = () => {
       val.Table1.forEach(ele => {
         pshBar1.push(ele?.PAID)
         pshBar2.push(ele?.UNPAID)
-        pshBarLabel.push(ele?.Date)
+        pshBarLabel.push(ele?.Date.split('T')[0])
       })
       setPayBar1(pshBar1)
       setPayBar2(pshBar2)
@@ -125,7 +117,12 @@ const Index = () => {
       setIsLoading(false);
     }))
 
+    if(PayBar1 == []){
+      setIsLoading(false);
+    }
+
   }
+
   const dataRet = (val) => {
     let data = {
       ...val,
@@ -146,11 +143,11 @@ const Index = () => {
   }, [])
 
   return (
-    <FinenceDashbordContainer>
+    <FinanceDashbordContainer>
       <div className="maiTopContainer">
         <PageHeader
-          pageTitle='Finance Dashbord'
-        ></PageHeader>
+          pageTitle='Finance Dashboard'
+        />
         <Filter
           dateRange
           dateRet={dataRet}
@@ -159,20 +156,20 @@ const Index = () => {
       </div>
       {/* loading pop up */}
       {
-        IsLoading ? <DataIsLoading /> :
-
+        PayBar1 === [] ? <DataIsLoading /> :
           <div className="mainContainer">
+
             <Row>
               <Col lg={24} md={24} sm={24} xs={24} className='financeCards'>
-                <h3>Paymet Report</h3>
+                <h3>Payment Report</h3>
                 <BarChart labels={PayBarLabel} data1={PayBar1} data2={PayBar2} />
               </Col>
             </Row>
+
             <Row gutter={16}>
               <Col lg={8} md={8} sm={24} xs={24} >
                 <PieChart labels={PayPieLabel} data={PayPie} />
               </Col>
-
 
               <Col lg={8} md={8} sm={24} xs={24} >
                 <DoughnutChart title={'Referer Report'} data={PayRef} labels={PayRefLabel} />
@@ -182,6 +179,7 @@ const Index = () => {
                 <DoughnutChart title={'Requestor Report'} data={PayReq} labels={PayReqLabel} />
               </Col>
             </Row>
+
             <Row style={{ marginTop: "20px" }}>
               <div className="tableisRes financeCards">
                 <h3>Total Collection</h3>
@@ -192,12 +190,12 @@ const Index = () => {
           </div>
       }
 
-    </FinenceDashbordContainer>
+    </FinanceDashbordContainer>
   )
 }
 export default Index;
 
-const FinenceDashbordContainer = styled.div`
+const FinanceDashbordContainer = styled.div`
   .financeCards{
     background: rgba( 255, 255, 255, 1 );
     box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.10 );

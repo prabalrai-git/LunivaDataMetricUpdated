@@ -33,6 +33,14 @@ export const options = {
       position: 'top',
     },
   },
+  scales: {
+    x: {
+      stacked: true
+    },
+    y: {
+      stacked: true
+    }
+  }
 };
 
 const BarChart = (props) => {
@@ -43,22 +51,20 @@ const BarChart = (props) => {
       {
         type: 'bar',
         label: 'paid',
-        backgroundColor: ChartColor,
+        backgroundColor: ChartColor[4],
         data: props.data1,
         borderColor: [
-          'rgba(255, 255, 132, 1)',
-
+          '#fff',
         ],
         borderWidth: 1,
       },
       {
         type: 'bar',
-        label: 'unpid',
-        backgroundColor: ChartColor,
+        label: 'unpaid',
+        backgroundColor: ChartColor[1],
         data: props.data2,
         borderColor: [
-          'rgba(255, 255, 132, 1)',
-
+          '#fff',
         ],
         borderWidth: 1,
       },
