@@ -1,4 +1,4 @@
-import useTokenHook from "../CustomHook/useTokenHook";
+// import useTokenHook from "../CustomHook/useTokenHook";
 
 export const useCareLabRoute = () => {
   const sampleStatusNav = [
@@ -268,6 +268,14 @@ export const useCareLabRoute = () => {
       path: "/qcdash",
       hasSubNav: true,
       subNavData: qcControlNav,
+      showTab: true,
+    },
+    {
+      icon: "icon-line2-doc",
+      key: "misreports",
+      name: "MIS Reports",
+      path: "/datametric",
+      hasSubNav: false,
       showTab: true,
     },
     // {

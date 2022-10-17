@@ -1,17 +1,18 @@
 import { Col, Row } from 'antd'
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { AfterLoginData } from '../Data/MenuRoute'
 import imgOne from '../assets/images/logobig.png'
+import { CARELAB_LINK } from '../constants/url'
 
 const AfterLogin = () => {
   const history = useHistory()
 
   const data = AfterLoginData;
   const token = JSON.parse(sessionStorage.getItem('token'));
-  
+
 
   useEffect(() => {
     if (token === null) {
@@ -43,20 +44,23 @@ const AfterLogin = () => {
               </Col>
             </>
           ))}
-
+          <Col sm={24} md={12} xs={12} lg={12} xl={8}>
+            <a href={CARELAB_LINK} target={'_blank'} key={'redirectOther'}>
+              <div className='cButton' >
+                <span><i className={'icon-lab'}></i> </span>
+                <span>Lab</span>
+              </div>
+            </a>
+          </Col>
         </Row>
       </div>
 
-
-
-      {/* </div> */}
     </DashbordContainer>
   )
 }
 
 export default AfterLogin
 
-// () => history.push(`./manufacture/edit/${record.MId}`)
 const DashbordContainer = styled.div`
 height: 100vh;
 width: 100%;

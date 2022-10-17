@@ -92,13 +92,15 @@ import {
   AsyncRequestorWiseDateChange,
   AsyncDateChanges,
   AsyncMembershipCard,
+  AsyncItemSource,
+  AsyncAddItemSource,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
 import PrivateRouter from "./Routes/PrivateRouter";
 import { createGlobalStyle } from "styled-components";
 import { themedata } from "./Components/theme/themdata";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 function App() {
   useEffect(() => {
@@ -112,7 +114,7 @@ function App() {
   //   localStorage.setItem('theme', JSON.stringify(themedata.theme3));
   // }, [])
   const theme = JSON.parse(localStorage.getItem("theme"));
-  const Potato = createGlobalStyle`
+  const GlobStyl = createGlobalStyle`
   :root {
   --primary: ${theme?.primary ? theme?.primary : "#026b9e"};
   --secondary: ${theme?.secondary ? theme?.secondary : "#3ea9dbc8"}; 
@@ -130,7 +132,7 @@ function App() {
   //   });
 
   //   useEffect(() => {
-  //     socket.emit("newUser", 'anib');
+  //     socket.emit("newUser", '');
   //   }, [socket]);
 
   //   useEffect(() => {
@@ -152,7 +154,7 @@ function App() {
 
   return (
     <>
-      <Potato />
+      <GlobStyl />
       <Suspense
         fallback={
           <div className="fallback-container">
@@ -1293,6 +1295,31 @@ function App() {
             // forEdit
             showSider
           /> */}
+
+                <PrivateRouter
+                  exact
+                  path="/itemsource"
+                  component={AsyncItemSource}
+                  layout={AsyncAppLayout}
+                  showSider
+                />
+
+                <PrivateRouter
+                  exact
+                  path="/itemsource/add"
+                  component={AsyncAddItemSource}
+                  layout={AsyncAppLayout}
+                  showSider
+                />
+
+                <PrivateRouter
+                  exact
+                  path="/itemsource/edit/:id"
+                  component={AsyncAddItemSource}
+                  layout={AsyncAppLayout}
+                  forEdit
+                  showSider
+                />
 
           <Route component={AsyncNotFound} />
         </Switch>

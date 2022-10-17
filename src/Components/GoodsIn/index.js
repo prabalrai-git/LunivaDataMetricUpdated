@@ -33,6 +33,11 @@ const Index = () => {
         `${text} ${record.Unit !== null ? record.Unit : ""}`,
     },
     {
+      title: "Item Source",
+      dataIndex: "Source",
+      key: "Source",
+    },
+    {
       title: "Expiry Date",
       dataIndex: "ExpiryDate",
       key: "ExpiryDate",

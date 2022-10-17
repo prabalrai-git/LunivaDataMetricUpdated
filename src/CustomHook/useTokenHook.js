@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeUserData } from '../store/slices/profileSlice';
 
-
 export default function useTokenHook() {
     const dispatch = useDispatch();
     const profileReducer = useSelector(state => state.profile);
@@ -16,7 +15,6 @@ export default function useTokenHook() {
             }
             return userToken
         }
-
     };
 
     const [token, setToken] = useState(getToken());

@@ -58,7 +58,7 @@ const AddItemVsRatio = (props) => {
   }
 
   const onFinish = (values) => {
-    // setButDis(true)
+    setButDis(true)
     let data = {
       "RId": forEdit ? RId : 0,
       "ItemId": values?.ItemId,

@@ -11,6 +11,7 @@ import { tokenString } from '../Common/HandleUser';
 import { getGoodsInByIdApi } from '../../services/labGoodsReceivedService';
 import CustomModal from '../Common/CustomModal';
 import { inventoryStat } from '../Common/StateList';
+import { getLocationApi } from '../../services/itemLocationService';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoodsOut = (props) => {
@@ -30,6 +31,7 @@ const AddGoodsOut = (props) => {
   const [visible, setVisible] = useState(false);
   // const [confirmLoading, setConfirmLoading] = useState(false);
   const [maxer, setMaxer] = useState(0);
+  const [locationList, setlocationList] = useState([])
 
   const GOId = props?.match?.params?.id;
   const fromDat = props?.match?.params?.from;
@@ -73,6 +75,12 @@ const AddGoodsOut = (props) => {
     if (forEdit && previousValues === undefined) {
       dispatch(getGoodsOutApi({ fromdate: fromDat, todate: fromDat }, (val) => { }))
     }
+
+    dispatch(
+      getLocationApi((val) => {
+        setlocationList(val)
+      })
+    )
   }, [])
 
   useEffect(() => {
@@ -110,7 +118,8 @@ const AddGoodsOut = (props) => {
       "UserId": tokenString.UId,
       "GoodsOutDate": values?.GoodsOutDate.format('YYYY-MM-DD'),
       "IsActive": forEdit ? false : (values?.IsActive === undefined || values?.IsActive === true ? true : false),
-      "Remarks": values?.Remarks
+      "Remarks": values?.Remarks,
+      "LocationId": values?.LocationId
     }
     dispatch(insertGoodsOutApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -326,6 +335,28 @@ const AddGoodsOut = (props) => {
                 style={{ width: '100%' }}
                 readOnly={editDisabled}
               />
+            </Form.Item>
+
+            <Form.Item
+              label="Location"
+              name="LocationId"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select Location!',
+                },
+              ]}
+            >
+              <Select allowClear>
+                {locationList?.map(iTy => {
+                  return (
+                    <Option value={iTy?.LId} key={iTy?.Location}>
+                      {iTy?.Location}
+                    </Option>
+                  )
+                })
+                }
+              </Select>
             </Form.Item>
 
             <Form.Item

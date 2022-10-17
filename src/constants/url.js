@@ -21,6 +21,8 @@ export const Carelab_Url =
 // export const Carelab_Url =
 //   "https://lunivacare.ddns.net/CarelabDataMetricServiceBagmatiJanaswasthaLive/";
 
+export const CARELAB_LINK = `https://lunivat.ddns.net/jpdhulikhel/Carelab/Account/Login`;
+
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
 export const CarelabBase_Url = `${Carelab_Url}Api/`;
 
@@ -613,3 +615,21 @@ export const GetMemberShipDetailsByMemberId = "GetMemberShipDetailsByMemberId";
 //   "DateOfBirth": null,
 //   "Address": ""
 // }
+
+/**
+ * @desc: insert update item source
+ * @param: {
+  "Id": 1,
+  "ItemSource": "sample string 2",
+  "UserId": 3,
+  "EntryDate": "2022-10-12T12:15:30.2571117+05:45",
+  "IsActive": true
+  }
+ */
+export const InsertUpdateItemSource = 'InsertUpdateItemSource'
+
+/**
+ * @desc: get item source details
+ * @param: 
+ */
+export const GetItemSourceDetails = 'GetItemSourceDetails'

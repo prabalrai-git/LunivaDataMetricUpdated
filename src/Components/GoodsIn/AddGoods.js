@@ -10,6 +10,7 @@ import { tokenString } from '../Common/HandleUser';
 import { formItemLayout } from '../Common/FormItemLayout';
 import { useHistory } from 'react-router-dom';
 import { inventoryStat } from '../Common/StateList';
+import { getItemSourceDetApi } from '../../services/itemSourceService';
 // import { SearchSelect } from '../Common/SearchSelect';
 
 const AddGoods = (props) => {
@@ -30,6 +31,7 @@ const AddGoods = (props) => {
   const goodsInReducer = useSelector(state => state.goodsin);
   const [previousValues, setPreviousValues] = useState(forEdit ? goodsInReducer?.goodsin[GId] : {});
   const [handleValue , sethandleValue] = useState(1);
+  const [itemSourceList, setitemSourceList] = useState([])
 
   const dateFormat = 'YYYY-MM-DD';
 
@@ -58,6 +60,11 @@ const AddGoods = (props) => {
       })
     )
     getAllLabItem()
+    dispatch(
+      getItemSourceDetApi((val) => {
+        setitemSourceList(val);
+      })
+    )
   }, [])
 
   useEffect(() => {
@@ -100,6 +107,7 @@ const AddGoods = (props) => {
       "CreatedBy": tokenString.UId,
       // "ItemStatus": forEdit ? 3 : values?.ItemStatus,
       "ItemStatus": forEdit ? 3 : handleValue,
+      "ItemSource": values?.ItemSource
     }
     dispatch(insertGoodsReceivedApi(data, (res) => {
       if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
@@ -328,6 +336,44 @@ const AddGoods = (props) => {
             </Form.Item>
 
             <Form.Item
+              label="Source"
+              name="ItemSource"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select Source!',
+                },
+              ]}
+            >
+              <Select
+                showSearch
+                optionFilterProp="children"
+                placeholder="Select source"
+                filterOption={(input, option) => {
+                  return (
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
+                allowClear>
+                {itemSourceList?.map(iTy => {
+                  return (
+                    iTy?.IsActive === true ? 
+                    <Option
+                      title={iTy?.ItemSource}
+                      key={iTy?.Id}
+                      value={iTy?.Id}>
+                      {iTy?.ItemSource}
+                    </Option>
+                    :
+                    ''
+                  )
+                })
+                }
+              </Select>
+            </Form.Item>
+
+            <Form.Item
               label={forEdit ? "Current Reagent Status" : "Reagent Status"}
               name="ItemStatus"
               rules={[
@@ -337,7 +383,8 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <Select allowClear defaultValue='1'
+              <Select allowClear 
+              // defaultValue='1'
                onChange={handleStatusChange}
                >
                 {

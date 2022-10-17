@@ -358,4 +358,12 @@ export const AsyncRequestorWiseNegative = lazy(() =>
   )
 );
 
+export const AsyncItemSource = lazy(() =>
+  pMinDelay(import("../Components/ItemSource/index"), 300)
+);
+
+export const AsyncAddItemSource = lazy(() =>
+  pMinDelay(import("../Components/ItemSource/AddItemSource"), 300)
+);
+
 // export const AsyncSampleStatus = lazy(() => pMinDelay(import('../Components/CareLabFolder/SampleStatus/SampleStatus'), 300));

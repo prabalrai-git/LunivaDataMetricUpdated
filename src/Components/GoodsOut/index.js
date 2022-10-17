@@ -48,6 +48,12 @@ const Index = () => {
       // responsive: ['md'],
     },
     {
+      title: 'Location',
+      dataIndex: 'Location',
+      key: 'Location',
+      // responsive: ['sm'],
+    },
+    {
       title: 'Is Active',
       dataIndex: 'IsActive',
       key: 'IsActive',

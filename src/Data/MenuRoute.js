@@ -9,13 +9,13 @@ export const AfterLoginData = [
     path: "/dashbord",
     isactive: MenuSettings.dashboard,
   },
-  {
-    icon: "icon-line2-doc",
-    key: "misreports",
-    name: "MIS Reports",
-    path: "/datametric",
-    isactive: MenuSettings.misreports,
-  },
+  // {
+  //   icon: "icon-line2-doc",
+  //   key: "misreports",
+  //   name: "MIS Reports",
+  //   path: "/datametric",
+  //   isactive: MenuSettings.misreports,
+  // },
   {
     icon: "icon-line-shopping-bag",
     key: "datametric",
@@ -150,6 +150,13 @@ export const settingsMenu = [
     key: "cons lookup",
     name: "cons lookup",
     path: "/consumptionlook",
+    isactive: MenuSettings.consumptionlook,
+  },
+  {
+    icon: "icon-bar-chart",
+    key: "item source",
+    name: "Item Source",
+    path: "/itemsource",
     isactive: MenuSettings.consumptionlook,
   },
   // {
