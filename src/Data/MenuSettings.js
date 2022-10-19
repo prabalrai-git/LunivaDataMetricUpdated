@@ -39,5 +39,6 @@ export const MenuSettings = {
   manufacture: true,
   //by me
   gettestlist: true,
-  datametrictab: true
+  datametrictab: true,
+  printanalysis: true,
 };

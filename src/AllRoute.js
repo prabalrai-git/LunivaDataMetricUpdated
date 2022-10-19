@@ -12,6 +12,7 @@ import {
   AsyncAddWastage,
   AsyncAppLayout,
   AsyncCategory,
+  AsyncAddBill,
   AsyncConsumableReports,
   AsyncConsumptionIndex,
   AsyncConsumptionLookIndex,
@@ -92,6 +93,12 @@ function AllRoute() {
         exact
         path="/item/add"
         component={AsyncAddItems}
+        layout={AsyncAppLayout}
+      />
+      <PrivateRouter
+        exact
+        path="/item/addbill"
+        component={AsyncAddBill}
         layout={AsyncAppLayout}
       />
       <PrivateRouter

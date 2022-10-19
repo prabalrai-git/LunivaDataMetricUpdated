@@ -41,6 +41,10 @@ export const AsyncAddItems = lazy(() =>
   pMinDelay(import("../Components/Item/AddItem"), 300)
 );
 
+export const AsyncAddBill = lazy(() =>
+  pMinDelay(import("../Components/AddBill/AddBill"), 300)
+);
+
 export const AsyncType = lazy(() =>
   pMinDelay(import("../Components/Type/index"), 300)
 );
@@ -367,3 +371,9 @@ export const AsyncAddItemSource = lazy(() =>
 );
 
 // export const AsyncSampleStatus = lazy(() => pMinDelay(import('../Components/CareLabFolder/SampleStatus/SampleStatus'), 300));
+export const AsyncPrintLayout = lazy(() =>
+  pMinDelay(import("../Components/PrintDetails/PrintLayout"), 300)
+);
+export const AsyncTableLayout = lazy(() =>
+  pMinDelay(import("../Components/AddTable/AddTable"), 300)
+);

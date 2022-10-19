@@ -57,7 +57,7 @@ export const useCareLabRoute = () => {
       path: "/testanalytics",
       hasSubNav: false,
     },
-  ]
+  ];
 
   const bulkNegativeNav = [
     {
@@ -278,6 +278,20 @@ export const useCareLabRoute = () => {
       hasSubNav: false,
       showTab: true,
     },
+    {
+      icon: "icon-line2-doc",
+      key: "printdetails",
+      name: "Print Reports",
+      path: "/print",
+      showTab: true,
+    },
+    {
+      icon: "icon-line2-doc",
+      key: "addtable",
+      name: "Billing",
+      path: "/bill",
+      showTab: true,
+    },
     // {
     //   icon: "icon-line-calendar",
     //   key: "datedash",
@@ -287,13 +301,14 @@ export const useCareLabRoute = () => {
     //   subNavData: dateChangeNav,
     // },
 
-    // {
-    //   icon: "icon-receipt",
-    //   key: "editbill",
-    //   name: "Edit Bill",
-    //   path: "/editbill",
-    //   hasSubNav: false,
-    // },
+    {
+      icon: "icon-receipt",
+      key: "editbill",
+      name: "Edit Bill",
+      path: "/editbill",
+      hasSubNav: false,
+      showTab: true,
+    },
   ];
 
   return {

@@ -6,8 +6,9 @@ import { getRequestorReport } from "../../services/datametricService";
 import { Table } from "antd";
 import DataIsLoading from "../Common/IsLoading";
 import PrintLayout from "../PrintDetails/PrintLayout";
-
-const RequestorReport = () => {
+import { useHistory } from "react-router-dom";
+const AddTable = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, settableData] = useState([]);
   const [tableHead, setTableHead] = useState([]);
@@ -67,19 +68,20 @@ const RequestorReport = () => {
     <>
       <div className="maiTopContainer">
         <PageHeader
-          pageTitle="Requestor Report"
-          csvLinkTitle="Export CSV"
-          csvData={newTableData}
-          csvDataName="requestorReport.csv"
-          printFileName
+          pageTitle=" View Billing Report"
           reportName="Requestor"
           tableHead={tableHead}
           fromToDate={fromToDate}
           removetwo
           selctorr={"Requestor Name"}
+          buttonTitle="Report"
+          buttonOnClick={() =>
+            history.push({
+              pathname: "/item/addbill",
+            })
+          }
         />
         <Filter
-          dateRange
           dateRet={dataRet}
           serchButton
           getrequestorlist
@@ -89,7 +91,7 @@ const RequestorReport = () => {
           forRequestorReport
         />
       </div>
-      
+
       {IsLoading ? (
         <DataIsLoading />
       ) : tableHead.length !== 0 ? (
@@ -107,4 +109,4 @@ const RequestorReport = () => {
   );
 };
 
-export default RequestorReport;
+export default AddTable;

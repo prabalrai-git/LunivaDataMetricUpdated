@@ -94,12 +94,18 @@ import {
   AsyncMembershipCard,
   AsyncItemSource,
   AsyncAddItemSource,
+  AsyncPrintLayout,
+  AsyncTableLayout,
+  AsyncAddBill,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
 import PrivateRouter from "./Routes/PrivateRouter";
 import { createGlobalStyle } from "styled-components";
 import { themedata } from "./Components/theme/themdata";
+import PrintDetails from "./Components/PrintDetails/PrintDetails";
+import PrintLayout from "./Components/PrintDetails/PrintLayout";
+import AddTable from "./Components/AddTable/AddTable";
 // import { io } from "socket.io-client";
 
 function App() {
@@ -173,6 +179,20 @@ function App() {
             component={AsyncLogin}
             layout={AsyncPublicLayout}
           />
+          {/* Design Purpose */}
+          <PublicRoute
+            exact
+            path="/layout"
+            component={PrintLayout}
+            layout={AsyncPrintLayout}
+          />
+          {/* <PublicRoute
+            exact
+            path="/table"
+            component={AddTable}
+            layout={AsyncTableLayout}
+          /> */}
+
           <PublicRoute
             exact
             path="/afterlogin"
@@ -240,6 +260,13 @@ function App() {
                   key="thisSet/6"
                   path="/item/add"
                   component={AsyncAddItems}
+                  layout={AsyncAppLayout}
+                  showSider
+                />,
+                <PrivateRouter
+                  exact
+                  path="/item/addbill"
+                  component={AsyncAddBill}
                   layout={AsyncAppLayout}
                   showSider
                 />,
@@ -1296,31 +1323,47 @@ function App() {
             showSider
           /> */}
 
-                <PrivateRouter
-                  exact
-                  path="/itemsource"
-                  component={AsyncItemSource}
-                  layout={AsyncAppLayout}
-                  showSider
-                />
+          <PrivateRouter
+            exact
+            path="/itemsource"
+            component={AsyncItemSource}
+            layout={AsyncAppLayout}
+            showSider
+          />
 
-                <PrivateRouter
-                  exact
-                  path="/itemsource/add"
-                  component={AsyncAddItemSource}
-                  layout={AsyncAppLayout}
-                  showSider
-                />
+          <PrivateRouter
+            exact
+            path="/itemsource/add"
+            component={AsyncAddItemSource}
+            layout={AsyncAppLayout}
+            showSider
+          />
 
-                <PrivateRouter
-                  exact
-                  path="/itemsource/edit/:id"
-                  component={AsyncAddItemSource}
-                  layout={AsyncAppLayout}
-                  forEdit
-                  showSider
-                />
-
+          <PrivateRouter
+            exact
+            path="/itemsource/edit/:id"
+            component={AsyncAddItemSource}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          {/* //For print destails page */}
+          <PrivateRouter
+            exact
+            path="/print"
+            component={PrintDetails}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/bill"
+            component={AddTable}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
           <Route component={AsyncNotFound} />
         </Switch>
       </Suspense>

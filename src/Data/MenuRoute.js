@@ -212,7 +212,21 @@ export const dataMetricCon = [
     path: "/tatanalysis",
     isactive: MenuSettings.tatanalysis,
   },
-
+  //by ..
+  {
+    icon: "icon-chat",
+    key: "printdetails",
+    name: "Print Reports",
+    path: "/print",
+    isactive: MenuSettings.printanalysis,
+  },
+  {
+    icon: "icon-chat",
+    key: "printdetails",
+    name: "Print Reports",
+    path: "/print",
+    isactive: MenuSettings.printanalysis,
+  },
   {
     icon: "icon-list",
     key: "tatGetTestList",
