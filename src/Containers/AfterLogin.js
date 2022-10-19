@@ -34,7 +34,7 @@ const AfterLogin = () => {
               <Col sm={24} md={12} xs={12} lg={12} xl={8}>
                 <NavLink to={{
                   pathname: e.path,
-                  state: e.key
+                  state: e.statePath
                 }} key={e.name}>
                   <div className='cButton' >
                     <span><i className={e.icon}></i> </span>

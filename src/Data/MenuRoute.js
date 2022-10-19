@@ -7,6 +7,7 @@ export const AfterLoginData = [
     key: "inventory",
     name: "Inventory",
     path: "/dashbord",
+    statePath: "inventory",
     isactive: MenuSettings.dashboard,
   },
   // {
@@ -21,6 +22,23 @@ export const AfterLoginData = [
     key: "datametric",
     name: "Datametric",
     path: "/caredashboard",
+    statePath: "datametric",
+    isactive: MenuSettings.datametrictab,
+  },
+  {
+    icon: "icon-stack2",
+    key: "qcmanagement",
+    name: "QC Management",
+    path: "/qcdash",
+    statePath: "datametric",
+    isactive: MenuSettings.datametrictab,
+  },
+  {
+    icon: "icon-chat",
+    key: "tatanalysis",
+    name: "tatanalysis",
+    path: "/tatanalysis",
+    statePath: "datametric",
     isactive: MenuSettings.datametrictab,
   },
 ];
