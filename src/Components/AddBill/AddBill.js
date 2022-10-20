@@ -14,9 +14,7 @@ import { useState, useEffect } from "react";
 import PageHeader from "../Common/pageHeader";
 import NewTableSummary from "../Common/NewTableSummary";
 import styled from "styled-components";
-import {
-  getRequestorBillListAll,
-} from "../../services/datametricService";
+import { getRequestorBillListAll } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
 const { Option } = Select;
 
@@ -110,10 +108,18 @@ const AddBill = () => {
   // };
 
   const onFinish = (values) => {
+    console.log(values, "asdasd");
+    console.log(data, "asdaaaaaaaaaaaa");
     let finaldata = {
       itemName: values?.item,
       subtotal: total,
       grandtotal: totaldis,
+      drop: values?.pmt,
+      id: data[0]?.crdId,
+      hospname: data[0]?.CrdPartyName,
+      code: data[0]?.crdPartyCode,
+      phone: data[0]?.CrdPartyPan,
+      address: data[0]?.crdPartyPhoneNo,
     };
     console.log("Success:", finaldata);
   };
@@ -136,7 +142,7 @@ const AddBill = () => {
     setDis(totalD);
   };
   const onChangeHandler = () => {
-    const itemData = requestorList.filter((res) => res.Id === chData);
+    const itemData = requestorList.filter((res) => res.crdId === chData);
     setData(itemData);
   };
 
@@ -152,11 +158,12 @@ const AddBill = () => {
                   <Select onChange={handleChange} style={{ width: "50%" }}>
                     {requestorList?.map((iTy) => (
                       <Option
-                        title={iTy?.Requestor}
-                        key={iTy?.Id}
-                        value={iTy?.Id}
+                        title={iTy?.CrdPartyName}
+                        key={iTy?.crdId}
+                        value={iTy?.crdId}
                       >
-                        {iTy?.Requestor}
+                        {/* //names */}
+                        {iTy?.CrdPartyName}
                       </Option>
                     ))}
                   </Select>
