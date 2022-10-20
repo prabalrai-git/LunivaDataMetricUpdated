@@ -89,12 +89,12 @@ export const getGetRequestorList = (successCallback) => {
   };
 };
 
-export const GetRequestorBillList = (successCallback) => {
+export const getRequestorBillListAll = (successCallback) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`GetCreditPartyList`);
+      const response = await fetch(`GetCreditPartyListForBilling`);
       if (response?.status === 200) {
-        successCallback(response?.data?.ReportType);
+        successCallback(response?.data?.CreditParty);
       } else {
         successCallback([]);
       }
