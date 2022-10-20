@@ -65,16 +65,10 @@ const AddBill = () => {
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
   const [dropmenu, setDropmenu] = useState([]);
-  //   data = {
-  //     itemname: "",
-  //     rate: "",
-  //     requtorid: "",
-  //     requestorName: "",
-  //   };
+
   const handleChange = (value) => {
     // console.log(`selected ${value}`);
     setChData(value);
-    // set(vale);
   };
 
   const paymentType = [
@@ -123,12 +117,10 @@ const AddBill = () => {
   };
 
   const onFinish = (values) => {
-    // data.id,
     let finaldata = {
       itemName: values?.item,
       subtotal: total,
       grandtotal: totaldis,
-      // select: dropmenu,
     };
     console.log("Success:", finaldata);
   };
@@ -140,7 +132,6 @@ const AddBill = () => {
     console.log(number1, number2, number3, totaldis, total);
     multiply();
     grandtotal();
-    // dropmenu();
   }, [number1, number2, number3, totaldis, total]);
 
   const multiply = () => {
@@ -153,28 +144,21 @@ const AddBill = () => {
     setDis(totalD);
   };
   const onChangeHandler = () => {
-    // var item = droplist.find((item) => item);
-    // .filter(item => selectedUser.id )
-    // setData
     const itemData = requestorList.filter((res) => res.Id === chData);
     console.log(chData);
     setData(itemData);
   };
-  // useEffect(() => {
-  //   console.log(data, "fromuseeffect");
-  // }, [data]);
+
   return (
     <>
       <AddBillSection>
         <div className="maiTopContainer">
           <PageHeader pageTitle={"Edit Billing Reports"} />
-          {/* <Filter serchButton getrequestorlist /> */}
           {
             <div className="dropdown-section">
               <Row>
                 <Col span={12} className="requestor-section">
                   <Select onChange={handleChange} style={{ width: "50%" }}>
-                    {/* <Option value="0">All</Option> */}
                     {requestorList?.map((iTy) => (
                       <Option
                         title={iTy?.Requestor}
@@ -200,7 +184,6 @@ const AddBill = () => {
           }
         </div>
         <div className="financeCards">
-          {/*  */}
           <NewTableSummary reqData={data}></NewTableSummary>
         </div>
         <div className="mainContainer">
@@ -211,7 +194,6 @@ const AddBill = () => {
                 <hr />
 
                 <Form
-                  // onSubmit={submitHandler}
                   name="basic"
                   labelCol={{
                     span: 12,
@@ -343,8 +325,5 @@ const AddBillSection = styled.div`
   }
   .requestor-section {
     display: flex;
-  }
-  .pmt-section {
-    margin-left: 40px;
   }
 `;
