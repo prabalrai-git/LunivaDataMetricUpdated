@@ -4,28 +4,21 @@ import {
   Input,
   Row,
   Select,
-  Table,
   Form,
   Button,
   Space,
   InputNumber,
-  Menu,
   Descriptions,
 } from "antd";
 import { useState, useEffect } from "react";
 import PageHeader from "../Common/pageHeader";
-import { formItemLayout } from "../Common/FormItemLayout";
-import Summery from "../Common/Summery";
-import AppButton from "../Common/AppButton";
-import Filter from "../Common/Filter";
 import NewTableSummary from "../Common/NewTableSummary";
 import styled from "styled-components";
 import {
-  getGetRequestorList,
-  GetRequestorBillList,
+  getRequestorBillListAll,
 } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
-const { Option, OptGroup } = Select;
+const { Option } = Select;
 
 const columns = [
   {
@@ -67,7 +60,6 @@ const AddBill = () => {
   const [dropmenu, setDropmenu] = useState([]);
 
   const handleChange = (value) => {
-    // console.log(`selected ${value}`);
     setChData(value);
   };
 
@@ -84,37 +76,38 @@ const AddBill = () => {
 
   useEffect(() => {
     dispatch(
-      GetRequestorBillList((val) => {
+      getRequestorBillListAll((val) => {
         setrequestorList(val);
       })
     );
   }, []);
-  function select() {
-    onChangeHandler();
-    onchange();
-  }
-  const submitHandler = (event) => {
-    event.preventDefault();
-    const item = event.target.item.value;
-    const rate = event.target.rate.value;
-    const qty = event.target.qty.value;
-    const dis = event.target.dis.value;
-    const pmt = event.target.pmt.value;
-    axios
-      .post("https://jsonplaceholder.typicode.com/posts", {
-        item,
-        qty,
-        rate,
-        dis,
-        pmt,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
+  // function select() {
+  //   onChangeHandler();
+  //   onchange();
+  // }
+  // const submitHandler = (event) => {
+  //   event.preventDefault();
+  //   const item = event.target.item.value;
+  //   const rate = event.target.rate.value;
+  //   const qty = event.target.qty.value;
+  //   const dis = event.target.dis.value;
+  //   const pmt = event.target.pmt.value;
+  //   axios
+  //     .post("https://jsonplaceholder.typicode.com/posts", {
+  //       item,
+  //       qty,
+  //       rate,
+  //       dis,
+  //       pmt,
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const onFinish = (values) => {
     let finaldata = {
@@ -129,7 +122,6 @@ const AddBill = () => {
   };
 
   useEffect(() => {
-    console.log(number1, number2, number3, totaldis, total);
     multiply();
     grandtotal();
   }, [number1, number2, number3, totaldis, total]);
@@ -145,7 +137,6 @@ const AddBill = () => {
   };
   const onChangeHandler = () => {
     const itemData = requestorList.filter((res) => res.Id === chData);
-    console.log(chData);
     setData(itemData);
   };
 
