@@ -20,7 +20,10 @@ import AppButton from "../Common/AppButton";
 import Filter from "../Common/Filter";
 import NewTableSummary from "../Common/NewTableSummary";
 import styled from "styled-components";
-import { getGetRequestorList } from "../../services/datametricService";
+import {
+  getGetRequestorList,
+  GetRequestorBillList,
+} from "../../services/datametricService";
 import { useDispatch } from "react-redux";
 const { Option, OptGroup } = Select;
 
@@ -61,6 +64,7 @@ const AddBill = () => {
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
+  const [dropmenu, setDropmenu] = useState([]);
   //   data = {
   //     itemname: "",
   //     rate: "",
@@ -73,11 +77,20 @@ const AddBill = () => {
     // set(vale);
   };
 
-  const droplist = [];
+  const paymentType = [
+    {
+      id: 1,
+      paymentmethod: "credit",
+    },
+    {
+      id: 2,
+      paymentmethod: "credit collection",
+    },
+  ];
 
   useEffect(() => {
     dispatch(
-      getGetRequestorList((val) => {
+      GetRequestorBillList((val) => {
         setrequestorList(val);
       })
     );
@@ -92,12 +105,14 @@ const AddBill = () => {
     const rate = event.target.rate.value;
     const qty = event.target.qty.value;
     const dis = event.target.dis.value;
+    const pmt = event.target.pmt.value;
     axios
       .post("https://jsonplaceholder.typicode.com/posts", {
         item,
         qty,
         rate,
         dis,
+        pmt,
       })
       .then((response) => {
         console.log(response);
@@ -113,6 +128,7 @@ const AddBill = () => {
       itemName: values?.item,
       subtotal: total,
       grandtotal: totaldis,
+      // select: dropmenu,
     };
     console.log("Success:", finaldata);
   };
@@ -124,6 +140,7 @@ const AddBill = () => {
     console.log(number1, number2, number3, totaldis, total);
     multiply();
     grandtotal();
+    // dropmenu();
   }, [number1, number2, number3, totaldis, total]);
 
   const multiply = () => {
@@ -140,7 +157,7 @@ const AddBill = () => {
     // .filter(item => selectedUser.id )
     // setData
     const itemData = requestorList.filter((res) => res.Id === chData);
-    console.log(chData, droplist);
+    console.log(chData);
     setData(itemData);
   };
   // useEffect(() => {
@@ -156,11 +173,7 @@ const AddBill = () => {
             <div className="dropdown-section">
               <Row>
                 <Col span={12} className="requestor-section">
-                  <Select
-                    onChange={handleChange}
-                    style={{ width: "100%" }}
-                    size="default"
-                  >
+                  <Select onChange={handleChange} style={{ width: "50%" }}>
                     {/* <Option value="0">All</Option> */}
                     {requestorList?.map((iTy) => (
                       <Option
@@ -204,7 +217,7 @@ const AddBill = () => {
                     span: 12,
                   }}
                   wrapperCol={{
-                    span: 12,
+                    span: 24,
                   }}
                   initialValues={{
                     remember: true,
@@ -214,41 +227,67 @@ const AddBill = () => {
                   autoComplete="off"
                 >
                   <Row>
-                    <Col span={6}>
+                    <Col span={8}>
                       <Form.Item label="Item Name" name="item">
-                        <Input />
-                      </Form.Item>
-                    </Col>
-                    <Col span={4}>
-                      <Form.Item label="Rate" name="rate">
-                        <InputNumber
-                          min={1}
-                          max={10000}
-                          onChange={(e) => {
-                            setNumber1(e);
+                        <Input
+                          style={{
+                            width: "100%",
                           }}
                         />
                       </Form.Item>
                     </Col>
-                    <Col span={4}>
-                      <Form.Item label="Quantity" name="qty">
+                    <Col span={8}>
+                      <Form.Item label="Rate" name="rate">
                         <InputNumber
                           min={1}
-                          max={10000}
+                          max={100000}
+                          onChange={(e) => {
+                            setNumber1(e);
+                          }}
+                          style={{
+                            width: "100%",
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item label="Quantity" name="qty">
+                        <InputNumber
+                          style={{
+                            width: "100%",
+                          }}
+                          min={1}
+                          max={100000}
                           onChange={(e) => setNumber2(e)}
                         />
                       </Form.Item>
                     </Col>
-                    <Col span={4}>
+                    <Col span={8}>
                       <Form.Item label="DiscountAmt" name="dis">
                         <InputNumber
+                          style={{
+                            width: "100%",
+                          }}
                           min={1}
-                          max={10000}
+                          max={100000}
                           onChange={(e) => setNumber3(e)}
                         />
                       </Form.Item>
                     </Col>
-                    <Col span={4}>
+                    <Col span={8}>
+                      <Form.Item label="Payment Type" name="pmt">
+                        <Select defaultValue="" onChange={handleChange}>
+                          {paymentType.map((item) => {
+                            return (
+                              <Option value={item.id} key={item.id}>
+                                {item.paymentmethod}
+                              </Option>
+                            );
+                          })}
+                        </Select>
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
                       <div className="s-btn">
                         <Button type="primary" htmlType="submit">
                           Save
@@ -294,6 +333,7 @@ const AddBillSection = styled.div`
   }
   .s-btn {
     margin-left: 20px;
+    float: right;
   }
   .load-btn {
     margin-left: 20px;
@@ -303,5 +343,8 @@ const AddBillSection = styled.div`
   }
   .requestor-section {
     display: flex;
+  }
+  .pmt-section {
+    margin-left: 40px;
   }
 `;

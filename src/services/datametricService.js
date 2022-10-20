@@ -89,6 +89,19 @@ export const getGetRequestorList = (successCallback) => {
   };
 };
 
+export const GetRequestorBillList = (successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`GetCreditPartyList`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.ReportType);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
 export const getGetRefererList = (successCallback) => {
   return async (dispatch) => {
     try {

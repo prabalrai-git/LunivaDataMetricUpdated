@@ -626,10 +626,10 @@ export const GetMemberShipDetailsByMemberId = "GetMemberShipDetailsByMemberId";
   "IsActive": true
   }
  */
-export const InsertUpdateItemSource = 'InsertUpdateItemSource'
+export const InsertUpdateItemSource = "InsertUpdateItemSource";
 
 /**
  * @desc: get item source details
- * @param: 
+ * @param:
  */
-export const GetItemSourceDetails = 'GetItemSourceDetails'
+export const GetItemSourceDetails = "GetItemSourceDetails";
