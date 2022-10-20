@@ -119,7 +119,7 @@ const AddBill = () => {
       hospname: data[0]?.CrdPartyName,
       code: data[0]?.crdPartyCode,
       phone: data[0]?.CrdPartyPan,
-      address: data[0]?.crdPartyPhoneNo,
+      address: data[0]?.CrdPartyAddress,
     };
     console.log("Success:", finaldata);
   };
