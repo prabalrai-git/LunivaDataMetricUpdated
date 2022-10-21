@@ -15,9 +15,11 @@ import PageHeader from "../Common/pageHeader";
 import NewTableSummary from "../Common/NewTableSummary";
 import styled from "styled-components";
 import {
+  addCreateCreditPartyBill,
   getRequestorBillListAll,
 } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
+import { dum } from "./dum";
 const { Option } = Select;
 
 const columns = [
@@ -110,13 +112,16 @@ const AddBill = () => {
   // };
 
   const onFinish = (values) => {
-    let finaldata = {
-      itemName: values?.item,
-      subtotal: total,
-      grandtotal: totaldis,
-      // select: dropmenu,
-    };
-    console.log("Success:", finaldata);
+    dispatch(addCreateCreditPartyBill(dum, (res) => {
+      console.log(res);
+    }))
+    // let finaldata = {
+    //   itemName: values?.item,
+    //   subtotal: total,
+    //   grandtotal: totaldis,
+    //   // select: dropmenu,
+    // };
+    // console.log("Success:", finaldata);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

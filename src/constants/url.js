@@ -23,6 +23,8 @@ export const Carelab_Url =
 
 export const CARELAB_LINK = `https://lunivat.ddns.net/jpdhulikhel/Carelab/Account/Login`;
 
+export const TEST_LINK = `http://192.168.100.77:90/ecrm/login/testCallSer`;
+
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
 export const CarelabBase_Url = `${Carelab_Url}Api/`;
 

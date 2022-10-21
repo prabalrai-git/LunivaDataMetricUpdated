@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GetListOfUserForMetric,
   GetListOfTestByTypeForBulkUpdate,
@@ -14,7 +15,7 @@ import {
   VerifyPatientReport,
 } from "../constants/url";
 import { generateUrlEncodedData } from "../utils/generateFormData";
-import { fetch, store } from "../utils/httpUtil";
+import { fetch, store, storeNested } from "../utils/httpUtil";
 
 export const getTestTypeReport = (data, successCallback) => {
   return async (dispatch) => {
@@ -209,6 +210,21 @@ export const insertVerifyPatientReport = (data, successCallback) => {
     try {
       const formData = generateUrlEncodedData(data);
       const response = await store(VerifyPatientReport, formData);
+      if (response?.status === 200) {
+        successCallback(response?.data);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const addCreateCreditPartyBill = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      data._lstBillItems = JSON.stringify(data._lstBillItems)
+      const formData = generateUrlEncodedData(data);
+      const response = await storeNested('', formData);
       if (response?.status === 200) {
         successCallback(response?.data);
       } else {
