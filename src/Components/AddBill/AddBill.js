@@ -19,10 +19,9 @@ import {
   getRequestorBillListAll,
 } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
-import { dum } from "./dum";
+// import { dum } from "./dum";
 const { Option } = Select;
 
-;
 const AddBill = () => {
   const dispatch = useDispatch();
   const [number1, setNumber1] = useState(0);
@@ -58,9 +57,13 @@ const AddBill = () => {
   }, []);
 
   const onFinish = (values) => {
-    dispatch(addCreateCreditPartyBill(dum, (res) => {
-      console.log(res);
-    }))
+    console.log(values, data);
+    const allDataSend = {};
+    dispatch(
+      addCreateCreditPartyBill(allDataSend, (res) => {
+        console.log(res);
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     // console.log("Failed:", errorInfo);
