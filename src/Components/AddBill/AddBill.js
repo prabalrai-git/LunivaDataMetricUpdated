@@ -81,7 +81,7 @@ const AddBill = () => {
     setDis(totalD);
   };
   const onChangeHandler = () => {
-    const itemData = requestorList.filter((res) => res.Id === chData);
+    const itemData = requestorList.filter((res) => res.crdId === chData);
     setData(itemData);
   };
 
@@ -97,11 +97,11 @@ const AddBill = () => {
                   <Select onChange={handleChange} style={{ width: "50%" }}>
                     {requestorList?.map((iTy) => (
                       <Option
-                        title={iTy?.Requestor}
-                        key={iTy?.Id}
-                        value={iTy?.Id}
+                        title={iTy?.CrdPartyName}
+                        key={iTy?.crdId}
+                        value={iTy?.crdId}
                       >
-                        {iTy?.Requestor}
+                        {iTy?.CrdPartyName}
                       </Option>
                     ))}
                   </Select>
