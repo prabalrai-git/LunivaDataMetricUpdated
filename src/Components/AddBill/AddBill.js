@@ -22,34 +22,8 @@ import { useDispatch } from "react-redux";
 import { dum } from "./dum";
 const { Option } = Select;
 
-const columns = [
-  {
-    title: "Item",
-    dataIndex: "Id",
-    key: "Id",
-  },
-  {
-    title: "Rate",
-    dataIndex: "IsGointOut",
-    key: "IsGointOut",
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-const selectedUser = (e) => {
-  setUser(e.target.value);
-};
+;
 const AddBill = () => {
-  const { TextArea } = Input;
-  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [number1, setNumber1] = useState(0);
   const [number2, setNumber2] = useState(0);
@@ -59,7 +33,6 @@ const AddBill = () => {
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
-  const [dropmenu, setDropmenu] = useState([]);
 
   const handleChange = (value) => {
     setChData(value);
@@ -84,53 +57,18 @@ const AddBill = () => {
     );
   }, []);
 
-  // function select() {
-  //   onChangeHandler();
-  //   onchange();
-  // }
-  // const submitHandler = (event) => {
-  //   event.preventDefault();
-  //   const item = event.target.item.value;
-  //   const rate = event.target.rate.value;
-  //   const qty = event.target.qty.value;
-  //   const dis = event.target.dis.value;
-  //   const pmt = event.target.pmt.value;
-  //   axios
-  //     .post("https://jsonplaceholder.typicode.com/posts", {
-  //       item,
-  //       qty,
-  //       rate,
-  //       dis,
-  //       pmt,
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
   const onFinish = (values) => {
     dispatch(addCreateCreditPartyBill(dum, (res) => {
       console.log(res);
     }))
-    // let finaldata = {
-    //   itemName: values?.item,
-    //   subtotal: total,
-    //   grandtotal: totaldis,
-    //   // select: dropmenu,
-    // };
-    // console.log("Success:", finaldata);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
   };
 
   useEffect(() => {
     multiply();
     grandtotal();
-    // dropmenu();
   }, [number1, number2, number3, totaldis, total]);
 
   const multiply = () => {
@@ -152,13 +90,11 @@ const AddBill = () => {
       <AddBillSection>
         <div className="maiTopContainer">
           <PageHeader pageTitle={"Edit Billing Reports"} />
-          {/* <Filter serchButton getrequestorlist /> */}
           {
             <div className="dropdown-section">
               <Row>
                 <Col span={12} className="requestor-section">
                   <Select onChange={handleChange} style={{ width: "50%" }}>
-                    {/* <Option value="0">All</Option> */}
                     {requestorList?.map((iTy) => (
                       <Option
                         title={iTy?.Requestor}
@@ -195,7 +131,6 @@ const AddBill = () => {
                 <hr />
 
                 <Form
-                  // onSubmit={submitHandler}
                   name="basic"
                   labelCol={{
                     span: 12,
