@@ -8,7 +8,6 @@ import {
   Button,
   InputNumber,
   Descriptions,
-  message,
 } from "antd";
 import { useState, useEffect } from "react";
 import PageHeader from "../Common/pageHeader";
@@ -19,9 +18,9 @@ import {
   getRequestorBillListAll,
 } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
+import { dum } from "./dum";
 const { Option } = Select;
 
-;
 const AddBill = () => {
   const dispatch = useDispatch();
   const [number1, setNumber1] = useState(0);
@@ -55,78 +54,17 @@ const AddBill = () => {
       })
     );
   }, []);
+  function sendText() {
+    if (BillCreditPartyCode.length < 0) {
+      message.warning("Request data is not selected");
+    } else {
+    }
+  }
 
   const onFinish = (values) => {
-    if (data.length > 0) {
-      let allDataSend = {
-        "_lstBillItems": [
-          {
-            "ID": 0,
-            "BillID": 0,
-            "BillNo": "",
-            "TestID": 0,
-            "billDGid": 0,
-            "billTestName": values?.item,
-            "billPrice": total,
-            "billOutGoing": true,
-            "billDiscount": 9.0,
-            "billDiscountAmt": values?.dis,
-            "billPriceFinal": totaldis,
-            "IsSync": true,
-            "RoundAmt": 0,
-            "Remarks": "",
-            "OutgoingLabId": 1
-          }
-        ],
-        "Id": 0,
-        "PatId": data[0].crdId,
-        "Nrl_Reg_No": "",
-        "TestId": 0,
-        "Price": total,
-        "TotalPrice": totaldis,
-        "DiscountPrice": values?.dis,
-        "HSTPrice": 0,
-        "IsPaid": true,
-        "IsDone": true,
-        "BillDate": "",
-        "BillLastModifiedDate": "",
-        "BillNo": "",
-        "BillDiscount": 0,
-        "BillDiscountAmt": values?.dis,
-        "BillHst": 0,
-        "BillHstAmt": 0,
-        "BillAmtPaid": totaldis,
-        "BillRemainingAmt": 0,
-        "BillPaymentType": values?.pmt,
-        "BillOutGngAmt": totaldis,
-        "BillOutGngDiscountAmt": values?.dis,
-        "BillOutGngAmtPc": totaldis,
-        "UserId": 1,
-        "BillIsVoid": false,
-        "BillLastModifiedUser": 1,
-        "BillAdvanceAmt": 0,
-        "BillCollectionAmt": totaldis,
-        "BillNepaliDate": "",
-        "BillLastModifiedNepaliDate": "",
-        "BillRoundedAmt": "",
-        "BillWithoutRound": total,
-        "BillCreditPartyCode": data[0].crdPartyCode,
-        "BillPassword": "",
-        "IsSync": true,
-        "PaymentMode": "Cash",
-        "Remarks": "",
-        "PaymentCode": "",
-        "SampleId": 0,
-        "FiscalYearId": 1
-      }
-      console.log(allDataSend);
-      return
-      dispatch(addCreateCreditPartyBill(allDataSend, (res) => {
-        console.log(res);
-      }))
-    } else {
-      message.warn('Select a requestor')
-    }
+    dispatch(addCreateCreditPartyBill(dum, (res) => {
+      console.log(res);
+    }))
   };
   const onFinishFailed = (errorInfo) => {
     // console.log("Failed:", errorInfo);
@@ -176,6 +114,7 @@ const AddBill = () => {
                     htmlType="submit"
                     className="load-btn"
                     type="primary"
+                    id="submitBtn"
                   >
                     Load
                   </Button>
