@@ -29,6 +29,7 @@ const AddBill = () => {
   const [number3, setNumber3] = useState(0);
   const [total, setTotal] = useState(0);
   const [totaldis, setDis] = useState(0);
+  const [roundamt, setRoundAmt] = useState(0);
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
@@ -79,7 +80,7 @@ const AddBill = () => {
             billPriceFinal:
               values?.totaldis !== "undefined" ? values?.totaldis : 0,
             IsSync: true,
-            RoundAmt: 0,
+            RoundAmt: roundamt,
             Remarks: "",
             OutgoingLabId: 1,
           },
@@ -144,6 +145,7 @@ const AddBill = () => {
   useEffect(() => {
     multiply();
     grandtotal();
+    round();
   }, [number1, number2, number3, totaldis, total]);
 
   const multiply = () => {
@@ -152,8 +154,14 @@ const AddBill = () => {
   };
 
   const grandtotal = () => {
-    let totalD = total - number3;
+    let totalss = total - number3;
+    let totalD = Math.round(totalss);
     setDis(totalD);
+  };
+  const round = () => {
+    let totalss = total - number3;
+    let rv = Math.round(totalss);
+    setRoundAmt(rv);
   };
   const onChangeHandler = () => {
     const itemData = requestorList.filter((res) => res.crdId === chData);
@@ -346,6 +354,10 @@ const AddBill = () => {
                         <br></br>
                         <Descriptions.Item label="GrandTotal">
                           {totaldis}
+                        </Descriptions.Item>
+                        <br></br>
+                        <Descriptions.Item label="Rounded Amount">
+                          {roundamt}
                         </Descriptions.Item>
                       </Descriptions>
                     </Col>
