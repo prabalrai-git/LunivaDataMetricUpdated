@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Col,
   Input,
@@ -19,8 +18,10 @@ import {
   getRequestorBillListAll,
 } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
-// import { dum } from "./dum";
-const { Option } = Select;
+import { adToBs } from "@sbmdkl/nepali-date-converter";
+import { paymentType } from "../../constants/paymentType";
+import { todaydate } from "../Common/TodayDate";
+import { tokenString } from "../Common/HandleUser";
 
 const AddBill = () => {
   const dispatch = useDispatch();
@@ -33,21 +34,11 @@ const AddBill = () => {
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
+  const { Option } = Select;
 
   const handleChange = (value) => {
     setChData(value);
   };
-
-  const paymentType = [
-    {
-      id: 1,
-      paymentmethod: "credit",
-    },
-    {
-      id: 2,
-      paymentmethod: "credit collection",
-    },
-  ];
 
   useEffect(() => {
     dispatch(
@@ -95,8 +86,8 @@ const AddBill = () => {
         HSTPrice: 0,
         IsPaid: true,
         IsDone: true,
-        // BillDate: date object '2022-10-12T',
-        // BillLastModifiedDate: date object '2022-10-12T',
+        BillDate: todaydate,
+        BillLastModifiedDate: todaydate,
         BillNo: "",
         BillDiscount: values?.dis,
         BillDiscountAmt: values?.dis,
@@ -108,14 +99,13 @@ const AddBill = () => {
         BillOutGngAmt: totaldis,
         BillOutGngDiscountAmt: values?.dis !== "undefined" ? values?.dis : 0,
         BillOutGngAmtPc: 1,
-        UserId: 1,
+        UserId: tokenString.UId,
         BillIsVoid: false,
-        BillLastModifiedUser: 1,
+        BillLastModifiedUser: tokenString.UId,
         BillAdvanceAmt: 0,
         BillCollectionAmt: totaldis,
-        BillNepaliDate: "",
-        BillLastModifiedNepaliDate: "",
-        // BillRoundedAmt: rounded amount,
+        BillNepaliDate: nepaliDateConverter(todaydate),
+        BillLastModifiedNepaliDate: nepaliDateConverter(todaydate),
         BillRoundedAmt: "",
         BillWithoutRound: totaldis,
         BillCreditPartyCode: data[0].crdPartyCode,
@@ -141,6 +131,11 @@ const AddBill = () => {
   const onFinishFailed = (errorInfo) => {
     // console.log("Failed:", errorInfo);
   };
+
+  const nepaliDateConverter = (englishDateString) => {
+    const nDate = adToBs(englishDateString);
+    return nDate
+  }
 
   useEffect(() => {
     multiply();
