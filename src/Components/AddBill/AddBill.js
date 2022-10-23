@@ -24,12 +24,17 @@ import { todaydate } from "../Common/TodayDate";
 import { tokenString } from "../Common/HandleUser";
 
 const AddBill = () => {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const [number1, setNumber1] = useState(0);
-  const [number2, setNumber2] = useState(0);
-  const [number3, setNumber3] = useState(0);
+  const [rate, setRate] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [discountamount, setDiscountAmount] = useState(0);
+  const [discountpercentage, setDiscountPercentage] = useState(0);
+  const [discountamounttoper, setDiscountAmountToPer] = useState(0);
+  const [dispercenttoAmt, setDisPercentToAmt] = useState(0);
   const [total, setTotal] = useState(0);
-  const [totaldis, setDis] = useState(0);
+  const [grandtotals, setGrandTotal] = useState(0);
+  const [roundamt, setRoundAmt] = useState(0);
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
@@ -48,11 +53,6 @@ const AddBill = () => {
   }, []);
 
   const onFinish = (values) => {
-    // console.log(values, data);
-    // const a =
-    //   BillCreditPartyCode.length < 0
-    //     ? message.warning("Request data is not selected")
-    //     : "";
     if (data.length > 0) {
       const allDataSend = {
         _lstBillItems: [
@@ -68,9 +68,9 @@ const AddBill = () => {
             billDiscount: values?.dis !== "undefined" ? values?.dis : 0,
             billDiscountAmt: values?.dis !== "undefined" ? values?.dis : 0,
             billPriceFinal:
-              values?.totaldis !== "undefined" ? values?.totaldis : 0,
+              values?.grandtotals !== "undefined" ? values?.grandtotals : 0,
             IsSync: true,
-            RoundAmt: 0,
+            RoundAmt: roundamt,
             Remarks: "",
             OutgoingLabId: 1,
           },
@@ -80,7 +80,7 @@ const AddBill = () => {
         Nrl_Reg_No: "",
         TestId: 0,
         Price: total,
-        TotalPrice: totaldis,
+        TotalPrice: grandtotals,
         DiscountPrice: values?.dis !== "undefined" ? values?.dis : 0,
         HSTPrice: 0,
         IsPaid: true,
@@ -92,21 +92,21 @@ const AddBill = () => {
         BillDiscountAmt: values?.dis,
         BillHst: 0,
         BillHstAmt: 0,
-        BillAmtPaid: totaldis,
+        BillAmtPaid: grandtotals,
         BillRemainingAmt: 0,
         BillPaymentType: values?.pmt !== "undefined" ? values?.pmt : 0,
-        BillOutGngAmt: totaldis,
+        BillOutGngAmt: grandtotals,
         BillOutGngDiscountAmt: values?.dis !== "undefined" ? values?.dis : 0,
         BillOutGngAmtPc: 1,
         UserId: tokenString.UId,
         BillIsVoid: false,
         BillLastModifiedUser: tokenString.UId,
         BillAdvanceAmt: 0,
-        BillCollectionAmt: totaldis,
+        BillCollectionAmt: grandtotals,
         BillNepaliDate: nepaliDateConverter(todaydate),
         BillLastModifiedNepaliDate: nepaliDateConverter(todaydate),
         BillRoundedAmt: "",
-        BillWithoutRound: totaldis,
+        BillWithoutRound: grandtotals,
         BillCreditPartyCode: data[0].crdPartyCode,
         BillPassword: "",
         IsSync: true,
@@ -133,26 +133,59 @@ const AddBill = () => {
 
   const nepaliDateConverter = (englishDateString) => {
     const nDate = adToBs(englishDateString);
-    return nDate
-  }
+    return nDate;
+  };
 
   useEffect(() => {
     multiply();
     grandtotal();
-  }, [number1, number2, number3, totaldis, total]);
+    roundsfunc();
+    // autopercentagecalculate();
+    autocalcDisAmount();
+    // autocalcPer();
+  }, [rate, quantity, discountamount, grandtotals, total]);
 
   const multiply = () => {
-    let totalcal = number1 * number2;
+    let totalcal = rate * quantity;
     setTotal(totalcal);
   };
 
   const grandtotal = () => {
-    let totalD = total - number3;
-    setDis(totalD);
+    let totalss = total - discountamount;
+    let totalD = Math.round(totalss);
+    setGrandTotal(totalD);
   };
+  const roundsfunc = () => {
+    let rv = Math.round(discountamount);
+    setRoundAmt(rv);
+  };
+  const autopercentagecalculate = (e) => {
+    let calculate = (e / total) * 100;
+    setDiscountPercentage(calculate);
+    form.setFieldsValue({
+      dispercent: calculate,
+    });
+    // setDiscountAmountToPer(calculate);
+    // form.setFieldsValue(calculate);
+    // setFieldsValue
+  };
+
   const onChangeHandler = () => {
     const itemData = requestorList.filter((res) => res.crdId === chData);
     setData(itemData);
+  };
+
+  const autocalcDisAmount = (e) => {
+    // 12 / total * 100
+    // console.log(e);
+    let disamt = (e / 100) * total;
+    // console.log(total, disamt);
+    setDisPercentToAmt(disamt);
+    setDiscountAmount(disamt);
+    form.setFieldsValue({
+      dis: disamt,
+    });
+    // setFieldsValue(autocal);
   };
 
   return (
@@ -212,6 +245,7 @@ const AddBill = () => {
                   initialValues={{
                     remember: true,
                   }}
+                  form={form}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
                   autoComplete="off"
@@ -249,7 +283,7 @@ const AddBill = () => {
                         <InputNumber
                           min={0}
                           onChange={(e) => {
-                            setNumber1(e);
+                            setRate(e);
                           }}
                           style={{
                             width: "100%",
@@ -273,7 +307,7 @@ const AddBill = () => {
                             width: "100%",
                           }}
                           min={0}
-                          onChange={(e) => setNumber2(e)}
+                          onChange={(e) => setQuantity(e)}
                         />
                       </Form.Item>
                     </Col>
@@ -293,7 +327,41 @@ const AddBill = () => {
                             width: "100%",
                           }}
                           min={0}
-                          onChange={(e) => setNumber3(e)}
+                          onChange={(e) => {
+                            // form.setFieldsValue({
+                            //   dispercent: discountamounttoper,
+                            // });
+                            // setDiscountAmount(e);
+                            autopercentagecalculate(e);
+                          }}
+                          // value={discountpercentage}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item
+                        label="Discount Percent"
+                        name="dispercent"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item discount!",
+                          },
+                        ]}
+                      >
+                        <InputNumber
+                          style={{
+                            width: "100%",
+                          }}
+                          min={0}
+                          onChange={(e) => {
+                            // form.setFieldsValue({
+                            //   dis: discountamounttoper,
+                            // });
+                            // setDiscountPercentage(e);
+                            autocalcDisAmount(e);
+                          }}
+                          // value={discountpercentage}
                         />
                       </Form.Item>
                     </Col>
@@ -319,7 +387,7 @@ const AddBill = () => {
                         </Select>
                       </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    <Col span={24}>
                       <div className="s-btn">
                         <Button type="primary" htmlType="submit">
                           Save
@@ -338,10 +406,19 @@ const AddBill = () => {
                         <Descriptions.Item label="SubTotal">
                           {total}
                         </Descriptions.Item>
-                        <br></br>
-                        <Descriptions.Item label="GrandTotal">
-                          {totaldis}
+                        <Descriptions.Item label="Discount (%)">
+                          {discountpercentage}
                         </Descriptions.Item>
+                        <Descriptions.Item label="Discount Amt">
+                          {discountamount}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Rounded Amount">
+                          {roundamt}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="GrandTotal">
+                          {grandtotals}
+                        </Descriptions.Item>
+                        <br></br>
                       </Descriptions>
                     </Col>
                   </Row>
