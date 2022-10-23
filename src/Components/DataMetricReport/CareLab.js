@@ -1,8 +1,9 @@
 import React from "react";
 import styled from 'styled-components'
 import PageHeader from '../Common/pageHeader'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Row, Col } from 'antd'
+import { carelabStat } from "../Common/StateList";
 
 const data = [
     {
@@ -13,10 +14,6 @@ const data = [
         name: 'Daily Transaction',
         pathName: 'dailytransaction'
     },
-    // {
-    //     name: 'Test Type Report',
-    //     pathName: 'testtype'
-    // },
     {
         name: 'Requestor Report',
         pathName: 'requestor'
@@ -29,6 +26,10 @@ const data = [
         name: 'Requestor Sales Summary',
         pathName: 'requestorsales'
     },
+    // {
+    //     name: 'Test Type Report',
+    //     pathName: 'testtype'
+    // },
 ]
 
 const CareLab = () => {
@@ -36,18 +37,25 @@ const CareLab = () => {
     return (
         <CareLabContain>
             <div className="maiTopContainer">
-            <PageHeader pageTitle="MIS Reports"></PageHeader>
+                <PageHeader pageTitle="MIS Reports"></PageHeader>
             </div>
             <div className="contents">
                 <Row gutter={[16, 16]}>
                     {
                         data.map(e => (
                             <Col sm={24} md={8} xs={24} lg={6} key={e.pathName}>
-                                <Link to={`/datametric/${e.pathName}`} key={e.pathName} pathname={e.pathName}>
-                                <div className="cButton"><span>{e.name}</span></div>
-                                </Link>
+                                <NavLink
+                                    key={e.pathName}
+                                    to={{
+                                        pathname: `/datametric/${e.pathName}`,
+                                        state: carelabStat
+                                    }}>
+                                    <div className="cButton">
+                                        <span>{e.name}</span>
+                                    </div>
+                                </NavLink>
                             </Col>
-                            
+
                         ))
                     }
                 </Row>

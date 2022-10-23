@@ -6,7 +6,6 @@ import {
   Select,
   Form,
   Button,
-  Space,
   InputNumber,
   Descriptions,
   message,
@@ -58,83 +57,86 @@ const AddBill = () => {
   }, []);
 
   const onFinish = (values) => {
-    console.log(values, data);
+    // console.log(values, data);
     // const a =
     //   BillCreditPartyCode.length < 0
     //     ? message.warning("Request data is not selected")
     //     : "";
-    message.warning("Request data is not selected");
-    const allDataSend = {
-      _lstBillItems: [
-        {
-          ID: 0,
-          BillID: 0,
-          BillNo: "",
-          TestID: 0,
-          billDGid: 0,
-          billTestName: values?.item != "undefined" ? values?.item : 0,
-          billPrice: values?.total,
-          billOutGoing: true,
-          billDiscount: values?.dis != "undefined" ? values?.dis : 0,
-          billDiscountAmt: values?.dis != "undefined" ? values?.dis : 0,
-          billPriceFinal:
-            values?.totaldis != "undefined" ? values?.totaldis : 0,
-          IsSync: true,
-          RoundAmt: 0,
-          Remarks: "",
-          OutgoingLabId: 1,
-        },
-      ],
-      Id: 0,
-      PatId: 2,
-      Nrl_Reg_No: "",
-      TestId: 0,
-      Price: total,
-      TotalPrice: totaldis,
-      DiscountPrice: values?.dis !== "undefined" ? values?.dis : 0,
-      HSTPrice: 0,
-      IsPaid: true,
-      IsDone: true,
-      // BillDate: date object '2022-10-12T',
+    if (data.length > 0) {
+      const allDataSend = {
+        _lstBillItems: [
+          {
+            ID: 0,
+            BillID: 0,
+            BillNo: "",
+            TestID: 0,
+            billDGid: 0,
+            billTestName: values?.item != "undefined" ? values?.item : 0,
+            billPrice: values?.total,
+            billOutGoing: true,
+            billDiscount: values?.dis != "undefined" ? values?.dis : 0,
+            billDiscountAmt: values?.dis != "undefined" ? values?.dis : 0,
+            billPriceFinal:
+              values?.totaldis != "undefined" ? values?.totaldis : 0,
+            IsSync: true,
+            RoundAmt: 0,
+            Remarks: "",
+            OutgoingLabId: 1,
+          },
+        ],
+        Id: 0,
+        PatId: 2,
+        Nrl_Reg_No: "",
+        TestId: 0,
+        Price: total,
+        TotalPrice: totaldis,
+        DiscountPrice: values?.dis !== "undefined" ? values?.dis : 0,
+        HSTPrice: 0,
+        IsPaid: true,
+        IsDone: true,
+        // BillDate: date object '2022-10-12T',
 
-      // BillLastModifiedDate: date object '2022-10-12T',
-      BillNo: "",
-      BillDiscount: values?.dis,
-      BillDiscountAmt: values?.dis,
-      BillHst: 0,
-      BillHstAmt: 0,
-      BillAmtPaid: totaldis,
-      BillRemainingAmt: 0,
-      BillPaymentType: values?.pmt != "undefined" ? values?.pmt : 0,
-      BillOutGngAmt: totaldis,
-      BillOutGngDiscountAmt: values?.dis != "undefined" ? values?.dis : 0,
-      BillOutGngAmtPc: 1,
-      UserId: 1,
-      BillIsVoid: false,
-      BillLastModifiedUser: 1,
-      BillAdvanceAmt: 0,
-      BillCollectionAmt: totaldis,
-      BillNepaliDate: "",
-      BillLastModifiedNepaliDate: "",
-      // BillRoundedAmt: rounded amount,
-      BillRoundedAmt: "",
-      BillWithoutRound: totaldis,
-      BillCreditPartyCode: data[0].crdPartyCode,
-      BillPassword: "",
-      IsSync: true,
-      PaymentMode: "Cash",
-      Remarks: "",
-      PaymentCode: "",
-      SampleId: 0,
-      FiscalYearId: 1,
-    };
-    console.log(allDataSend);
-    return;
-    dispatch(
-      addCreateCreditPartyBill(allDataSend, (res) => {
-        console.log(res);
-      })
-    );
+        // BillLastModifiedDate: date object '2022-10-12T',
+        BillNo: "",
+        BillDiscount: values?.dis,
+        BillDiscountAmt: values?.dis,
+        BillHst: 0,
+        BillHstAmt: 0,
+        BillAmtPaid: totaldis,
+        BillRemainingAmt: 0,
+        BillPaymentType: values?.pmt != "undefined" ? values?.pmt : 0,
+        BillOutGngAmt: totaldis,
+        BillOutGngDiscountAmt: values?.dis != "undefined" ? values?.dis : 0,
+        BillOutGngAmtPc: 1,
+        UserId: 1,
+        BillIsVoid: false,
+        BillLastModifiedUser: 1,
+        BillAdvanceAmt: 0,
+        BillCollectionAmt: totaldis,
+        BillNepaliDate: "",
+        BillLastModifiedNepaliDate: "",
+        // BillRoundedAmt: rounded amount,
+        BillRoundedAmt: "",
+        BillWithoutRound: totaldis,
+        BillCreditPartyCode: data[0].crdPartyCode,
+        BillPassword: "",
+        IsSync: true,
+        PaymentMode: "Cash",
+        Remarks: "",
+        PaymentCode: "",
+        SampleId: 0,
+        FiscalYearId: 1,
+      };
+      console.log(allDataSend);
+      return;
+      dispatch(
+        addCreateCreditPartyBill(allDataSend, (res) => {
+          console.log(res);
+        })
+      );
+    } else {
+      message.warning("RequestOR is not selected");
+    }
   };
   const onFinishFailed = (errorInfo) => {
     // console.log("Failed:", errorInfo);
@@ -222,7 +224,16 @@ const AddBill = () => {
                 >
                   <Row>
                     <Col span={8}>
-                      <Form.Item label="Item Name" name="item">
+                      <Form.Item
+                        label="Item Name"
+                        name="item"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item name!",
+                          },
+                        ]}
+                      >
                         <Input
                           style={{
                             width: "100%",
@@ -231,10 +242,18 @@ const AddBill = () => {
                       </Form.Item>
                     </Col>
                     <Col span={8}>
-                      <Form.Item label="Rate" name="rate">
+                      <Form.Item
+                        label="Rate"
+                        name="rate"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item rate!",
+                          },
+                        ]}
+                      >
                         <InputNumber
-                          min={1}
-                          max={100000}
+                          min={0}
                           onChange={(e) => {
                             setNumber1(e);
                           }}
@@ -245,35 +264,60 @@ const AddBill = () => {
                       </Form.Item>
                     </Col>
                     <Col span={8}>
-                      <Form.Item label="Quantity" name="qty">
+                      <Form.Item
+                        label="Quantity"
+                        name="qty"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item quantity!",
+                          },
+                        ]}
+                      >
                         <InputNumber
                           style={{
                             width: "100%",
                           }}
-                          min={1}
-                          max={100000}
+                          min={0}
                           onChange={(e) => setNumber2(e)}
                         />
                       </Form.Item>
                     </Col>
                     <Col span={8}>
-                      <Form.Item label="DiscountAmt" name="dis">
+                      <Form.Item
+                        label="DiscountAmt"
+                        name="dis"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item discount!",
+                          },
+                        ]}
+                      >
                         <InputNumber
                           style={{
                             width: "100%",
                           }}
-                          min={1}
-                          max={100000}
+                          min={0}
                           onChange={(e) => setNumber3(e)}
                         />
                       </Form.Item>
                     </Col>
                     <Col span={8}>
-                      <Form.Item label="Payment Type" name="pmt">
-                        <Select defaultValue="" onChange={handleChange}>
+                      <Form.Item
+                        label="Payment Type"
+                        name="pmt"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please select payment type!",
+                          },
+                        ]}
+                      >
+                        <Select onChange={handleChange}>
                           {paymentType.map((item) => {
                             return (
-                              <Option value={item.id} key={item.id}>
+                              <Option value={item.paymentmethod} key={item.id}>
                                 {item.paymentmethod}
                               </Option>
                             );

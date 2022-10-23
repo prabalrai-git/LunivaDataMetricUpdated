@@ -283,13 +283,13 @@ export const useCareLabRoute = () => {
       key: "printdetails",
       name: "Print Reports",
       path: "/print",
-      showTab: true,
+      showTab: false,
     },
     {
       icon: "icon-line2-doc",
       key: "addtable",
       name: "Billing",
-      path: "/bill",
+      path: "/viewbill",
       showTab: true,
     },
     // {
@@ -307,7 +307,7 @@ export const useCareLabRoute = () => {
       name: "Edit Bill",
       path: "/editbill",
       hasSubNav: false,
-      showTab: true,
+      showTab: false,
     },
   ];
 

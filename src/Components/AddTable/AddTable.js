@@ -5,9 +5,8 @@ import PageHeader from "../Common/pageHeader";
 import { getRequestorReport } from "../../services/datametricService";
 import { Table } from "antd";
 import DataIsLoading from "../Common/IsLoading";
-import PrintLayout from "../PrintDetails/PrintLayout";
 import { useHistory } from "react-router-dom";
-import { inventoryStat } from "../Common/StateList";
+import { carelabStat } from "../Common/StateList";
 const AddTable = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -78,8 +77,8 @@ const AddTable = () => {
           buttonTitle="Add Bill"
           buttonOnClick={() =>
             history.push({
-              pathname: "/item/addbill",
-              state: inventoryStat
+              pathname: "/addbill",
+              state: carelabStat
             })
           }
         />

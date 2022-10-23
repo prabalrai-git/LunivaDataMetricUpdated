@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   GetListOfUserForMetric,
   GetListOfTestByTypeForBulkUpdate,
@@ -224,7 +223,8 @@ export const addCreateCreditPartyBill = (data, successCallback) => {
     try {
       data._lstBillItems = JSON.stringify(data._lstBillItems)
       const formData = generateUrlEncodedData(data);
-      const response = await storeNested('', formData);
+      // const response = await storeNested('', formData);
+      const response = await store('CreateCreditPartyBill', formData);
       if (response?.status === 200) {
         successCallback(response?.data);
       } else {
