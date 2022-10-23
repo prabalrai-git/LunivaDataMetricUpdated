@@ -12,6 +12,8 @@ import {
   GetCompanyDetials,
   GetDataMetricReportByReportTypeAndDateRange,
   VerifyPatientReport,
+  GetPatientBillInfoByBillId,
+  GetPatientBillItemDetailsByBillId,
 } from "../constants/url";
 import { generateUrlEncodedData } from "../utils/generateFormData";
 import { fetch, store, storeNested } from "../utils/httpUtil";
@@ -227,6 +229,34 @@ export const addCreateCreditPartyBill = (data, successCallback) => {
       const response = await store('CreateCreditPartyBill', formData);
       if (response?.status === 200) {
         successCallback(response?.data);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const getPatientBillByBillId = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${GetPatientBillInfoByBillId}?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.billDetails);
+        // dispatch(response?.data)
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const getPatientBillItemByBillId = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${GetPatientBillItemDetailsByBillId}?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.billItemDetails);
+        // dispatch(response?.data)
       } else {
         successCallback([]);
       }

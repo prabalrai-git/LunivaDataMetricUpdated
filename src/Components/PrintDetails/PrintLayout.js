@@ -1,60 +1,92 @@
-import React from "react";
-import { Col, Row, Divider } from "antd";
+import { Divider } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+// import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { getPatientBillByBillId, getPatientBillItemByBillId } from "../../services/datametricService";
+
 const PrintLayout = () => {
-  const data = [
-    {
-      municiplaitynm: "Abc Rural Municipality",
-      municiplaityex: "Office of Municipality Executive",
-      carename: "Allied Community HealthCare & Diagnostic Center",
-      location: "Dallu Kathmandu",
-      phone: "01166234",
-      name: "ABC",
-      panno: "0912821",
-      age: "21 y/Male",
-      address: "Kirtipur Municipality",
-      mobilenum: "9878787867",
-      depart: "All",
-      paymenttype: "General",
-      Invoicedate: "2022-10-16 A.D",
-      transDate: "2022-10-16 A.D",
-      billno: "21",
-      patientid: "12",
-      paymenttype: "Cash",
-      RefDr: "SELF",
-      testname: "40% - 59% BURN DRESSING ",
-      rate: "1000",
-      qty: "1",
-      price: "1000",
-      total: "1000",
-      return: "1000",
-      paidamt: "1000",
-      remaining: "0",
-      billby: "admin",
-      printedby: "admin",
-      amtword: "1000",
-      printedon: "2022-10-16 A.D",
-    },
-  ];
+  const dispatch = useDispatch();
+  // const { id } = useParams()
+  // const BILLID = props?.match?.params?.id;
+  // const FISCALYEAR = props?.match?.params?.fiscalyear;
+
+  // console.log(id, BILLID, FISCALYEAR);
+  const [billDetails, setBillDetails] = useState([]);
+  const [billItemDetails, setBillItemDetails] = useState([]);
+
+  const loadPrintDataFun = (billId, fiscalYear) => {
+    const ALLDATA = {
+      sampleId: billId,
+      fiscalYear: fiscalYear,
+    }
+    dispatch(
+      getPatientBillByBillId(ALLDATA, (val) => {
+        if (val.length > 0) {
+          setBillDetails(val)
+        }
+      })
+    );
+    dispatch(
+      getPatientBillItemByBillId(ALLDATA, (val) => {
+        if (val.length > 0) {
+          setBillItemDetails(val)
+        }
+      })
+    )
+  }
+
+  useEffect(() => {
+    loadPrintDataFun(12, 1)
+  }, [])
+
+  // const data = [
+  //   {
+  //     municiplaitynm: "Abc Rural Municipality",
+  //     municiplaityex: "Office of Municipality Executive",
+  //     carename: "Allied Community HealthCare & Diagnostic Center",
+  //     location: "Dallu Kathmandu",
+  //     phone: "01166234",
+  //     name: "ABC",
+  //     panno: "0912821",
+  //     age: "21 y/Male",
+  //     address: "Kirtipur Municipality",
+  //     mobilenum: "9878787867",
+  //     depart: "All",
+  //     paymenttype: "General",
+  //     Invoicedate: "2022-10-16 A.D",
+  //     transDate: "2022-10-16 A.D",
+  //     billno: "21",
+  //     patientid: "12",
+  //     paymenttype: "Cash",
+  //     RefDr: "SELF",
+  //     testname: "40% - 59% BURN DRESSING ",
+  //     rate: "1000",
+  //     qty: "1",
+  //     price: "1000",
+  //     total: "1000",
+  //     return: "1000",
+  //     paidamt: "1000",
+  //     remaining: "0",
+  //     billby: "admin",
+  //     printedby: "admin",
+  //     amtword: "1000",
+  //     printedon: "2022-10-16 A.D",
+  //   },
+  // ];
   return (
     <div>
-      {data.map((user) => (
+      {billDetails.map((user) => (
         <PrintLayoutPage>
           <div className="topic-section">
-            <p>{user.municiplaitynm}</p>
-            <p>{user.municiplaityex}</p>
-            <h3>{user.carename}</h3>
-            <p>{user.location}</p>
+            <h3>Lu Bill</h3>
+            <p>Lalitpur</p>
             <p>
-              Phone no.<span>{user.phone}</span>
+              Phone no.<span>0000000</span>
             </p>
             <div className="invoice">
               <span className="invoice-details">Invoice</span>
             </div>
-            <p>
-              Customer Copy No.:<span>6</span>
-            </p>
-            <p>(Customer Copy)</p>
           </div>
 
           <div className="details-section">
@@ -67,53 +99,37 @@ const PrintLayout = () => {
                     <td>
                       <div>
                         <strong>
-                          Name:<span>{user.name}</span>
+                          Requestor: <span>{user.Requestor}</span>
                         </strong>
                       </div>
                       <div>
-                        PAN NO:<span>{user.panno}</span>
+                        Bill No:<span>{user.BillNo}</span>
                       </div>
                       <div>
-                        Age/Sex:<span>{user.age}</span>
+                        <strong>Payment Mode:{user.PaymentMode}</strong>
                       </div>
                       <div>
-                        Address:<span>{user.address}</span>
-                      </div>
-                      <div>
-                        Mobile No:<span>{user.mobilenum}</span>
-                      </div>
-                      <div>
-                        Department:<span>{user.depart}</span>
-                      </div>
-                      <div>
-                        <strong>Payment:{user.paymenttype}</strong>
+                        <strong>Payment Type:</strong>
+                        <span>{user.BillPaymentType}</span>
                       </div>
                     </td>
                     <td>
                       <div className="right-details">
                         <div>
-                          <strong>Invoice Date:</strong>
-                          <span>{user.Invoicedate}</span>
+                          <strong>Bill Date:</strong>
+                          <span>{user.BillDate}</span>
                         </div>
                         <div>
-                          <strong>Transaction Date:</strong>
-                          <span>{user.transDate}</span>
-                        </div>
-                        <div>
-                          <strong>Bill No:</strong>
-                          <span>{user.billno}</span>
+                          <strong>Bill Nepali Date:</strong>
+                          <span>{user.BillNepaliDate}</span>
                         </div>
                         <div>
                           <strong>Patient Id:</strong>
-                          <span>{user.patientid}</span>
+                          <span>{user.patId}</span>
                         </div>
                         <div>
-                          <strong>Payment Type:</strong>
-                          <span>{user.paymenttype}</span>
-                        </div>
-                        <div>
-                          <strong>Ref Doctor:</strong>
-                          <span>{user.RefDr}</span>
+                          <strong>Credit Party Code:</strong>
+                          <span>{user.BillCreditPartyCode}</span>
                         </div>
                       </div>
                     </td>
@@ -128,50 +144,34 @@ const PrintLayout = () => {
                       <th>Test Name</th>
                       <th>Rate</th>
                       <th>Quantity</th>
+                      <th>Discount</th>
                       <th>Price (Rs)</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>
-                        <div>{user.testname} </div>
-                      </td>
-                      <td className="money">{user.rate}</td>
-                      <td className="money qmoney">{user.qty}</td>
-                      <td className="money">{user.price}</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>
-                        <div>{user.testname}</div>
-                      </td>
-                      <td className="money">{user.rate}</td>
-                      <td className="money qmoney">{user.qty}</td>
-                      <td className="money">{user.price}</td>
-                    </tr>
+                    {
+                      billItemDetails.map((billItemVal, index) => (
+                        <tr>
+                          <td>{index+1}</td>
+                          <td>
+                            <div>{billItemVal.billTestName} </div>
+                          </td>
+                          <td className="money">{billItemVal.billPrice}</td>
+                          <td className="money qmoney">1</td>
+                          <td className="money">{billItemVal.BillDiscountAmount}</td>
+                          <td className="money">{billItemVal.BillPriceFinal}</td>
+                        </tr>
+                      ))
+                    }
                     <tr>
                       <th>Total</th>
                       <th></th>
-                      <th class="money grandTotalAmount" colspan="3">
+                      <th></th>
+                      <th className="money grandTotalAmount" colSpan="3">
                         {user.amtword}
                       </th>
                     </tr>
                     <tr>
-                      <th></th>
-                      <th className="total-below">
-                        <span>Grand Total</span>
-                        <br></br>
-                        <span>Return</span> <br></br>
-                        <span>Paid Amount</span> <br></br>
-                        <span>Remaining</span> <br></br>
-                      </th>
-                      <td className="money" colspan="3">
-                        <span>{user.total}</span> <br></br>
-                        <span>{user.return}</span> <br></br>
-                        <span>{user.paidamt}</span> <br></br>
-                        <span>{user.remaining}</span> <br></br>
-                      </td>
                     </tr>
                   </tbody>
                 </table>

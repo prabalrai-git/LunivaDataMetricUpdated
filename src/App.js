@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import loadlogo from "./assets/images/logo1.png";
@@ -95,11 +95,11 @@ import {
   AsyncItemSource,
   AsyncAddItemSource,
   AsyncPrintLayout,
-  AsyncTableLayout,
   AsyncAddBill,
   AsyncAddUpdateBill,
   AsyncViewBillingTable,
   AsyncPrintBillLayout,
+  AsyncViewUpdateBill,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1350,6 +1350,15 @@ function App() {
             forEdit
             showSider
           />
+
+          <PrivateRouter
+            exact
+            path="/viewupdatebill/:id/:fiscalyear"
+            component={AsyncViewUpdateBill}
+            layout={AsyncAppLayout}
+            showSider
+          />
+
           <PrivateRouter
             exact
             path="/viewbill"
@@ -1362,7 +1371,7 @@ function App() {
           {/* Design Purpose */}
           <PublicRoute
             exact
-            path="/printlayout"
+            path="/printlayout/:id/:fiscalyear"
             component={AsyncPrintBillLayout}
             layout={AsyncPrintLayout}
           />

@@ -20,7 +20,7 @@ const NewTableSummary = (props) => {
   // requestorList
   return (
     <NewSummaryContainer>
-      <h4>New Bill Summary</h4>
+      <h4>Bill Summary</h4>
       <Row justify="space-between">
         <Col>
           <li>Id:{id}</li>

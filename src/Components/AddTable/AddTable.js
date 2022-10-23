@@ -1,68 +1,86 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import Filter from "../Common/Filter";
 import PageHeader from "../Common/pageHeader";
-import { getRequestorReport } from "../../services/datametricService";
-import { Table } from "antd";
+import { getPatientBillByBillId } from "../../services/datametricService";
+import { Space, Table } from "antd";
 import DataIsLoading from "../Common/IsLoading";
 import { useHistory } from "react-router-dom";
 import { carelabStat } from "../Common/StateList";
+import CarelabFilter from "../Common/CarelabFilter";
+import View from "../Common/View";
+import Print from "../Common/Print";
+
 const AddTable = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [tableData, settableData] = useState([]);
-  const [tableHead, setTableHead] = useState([]);
-  const [newTableData, setnewTableData] = useState([]);
-  const [fromToDate, setfromToDate] = useState({});
+  const [tableData, setTableData] = useState([]);
+  const [returnDataList, setReturnDataList] = useState({})
   const [IsLoading, setIsLoading] = useState(false);
+
+  const tableHeads = [
+    {
+      title: 'BillNo',
+      dataIndex: 'BillNo',
+      key: 'BillNo',
+    },
+    {
+      title: 'Price',
+      dataIndex: 'Price',
+      key: 'Price',
+    },
+    {
+      title: 'TotalPrice',
+      dataIndex: 'TotalPrice',
+      key: 'TotalPrice',
+    },
+    {
+      title: 'Action',
+      dataIndex: 'Action',
+      key: 'SampleId',
+      render: (text, record) => (
+        <Space size="middle">
+          <View onClick={() => history.push({
+              pathname: `/viewupdatebill/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
+              state: carelabStat
+            })}>View</View>
+            <Print onClick={() => history.push({
+              pathname: `/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
+              state: carelabStat
+            })}>Print</Print>
+        </Space>
+      ),
+    }
+  ]
 
   const getDataForReport = (data) => {
     setIsLoading(true);
     dispatch(
-      getRequestorReport(data, (val) => {
-        settableData(val);
-        setnewTableData(val);
-        setIsLoading(false);
+      getPatientBillByBillId(data, (val) => {
+        setTableData(val);
       })
     );
+    setIsLoading(false);
   };
 
-  const dataRet = (val) => {
-    let data = {
-      ...val,
-      fromdate: val[0].format("YYYY-MM-DD"),
-      todate: val[1].format("YYYY-MM-DD"),
-    };
-    getDataForReport(data);
-    setfromToDate(data);
-  };
+  // const createTableHead = () => {
+  //   if (tableData.length !== 0) {
+  //     let tableKeys = Object.keys(tableData[0]);
+  //     let data = [];
+  //     tableKeys.forEach((ele) => {
+  //       data.push({
+  //         title: ele,
+  //         dataIndex: ele,
+  //         key: ele,
+  //       });
+  //     });
+  //     setTableHead(data);
+  //   }
+  // };
 
-  useEffect(() => {
-    createTableHead();
-  }, [tableData]);
-
-  const createTableHead = () => {
-    if (tableData.length !== 0) {
-      let tableKeys = Object.keys(tableData[0]);
-      let data = [];
-      tableKeys.forEach((ele) => {
-        data.push({
-          title: ele,
-          dataIndex: ele,
-          key: ele,
-        });
-      });
-      setTableHead(data);
-    }
-  };
-
-  const handleSearch = (val) => {
-    if (val === undefined || val === "") {
-      setnewTableData(tableData);
-    } else {
-      setnewTableData(val);
-    }
-  };
+  const returnFilterData = (res) => {
+    setReturnDataList(res)
+    getDataForReport(res)
+  }
 
   return (
     <>
@@ -70,9 +88,6 @@ const AddTable = () => {
         <PageHeader
           pageTitle=" View Billing Report"
           reportName="Requestor"
-          tableHead={tableHead}
-          fromToDate={fromToDate}
-          removetwo
           selctorr={"Requestor Name"}
           buttonTitle="Add Bill"
           buttonOnClick={() =>
@@ -82,25 +97,21 @@ const AddTable = () => {
             })
           }
         />
-        <Filter
-          dateRet={dataRet}
-          serchButton
-          getrequestorlist
-          toCompareData={tableData}
-          onSearch
-          dataReturn={handleSearch}
-          forRequestorReport
+        <CarelabFilter
+          showSampleId={'Bill Id'}
+          fiscalService
+          returnFilterData={returnFilterData}
         />
       </div>
 
       {IsLoading ? (
         <DataIsLoading />
-      ) : tableHead.length !== 0 ? (
+      ) : tableData.length !== 0 ? (
         <div className="tableisRes">
           <Table
             className="tableWidth"
-            columns={tableHead}
-            dataSource={newTableData}
+            columns={tableHeads}
+            dataSource={tableData}
           />
         </div>
       ) : (

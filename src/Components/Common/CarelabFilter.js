@@ -1,5 +1,4 @@
 import { Row, Col, Select, Button, Form, DatePicker, Input } from "antd";
-import FormItem from "antd/lib/form/FormItem";
 import moment from "moment";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -7,7 +6,6 @@ import styled from "styled-components";
 import { useControlDetails } from "../../CustomHook/useControlDetails";
 import { useFiscalYear } from "../../CustomHook/useFiscalYear";
 import { getControlTestListApi } from "../../services/qcService";
-import Filter from "./Filter";
 
 const CarelabFilter = (props) => {
   const {
@@ -29,7 +27,6 @@ const CarelabFilter = (props) => {
   const [testList, setTestList] = useState([]);
   const [dateRange, setDateRange] = useState([moment(), moment()]);
   const fiscalYear = useFiscalYear();
-  // console.log(fiscalYear);
 
   const initialValues = {
     SingleDate: moment(),
@@ -77,7 +74,6 @@ const CarelabFilter = (props) => {
                       initialValues={dateRange}
                       onChange={(value) => {
                         setDateRange(value);
-                        // console.log(dateRange);
                       }}
                       style={{ width: "100%" }}
                     />
@@ -233,8 +229,8 @@ const CarelabFilter = (props) => {
               {showSampleId && (
                 <>
                   <Col lg={4} md={12} sm={12} xs={24}>
-                    <Form.Item name="sampleId" label="Sample Id">
-                      <Input placeholder="Sample Id" />
+                    <Form.Item name="sampleId" label={showSampleId != '' ? showSampleId : 'Sample Id'}>
+                      <Input placeholder={showSampleId != '' ? showSampleId : 'Sample Id'} />
                     </Form.Item>
                   </Col>
                 </>

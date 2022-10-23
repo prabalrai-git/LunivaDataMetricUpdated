@@ -635,3 +635,15 @@ export const InsertUpdateItemSource = "InsertUpdateItemSource";
  * @param:
  */
 export const GetItemSourceDetails = "GetItemSourceDetails";
+
+/**
+ * @desc: GetPatientBillInfoByBillId
+ * @param: ?billId={billId}&fiscalyear={fiscalyear}
+ */
+export const GetPatientBillInfoByBillId = 'GetPatientBillInfoByBillId'
+
+/**
+ * @desc: GetPatientBillItemDetailsByBillId
+ * @param: ?billId={billId}&fiscalyear={fiscalyear}
+ */
+export const GetPatientBillItemDetailsByBillId = 'GetPatientBillItemDetailsByBillId'
