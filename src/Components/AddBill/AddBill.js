@@ -56,15 +56,13 @@ const AddBill = () => {
       })
     );
   }, []);
-  function sendText() {
-    if (BillCreditPartyCode.length < 0) {
-      message.warning("Request data is not selected");
-    } else {
-    }
-  }
 
   const onFinish = (values) => {
     console.log(values, data);
+    // const a =
+    //   BillCreditPartyCode.length < 0
+    //     ? message.warning("Request data is not selected")
+    //     : "";
     message.warning("Request data is not selected");
     const allDataSend = {
       _lstBillItems: [
@@ -93,7 +91,7 @@ const AddBill = () => {
       TestId: 0,
       Price: total,
       TotalPrice: totaldis,
-      DiscountPrice: values?.dis != "undefined" ? values?.dis : 0,
+      DiscountPrice: values?.dis !== "undefined" ? values?.dis : 0,
       HSTPrice: 0,
       IsPaid: true,
       IsDone: true,
@@ -107,9 +105,9 @@ const AddBill = () => {
       BillHstAmt: 0,
       BillAmtPaid: totaldis,
       BillRemainingAmt: 0,
-      BillPaymentType: values?.pmt,
+      BillPaymentType: values?.pmt != "undefined" ? values?.pmt : 0,
       BillOutGngAmt: totaldis,
-      BillOutGngDiscountAmt: values?.dis,
+      BillOutGngDiscountAmt: values?.dis != "undefined" ? values?.dis : 0,
       BillOutGngAmtPc: 1,
       UserId: 1,
       BillIsVoid: false,
