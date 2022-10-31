@@ -1373,7 +1373,8 @@ function App() {
             exact
             path="/printlayout/:id/:fiscalyear"
             component={AsyncPrintBillLayout}
-            layout={AsyncPrintLayout}
+            layout={AsyncAppLayout}
+            forEdit
           />
 
           <Route component={AsyncNotFound} />

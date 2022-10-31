@@ -40,13 +40,17 @@ const AddTable = () => {
       render: (text, record) => (
         <Space size="middle">
           <View onClick={() => history.push({
-              pathname: `/viewupdatebill/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
-              state: carelabStat
-            })}>View</View>
-            <Print onClick={() => history.push({
-              pathname: `/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
-              state: carelabStat
-            })}>Print</Print>
+            pathname: `/viewupdatebill/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
+            state: carelabStat
+          })}>View</View>
+          <Print onClick={() => {
+            window.open(`/luniva360pphlbagmati/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`, "_blank");
+            // history.push({
+            //   pathname: `/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
+            //   state: carelabStat
+            // })}
+          }}>Print</Print>
+
         </Space>
       ),
     }

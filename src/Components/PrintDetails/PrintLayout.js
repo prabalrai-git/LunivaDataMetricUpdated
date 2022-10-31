@@ -3,17 +3,20 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { inWords } from "../../constants/numberToWords";
 import { getPatientBillByBillId, getPatientBillItemByBillId } from "../../services/datametricService";
+import { todaydate } from "../Common/TodayDate";
 
-const PrintLayout = () => {
+const PrintLayout = (props) => {
   const dispatch = useDispatch();
   // const { id } = useParams()
-  // const BILLID = props?.match?.params?.id;
-  // const FISCALYEAR = props?.match?.params?.fiscalyear;
+  const paramVal = props !== undefined ? props?.location?.pathname.split('/') : '';
+  const BILLID = paramVal != '' ? paramVal[2] : '';
+  const FISCALYEAR = paramVal != '' ? paramVal[3] : '';
 
-  // console.log(id, BILLID, FISCALYEAR);
   const [billDetails, setBillDetails] = useState([]);
   const [billItemDetails, setBillItemDetails] = useState([]);
+  const [shouldPrint, setShouldPrint] = useState(false);
 
   const loadPrintDataFun = (billId, fiscalYear) => {
     const ALLDATA = {
@@ -31,55 +34,31 @@ const PrintLayout = () => {
       getPatientBillItemByBillId(ALLDATA, (val) => {
         if (val.length > 0) {
           setBillItemDetails(val)
+          setShouldPrint(true)
         }
       })
     )
   }
 
   useEffect(() => {
-    loadPrintDataFun(12, 1)
+    if(shouldPrint){
+      setTimeout(() => {
+        window.print()
+        window.close()
+      }, [1000])
+    }
+  }, [shouldPrint])
+
+  useEffect(() => {
+    loadPrintDataFun(BILLID, FISCALYEAR)
   }, [])
 
-  // const data = [
-  //   {
-  //     municiplaitynm: "Abc Rural Municipality",
-  //     municiplaityex: "Office of Municipality Executive",
-  //     carename: "Allied Community HealthCare & Diagnostic Center",
-  //     location: "Dallu Kathmandu",
-  //     phone: "01166234",
-  //     name: "ABC",
-  //     panno: "0912821",
-  //     age: "21 y/Male",
-  //     address: "Kirtipur Municipality",
-  //     mobilenum: "9878787867",
-  //     depart: "All",
-  //     paymenttype: "General",
-  //     Invoicedate: "2022-10-16 A.D",
-  //     transDate: "2022-10-16 A.D",
-  //     billno: "21",
-  //     patientid: "12",
-  //     paymenttype: "Cash",
-  //     RefDr: "SELF",
-  //     testname: "40% - 59% BURN DRESSING ",
-  //     rate: "1000",
-  //     qty: "1",
-  //     price: "1000",
-  //     total: "1000",
-  //     return: "1000",
-  //     paidamt: "1000",
-  //     remaining: "0",
-  //     billby: "admin",
-  //     printedby: "admin",
-  //     amtword: "1000",
-  //     printedon: "2022-10-16 A.D",
-  //   },
-  // ];
   return (
     <div>
       {billDetails.map((user) => (
         <PrintLayoutPage>
           <div className="topic-section">
-            <h3>Lu Bill</h3>
+            <h3>Luniva Bill</h3>
             <p>Lalitpur</p>
             <p>
               Phone no.<span>0000000</span>
@@ -117,7 +96,7 @@ const PrintLayout = () => {
                       <div className="right-details">
                         <div>
                           <strong>Bill Date:</strong>
-                          <span>{user.BillDate}</span>
+                          <span>{user.BillDate.split('T')[0]}</span>
                         </div>
                         <div>
                           <strong>Bill Nepali Date:</strong>
@@ -166,32 +145,36 @@ const PrintLayout = () => {
                     <tr>
                       <th>Total</th>
                       <th></th>
+                      <th className="money">{user.Price}</th>
                       <th></th>
-                      <th className="money grandTotalAmount" colSpan="3">
-                        {user.amtword}
-                      </th>
+                      <th className="money"></th>
+                      {/* {user.BillDiscountPrice} */}
+                      <th className="money grandTotalAmount">{user.TotalPrice}</th>
                     </tr>
                     <tr>
+                      <th></th>
+                      <th className="total-below">
+                        <span>Net Total</span> <br></br>
+                        <span>Discount Total</span> <br></br>
+                        <span>Grand Total</span> <br></br>
+                        <span>Paid Amount</span> <br></br>
+                      </th>
+                      <td className="money" colspan="4">
+                        <span>{user.Price}</span> <br></br>
+                        <span>{user.BillDiscountPrice}</span> <br></br>
+                        <span>{user.TotalPrice}</span> <br></br>
+                        <span>{user.BillAmtPaid}</span> <br></br>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
                 <div className="printed-section">
                   <span>
-                    <strong>Bill By:</strong>
-                    {user.billby}
-                  </span>
-                  <br></br>
-                  <span>
-                    <strong>Printed on:</strong>
-                    {user.printedon}
-                  </span>
-                  <span>
-                    <strong>Printed By:</strong>
-                    {user.printedby}
+                    <strong>Printed on:</strong> {todaydate}
                   </span>
                 </div>
                 <span className="total-amt">
-                  Amount in Words: three thousand
+                  Amount in Words: {inWords(user.TotalPrice)}
                 </span>
               </div>
             </div>
