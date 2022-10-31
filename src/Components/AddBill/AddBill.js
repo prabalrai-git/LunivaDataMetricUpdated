@@ -141,7 +141,8 @@ const AddBill = () => {
     grandtotal();
     roundsfunc();
     // autopercentagecalculate();
-    autocalcDisAmount();
+    // autocalcDisAmount();
+    // autodisountamtcalculate();
     // autocalcPer();
   }, [rate, quantity, discountamount, grandtotals, total]);
 
@@ -153,6 +154,7 @@ const AddBill = () => {
   const grandtotal = () => {
     let totalss = total - discountamount;
     let totalD = Math.round(totalss);
+    // console.log(total, discountamount);
     setGrandTotal(totalD);
   };
   const roundsfunc = () => {
@@ -165,6 +167,7 @@ const AddBill = () => {
     form.setFieldsValue({
       dispercent: calculate,
     });
+
     // setDiscountAmountToPer(calculate);
     // form.setFieldsValue(calculate);
     // setFieldsValue
@@ -174,19 +177,25 @@ const AddBill = () => {
     const itemData = requestorList.filter((res) => res.crdId === chData);
     setData(itemData);
   };
-
-  const autocalcDisAmount = (e) => {
-    // 12 / total * 100
-    // console.log(e);
-    let disamt = (e / 100) * total;
-    // console.log(total, disamt);
-    setDisPercentToAmt(disamt);
-    setDiscountAmount(disamt);
+  const autodisountamtcalculate = (e) => {
+    let autocalamt = (e / 100) * total;
+    setDiscountAmount(autocalamt);
     form.setFieldsValue({
-      dis: disamt,
+      dis: autocalamt,
     });
-    // setFieldsValue(autocal);
   };
+  // const autocalcDisAmount = (e) => {
+  //   // 12 / total * 100
+  //   // console.log(e);
+  //   let disamt = (e / 100) * total;
+  //   // console.log(total, disamt);
+  //   // setDisPercentToAmt(disamt);
+  //   setDiscountAmount(disamt);
+  //   form.setFieldsValue({
+  //     dis: disamt,
+  //   });
+  //   // setFieldsValue(autocal);
+  // };
 
   return (
     <>
@@ -331,14 +340,14 @@ const AddBill = () => {
                             // form.setFieldsValue({
                             //   dispercent: discountamounttoper,
                             // });
-                            // setDiscountAmount(e);
-                            autopercentagecalculate(e);
+                            setDiscountAmount(e);
+                            // autopercentagecalculate(e);
                           }}
                           // value={discountpercentage}
                         />
                       </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    {/* <Col span={8}>
                       <Form.Item
                         label="Discount Percent"
                         name="dispercent"
@@ -359,12 +368,13 @@ const AddBill = () => {
                             //   dis: discountamounttoper,
                             // });
                             // setDiscountPercentage(e);
-                            autocalcDisAmount(e);
+                            autodisountamtcalculate(e);
+                            // autocalcDisAmount(e);
                           }}
                           // value={discountpercentage}
                         />
                       </Form.Item>
-                    </Col>
+                    </Col> */}
                     <Col span={8}>
                       <Form.Item
                         label="Payment Type"
@@ -406,15 +416,15 @@ const AddBill = () => {
                         <Descriptions.Item label="SubTotal">
                           {total}
                         </Descriptions.Item>
-                        <Descriptions.Item label="Discount (%)">
+                        {/* <Descriptions.Item label="Discount (%)">
                           {discountpercentage}
-                        </Descriptions.Item>
+                        </Descriptions.Item> */}
                         <Descriptions.Item label="Discount Amt">
                           {discountamount}
                         </Descriptions.Item>
-                        <Descriptions.Item label="Rounded Amount">
+                        {/* <Descriptions.Item label="Rounded Amount">
                           {roundamt}
-                        </Descriptions.Item>
+                        </Descriptions.Item> */}
                         <Descriptions.Item label="GrandTotal">
                           {grandtotals}
                         </Descriptions.Item>
