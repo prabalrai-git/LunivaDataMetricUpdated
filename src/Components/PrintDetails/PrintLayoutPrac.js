@@ -8,7 +8,6 @@ import {
   getPatientBillByBillId,
   getPatientBillItemByBillId,
 } from "../../services/datametricService";
-import { tokenString } from "../Common/HandleUser";
 import { todaydate } from "../Common/TodayDate";
 
 const PrintLayout = (props) => {
@@ -48,8 +47,8 @@ const PrintLayout = (props) => {
   useEffect(() => {
     if (shouldPrint) {
       setTimeout(() => {
-        window.print();
-        window.close();
+        // window.print()
+        // window.close()
       }, [1000]);
     }
   }, [shouldPrint]);
@@ -60,7 +59,7 @@ const PrintLayout = (props) => {
 
   return (
     <div>
-      {billDetails.map(() => (
+      {billDetails.map((user) => (
         <PrintLayoutPage>
           {console.log(billDetails)}
           <div className="topic-section">
@@ -73,6 +72,7 @@ const PrintLayout = (props) => {
               <span className="invoice-details">Invoice</span>
             </div>
           </div>
+
           <div className="details-section">
             <Divider orientation="left"></Divider>
 
@@ -83,39 +83,37 @@ const PrintLayout = (props) => {
                     <td>
                       <div>
                         <strong>
-                          Requestor: <span>{billDetails[0].Requestor}</span>
+                          Requestor: <span>{user.Requestor}</span>
                         </strong>
                       </div>
                       <div>
-                        Bill No:<span>{billDetails[0].BillNo}</span>
+                        Bill No:<span>{user.BillNo}</span>
                       </div>
                       <div>
-                        <strong>
-                          Payment Mode:{billDetails[0].PaymentMode}
-                        </strong>
+                        <strong>Payment Mode:{user.PaymentMode}</strong>
                       </div>
                       <div>
                         <strong>Payment Type:</strong>
-                        <span>{billDetails[0].BillPaymentType}</span>
+                        <span>{user.BillPaymentType}</span>
                       </div>
                     </td>
                     <td>
                       <div className="right-details">
-                        {/* <div>
-                        <strong>Bill Date:</strong>
-                        <span>{billDetails[0].BillDate.split("T")[0]}</span>
-                      </div> */}
+                        <div>
+                          <strong>Bill Date:</strong>
+                          <span>{user.BillDate.split("T")[0]}</span>
+                        </div>
                         <div>
                           <strong>Bill Nepali Date:</strong>
-                          <span>{billDetails[0].BillNepaliDate}</span>
+                          <span>{user.BillNepaliDate}</span>
                         </div>
                         <div>
                           <strong>Patient Id:</strong>
-                          <span>{billDetails[0].patId}</span>
+                          <span>{user.patId}</span>
                         </div>
                         <div>
                           <strong>Credit Party Code:</strong>
-                          <span>{billDetails[0].BillCreditPartyCode}</span>
+                          <span>{user.BillCreditPartyCode}</span>
                         </div>
                       </div>
                     </td>
@@ -152,12 +150,12 @@ const PrintLayout = (props) => {
                     <tr>
                       <th>Total</th>
                       <th></th>
-                      <th className="money">{billDetails[0].Price}</th>
+                      <th className="money">{user.Price}</th>
                       <th></th>
                       <th className="money"></th>
-                      {/* {billDetails[0].BillDiscountPrice} */}
+                      {/* {user.BillDiscountPrice} */}
                       <th className="money grandTotalAmount">
-                        {billDetails[0].TotalPrice}
+                        {user.TotalPrice}
                       </th>
                     </tr>
                     <tr>
@@ -169,11 +167,10 @@ const PrintLayout = (props) => {
                         <span>Paid Amount</span> <br></br>
                       </th>
                       <td className="money" colspan="4">
-                        <span>{billDetails[0].Price}</span> <br></br>
-                        <span>{billDetails[0].BillDiscountPrice}</span>{" "}
-                        <br></br>
-                        <span>{billDetails[0].TotalPrice}</span> <br></br>
-                        <span>{billDetails[0].BillAmtPaid}</span> <br></br>
+                        <span>{user.Price}</span> <br></br>
+                        <span>{user.BillDiscountPrice}</span> <br></br>
+                        <span>{user.TotalPrice}</span> <br></br>
+                        <span>{user.BillAmtPaid}</span> <br></br>
                       </td>
                     </tr>
                   </tbody>
@@ -182,12 +179,9 @@ const PrintLayout = (props) => {
                   <span>
                     <strong>Printed on:</strong> {todaydate}
                   </span>
-                  <span>
-                    <strong>Printed By:</strong> {tokenString.username}
-                  </span>
                 </div>
                 <span className="total-amt">
-                  Amount in Words: {inWords(billDetails[0].TotalPrice)}
+                  Amount in Words: {inWords(user.TotalPrice)}
                 </span>
               </div>
             </div>
