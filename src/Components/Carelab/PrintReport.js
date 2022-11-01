@@ -1,17 +1,17 @@
 // print panel in different pages
 import { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { careLabTestListApi } from "../../services/careLabService";
 
 const PrintReport = (props) => {
-    const { isPrint, handlePrintClose } = props
-    const dispatch = useDispatch();
-    const [printJData, setPrintJData] = useState([]);
+  const { isPrint, handlePrintClose } = props;
+  const dispatch = useDispatch();
+  const [printJData, setPrintJData] = useState([]);
 
-    const printReportHere = () => {
-        createDataLayout()
-        let newWindow = window.open();
-        let newStyle = `
+  const printReportHere = () => {
+    createDataLayout();
+    let newWindow = window.open();
+    let newStyle = `
         <style>
         /* .introHead {
             position: fixed;
@@ -98,9 +98,9 @@ const PrintReport = (props) => {
             }
         }
         </style>
-        `
+        `;
 
-        let topHeader = `
+    let topHeader = `
         <table class="introHead">
             <tbody>
                 <tr>
@@ -127,9 +127,9 @@ const PrintReport = (props) => {
                     </td>
                 </tr>
             </tbody>
-        </table>`
+        </table>`;
 
-        let panelFoot = `
+    let panelFoot = `
         <div id="container">
             <div>
                 <div>Name</div>
@@ -147,19 +147,19 @@ const PrintReport = (props) => {
                 <div>Number</div>
             </div>
         </div>
-        `
+        `;
 
-        let headAndFoot = `
+    let headAndFoot = `
         <div class="page-header">
             ${topHeader}
         </div>
         <div class="page-footer">
             ${panelFoot}
         </div>
-        `
+        `;
 
-        // margin_topClass
-        let panTableStart = `
+    // margin_topClass
+    let panTableStart = `
         <table class="">
             <thead>
                 <tr>
@@ -172,25 +172,28 @@ const PrintReport = (props) => {
             <tbody>
                 <tr>
                     <td>
-        `
+        `;
 
-        let panelStart = '';
-        printJData && Object.entries(printJData).map(def => {
-            let panelName = def[0];
-            let panelValue = def[1]
-            let allPanData = `
+    let panelStart = "";
+    printJData &&
+      Object.entries(printJData).map((def) => {
+        let panelName = def[0];
+        let panelValue = def[1];
+        let allPanData = `
             <div class="pageBreaker"><div class="panelName"><h2>${panelName}</h2></div>
-            `
+            `;
 
-            panelValue && Object.entries(panelValue).map(pan => {
-                let groupName = pan[1][0][0]?.GroupName
-                let groupValue = pan[1]
+        panelValue &&
+          Object.entries(panelValue).map((pan) => {
+            let groupName = pan[1][0][0]?.GroupName;
+            let groupValue = pan[1];
 
-                let groupHead = panelName !== groupName ?
-                    `<div class="groupHead">${groupName}</div>`
-                    : ''
+            let groupHead =
+              panelName !== groupName
+                ? `<div class="groupHead">${groupName}</div>`
+                : "";
 
-                let groupTableAll = `
+            let groupTableAll = `
                 <table class="testTableHere">
                     <thead>
                         <tr>
@@ -201,74 +204,87 @@ const PrintReport = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                `
+                `;
 
-                let tableRowCreate = '';
-                groupValue && groupValue.map(gou => {
-                    if (gou.length > 1) {
-                        let testNameHeader = gou[0]?.Testname;
+            let tableRowCreate = "";
+            groupValue &&
+              groupValue.map((gou) => {
+                if (gou.length > 1) {
+                  let testNameHeader = gou[0]?.Testname;
 
-                        let subHeader = gou[0]?.subtestId !== null ?
-                            `<tr>
+                  let subHeader =
+                    gou[0]?.subtestId !== null
+                      ? `<tr>
                                 <th>${testNameHeader}</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>`
-                            :
-                            '';
-                        tableRowCreate += subHeader
+                      : "";
+                  tableRowCreate += subHeader;
 
-                        gou.map(tesLi => {
-                            let isSubtest = tesLi?.subtestId !== null;
-                            let rowHere = `
-                                <tr class=${isSubtest ? 'subTestClass' : ''}>
-                                    ${isSubtest ? `<td>${tesLi?.TestSubType}</td>` : `<th>${tesLi?.Testname}</th>`}
+                  gou.map((tesLi) => {
+                    let isSubtest = tesLi?.subtestId !== null;
+                    let rowHere = `
+                                <tr class=${isSubtest ? "subTestClass" : ""}>
+                                    ${
+                                      isSubtest
+                                        ? `<td>${tesLi?.TestSubType}</td>`
+                                        : `<th>${tesLi?.Testname}</th>`
+                                    }
                                     <td>
-                                    ${isSubtest ?
-                                    tesLi?.subresult !== null ? tesLi?.subresult : ''
-                                    :
-                                    tesLi?.TestResult !== null ? tesLi?.TestResult : ''}
+                                    ${
+                                      isSubtest
+                                        ? tesLi?.subresult !== null
+                                          ? tesLi?.subresult
+                                          : ""
+                                        : tesLi?.TestResult !== null
+                                        ? tesLi?.TestResult
+                                        : ""
+                                    }
                                     </td>
                                     <td>
                                     ${isSubtest ? tesLi?.Range : tesLi?.Max}
                                     </td>
                                     <td>${tesLi?.Units}</td>
-                                </tr>`
+                                </tr>`;
 
-                            tableRowCreate += rowHere
-                        })
-                    } else {
-                        let newRowHere =
-                            `
+                    tableRowCreate += rowHere;
+                  });
+                } else {
+                  let newRowHere = `
                         <tr>
                             <th>${gou[0]?.Testname}</th>
-                            <td>${gou[0]?.TestResult != null ? gou[0]?.TestResult : ''}</td>
+                            <td>${
+                              gou[0]?.TestResult != null
+                                ? gou[0]?.TestResult
+                                : ""
+                            }</td>
                             <td>${gou[0]?.Max}</td>
                             <td>${gou[0]?.Units}</td>
                         </tr>
-                        `
-                        tableRowCreate += newRowHere
-                    }
-                })
+                        `;
+                  tableRowCreate += newRowHere;
+                }
+              });
 
-                groupTableAll += tableRowCreate
-                groupTableAll += `
+            groupTableAll += tableRowCreate;
+            groupTableAll += `
                     </tbody>
                 </table>
-                `
+                `;
 
-                allPanData += groupHead + groupTableAll
-            })
+            allPanData += groupHead + groupTableAll;
+          });
 
-            allPanData += '</div>'
+        allPanData += "</div>";
 
-            panelStart += allPanData
-        })
+        panelStart += allPanData;
+      });
 
-        panTableStart += panelStart
+    panTableStart += panelStart;
 
-        panTableStart += `
+    panTableStart += `
                     </td>
                 </tr>
             </tbody>
@@ -279,91 +295,86 @@ const PrintReport = (props) => {
                     </td>
                 </tr>
             </tfoot>
-        </table>`
+        </table>`;
 
-        newWindow.document.body.innerHTML = newStyle + headAndFoot + panTableStart
+    newWindow.document.body.innerHTML = newStyle + headAndFoot + panTableStart;
 
-        // setTimeout(function () {
-        //     newWindow.print();
-        //     newWindow.close();
-        //   }, 300);
+    // setTimeout(function () {
+    //     newWindow.print();
+    //     newWindow.close();
+    //   }, 300);
 
-        handlePrintClose(false)
-    }
+    handlePrintClose(false);
+  };
 
-    useEffect(() => {
+  useEffect(() => {}, [printJData]);
 
-    }, [printJData])
+  const createDataLayout = () => {
+    let fullDa = {
+      sampleid: 112,
+      fiscalyear: 1,
+    };
+    dispatch(
+      careLabTestListApi(fullDa, (res) => {
+        let newArray = {};
+        let newJSON = {};
+        let newSub = {};
 
-    const createDataLayout = () => {
-        let fullDa = {
-            sampleid: 112,
-            fiscalyear: 1
-        };
-        dispatch(careLabTestListApi(fullDa, (res) => {
-            let newArray = {}
-            let newJSON = {}
-            let newSub = {}
+        for (const key in res) {
+          if (Object.hasOwnProperty.call(res, key)) {
+            const ele = res[key];
 
-            for (const key in res) {
-                if (Object.hasOwnProperty.call(res, key)) {
-                    const ele = res[key];
+            let panelName = ele?.Panel;
+            let groupName = `${ele?.Panel}_${ele?.GroupName}`;
+            let subTypeName = `${ele?.Testname}?q=&${ele?.Panel}_${ele?.GroupName}`;
 
-                    let panelName = ele?.Panel
-                    let groupName = `${ele?.Panel}_${ele?.GroupName}`
-                    let subTypeName = `${ele?.Testname}?q=&${ele?.Panel}_${ele?.GroupName}`
-
-                    if (!newArray[panelName]) {
-                        newArray[panelName] = [];
-                    }
-
-                    if (!newJSON[groupName]) {
-                        newJSON[groupName] = [];
-                    }
-
-                    //subtype
-                    if (subTypeName !== null && !newSub[subTypeName]) {
-                        newSub[subTypeName] = [];
-                    }
-
-                    newSub[subTypeName] = [...newSub[subTypeName], ele];
-                    //subtype
-                }
+            if (!newArray[panelName]) {
+              newArray[panelName] = [];
             }
 
-            for (const key in newSub) {
-                if (Object.hasOwnProperty.call(newSub, key)) {
-                    let spKey = key.split('?q=&')[1];
-                    const element = newSub[key];
-                    newJSON[spKey].push(element)
-                }
+            if (!newJSON[groupName]) {
+              newJSON[groupName] = [];
             }
 
-
-            for (const key in newJSON) {
-                if (Object.hasOwnProperty.call(newJSON, key)) {
-                    let spKey = key.split('_')[0];
-                    const element = newJSON[key];
-                    newArray[spKey].push(element)
-                }
+            //subtype
+            if (subTypeName !== null && !newSub[subTypeName]) {
+              newSub[subTypeName] = [];
             }
 
-            setPrintJData(newArray);
-            return newArray
-        }))
-    }
-
-    useEffect(() => {
-        if (isPrint === true) {
-            printReportHere()
+            newSub[subTypeName] = [...newSub[subTypeName], ele];
+            //subtype
+          }
         }
-    }, [isPrint])
 
-    return (
-        <>
-        </>
-    )
+        for (const key in newSub) {
+          if (Object.hasOwnProperty.call(newSub, key)) {
+            let spKey = key.split("?q=&")[1];
+            const element = newSub[key];
+            newJSON[spKey].push(element);
+          }
+        }
 
-}
+        for (const key in newJSON) {
+          if (Object.hasOwnProperty.call(newJSON, key)) {
+            let spKey = key.split("_")[0];
+            const element = newJSON[key];
+            newArray[spKey].push(element);
+          }
+        }
 
-export default PrintReport
+        setPrintJData(newArray);
+        return newArray;
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (isPrint === true) {
+      printReportHere();
+    }
+  }, [isPrint]);
+
+  return <></>;
+};
+
+export default PrintReport;

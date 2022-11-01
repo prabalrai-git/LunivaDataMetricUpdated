@@ -374,6 +374,9 @@ export const AsyncAddItemSource = lazy(() =>
 export const AsyncPrintLayout = lazy(() =>
   pMinDelay(import("../Components/PrintDetails/PrintLayout"), 300)
 );
+export const AsyncPrintLayoutPrac = lazy(() =>
+  pMinDelay(import("../Components/PrintDetails/PrintLayoutPrac"), 300)
+);
 export const AsyncTableLayout = lazy(() =>
   pMinDelay(import("../Components/AddTable/AddTable"), 300)
 );
