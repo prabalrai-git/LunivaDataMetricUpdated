@@ -29,11 +29,11 @@ const AddBill = () => {
   const [rate, setRate] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [discountamount, setDiscountAmount] = useState(0);
-  const [discountpercentage, setDiscountPercentage] = useState(0);
-  const [discountamounttoper, setDiscountAmountToPer] = useState(0);
-  const [dispercenttoAmt, setDisPercentToAmt] = useState(0);
+  // const [discountpercentage, setDiscountPercentage] = useState(0);
+  // const [discountamounttoper, setDiscountAmountToPer] = useState(0);
+  // const [dispercenttoAmt, setDisPercentToAmt] = useState(0);
   const [total, setTotal] = useState(0);
-  const [grandtotals, setGrandTotal] = useState(0);
+  const [grandtotals, setGrandTotals] = useState(0);
   const [roundamt, setRoundAmt] = useState(0);
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
@@ -62,41 +62,44 @@ const AddBill = () => {
             BillNo: "",
             TestID: 0,
             billDGid: 0,
-            billTestName: values?.item !== "undefined" ? values?.item : 0,
-            billPrice: values?.total,
+            billTestName: values?.item !== undefined && values?.item !== null ? values?.item : 0,
+            billPrice: total !== undefined && total !== null ? total : 0,
             billOutGoing: true,
-            billDiscount: values?.dis !== "undefined" ? values?.dis : 0,
-            billDiscountAmt: values?.dis !== "undefined" ? values?.dis : 0,
-            billPriceFinal:
-              values?.grandtotals !== "undefined" ? values?.grandtotals : 0,
+            //needs percent
+            billDiscount: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
+            //needs percent
+            billDiscountAmt: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
+            billPriceFinal: grandtotals !== undefined && grandtotals !== null ? grandtotals : 0,
             IsSync: true,
-            RoundAmt: roundamt,
-            Remarks: "",
+            RoundAmt: 0,//roundamt,
+            Remarks: "N/A",
             OutgoingLabId: 1,
           },
         ],
         Id: 0,
         PatId: 2,
-        Nrl_Reg_No: "",
+        Nrl_Reg_No: "N/A",
         TestId: 0,
         Price: total,
         TotalPrice: grandtotals,
-        DiscountPrice: values?.dis !== "undefined" ? values?.dis : 0,
+        DiscountPrice: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
         HSTPrice: 0,
         IsPaid: true,
         IsDone: true,
         BillDate: todaydate,
         BillLastModifiedDate: todaydate,
-        BillNo: "",
-        BillDiscount: values?.dis,
-        BillDiscountAmt: values?.dis,
+        BillNo: "A",
+        //needs percent
+        BillDiscount: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
+        //needs percent
+        BillDiscountAmt: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
         BillHst: 0,
         BillHstAmt: 0,
         BillAmtPaid: grandtotals,
         BillRemainingAmt: 0,
-        BillPaymentType: values?.pmt !== "undefined" ? values?.pmt : 0,
+        BillPaymentType: values?.pmt !== undefined && values?.pmt !== null ? values?.pmt : 0,
         BillOutGngAmt: grandtotals,
-        BillOutGngDiscountAmt: values?.dis !== "undefined" ? values?.dis : 0,
+        BillOutGngDiscountAmt: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
         BillOutGngAmtPc: 1,
         UserId: tokenString.UId,
         BillIsVoid: false,
@@ -111,24 +114,23 @@ const AddBill = () => {
         BillPassword: "",
         IsSync: true,
         PaymentMode: "Cash",
-        Remarks: "",
+        Remarks: "N/A",
         PaymentCode: "",
         SampleId: 0,
         FiscalYearId: 1,
       };
-      console.log(allDataSend);
-      return;
+      // console.log(allDataSend);
+      // return;
       dispatch(
         addCreateCreditPartyBill(allDataSend, (res) => {
           console.log(res);
         })
       );
     } else {
-      message.warning("RequestOR is not selected");
+      message.warning("Requestor is not selected");
     }
   };
   const onFinishFailed = (errorInfo) => {
-    // console.log("Failed:", errorInfo);
   };
 
   const nepaliDateConverter = (englishDateString) => {
@@ -154,47 +156,32 @@ const AddBill = () => {
   const grandtotal = () => {
     let totalss = total - discountamount;
     let totalD = Math.round(totalss);
-    // console.log(total, discountamount);
-    setGrandTotal(totalD);
+    setGrandTotals(totalD);
   };
   const roundsfunc = () => {
     let rv = Math.round(discountamount);
     setRoundAmt(rv);
   };
-  const autopercentagecalculate = (e) => {
-    let calculate = (e / total) * 100;
-    setDiscountPercentage(calculate);
-    form.setFieldsValue({
-      dispercent: calculate,
-    });
 
-    // setDiscountAmountToPer(calculate);
-    // form.setFieldsValue(calculate);
-    // setFieldsValue
-  };
+  // const autopercentagecalculate = (e) => {
+  //   let calculate = (e / total) * 100;
+  //   setDiscountPercentage(calculate);
+  //   form.setFieldsValue({
+  //     dispercent: calculate,
+  //   });
+  // };
 
   const onChangeHandler = () => {
     const itemData = requestorList.filter((res) => res.crdId === chData);
     setData(itemData);
   };
-  const autodisountamtcalculate = (e) => {
-    let autocalamt = (e / 100) * total;
-    setDiscountAmount(autocalamt);
-    form.setFieldsValue({
-      dis: autocalamt,
-    });
-  };
-  // const autocalcDisAmount = (e) => {
-  //   // 12 / total * 100
-  //   // console.log(e);
-  //   let disamt = (e / 100) * total;
-  //   // console.log(total, disamt);
-  //   // setDisPercentToAmt(disamt);
-  //   setDiscountAmount(disamt);
+
+  // const autodisountamtcalculate = (e) => {
+  //   let autocalamt = (e / 100) * total;
+  //   setDiscountAmount(autocalamt);
   //   form.setFieldsValue({
-  //     dis: disamt,
+  //     dis: autocalamt,
   //   });
-  //   // setFieldsValue(autocal);
   // };
 
   return (
@@ -324,12 +311,12 @@ const AddBill = () => {
                       <Form.Item
                         label="DiscountAmt"
                         name="dis"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input item discount!",
-                          },
-                        ]}
+                        // rules={[
+                        //   {
+                        //     required: true,
+                        //     message: "Please input item discount!",
+                        //   },
+                        // ]}
                       >
                         <InputNumber
                           style={{
@@ -337,13 +324,9 @@ const AddBill = () => {
                           }}
                           min={0}
                           onChange={(e) => {
-                            // form.setFieldsValue({
-                            //   dispercent: discountamounttoper,
-                            // });
                             setDiscountAmount(e);
                             // autopercentagecalculate(e);
                           }}
-                          // value={discountpercentage}
                         />
                       </Form.Item>
                     </Col>
@@ -364,14 +347,9 @@ const AddBill = () => {
                           }}
                           min={0}
                           onChange={(e) => {
-                            // form.setFieldsValue({
-                            //   dis: discountamounttoper,
-                            // });
-                            // setDiscountPercentage(e);
                             autodisountamtcalculate(e);
                             // autocalcDisAmount(e);
                           }}
-                          // value={discountpercentage}
                         />
                       </Form.Item>
                     </Col> */}

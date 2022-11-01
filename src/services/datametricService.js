@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GetListOfUserForMetric,
   GetListOfTestByTypeForBulkUpdate,
@@ -15,6 +16,7 @@ import {
   GetPatientBillInfoByBillId,
   GetPatientBillItemDetailsByBillId,
 } from "../constants/url";
+import { axiosData } from "../utils/axiosData";
 import { generateUrlEncodedData } from "../utils/generateFormData";
 import { fetch, store, storeNested } from "../utils/httpUtil";
 
@@ -224,9 +226,30 @@ export const addCreateCreditPartyBill = (data, successCallback) => {
   return async (dispatch) => {
     try {
       data._lstBillItems = JSON.stringify(data._lstBillItems)
-      const formData = generateUrlEncodedData(data);
-      // const response = await storeNested('', formData);
-      const response = await store('CreateCreditPartyBill', formData);
+      // const formData = generateUrlEncodedData(data);
+      // const formData = JSON.stringify(data)
+      // axios({
+      //   url: 'https://lunivacare.ddns.net/CarelabDataMetricService_qc/Api/CreateCreditPartyBill',
+      //   method: 'post',
+      //   data: formData,
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+      //     // 'Content-Type': 'application/json;charset=utf-8',
+      //     // 'Access-Control-Allow-Origin': '*',
+      //   },
+      //   mode: 'no-cors',
+      // })
+      // .then(function (response) {
+      //     console.log(response);
+      // })
+      // .catch(function (error) {
+      //     console.log(error);
+      // });
+      // console.log(formData);
+      return
+      const response = await storeNested('', data);
+      // const response = await axiosData('CreateCreditPartyBill', formData);
+      // const response = await axiosData(data);
       if (response?.status === 200) {
         successCallback(response?.data);
       } else {

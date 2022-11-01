@@ -1,5 +1,5 @@
 export const printMembership = (cry, small, data, e) => {
-  console.log(cry);
+
   let newWindow = window.open();
   let newStyle = `
     <style>
@@ -115,7 +115,7 @@ export const printMembership = (cry, small, data, e) => {
           <img src="${small}" alt="" class="noprint"/>
         </div>
         <div class="logo-right">
-          <img src="${cry}" alt="asdf" class="noprint" />
+          <img src="${cry}" alt="" class="noprint" />
           <p
             style="
               font-size: 2mm;
