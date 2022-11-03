@@ -46,7 +46,7 @@ const ViewUpdateBill = (props) => {
   console.log(props?.match?.params.id);
   const BILLID = props?.match?.params.id;
   // const BILLID = paramVal != "" ? paramVal[2] : "";
-  const FISCALYEAR = paramVal != "" ? paramVal[3] : "";
+  const FISCALYEAR = props?.match?.params.fiscalyear;
   const [IsLoading, setIsLoading] = useState(false);
   const [billDetails, setBillDetails] = useState([]);
   const [billItemDetails, setBillItemDetails] = useState([]);
