@@ -223,10 +223,10 @@ export const insertVerifyPatientReport = (data, successCallback) => {
 export const addCreateCreditPartyBill = (data, successCallback) => {
   return async (dispatch) => {
     try {
-      data._lstBillItems = JSON.stringify(data._lstBillItems)
+      data._lstBillItems = JSON.stringify(data._lstBillItems);
       const formData = generateUrlEncodedData(data);
       // const response = await storeNested('', formData);
-      const response = await store('CreateCreditPartyBill', formData);
+      const response = await store("CreateCreditPartyBill", formData);
       if (response?.status === 200) {
         successCallback(response?.data);
       } else {
@@ -239,7 +239,9 @@ export const addCreateCreditPartyBill = (data, successCallback) => {
 export const getPatientBillByBillId = (data, successCallback) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${GetPatientBillInfoByBillId}?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`);
+      const response = await fetch(
+        `${GetPatientBillInfoByBillId}?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`
+      );
       if (response?.status === 200) {
         successCallback(response?.data?.billDetails);
         // dispatch(response?.data)
@@ -253,7 +255,9 @@ export const getPatientBillByBillId = (data, successCallback) => {
 export const getPatientBillItemByBillId = (data, successCallback) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${GetPatientBillItemDetailsByBillId}?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`);
+      const response = await fetch(
+        `${GetPatientBillItemDetailsByBillId}?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`
+      );
       if (response?.status === 200) {
         successCallback(response?.data?.billItemDetails);
         // dispatch(response?.data)

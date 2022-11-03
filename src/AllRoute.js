@@ -47,6 +47,7 @@ import {
   AsyncDailyTransaction,
   AsyncFinance,
 } from "./App/asyncComponent";
+import PrintLayout from "./Components/PrintDetails/PrintLayout";
 import PrivateRouter from "./Routes/PrivateRouter";
 
 function AllRoute() {

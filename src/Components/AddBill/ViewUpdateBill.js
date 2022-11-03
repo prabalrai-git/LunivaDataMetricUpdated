@@ -7,320 +7,198 @@ import {
   Button,
   InputNumber,
   Descriptions,
-  message,
+  Table,
 } from "antd";
-import { useState, useEffect } from "react";
 import PageHeader from "../Common/pageHeader";
-import NewTableSummary from "../Common/NewTableSummary";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+
 import {
-  addCreateCreditPartyBill,
+  getPatientBillByBillId,
+  getPatientBillItemByBillId,
   getRequestorBillListAll,
 } from "../../services/datametricService";
-import { useDispatch } from "react-redux";
-import { adToBs } from "@sbmdkl/nepali-date-converter";
-import { paymentType } from "../../constants/paymentType";
-import { todaydate } from "../Common/TodayDate";
-import { tokenString } from "../Common/HandleUser";
-
-const ViewUpdateBill = () => {
+import { useEffect, useState } from "react";
+const columns = [
+  {
+    title: "bill id",
+    dataIndex: "name",
+  },
+  {
+    title: "Bill no",
+    dataIndex: "age",
+  },
+  {
+    title: "Bill TestName",
+    dataIndex: "address",
+  },
+];
+const ViewUpdateBill = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
-  const [number1, setNumber1] = useState(0);
-  const [number2, setNumber2] = useState(0);
-  const [number3, setNumber3] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [totaldis, setDis] = useState(0);
-  const [data, setData] = useState([]);
-  const [chData, setChData] = useState({});
-  const [requestorList, setrequestorList] = useState([]);
+
   const { Option } = Select;
+  const paramVal =
+    props !== undefined ? props?.location?.pathname.split("/") : "";
+  const BILLID = paramVal != "" ? paramVal[2] : "";
+  const FISCALYEAR = paramVal != "" ? paramVal[3] : "";
+  const [billDetails, setBillDetails] = useState([]);
+  const [billItemDetails, setBillItemDetails] = useState([]);
+  const [partylistdata, setPartyListData] = useState([]);
+  const [requestme, setRequestMe] = useState([]);
+  const [patientinfo, setPatientInfo] = useState([]);
 
-  const handleChange = (value) => {
-    setChData(value);
-  };
+  const itemme = patientinfo.filter((res) => res.BillCreditPartyCode[0]);
+  console.log(itemme, "firstcode");
+  const itemData = partylistdata.filter((res) => res?.crdPartyPhoneNo);
+  console.log(itemData, "second code");
 
-  useEffect(() => {
+  const filtarate = itemme === itemData;
+
+  const loadPrintDataFun = (billId, fiscalYear) => {
+    const ALLDATA = {
+      sampleId: billId,
+      fiscalYear: fiscalYear,
+    };
+
     dispatch(
-      getRequestorBillListAll((val) => {
-        setrequestorList(val);
+      getPatientBillByBillId(ALLDATA, (val) => {
+        if (val.length > 0) {
+          setBillDetails(val);
+          setPatientInfo(val);
+        }
       })
     );
-  }, []);
 
-  const onFinish = (values) => {
-    // console.log(values, data);
-    // const a =
-    //   BillCreditPartyCode.length < 0
-    //     ? message.warning("Request data is not selected")
-    //     : "";
-    if (data.length > 0) {
-      const allDataSend = {
-        _lstBillItems: [
-          {
-            ID: 0,
-            BillID: 0,
-            BillNo: "",
-            TestID: 0,
-            billDGid: 0,
-            billTestName: values?.item !== "undefined" ? values?.item : 0,
-            billPrice: values?.total,
-            billOutGoing: true,
-            billDiscount: values?.dis !== "undefined" ? values?.dis : 0,
-            billDiscountAmt: values?.dis !== "undefined" ? values?.dis : 0,
-            billPriceFinal:
-              values?.totaldis !== "undefined" ? values?.totaldis : 0,
-            IsSync: true,
-            RoundAmt: 0,
-            Remarks: "",
-            OutgoingLabId: 1,
-          },
-        ],
-        Id: 0,
-        PatId: 2,
-        Nrl_Reg_No: "",
-        TestId: 0,
-        Price: total,
-        TotalPrice: totaldis,
-        DiscountPrice: values?.dis !== "undefined" ? values?.dis : 0,
-        HSTPrice: 0,
-        IsPaid: true,
-        IsDone: true,
-        BillDate: todaydate,
-        BillLastModifiedDate: todaydate,
-        BillNo: "",
-        BillDiscount: values?.dis,
-        BillDiscountAmt: values?.dis,
-        BillHst: 0,
-        BillHstAmt: 0,
-        BillAmtPaid: totaldis,
-        BillRemainingAmt: 0,
-        BillPaymentType: values?.pmt !== "undefined" ? values?.pmt : 0,
-        BillOutGngAmt: totaldis,
-        BillOutGngDiscountAmt: values?.dis !== "undefined" ? values?.dis : 0,
-        BillOutGngAmtPc: 1,
-        UserId: tokenString.UId,
-        BillIsVoid: false,
-        BillLastModifiedUser: tokenString.UId,
-        BillAdvanceAmt: 0,
-        BillCollectionAmt: totaldis,
-        BillNepaliDate: nepaliDateConverter(todaydate),
-        BillLastModifiedNepaliDate: nepaliDateConverter(todaydate),
-        BillRoundedAmt: "",
-        BillWithoutRound: totaldis,
-        BillCreditPartyCode: data[0].crdPartyCode,
-        BillPassword: "",
-        IsSync: true,
-        PaymentMode: "Cash",
-        Remarks: "",
-        PaymentCode: "",
-        SampleId: 0,
-        FiscalYearId: 1,
-      };
-      console.log(allDataSend);
-      return;
-      dispatch(
-        addCreateCreditPartyBill(allDataSend, (res) => {
-          console.log(res);
-        })
-      );
-    } else {
-      message.warning("RequestOR is not selected");
-    }
-  };
-  const onFinishFailed = (errorInfo) => {
-    // console.log("Failed:", errorInfo);
-  };
+    dispatch(
+      getRequestorBillListAll((val) => {
+        if (val.length > 0) {
+          setPartyListData(val);
+        }
+      })
+    );
 
-  const nepaliDateConverter = (englishDateString) => {
-    const nDate = adToBs(englishDateString);
-    return nDate;
+    setIsLoading(true);
+    dispatch(
+      getPatientBillItemByBillId(ALLDATA, (val) => {
+        if (val.length > 0) {
+          setBillItemDetails(val);
+          setTableData(val);
+          // console.log(val);
+        } else {
+          setTableData([]);
+        }
+      })
+    );
+    setIsLoading(false);
   };
-
   useEffect(() => {
-    multiply();
-    grandtotal();
-  }, [number1, number2, number3, totaldis, total]);
+    loadPrintDataFun(BILLID, FISCALYEAR);
+  }, []);
+  const [IsLoading, setIsLoading] = useState(false);
+  const onFinish = (res) => {};
 
-  const multiply = () => {
-    let totalcal = number1 * number2;
-    setTotal(totalcal);
-  };
-
-  const grandtotal = () => {
-    let totalD = total - number3;
-    setDis(totalD);
-  };
-  const onChangeHandler = () => {
-    const itemData = requestorList.filter((res) => res.crdId === chData);
-    setData(itemData);
-  };
+  const onFinishFailed = (res) => {};
 
   return (
     <>
-      <ViewUpdateBillSection>
-        <div className="maiTopContainer">
-          <PageHeader pageTitle={"View Bill"} />
-        </div>
-        <div className="financeCards">
-          <NewTableSummary reqData={data}></NewTableSummary>
-        </div>
-        <div className="mainContainer">
-          <Row gutter={16}>
-            <Col span={24}>
-              <div className="financeCards">
-                <h4>Bill Details</h4>
-                <hr />
+      {billDetails.map(() => (
+        <ViewUpdateBillSection>
+          <div className="maiTopContainer">
+            <PageHeader pageTitle={"View Bill"} />
+          </div>
+          <div className="financeCards">
+            <h4>Bill Summary</h4>
+            <Row justify="space-between">
+              <Col>
+                <ul>Patient Id:{billDetails[0].patId}</ul>
+                <ul>Bill Id:{billDetails[0].patId}</ul>
+              </Col>
+              <Col>
+                <ul>Bill No :{billDetails[0].BillNo} </ul>
 
-                <Form
-                  name="basic"
-                  labelCol={{
-                    span: 12,
-                  }}
-                  wrapperCol={{
-                    span: 24,
-                  }}
-                  initialValues={{
-                    remember: true,
-                  }}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  autoComplete="off"
-                >
-                  <Row>
-                    <Col span={8}>
-                      <Form.Item
-                        label="Item Name"
-                        name="item"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input item name!",
-                          },
-                        ]}
-                      >
-                        <Input
-                          style={{
-                            width: "100%",
-                          }}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                      <Form.Item
-                        label="Rate"
-                        name="rate"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input item rate!",
-                          },
-                        ]}
-                      >
-                        <InputNumber
-                          min={0}
-                          onChange={(e) => {
-                            setNumber1(e);
-                          }}
-                          style={{
-                            width: "100%",
-                          }}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                      <Form.Item
-                        label="Quantity"
-                        name="qty"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input item quantity!",
-                          },
-                        ]}
-                      >
-                        <InputNumber
-                          style={{
-                            width: "100%",
-                          }}
-                          min={0}
-                          onChange={(e) => setNumber2(e)}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                      <Form.Item
-                        label="DiscountAmt"
-                        name="dis"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input item discount!",
-                          },
-                        ]}
-                      >
-                        <InputNumber
-                          style={{
-                            width: "100%",
-                          }}
-                          min={0}
-                          onChange={(e) => setNumber3(e)}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                      <Form.Item
-                        label="Payment Type"
-                        name="pmt"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please select payment type!",
-                          },
-                        ]}
-                      >
-                        <Select onChange={handleChange}>
-                          {paymentType.map((item) => {
-                            return (
-                              <Option value={item.paymentmethod} key={item.id}>
-                                {item.paymentmethod}
-                              </Option>
-                            );
-                          })}
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                      <div className="s-btn">
-                        <Button type="primary" htmlType="submit">
-                          Save
-                        </Button>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col span={6}>
-                      <Descriptions
-                        bordered
-                        layout="horizontal"
-                        column={1}
-                        size="small"
-                      >
-                        <Descriptions.Item label="SubTotal">
-                          {total}
-                        </Descriptions.Item>
-                        <br></br>
-                        <Descriptions.Item label="GrandTotal">
-                          {totaldis}
-                        </Descriptions.Item>
-                      </Descriptions>
-                    </Col>
-                  </Row>
-                </Form>
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </ViewUpdateBillSection>
+                <ul>Name :{billDetails[0].BillCreditPartyCode} </ul>
+              </Col>
+              {/* {partylistdata.map(() => (
+                <Col>
+                  <ul>Bill No :{partylistdata[0].CrdPartyName} </ul>
+                  <ul>Bill No :{billDetails[0].BillNo} </ul>
+                </Col>
+              ))} */}
+            </Row>
+
+            {/* <div>
+              {partylistdata.map((abc) => {
+                return <ul>Bill No :{abc.crdId} </ul>;
+              })}
+            </div> */}
+          </div>
+          <div className="mainContainer">
+            <Row gutter={16}>
+              <Col span={24}>
+                <div className="financeCards">
+                  <h4>Bill Details</h4>
+                  <hr />
+                  <Form
+                    name="basic"
+                    labelCol={{
+                      span: 12,
+                    }}
+                    wrapperCol={{
+                      span: 24,
+                    }}
+                    initialValues={{
+                      remember: true,
+                    }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                  >
+                    <table className="table" id="customers">
+                      <thead>
+                        <tr>
+                          <th> Bill Id</th>
+                          <th>Bill Test Name</th>
+                          <th>Price </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {billItemDetails.map((data, index) => {
+                          return (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td>{data.billTestName}</td>
+                              <td>{data.billPrice}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                    <Row>
+                      <Col span={6}>
+                        <Descriptions
+                          bordered
+                          layout="horizontal"
+                          column={1}
+                          size="small"
+                        >
+                          <Descriptions.Item label="SubTotal">
+                            {billDetails[0].TotalPrice}
+                          </Descriptions.Item>
+                          <br></br>
+                          <Descriptions.Item label="GrandTotal">
+                            {billDetails[0].Price}
+                          </Descriptions.Item>
+                        </Descriptions>
+                      </Col>
+                    </Row>
+                  </Form>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </ViewUpdateBillSection>
+      ))}
     </>
   );
 };
@@ -348,5 +226,36 @@ const ViewUpdateBillSection = styled.div`
   }
   .pmt-section {
     margin-left: 40px;
+  }
+  .table {
+    border: 1px solid;
+  }
+  #customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+  }
+
+  #customers td,
+  #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  #customers tr:hover {
+    background-color: #ddd;
+  }
+
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #fafafa;
+    color: rgba(0, 0, 0, 0.85);
   }
 `;

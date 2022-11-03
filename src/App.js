@@ -1357,6 +1357,7 @@ function App() {
             path="/viewupdatebill/:id/:fiscalyear"
             component={AsyncViewUpdateBill}
             layout={AsyncAppLayout}
+            forEdit
             showSider
           />
 
