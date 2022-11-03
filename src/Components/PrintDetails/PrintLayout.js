@@ -5,22 +5,26 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { inWords } from "../../constants/numberToWords";
 import {
+  getListofcompany,
   getPatientBillByBillId,
   getPatientBillItemByBillId,
+  getRequestorBillListAll,
 } from "../../services/datametricService";
 import { tokenString } from "../Common/HandleUser";
 import { todaydate } from "../Common/TodayDate";
 
 const PrintLayout = (props) => {
   const dispatch = useDispatch();
-  // const { id } = useParams()
   const paramVal =
     props !== undefined ? props?.location?.pathname.split("/") : "";
   const BILLID = paramVal != "" ? paramVal[2] : "";
   const FISCALYEAR = paramVal != "" ? paramVal[3] : "";
 
+  const [companyDetail, setcompanyDetail] = useState([]);
   const [billDetails, setBillDetails] = useState([]);
   const [billItemDetails, setBillItemDetails] = useState([]);
+  const [partyListData, setPartyListData] = useState([]);
+  const [singlePartyData, setSinglePartyData] = useState([]);
   const [shouldPrint, setShouldPrint] = useState(false);
 
   const loadPrintDataFun = (billId, fiscalYear) => {
@@ -28,6 +32,18 @@ const PrintLayout = (props) => {
       sampleId: billId,
       fiscalYear: fiscalYear,
     };
+    dispatch(getListofcompany(data => {
+      setcompanyDetail(data[0])
+    }))
+
+    dispatch(
+      getRequestorBillListAll((val) => {
+        if (val.length > 0) {
+          setPartyListData(val);
+        }
+      })
+    );
+
     dispatch(
       getPatientBillByBillId(ALLDATA, (val) => {
         if (val.length > 0) {
@@ -58,16 +74,27 @@ const PrintLayout = (props) => {
     loadPrintDataFun(BILLID, FISCALYEAR);
   }, []);
 
+  useEffect(() => {
+    if (billDetails.length > 0) {
+      const oneParty = partyListData.filter(
+        (res) => billDetails[0].BillCreditPartyCode === res.crdPartyCode
+      );
+      if (oneParty.length > 0)
+        setSinglePartyData(oneParty[0]);
+    }
+  }, [partyListData, billDetails])
+
   return (
     <div>
       {billDetails.map(() => (
         <PrintLayoutPage>
-          {console.log(billDetails)}
           <div className="topic-section">
-            <h3>Luniva Bill</h3>
-            <p>Lalitpur</p>
+            {console.log(singlePartyData)}
+            <h3>{companyDetail?.CompanyName}</h3>
+            <p>{companyDetail?.COmpanyAddress}</p>
             <p>
-              Phone no.<span>0000000</span>
+              Phn no: <span>{companyDetail?.COmpanyContactNo}</span> <br />
+              PAN: <span>{companyDetail?.COmpanyTPIN}</span>
             </p>
             <div className="invoice">
               <span className="invoice-details">Invoice</span>
@@ -82,12 +109,15 @@ const PrintLayout = (props) => {
                   <tr>
                     <td>
                       <div>
+                        <strong>Bill No: </strong><span>{billDetails[0].BillNo}</span>
+                      </div>
+                      <div>
+                        <strong>Bill Id: </strong><span>{BILLID}</span>
+                      </div>
+                      <div>
                         <strong>
                           Requestor: <span>{billDetails[0].Requestor}</span>
                         </strong>
-                      </div>
-                      <div>
-                        Bill No:<span>{billDetails[0].BillNo}</span>
                       </div>
                       <div>
                         <strong>
@@ -101,20 +131,24 @@ const PrintLayout = (props) => {
                     </td>
                     <td>
                       <div className="right-details">
-                        {/* <div>
-                        <strong>Bill Date:</strong>
-                        <span>{billDetails[0].BillDate.split("T")[0]}</span>
-                      </div> */}
                         <div>
-                          <strong>Bill Nepali Date:</strong>
+                          <strong>Bill Date: </strong>
+                          <span>{billDetails[0].BillDate.split("T")[0]}</span>
+                        </div>
+                        <div>
+                          <strong>Bill Nepali Date: </strong>
                           <span>{billDetails[0].BillNepaliDate}</span>
                         </div>
                         <div>
-                          <strong>Patient Id:</strong>
-                          <span>{billDetails[0].patId}</span>
+                          <strong>Credit Name: </strong>
+                          <span>{singlePartyData?.CrdPartyName}</span>
                         </div>
                         <div>
-                          <strong>Credit Party Code:</strong>
+                          <strong>Credit Pan: </strong>
+                          <span>{singlePartyData?.CrdPartyPan}</span>
+                        </div>
+                        <div>
+                          <strong>Credit Party Code: </strong>
                           <span>{billDetails[0].BillCreditPartyCode}</span>
                         </div>
                       </div>
@@ -128,10 +162,10 @@ const PrintLayout = (props) => {
                     <tr>
                       <th>S.N</th>
                       <th>Test Name</th>
-                      <th>Rate</th>
-                      <th>Quantity</th>
-                      <th>Discount</th>
-                      <th>Price (Rs)</th>
+                      <th className="money">Rate</th>
+                      {/* <th className="money">Quantity</th> */}
+                      <th className="money">Discount</th>
+                      <th className="money">Price (Rs)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -142,7 +176,7 @@ const PrintLayout = (props) => {
                           <div>{billItemVal.billTestName} </div>
                         </td>
                         <td className="money">{billItemVal.billPrice}</td>
-                        <td className="money qmoney">1</td>
+                        {/* <td className="money">1</td> */}
                         <td className="money">
                           {billItemVal.BillDiscountAmount}
                         </td>
@@ -153,7 +187,7 @@ const PrintLayout = (props) => {
                       <th>Total</th>
                       <th></th>
                       <th className="money">{billDetails[0].Price}</th>
-                      <th></th>
+                      {/* <th></th> */}
                       <th className="money"></th>
                       {/* {billDetails[0].BillDiscountPrice} */}
                       <th className="money grandTotalAmount">
@@ -168,7 +202,7 @@ const PrintLayout = (props) => {
                         <span>Grand Total</span> <br></br>
                         <span>Paid Amount</span> <br></br>
                       </th>
-                      <td className="money" colspan="4">
+                      <td className="money" colSpan="3">
                         <span>{billDetails[0].Price}</span> <br></br>
                         <span>{billDetails[0].BillDiscountPrice}</span>{" "}
                         <br></br>
@@ -180,7 +214,7 @@ const PrintLayout = (props) => {
                 </table>
                 <div className="printed-section">
                   <span>
-                    <strong>Printed on:</strong> {todaydate}
+                    <strong>Printed On:</strong> {todaydate}
                   </span>
                   <span>
                     <strong>Printed By:</strong> {tokenString.username}

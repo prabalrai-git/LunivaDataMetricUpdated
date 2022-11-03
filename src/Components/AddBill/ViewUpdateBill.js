@@ -76,7 +76,7 @@ const ViewUpdateBill = (props) => {
       );
       setFinaldata(itemme2);
     }
-  }, [partylistdata]);
+  }, [patientinfo, partylistdata]);
 
   const onFinish = (res) => { };
   const onFinishFailed = (res) => { };
@@ -101,19 +101,17 @@ const ViewUpdateBill = (props) => {
             <h4>Bill Summary</h4>
             <Row justify="space-between">
               <Col>
-                <ul>Patient Id:{billDetails[0].patId}</ul>
-                <ul>Bill Id:{billDetails[0].patId}</ul>
+                <ul>Patient Id: {billDetails[0].patId}</ul>
+                <ul>Bill Id: {BILLID}</ul>
+                <ul>Bill No: {billDetails[0].BillNo} </ul>
               </Col>
               <Col>
-                <ul>Bill No :{billDetails[0].BillNo} </ul>
-
-                <ul>Name :{billDetails[0].BillCreditPartyCode} </ul>
               </Col>
               {finaldata.map(() => (
                 <Col>
-                  <ul>Bill Name :{finaldata[0].CrdPartyName} </ul>
-                  <ul>Phone No :{finaldata[0].crdPartyPhoneNo} </ul>
-                  <ul>Address :{finaldata[0].CrdPartyAddress} </ul>
+                  <ul>Credit Party: {finaldata[0].CrdPartyName} </ul>
+                  <ul>Credit Pan: {finaldata[0].CrdPartyPan} </ul>
+                  <ul>Credit Party Code: {billDetails[0].BillCreditPartyCode} </ul>
                 </Col>
               ))}
             </Row>
@@ -187,14 +185,14 @@ const ViewUpdateBill = (props) => {
                           column={1}
                           size="small"
                         >
-                          <Descriptions.Item label="SubTotal">
+                          <Descriptions.Item label="Net Total">
                             {billDetails[0].Price}
                           </Descriptions.Item>
                           <Descriptions.Item label="Discount">
                             {billDetails[0].BillDiscountPrice}
                           </Descriptions.Item>
                           <br></br>
-                          <Descriptions.Item label="GrandTotal">
+                          <Descriptions.Item label="Grand Total">
                             {billDetails[0].TotalPrice}
                           </Descriptions.Item>
                         </Descriptions>
