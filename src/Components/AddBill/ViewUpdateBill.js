@@ -43,12 +43,16 @@ const ViewUpdateBill = (props) => {
   // const { Option } = Select;
   const paramVal =
     props !== undefined ? props?.location?.pathname.split("/") : "";
-  const BILLID = paramVal != "" ? paramVal[2] : "";
+  console.log(props?.match?.params.id);
+  const BILLID = props?.match?.params.id;
+  // const BILLID = paramVal != "" ? paramVal[2] : "";
   const FISCALYEAR = paramVal != "" ? paramVal[3] : "";
+  const [IsLoading, setIsLoading] = useState(false);
   const [billDetails, setBillDetails] = useState([]);
   const [billItemDetails, setBillItemDetails] = useState([]);
   const [partylistdata, setPartyListData] = useState([]);
   const [patientinfo, setPatientInfo] = useState([]);
+  const [finaldata, setFinaldata] = useState([]);
 
   // const filtarate = itemme === itemData;
 
@@ -91,18 +95,31 @@ const ViewUpdateBill = (props) => {
   useEffect(() => {
     loadPrintDataFun(BILLID, FISCALYEAR);
   }, []);
-  useEffect(() => {
-    const itemme = patientinfo.filter((res) => res.BillCreditPartyCode);
-    console.log(itemme[0], "firstcode");
-    const itemData = partylistdata.filter((res) => res.crdPartyCode);
-    console.log(itemData[0], "second code");
-    const finalfiltrate = itemme === itemData;
-    console.log("given value is", finalfiltrate);
-  });
-  const [IsLoading, setIsLoading] = useState(false);
-  const onFinish = (res) => { };
 
-  const onFinishFailed = (res) => { };
+  function filterdata(partylist = {}, code = "") {
+    let newO = partylist.filter((res) =>
+      res.BillCreditPartyCode.includes(code)
+    );
+  }
+  const mydata = () => {};
+  useEffect(() => {
+    // const itemme = patientinfo.filter((res) =>
+    //   filterdata(partylistdata, res.BillCreditPartyCode)
+    // );
+    if (patientinfo !== {} && patientinfo !== undefined) {
+      const itemme2 = partylistdata.filter(
+        (res) => patientinfo[0].BillCreditPartyCode === res.crdPartyCode
+      );
+      setFinaldata(itemme2);
+    }
+    // const itemData = partylistdata.filter((res) => res.crdPartyCode);
+    // console.log(itemData[0], "second code");
+    // const finalfiltrate = itemme === itemData;
+    // console.log("given value is", finalfiltrate);
+  }, [partylistdata]);
+
+  const onFinish = (res) => {};
+  const onFinishFailed = (res) => {};
 
   return (
     <>
@@ -123,14 +140,25 @@ const ViewUpdateBill = (props) => {
 
                 <ul>Name :{billDetails[0].BillCreditPartyCode} </ul>
               </Col>
-              {/* {partylistdata.map(() => (
+              {finaldata.map(() => (
                 <Col>
-                  <ul>Bill No :{partylistdata[0].CrdPartyName} </ul>
-                  <ul>Bill No :{billDetails[0].BillNo} </ul>
+                  <ul>Bill Name :{finaldata[0].CrdPartyName} </ul>
+                  <ul>Phone No :{finaldata[0].crdPartyPhoneNo} </ul>
+                  <ul>Address :{finaldata[0].CrdPartyAddress} </ul>
                 </Col>
-              ))} */}
+              ))}
             </Row>
-
+            {/* {finaldata.map(() => (
+              <Row justify="space-between">
+                <Col>
+                  <ul>Bill Name :{finaldata[0].CrdPartyName} </ul>
+                  <ul>Bill No :{finaldata[0].crdPartyPhoneNo} </ul>
+                </Col>
+                <Col>
+                  <ul>Address :{finaldata[0].CrdPartyAddress} </ul>
+                </Col>
+              </Row>
+            ))} */}
             {/* <div>
               {partylistdata.map((abc) => {
                 return <ul>Bill No :{abc.crdId} </ul>;
@@ -199,7 +227,10 @@ const ViewUpdateBill = (props) => {
                         <PrintContainer>
                           <Button
                             onClick={() => {
-                              window.open(`/${homePageName}/printlayout/${BILLID}/${FISCALYEAR}`, "_blank");
+                              window.open(
+                                `/${homePageName}/printlayout/${BILLID}/${FISCALYEAR}`,
+                                "_blank"
+                              );
                             }}
                           >
                             Print
@@ -276,5 +307,5 @@ const ViewUpdateBillSection = styled.div`
 `;
 
 const PrintContainer = styled.div`
-float: right;
-`
+  float: right;
+`;
