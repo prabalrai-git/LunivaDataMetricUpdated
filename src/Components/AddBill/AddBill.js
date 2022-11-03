@@ -21,10 +21,13 @@ import { useDispatch } from "react-redux";
 import { adToBs } from "@sbmdkl/nepali-date-converter";
 import { paymentType } from "../../constants/paymentType";
 import { todaydate } from "../Common/TodayDate";
+import { useHistory } from 'react-router-dom';
 import { tokenString } from "../Common/HandleUser";
+import { inventoryStat } from "../Common/StateList";
 
 const AddBill = () => {
   const [form] = Form.useForm();
+  const history = useHistory();
   const dispatch = useDispatch();
   const [rate, setRate] = useState(0);
   const [quantity, setQuantity] = useState(0);
@@ -38,6 +41,7 @@ const AddBill = () => {
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
+  const [butDis, setButDis] = useState(false);
   const { Option } = Select;
 
   const handleChange = (value) => {
@@ -54,12 +58,13 @@ const AddBill = () => {
 
   const onFinish = (values) => {
     if (data.length > 0) {
+      setButDis(true)
       const allDataSend = {
         _lstBillItems: [
           {
             ID: 0,
             BillID: 0,
-            BillNo: "",
+            BillNo: "N/A",
             TestID: 0,
             billDGid: 0,
             billTestName: values?.item !== undefined && values?.item !== null ? values?.item : 0,
@@ -88,7 +93,7 @@ const AddBill = () => {
         IsDone: true,
         BillDate: todaydate,
         BillLastModifiedDate: todaydate,
-        BillNo: "A",
+        BillNo: "N/A",
         //needs percent
         BillDiscount: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
         //needs percent
@@ -97,7 +102,7 @@ const AddBill = () => {
         BillHstAmt: 0,
         BillAmtPaid: grandtotals,
         BillRemainingAmt: 0,
-        BillPaymentType: values?.pmt !== undefined && values?.pmt !== null ? values?.pmt : 0,
+        BillPaymentType: values?.pmt !== undefined && values?.pmt !== null ? values?.pmt : "",
         BillOutGngAmt: grandtotals,
         BillOutGngDiscountAmt: values?.dis !== undefined && values?.dis !== null ? values?.dis : 0,
         BillOutGngAmtPc: 1,
@@ -123,14 +128,27 @@ const AddBill = () => {
       // return;
       dispatch(
         addCreateCreditPartyBill(allDataSend, (res) => {
-          console.log(res);
+          if(res?.SuccessMsg === true){
+            message.success(res?.Message)
+            setTimeout(() => {
+              history.push({
+                pathname: '/viewbill',
+                state: inventoryStat
+              })
+            }, 1000);
+          }else{
+            setButDis(false)
+            message.error(res?.Message)
+          }
         })
       );
     } else {
+      setButDis(false)
       message.warning("Requestor is not selected");
     }
   };
   const onFinishFailed = (errorInfo) => {
+    setButDis(false)
   };
 
   const nepaliDateConverter = (englishDateString) => {
@@ -377,7 +395,8 @@ const AddBill = () => {
                     </Col>
                     <Col span={24}>
                       <div className="s-btn">
-                        <Button type="primary" htmlType="submit">
+                        {/* <Button type="primary" htmlType="submit"> */}
+                        <Button htmlType="submit" disabled={butDis} type="primary" className=''>
                           Save
                         </Button>
                       </div>
