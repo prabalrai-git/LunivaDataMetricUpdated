@@ -43,7 +43,8 @@ const ViewUpdateBill = (props) => {
   // const { Option } = Select;
   const paramVal =
     props !== undefined ? props?.location?.pathname.split("/") : "";
-  console.log(props?.match?.params.id);
+  // console.log(props?.match?.params.id);
+  // console.log(props?.match?.params.fiscalyear);
   const BILLID = props?.match?.params.id;
   // const BILLID = paramVal != "" ? paramVal[2] : "";
   const FISCALYEAR = props?.match?.params.fiscalyear;
@@ -53,8 +54,6 @@ const ViewUpdateBill = (props) => {
   const [partylistdata, setPartyListData] = useState([]);
   const [patientinfo, setPatientInfo] = useState([]);
   const [finaldata, setFinaldata] = useState([]);
-
-  // const filtarate = itemme === itemData;
 
   const loadPrintDataFun = (billId, fiscalYear) => {
     const ALLDATA = {
@@ -137,17 +136,21 @@ const ViewUpdateBill = (props) => {
               </Col>
               <Col>
                 <ul>Bill No :{billDetails[0].BillNo} </ul>
-
                 <ul>Name :{billDetails[0].BillCreditPartyCode} </ul>
               </Col>
-              {finaldata.map(() => (
+            </Row>
+            {finaldata.map(() => (
+              <Row justify="space-between">
                 <Col>
                   <ul>Bill Name :{finaldata[0].CrdPartyName} </ul>
                   <ul>Phone No :{finaldata[0].crdPartyPhoneNo} </ul>
-                  <ul>Address :{finaldata[0].CrdPartyAddress} </ul>
                 </Col>
-              ))}
-            </Row>
+                <Col>
+                  <ul>Address :{finaldata[0].CrdPartyAddress} </ul>
+                  <ul>Pan No :{finaldata[0].CrdPartyPan} </ul>
+                </Col>
+              </Row>
+            ))}
             {/* {finaldata.map(() => (
               <Row justify="space-between">
                 <Col>
