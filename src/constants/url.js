@@ -5,7 +5,10 @@ export const DEV_URL =
 // "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
 
 export const Carelab_Url =
-  "http://192.168.100.34/CarelabDataMetricServiceCrystal/";
+  "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
+
+// export const Carelab_Url =
+//   "http://192.168.100.34/CarelabDataMetricServiceCrystal/";
 
 // export const Carelab_Url =
 //   "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
@@ -23,7 +26,8 @@ export const Carelab_Url =
 
 export const CARELAB_LINK = `https://lunivat.ddns.net/jpdhulikhel/Carelab/Account/Login`;
 
-export const TEST_LINK = `http://192.168.100.77:90/ecrm/login/testCallSer`;
+// export const TEST_LINK = `http://192.168.100.77:90/ecrm/login/testCallSer`;
+export const TEST_LINK = `http://lunivacare.ddns.net:8080/ecrm/login/testCallSer`
 
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
 export const CarelabBase_Url = `${Carelab_Url}Api/`;

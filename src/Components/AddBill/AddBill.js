@@ -23,7 +23,8 @@ import { paymentType } from "../../constants/paymentType";
 import { todaydate } from "../Common/TodayDate";
 import { useHistory } from 'react-router-dom';
 import { tokenString } from "../Common/HandleUser";
-import { inventoryStat } from "../Common/StateList";
+import { carelabStat, homePageName, inventoryStat } from "../Common/StateList";
+import { useFiscalYear } from "../../CustomHook/useFiscalYear";
 
 const AddBill = () => {
   const [form] = Form.useForm();
@@ -42,6 +43,8 @@ const AddBill = () => {
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
   const [butDis, setButDis] = useState(false);
+  const [fiscalYearId, setFiscalYearId] = useState(1)
+  const fiscalYear = useFiscalYear();
   const { Option } = Select;
 
   const handleChange = (value) => {
@@ -122,21 +125,22 @@ const AddBill = () => {
         Remarks: "N/A",
         PaymentCode: "",
         SampleId: 0,
-        FiscalYearId: 1,
+        FiscalYearId: fiscalYearId,
       };
       // console.log(allDataSend);
       // return;
       dispatch(
         addCreateCreditPartyBill(allDataSend, (res) => {
-          if(res?.SuccessMsg === true){
+          if (res?.SuccessMsg === true) {
             message.success(res?.Message)
             setTimeout(() => {
               history.push({
-                pathname: '/viewbill',
-                state: inventoryStat
+                pathname: `/viewupdatebill/${res.CreatedId}/${fiscalYearId}`,
+                state: carelabStat
               })
+              window.open(`/${homePageName}/printlayout/${res?.CreatedId}/${fiscalYearId}`, "_blank");
             }, 1000);
-          }else{
+          } else {
             setButDis(false)
             message.error(res?.Message)
           }
@@ -206,7 +210,7 @@ const AddBill = () => {
     <>
       <AddBillSection>
         <div className="maiTopContainer">
-          <PageHeader pageTitle={"Edit Billing Reports"} />
+          <PageHeader pageTitle={"Create New Bill"} />
           {
             <div className="dropdown-section">
               <Row>
@@ -329,12 +333,12 @@ const AddBill = () => {
                       <Form.Item
                         label="DiscountAmt"
                         name="dis"
-                        // rules={[
-                        //   {
-                        //     required: true,
-                        //     message: "Please input item discount!",
-                        //   },
-                        // ]}
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: "Please input item discount!",
+                      //   },
+                      // ]}
                       >
                         <InputNumber
                           style={{
@@ -390,6 +394,23 @@ const AddBill = () => {
                               </Option>
                             );
                           })}
+                        </Select>
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item name="fiscalYear" label="Fiscal Year">
+                        <Select style={{ width: "100%" }} size="default" onChange={(res) => {
+                          setFiscalYearId(res);
+                        }}>
+                          {fiscalYear.map((lis) => (
+                            <Option
+                              title={lis?.Year}
+                              key={lis?.Id}
+                              value={lis?.Id}
+                            >
+                              {lis?.Year}
+                            </Option>
+                          ))}
                         </Select>
                       </Form.Item>
                     </Col>

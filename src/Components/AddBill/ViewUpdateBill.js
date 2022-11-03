@@ -1,51 +1,26 @@
 import {
   Col,
-  // Input,
   Row,
-  // Select,
   Form,
-  // Button,
-  // InputNumber,
   Descriptions,
   Button,
-  // Table,
 } from "antd";
 import PageHeader from "../Common/pageHeader";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-
 import {
   getPatientBillByBillId,
   getPatientBillItemByBillId,
   getRequestorBillListAll,
 } from "../../services/datametricService";
 import { useEffect, useState } from "react";
-// import Print from "../Common/Print";
-import { homePageName } from "../Common/StateList";
-// const columns = [
-//   {
-//     title: "bill id",
-//     dataIndex: "name",
-//   },
-//   {
-//     title: "Bill no",
-//     dataIndex: "age",
-//   },
-//   {
-//     title: "Bill TestName",
-//     dataIndex: "address",
-//   },
-// ];
-const ViewUpdateBill = (props) => {
-  console.log(props);
-  const dispatch = useDispatch();
+import { carelabStat, homePageName } from "../Common/StateList";
+import { useHistory } from "react-router-dom";
 
-  // const { Option } = Select;
-  const paramVal =
-    props !== undefined ? props?.location?.pathname.split("/") : "";
-  console.log(props?.match?.params.id);
+const ViewUpdateBill = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const BILLID = props?.match?.params.id;
-  // const BILLID = paramVal != "" ? paramVal[2] : "";
   const FISCALYEAR = props?.match?.params.fiscalyear;
   const [IsLoading, setIsLoading] = useState(false);
   const [billDetails, setBillDetails] = useState([]);
@@ -53,8 +28,6 @@ const ViewUpdateBill = (props) => {
   const [partylistdata, setPartyListData] = useState([]);
   const [patientinfo, setPatientInfo] = useState([]);
   const [finaldata, setFinaldata] = useState([]);
-
-  // const filtarate = itemme === itemData;
 
   const loadPrintDataFun = (billId, fiscalYear) => {
     const ALLDATA = {
@@ -96,37 +69,33 @@ const ViewUpdateBill = (props) => {
     loadPrintDataFun(BILLID, FISCALYEAR);
   }, []);
 
-  function filterdata(partylist = {}, code = "") {
-    let newO = partylist.filter((res) =>
-      res.BillCreditPartyCode.includes(code)
-    );
-  }
-  const mydata = () => {};
   useEffect(() => {
-    // const itemme = patientinfo.filter((res) =>
-    //   filterdata(partylistdata, res.BillCreditPartyCode)
-    // );
-    if (patientinfo !== {} && patientinfo !== undefined) {
+    if (patientinfo.length > 0) {
       const itemme2 = partylistdata.filter(
         (res) => patientinfo[0].BillCreditPartyCode === res.crdPartyCode
       );
       setFinaldata(itemme2);
     }
-    // const itemData = partylistdata.filter((res) => res.crdPartyCode);
-    // console.log(itemData[0], "second code");
-    // const finalfiltrate = itemme === itemData;
-    // console.log("given value is", finalfiltrate);
   }, [partylistdata]);
 
-  const onFinish = (res) => {};
-  const onFinishFailed = (res) => {};
+  const onFinish = (res) => { };
+  const onFinishFailed = (res) => { };
 
   return (
     <>
       {billDetails.map(() => (
         <ViewUpdateBillSection>
           <div className="maiTopContainer">
-            <PageHeader pageTitle={"View Bill"} />
+            <PageHeader
+              pageTitle={"View Bill"}
+              buttonTitle="Create New Bill"
+              buttonOnClick={() =>
+                history.push({
+                  pathname: "/addbill",
+                  state: carelabStat
+                })
+              }
+            />
           </div>
           <div className="financeCards">
             <h4>Bill Summary</h4>

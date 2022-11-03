@@ -225,6 +225,7 @@ export const addCreateCreditPartyBill = (data, successCallback) => {
     try {
       data._lstBillItems = JSON.stringify(data._lstBillItems);
       const formData = generateUrlEncodedData(data);
+      // const response = await store('CreateCreditPartyBill', formData);
       const response = await storeNested("", formData);
       if (response?.status === 200) {
         successCallback(response?.data);
