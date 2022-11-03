@@ -1,13 +1,14 @@
 import {
   Col,
-  Input,
+  // Input,
   Row,
-  Select,
+  // Select,
   Form,
-  Button,
-  InputNumber,
+  // Button,
+  // InputNumber,
   Descriptions,
-  Table,
+  Button,
+  // Table,
 } from "antd";
 import PageHeader from "../Common/pageHeader";
 import styled from "styled-components";
@@ -19,25 +20,27 @@ import {
   getRequestorBillListAll,
 } from "../../services/datametricService";
 import { useEffect, useState } from "react";
-const columns = [
-  {
-    title: "bill id",
-    dataIndex: "name",
-  },
-  {
-    title: "Bill no",
-    dataIndex: "age",
-  },
-  {
-    title: "Bill TestName",
-    dataIndex: "address",
-  },
-];
+// import Print from "../Common/Print";
+import { homePageName } from "../Common/StateList";
+// const columns = [
+//   {
+//     title: "bill id",
+//     dataIndex: "name",
+//   },
+//   {
+//     title: "Bill no",
+//     dataIndex: "age",
+//   },
+//   {
+//     title: "Bill TestName",
+//     dataIndex: "address",
+//   },
+// ];
 const ViewUpdateBill = (props) => {
   console.log(props);
   const dispatch = useDispatch();
 
-  const { Option } = Select;
+  // const { Option } = Select;
   const paramVal =
     props !== undefined ? props?.location?.pathname.split("/") : "";
   const BILLID = paramVal != "" ? paramVal[2] : "";
@@ -97,9 +100,9 @@ const ViewUpdateBill = (props) => {
     console.log("given value is", finalfiltrate);
   });
   const [IsLoading, setIsLoading] = useState(false);
-  const onFinish = (res) => {};
+  const onFinish = (res) => { };
 
-  const onFinishFailed = (res) => {};
+  const onFinishFailed = (res) => { };
 
   return (
     <>
@@ -158,8 +161,8 @@ const ViewUpdateBill = (props) => {
                     <table className="table" id="customers">
                       <thead>
                         <tr>
-                          <th> Bill Id</th>
-                          <th>Bill Test Name</th>
+                          <th>SN</th>
+                          <th>Test Name</th>
                           <th>Price </th>
                         </tr>
                       </thead>
@@ -191,6 +194,17 @@ const ViewUpdateBill = (props) => {
                             {billDetails[0].Price}
                           </Descriptions.Item>
                         </Descriptions>
+                      </Col>
+                      <Col span={18}>
+                        <PrintContainer>
+                          <Button
+                            onClick={() => {
+                              window.open(`/${homePageName}/printlayout/${BILLID}/${FISCALYEAR}`, "_blank");
+                            }}
+                          >
+                            Print
+                          </Button>
+                        </PrintContainer>
                       </Col>
                     </Row>
                   </Form>
@@ -260,3 +274,7 @@ const ViewUpdateBillSection = styled.div`
     color: rgba(0, 0, 0, 0.85);
   }
 `;
+
+const PrintContainer = styled.div`
+float: right;
+`

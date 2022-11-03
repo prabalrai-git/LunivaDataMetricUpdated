@@ -5,7 +5,7 @@ import { getPatientBillByBillId } from "../../services/datametricService";
 import { Space, Table } from "antd";
 import DataIsLoading from "../Common/IsLoading";
 import { useHistory } from "react-router-dom";
-import { carelabStat } from "../Common/StateList";
+import { carelabStat, homePageName } from "../Common/StateList";
 import CarelabFilter from "../Common/CarelabFilter";
 import View from "../Common/View";
 import Print from "../Common/Print";
@@ -44,7 +44,7 @@ const AddTable = () => {
             state: carelabStat
           })}>View</View>
           <Print onClick={() => {
-            window.open(`/luniva360pphlbagmati/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`, "_blank");
+            window.open(`/${homePageName}/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`, "_blank");
             // history.push({
             //   pathname: `/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
             //   state: carelabStat
