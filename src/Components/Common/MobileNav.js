@@ -1,15 +1,18 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components'
 import loadlogo from '../../assets/images/logosmall.png';
 
 const MobileNav = () => {
   return (
     <MobileNavContainer>
+      <NavLink to="/afterlogin">
       <div className="logo">
         <img src={loadlogo} alt="" />
       </div>
       <div className="userIcon">
       </div>
+      </NavLink>
     </MobileNavContainer>
   )
 }

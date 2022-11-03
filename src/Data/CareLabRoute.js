@@ -214,12 +214,20 @@ export const useCareLabRoute = () => {
     },
     {
       icon: "icon-line-file",
-      key: "membershipcard",
-      name: "Membership Card",
+      key: "marketanlaytic",
+      name: 'Marketing Analytic',
       path: "/carddash",
       hasSubNav: false,
-      showTab: false,
+      showTab: true,
     },
+    // {
+    //   icon: "icon-line-file",
+    //   key: "membershipcard",
+    //   name: "Membership Card",
+    //   path: "/carddash",
+    //   hasSubNav: false,
+    //   showTab: true,
+    // },
     {
       icon: "icon-money",
       key: "expensemanagement",

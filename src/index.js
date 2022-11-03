@@ -13,7 +13,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router basename={"/luniva360pphlbagmati/"}>
+      {/* <Router basename={"/luniva360pphlbagmati/"}> */}
+      <Router basename={"/crystal/luniva360crystaldatametric/"}>
         {/* ReportEntry/linkname */}
         <App />
       </Router>

@@ -1,8 +1,8 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
 export const DEV_URL =
   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
-// // export const DEV_URL =
-// // "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
+// export const DEV_URL =
+// "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
 
 export const Carelab_Url =
   "http://192.168.100.34/CarelabDataMetricServiceCrystal/";

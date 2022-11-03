@@ -8,6 +8,7 @@ import PageHeader from "../../Common/pageHeader";
 import cry from "../../../assets/images/cry.png";
 import logosmall from "../../../assets/images/logosmall.png";
 import { useDispatch } from "react-redux";
+import CarelabFilter from "../../Common/CarelabFilter";
 
 function MembershipCard() {
   const [data, setData] = useState([]);
@@ -64,8 +65,12 @@ function MembershipCard() {
   ];
 
   useEffect(() => {
+    loadMemberData()
+  }, []);
+
+  const loadMemberData = (memberId=0) => {
     let a = {
-      mId: 0,
+      mId: memberId,
     };
     dispatch(
       getMemberShipDetailsByMemberId(a, (res) => {
@@ -78,7 +83,7 @@ function MembershipCard() {
         }
       })
     );
-  }, []);
+  }
 
   const onFinish = (values) => {
     {
@@ -86,17 +91,25 @@ function MembershipCard() {
         newpath = urlhref.split("luniva360lims");
       const imagePath = `${newpath[0]}${cry}`;
       const small = `${newpath[0]}${logosmall}`;
-
-      // console.log(data);
+      
       printMembership(imagePath, small, values, e);
     }
   };
+
+  const returnFilterData = (res) => {
+    loadMemberData(res?.sampleId)
+  }
+
   return (
     <>
       <div className="maiTopContainer">
         <PageHeader pageTitle={"Membership Card"} />
         {/* <Button onClick={onFinish}> Print</Button> */}
       </div>
+      <CarelabFilter
+      showSampleId={'Member Id'}
+      returnFilterData={returnFilterData}
+      />
       {dyColumnData.length > 0 && (
         <div className="tableisRes">
           <Table

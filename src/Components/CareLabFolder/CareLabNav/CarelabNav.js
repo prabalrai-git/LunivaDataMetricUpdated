@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useCareLabRoute } from "../../../Data/CareLabRoute";
 import { carelabStat } from "../../Common/StateList";
@@ -8,37 +8,71 @@ import { carelabStat } from "../../Common/StateList";
 const CarelabNavSettings = () => {
   const carelabNavData = useCareLabRoute();
   const [returnName, setReturnName] = useState("");
-  const newPa = window.location.pathname.split("/")[2];
+  const newPa = window.location.pathname.split("/")[3];
+  const location = useLocation();
+
+  console.log(location.pathname);
 
   const handleClick = (e) => {
     // setNewPath(window.location.pathname.split('/')[2])
   };
 
   useEffect(() => {
+    let pathname = location.pathname.split("/");
     let rName = "";
-    if (newPa === "caredashboard") {
+    console.log(newPa);
+    if (pathname[1] === "caredashboard") {
       rName = "mainRoute";
-    } else if (newPa === "sampledash") {
+    } else if (pathname[1] === "sampledash") {
       rName = "sampleStatusNav";
-    } else if (newPa === "reportdash") {
+    } else if (pathname[1] === "reportdash") {
       rName = "reportStatNav";
-    } else if (newPa === "financedash") {
+    } else if (pathname[1] === "financedash") {
       rName = "financeNav";
-    } else if (newPa === "marketingdash") {
+    } else if (pathname[1] === "marketingdash") {
       rName = "marketingNav";
-    } else if (newPa === "tatdash") {
+    } else if (pathname[1] === "tatdash") {
       rName = "tatNav";
-    } else if (newPa === "qcdash") {
+    } else if (pathname[1] === "qcdash") {
       rName = "qcControlNav";
-    } else if (newPa === "datedash") {
+    } else if (pathname[1] === "datedash") {
       rName = "dateChangeNav";
-    } else if (newPa === "bulknegativedash") {
+    } else if (pathname[1] === "bulknegativedash") {
       rName = "bulkNegativeNav";
-    } else if (newPa === "testanalysis") {
+    } else if (pathname[1] === "testanalysis") {
       rName = "testAnalysisNav";
     }
     setReturnName(rName);
-  }, [newPa]);
+  }, [location.pathname]);
+
+  // useEffect(() => {
+  //   let rName = "";
+  //   console.log(newPa);
+  //   if (newPa === "caredashboard") {
+  //     rName = "mainRoute";
+  //   } else if (newPa === "sampledash") {
+  //     rName = "sampleStatusNav";
+  //   } else if (newPa === "reportdash") {
+  //     rName = "reportStatNav";
+  //   } else if (newPa === "financedash") {
+  //     rName = "financeNav";
+  //   } else if (newPa === "marketingdash") {
+  //     rName = "marketingNav";
+  //   } else if (newPa === "tatdash") {
+  //     rName = "tatNav";
+  //   } else if (newPa === "qcdash") {
+  //     rName = "qcControlNav";
+  //   } else if (newPa === "datedash") {
+  //     rName = "dateChangeNav";
+  //   } else if (newPa === "bulknegativedash") {
+  //     rName = "bulkNegativeNav";
+  //   } else if (newPa === "testanalysis") {
+  //     rName = "testAnalysisNav";
+  //   }
+  //   setReturnName(rName);
+  // }, [newPa]);
+
+  console.log(newPa);
 
   return (
     <SettingsContainer>
