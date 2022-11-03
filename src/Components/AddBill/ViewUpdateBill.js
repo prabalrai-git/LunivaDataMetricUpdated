@@ -146,8 +146,10 @@ const ViewUpdateBill = (props) => {
                   <ul>Phone No :{finaldata[0].crdPartyPhoneNo} </ul>
                 </Col>
                 <Col>
-                  <ul>Address :{finaldata[0].CrdPartyAddress} </ul>
-                  <ul>Pan No :{finaldata[0].CrdPartyPan} </ul>
+                  <ul className="add">
+                    Address :{finaldata[0].CrdPartyAddress}{" "}
+                  </ul>
+                  <ul className="add">Pan No :{finaldata[0].CrdPartyPan} </ul>
                 </Col>
               </Row>
             ))}
@@ -313,6 +315,9 @@ const ViewUpdateBillSection = styled.div`
     text-align: left;
     background-color: #fafafa;
     color: rgba(0, 0, 0, 0.85);
+  }
+  .add {
+    margin-right: 10px;
   }
 `;
 
