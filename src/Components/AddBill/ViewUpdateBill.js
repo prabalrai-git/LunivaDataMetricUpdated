@@ -162,7 +162,9 @@ const ViewUpdateBill = (props) => {
                         <tr>
                           <th>SN</th>
                           <th>Test Name</th>
-                          <th>Price </th>
+                          <th>Rate</th>
+                          <th>Discount</th>
+                          <th>Price</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -172,6 +174,8 @@ const ViewUpdateBill = (props) => {
                               <td>{index + 1}</td>
                               <td>{data.billTestName}</td>
                               <td>{data.billPrice}</td>
+                              <td>{data.BillDiscountAmount}</td>
+                              <td>{data.BillPriceFinal}</td>
                             </tr>
                           );
                         })}
@@ -186,11 +190,14 @@ const ViewUpdateBill = (props) => {
                           size="small"
                         >
                           <Descriptions.Item label="SubTotal">
-                            {billDetails[0].TotalPrice}
+                            {billDetails[0].Price}
+                          </Descriptions.Item>
+                          <Descriptions.Item label="Discount">
+                            {billDetails[0].BillDiscountPrice}
                           </Descriptions.Item>
                           <br></br>
                           <Descriptions.Item label="GrandTotal">
-                            {billDetails[0].Price}
+                            {billDetails[0].TotalPrice}
                           </Descriptions.Item>
                         </Descriptions>
                       </Col>
