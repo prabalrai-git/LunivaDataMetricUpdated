@@ -45,15 +45,9 @@ const ViewUpdateBill = (props) => {
   const [billDetails, setBillDetails] = useState([]);
   const [billItemDetails, setBillItemDetails] = useState([]);
   const [partylistdata, setPartyListData] = useState([]);
-  const [requestme, setRequestMe] = useState([]);
   const [patientinfo, setPatientInfo] = useState([]);
 
-  const itemme = patientinfo.filter((res) => res.BillCreditPartyCode[0]);
-  console.log(itemme, "firstcode");
-  const itemData = partylistdata.filter((res) => res?.crdPartyPhoneNo);
-  console.log(itemData, "second code");
-
-  const filtarate = itemme === itemData;
+  // const filtarate = itemme === itemData;
 
   const loadPrintDataFun = (billId, fiscalYear) => {
     const ALLDATA = {
@@ -84,7 +78,6 @@ const ViewUpdateBill = (props) => {
         if (val.length > 0) {
           setBillItemDetails(val);
           setTableData(val);
-          // console.log(val);
         } else {
           setTableData([]);
         }
@@ -95,6 +88,14 @@ const ViewUpdateBill = (props) => {
   useEffect(() => {
     loadPrintDataFun(BILLID, FISCALYEAR);
   }, []);
+  useEffect(() => {
+    const itemme = patientinfo.filter((res) => res.BillCreditPartyCode);
+    console.log(itemme[0], "firstcode");
+    const itemData = partylistdata.filter((res) => res.crdPartyCode);
+    console.log(itemData[0], "second code");
+    const finalfiltrate = itemme === itemData;
+    console.log("given value is", finalfiltrate);
+  });
   const [IsLoading, setIsLoading] = useState(false);
   const onFinish = (res) => {};
 
