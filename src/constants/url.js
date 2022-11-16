@@ -27,7 +27,7 @@ export const Carelab_Url =
 export const CARELAB_LINK = `https://lunivat.ddns.net/jpdhulikhel/Carelab/Account/Login`;
 
 // export const TEST_LINK = `http://192.168.100.77:90/ecrm/login/testCallSer`;
-export const TEST_LINK = `http://lunivacare.ddns.net:8080/ecrm/login/testCallSer`
+export const TEST_LINK = `http://lunivacare.ddns.net:8080/ecrm/login/testCallSer`;
 
 export const BASE_URL = `${DEV_URL}Api/`; // see service for api or Api
 export const CarelabBase_Url = `${Carelab_Url}Api/`;
@@ -644,10 +644,41 @@ export const GetItemSourceDetails = "GetItemSourceDetails";
  * @desc: GetPatientBillInfoByBillId
  * @param: ?billId={billId}&fiscalyear={fiscalyear}
  */
-export const GetPatientBillInfoByBillId = 'GetPatientBillInfoByBillId'
+export const GetPatientBillInfoByBillId = "GetPatientBillInfoByBillId";
 
 /**
  * @desc: GetPatientBillItemDetailsByBillId
  * @param: ?billId={billId}&fiscalyear={fiscalyear}
  */
-export const GetPatientBillItemDetailsByBillId = 'GetPatientBillItemDetailsByBillId'
+export const GetPatientBillItemDetailsByBillId =
+  "GetPatientBillItemDetailsByBillId";
+
+// newTests
+
+export const GetStates = "GetStates";
+
+/**
+ * @desc: GetStates
+ */
+
+export const GetDistrictsByStateId = "GetDistrictsByStateId";
+
+/**
+ * @desc:GetDistrictsByStateId
+ * @param: ?stateId={stateId}
+ */
+
+export const GetMunicipalitiesByDistrictId = "GetMunicipalitiesByDistrictId";
+
+/**
+ * @desc: GetMunicipalitiesByDistrictId
+ * @param: ?districtId={districtId}
+ */
+
+export const GetPatientDetailsByLocationWise =
+  "GetPatientDetailsByLocationWise";
+
+/**
+ * @desc: GetPatientDetailsByLocationWise
+ * @param: ?provinceid={provinceid}&districtid={districtid}&municipalityId={municipalityId}&fromdate={fromdate}&todate={todate}
+ */

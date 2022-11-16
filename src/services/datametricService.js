@@ -14,6 +14,10 @@ import {
   VerifyPatientReport,
   GetPatientBillInfoByBillId,
   GetPatientBillItemDetailsByBillId,
+  GetStates,
+  GetDistrictsByStateId,
+  GetMunicipalitiesByDistrictId,
+  GetPatientDetailsByLocationWise,
 } from "../constants/url";
 import { generateUrlEncodedData } from "../utils/generateFormData";
 import { fetch, store, storeNested } from "../utils/httpUtil";
@@ -261,6 +265,63 @@ export const getPatientBillItemByBillId = (data, successCallback) => {
       if (response?.status === 200) {
         successCallback(response?.data?.billItemDetails);
         // dispatch(response?.data)
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+// newTests
+
+export const getStates = (successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${GetStates}`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.StateDetails);
+        // dispatch(response?.data)
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const getDistrictsByStateId = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${GetDistrictsByStateId}?stateId=${data}`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.DistrictList);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+export const getMunicipalitiesByDistrictId = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${GetMunicipalitiesByDistrictId}?districtId=${data}`
+      );
+      if (response?.status === 200) {
+        successCallback(response?.data?.MunicipalList);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+export const getPatientDetailsByLocationWise = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${GetPatientDetailsByLocationWise}?provinceid=${data.provinceid}&districtid=${data.districtid}&municipalityId=${data.municipalityId}&fromdate=${data.fromdate}&todate=${data.todate}`
+      );
+      if (response?.status === 200) {
+        successCallback(response?.data?.PatientList);
       } else {
         successCallback([]);
       }
