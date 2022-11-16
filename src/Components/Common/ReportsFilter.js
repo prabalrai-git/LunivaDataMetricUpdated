@@ -1,11 +1,15 @@
-import { Col, Row, Select } from "antd";
-import React from "react";
+import { Col, message, Row, Select } from "antd";
+import React, { useState } from "react";
+import { CSVLink } from "react-csv";
 import styled from "styled-components";
 import AppButton from "./AppButton";
 import Datepicker from "./Datepicker";
 import FilterTable from "./FilterTable";
+import { newTableStyles } from "./TableStyles";
 
 function ReportsFilter({ ...props }) {
+  const [dateRanges, setDateRanges] = useState();
+
   const {
     states,
     district,
@@ -18,9 +22,101 @@ function ReportsFilter({ ...props }) {
     setFromDate,
     setToDate,
     OnLoad,
+    csvDataName,
+    csvData,
+    reportName,
+    printFileName,
+    fromDate,
+    toDate,
+    tableHead,
   } = props;
 
   const { Option } = Select;
+
+  const printHandle = () => {
+    console.log("fromtodate", fromDate, toDate, dateRanges);
+
+    if (csvData.length !== 0) {
+      let newWindow = window.open();
+
+      var adbs = require("ad-bs-converter");
+      var nepaliFromDate = dateRanges[0].format("YYYY/MM/DD");
+      var nepaliToDate = dateRanges[1].format("YYYY/MM/DD");
+      var neaplaiFromToDateString = [];
+      if (nepaliFromDate !== undefined) {
+        // var nNepaliFromDate = nepaliFromDate.replaceAll("-", "/");
+        // var nNepaliToDate = nepaliToDate.replaceAll("-", "/");
+        var converterNepaliFromDate = adbs.ad2bs(nepaliFromDate);
+        var converterNepalitoDate = adbs.ad2bs(nepaliToDate);
+        console.log(converterNepaliFromDate, "hihihi");
+        var converteNpFromDate = `${converterNepaliFromDate.en.year}-${converterNepaliFromDate.en.month}-${converterNepaliFromDate.en.day} `;
+        var converteNpToDate = `${converterNepalitoDate.en.year}-${converterNepalitoDate.en.month}-${converterNepalitoDate.en.day} `;
+        neaplaiFromToDateString.push(converteNpFromDate, converteNpToDate);
+        console.log(neaplaiFromToDateString, "hello world");
+      }
+
+      let newStyle = ``;
+      // if (removetwo)
+      newStyle = `<style>thead > tr> th:first-child, thead > tr> th:nth-child(2), tbody > tr > td:first-child,tbody > tr > td:nth-child(2){
+        display: none;
+       }tbody > tr:last-child{
+    background-color: #f0f0f2;
+    }
+    tbody > tr:last-child > td{
+        font-size: 12px;
+        font-weight: 500;
+    }</style>`;
+
+      let refName = `
+      <div class="gocenter">
+          
+          <h2> Crystal Diagonistic Lab </h2>
+          <p> Kathmandu, Sankhamul </p>
+          <p>Contact no:9009090 </p>
+          <h2>${reportName} Report</h2>
+          
+          </div>
+          <div >
+          
+          <div style='float:right;margin-bottom:10px;'>
+          <strong >From</strong> ${neaplaiFromToDateString[0]} - <strong>To</strong> ${neaplaiFromToDateString[1]}
+          </div>
+      <div>
+
+    
+      `;
+
+      let tableBody = "";
+      let tableHeadHtml = "<thead>";
+      let columns = [];
+
+      tableHead.forEach((ele) => {
+        tableHeadHtml += `<th>${ele?.dataIndex}</th>`;
+        columns.push(ele.dataIndex);
+      });
+      tableHeadHtml += "</thead>";
+
+      csvData.forEach((ele) => {
+        tableBody = tableBody + "<tr>";
+        columns.forEach((cell) => {
+          tableBody = tableBody + "<td>" + ele[cell] + "</td>";
+        });
+        tableBody = tableBody + "</tr>";
+      });
+
+      let allTable = `<table>${tableHeadHtml}${tableBody}</table>`;
+
+      newWindow.document.body.innerHTML =
+        newTableStyles + newStyle + refName + allTable;
+
+      setTimeout(function () {
+        newWindow.print();
+        newWindow.close();
+      }, 300);
+    } else {
+      message.info("select some data");
+    }
+  };
 
   return (
     <FilterContainer>
@@ -88,6 +184,7 @@ function ReportsFilter({ ...props }) {
                   //   defaultValuer={fromDate}
                   onChanger={(value) => {
                     console.log("value", value);
+                    setDateRanges(value);
                     setFromDate(value[0].format("YYYY-MM-DD"));
                     setToDate(value[1].format("YYYY-MM-DD"));
                   }}
@@ -106,6 +203,42 @@ function ReportsFilter({ ...props }) {
                 />
               </Col>
             )}
+            <div
+              style={{
+                position: "absolute",
+                right: "-210px",
+                top: "-60px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {csvDataName && (
+                <div
+                  className="link"
+                  style={{ display: "inline", float: "right" }}
+                >
+                  <CSVLink
+                    filename={csvDataName}
+                    className="btn ant-btn btn-primary btn-primary--outline"
+                    data={csvData}
+                  >
+                    Export CSV
+                  </CSVLink>
+                </div>
+              )}
+              {printFileName && (
+                <button
+                  onClick={printHandle}
+                  className="btn ant-btn btn-primary btn-primary--outline"
+                  style={{
+                    marginLeft: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  Print
+                </button>
+              )}
+            </div>
           </Row>
         </Col>
 

@@ -2,6 +2,7 @@ import { message, Table } from "antd";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { VerifyPatientReport } from "../../../constants/url";
 import {
   getDistrictsByStateId,
   getMunicipalitiesByDistrictId,
@@ -32,6 +33,7 @@ function ProvienceDistrictWise() {
   }
 
   const OnLoad = () => {
+    console.log("fromtodate", fromDate, toDate);
     setPatientData([]);
     let data = {
       provinceid: stateId ? stateId : 0,
@@ -52,9 +54,9 @@ function ProvienceDistrictWise() {
               title: ele,
               dataIndex: ele,
               key: ele,
-              render: function (html) {
-                return <div dangerouslySetInnerHTML={createMarkup(html)} />;
-              },
+              // render: function (html) {
+              //   return <div dangerouslySetInnerHTML={createMarkup(html)} />;
+              // },
             });
           });
           setReportsColumn(data);
@@ -113,7 +115,15 @@ function ProvienceDistrictWise() {
           setFromDate={setFromDate}
           setToDate={setToDate}
           OnLoad={OnLoad}
+          csvDataName="PatientReport.csv"
+          csvData={patientData}
+          reportName="Patient's"
+          printFileName
+          fromDate
+          toDate
+          tableHead={reportsColumn}
         />
+
         {patientData?.length > 0 && (
           <div className="tableisRes">
             <Table

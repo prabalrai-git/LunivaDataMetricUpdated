@@ -1058,6 +1058,13 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
+          <PrivateRouter
+            exact
+            path="/newReports/"
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
 
           <PrivateRouter
             exact
