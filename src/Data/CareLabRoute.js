@@ -155,39 +155,39 @@ export const useCareLabRoute = () => {
     {
       icon: "icon-bars1",
       key: "viewProvience&DisticeWise",
-      name: "Provience/District Wise",
+      name: "Provience Wise Report",
       path: "viewProvience&DistrictWise",
     },
-    {
-      icon: "icon-bars1",
-      key: "viewAge&GenderWise",
-      name: "Age/Gender Wise",
-      path: "viewAge&GenderWise",
-    },
-    {
-      icon: "icon-bars1",
-      key: "viewDepartmentWiseTests",
-      name: "Department Wise Tests",
-      path: "viewDepartmentWiseTests",
-    },
-    {
-      icon: "icon-bars1",
-      key: "viewDepartmentWisePatients",
-      name: "Department Wise Patients",
-      path: "viewDepartmentWisePatients",
-    },
-    {
-      icon: "icon-bars1",
-      key: "viewDistrictCovidRecords",
-      name: "District Covid Records",
-      path: "viewDistrictCovidRecords",
-    },
-    {
-      icon: "icon-bars1",
-      key: "viewProvienceCovidRecords",
-      name: "Provience Covid Records",
-      path: "viewProvienceCovidRecords",
-    },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewAge&GenderWise",
+    //   name: "Age/Gender Wise",
+    //   path: "viewAge&GenderWise",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewDepartmentWiseTests",
+    //   name: "Department Wise Tests",
+    //   path: "viewDepartmentWiseTests",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewDepartmentWisePatients",
+    //   name: "Department Wise Patients",
+    //   path: "viewDepartmentWisePatients",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewDistrictCovidRecords",
+    //   name: "District Covid Records",
+    //   path: "viewDistrictCovidRecords",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewProvienceCovidRecords",
+    //   name: "Provience Covid Records",
+    //   path: "viewProvienceCovidRecords",
+    // },
   ];
 
   const mainRoute = [
@@ -338,7 +338,7 @@ export const useCareLabRoute = () => {
       key: "addtable",
       name: "Billing",
       path: "/viewbill",
-      showTab: true,
+      showTab: false,
     },
     // {
     //   icon: "icon-line-calendar",

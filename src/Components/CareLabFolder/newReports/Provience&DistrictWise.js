@@ -4,6 +4,10 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { VerifyPatientReport } from "../../../constants/url";
 import {
+  getDatametricReportType,
+  getGeographyWiseMISReports,
+} from "../../../services/careLabService";
+import {
   getDistrictsByStateId,
   getMunicipalitiesByDistrictId,
   getPatientDetailsByLocationWise,
@@ -23,6 +27,8 @@ function ProvienceDistrictWise() {
   const [toDate, setToDate] = useState();
   const [patientData, setPatientData] = useState([]);
   const [reportsColumn, setReportsColumn] = useState([]);
+  const [reportType, setReportType] = useState();
+  const [reportId, setReportId] = useState();
 
   const dispatch = useDispatch();
 
@@ -32,6 +38,13 @@ function ProvienceDistrictWise() {
     };
   }
 
+  useEffect(() => {
+    dispatch(
+      getDatametricReportType((val) => {
+        setReportType(val);
+      })
+    );
+  }, []);
   const OnLoad = () => {
     console.log("fromtodate", fromDate, toDate);
     setPatientData([]);
@@ -41,11 +54,13 @@ function ProvienceDistrictWise() {
       municipalityId: municipalityId ? municipalityId : 0,
       fromdate: fromDate,
       todate: toDate,
+      reportTypeId: reportId,
     };
     console.log(data, "data");
 
     dispatch(
-      getPatientDetailsByLocationWise(data, (val) => {
+      getGeographyWiseMISReports(data, (val) => {
+        console.log("data", data, "val", val);
         if (val.length > 0) {
           let tableKeys = Object.keys(val[0]);
           let data = [];
@@ -101,7 +116,7 @@ function ProvienceDistrictWise() {
     <>
       <div className="maiTopContainer">
         <PageHeader
-          pageTitle={"Provience & Districtwise Patient Count & Details"}
+          pageTitle={"Province & District-Wise Patient Count & Details"}
         />
         <ReportsFilter
           dateRange
@@ -117,11 +132,13 @@ function ProvienceDistrictWise() {
           OnLoad={OnLoad}
           csvDataName="PatientReport.csv"
           csvData={patientData}
-          reportName="Patient's"
+          reportName={reportId === 1 ? "Patient's" : "Patient's Count"}
           printFileName
           fromDate
           toDate
           tableHead={reportsColumn}
+          reportType={reportType}
+          setReportId={setReportId}
         />
 
         {patientData?.length > 0 && (

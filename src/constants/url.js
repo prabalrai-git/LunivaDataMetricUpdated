@@ -675,10 +675,23 @@ export const GetMunicipalitiesByDistrictId = "GetMunicipalitiesByDistrictId";
  * @param: ?districtId={districtId}
  */
 
-export const GetPatientDetailsByLocationWise =
-  "GetPatientDetailsByLocationWise";
+// export const GetPatientDetailsByLocationWise =
+//   "GetPatientDetailsByLocationWise";
+
+// /**
+//  * @desc: GetPatientDetailsByLocationWise
+//  * @param: ?provinceid={provinceid}&districtid={districtid}&municipalityId={municipalityId}&fromdate={fromdate}&todate={todate}
+//  */
+
+export const GetDatametricReportType = "GetDatametricReportType";
 
 /**
- * @desc: GetPatientDetailsByLocationWise
- * @param: ?provinceid={provinceid}&districtid={districtid}&municipalityId={municipalityId}&fromdate={fromdate}&todate={todate}
+ * @desc: GetDatametricReportType
  */
+
+export const GetGeographyWiseMISReports = "GetGeographyWiseMISReports";
+
+// /**
+//  * @desc: GetPatientDetailsByLocationWise
+//  * @param: ?provinceid={provinceid}&districtid={districtid}&municipalityId={municipalityId}&fromdate={fromdate}&todate={todate}
+//  */

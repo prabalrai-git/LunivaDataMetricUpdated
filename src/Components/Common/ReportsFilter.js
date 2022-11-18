@@ -1,13 +1,17 @@
 import { Col, message, Row, Select } from "antd";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { CSVLink } from "react-csv";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { getDatametricReportType } from "../../services/careLabService";
 import AppButton from "./AppButton";
 import Datepicker from "./Datepicker";
 import FilterTable from "./FilterTable";
 import { newTableStyles } from "./TableStyles";
 
 function ReportsFilter({ ...props }) {
+  const dispatch = useDispatch();
   const [dateRanges, setDateRanges] = useState();
 
   const {
@@ -29,12 +33,40 @@ function ReportsFilter({ ...props }) {
     fromDate,
     toDate,
     tableHead,
+    reportType,
+    setReportId,
+    stateId,
+    districtId,
+    municipalityId,
   } = props;
 
   const { Option } = Select;
 
+  const getLocationDetails = (stateId, districtId, municipalityId) => {
+    const sProvince = states.map((index) => {
+      if (index.Id === stateId) {
+        return index.Name;
+      }
+    });
+    const sDistrict = district.map((index) => {
+      if (index.Id === districtId) {
+        return index.Name;
+      }
+    });
+    const sMunicipality = municipality.map((index) => {
+      if (index.Id === municipalityId) {
+        return index.Name;
+      }
+    });
+    console.log(sProvince, sDistrict, sMunicipality);
+  };
+
+  useEffect(() => {
+    getLocationDetails();
+  }, []);
+
   const printHandle = () => {
-    console.log("fromtodate", fromDate, toDate, dateRanges);
+    // console.log("fromtodate", fromDate, toDate, dateRanges);
 
     if (csvData.length !== 0) {
       let newWindow = window.open();
@@ -81,9 +113,14 @@ function ReportsFilter({ ...props }) {
           <div style='float:right;margin-bottom:10px;'>
           <strong >From</strong> ${neaplaiFromToDateString[0]} - <strong>To</strong> ${neaplaiFromToDateString[1]}
           </div>
-      <div>
+        
+      </div>
+      `;
 
-    
+      let locationDetail = `
+        <div style='float:right;margin-bottom:10px;'>
+          <strong >Province</strong> ${states} <strong>To</strong> ${neaplaiFromToDateString[1]}
+          </div>
       `;
 
       let tableBody = "";
@@ -177,6 +214,23 @@ function ReportsFilter({ ...props }) {
                 </Select>
               </Col>
             )}
+
+            <Col lg={8} md={12} sm={11} xs={24}>
+              <span className="labelTop">Report Type</span>
+              <Select
+                style={{ width: "100%" }}
+                // defaultValue="0"
+                onChange={(val) => {
+                  console.log(val, "valvalval");
+                  setReportId(val);
+                }}
+              >
+                {reportType?.map((iTy) => {
+                  return <Option value={iTy?.RId}>{iTy?.ReportName}</Option>;
+                })}
+              </Select>
+            </Col>
+
             {dateRange && (
               <Col lg={8} md={10} sm={12} xs={24}>
                 <span className="labelTop">Date Range</span>
