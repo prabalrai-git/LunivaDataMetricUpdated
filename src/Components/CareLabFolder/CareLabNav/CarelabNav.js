@@ -20,7 +20,6 @@ const CarelabNavSettings = () => {
   useEffect(() => {
     let pathname = location.pathname.split("/");
     let rName = "";
-    console.log(newPa);
     if (pathname[1] === "caredashboard") {
       rName = "mainRoute";
     } else if (pathname[1] === "sampledash") {
@@ -41,6 +40,8 @@ const CarelabNavSettings = () => {
       rName = "bulkNegativeNav";
     } else if (pathname[1] === "testanalysis") {
       rName = "testAnalysisNav";
+    } else if (pathname[1] === "newReports") {
+      rName = "newReportsNav";
     }
     setReturnName(rName);
   }, [location.pathname]);
@@ -78,8 +79,8 @@ const CarelabNavSettings = () => {
     <SettingsContainer>
       <Row gutter={[16, 16]} className="fullWidth">
         {carelabNavData[returnName] !== undefined &&
-          carelabNavData[returnName].map((e) => (
-            e.showTab !== false ?
+          carelabNavData[returnName].map((e) =>
+            e.showTab !== false ? (
               <Col sm={24} md={12} xs={12} lg={12} xl={8}>
                 <div key={e.name} onClick={() => handleClick(e.path)}>
                   <NavLink
@@ -97,8 +98,10 @@ const CarelabNavSettings = () => {
                   </NavLink>
                 </div>
               </Col>
-              : ''
-          ))}
+            ) : (
+              ""
+            )
+          )}
       </Row>
     </SettingsContainer>
   );

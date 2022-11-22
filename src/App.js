@@ -100,6 +100,12 @@ import {
   AsyncViewBillingTable,
   AsyncPrintBillLayout,
   AsyncViewUpdateBill,
+  AsyncProvienceDistrictWise,
+  AsyncDeparmentWisePatients,
+  AsyncAgeGenderWise,
+  AsyncDepartmentWiseTests,
+  AsyncDistrictCovidRecords,
+  AsyncProvienceCovidRecords,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1052,6 +1058,13 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
+          <PrivateRouter
+            exact
+            path="/newReports/"
+            component={AsyncViewCareDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
 
           <PrivateRouter
             exact
@@ -1365,6 +1378,54 @@ function App() {
             exact
             path="/viewbill"
             component={AsyncViewBillingTable}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/viewProvience&DistrictWise"
+            component={AsyncProvienceDistrictWise}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/viewDistrictCovidRecords"
+            component={AsyncDistrictCovidRecords}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/viewProvienceCovidRecords"
+            component={AsyncProvienceCovidRecords}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/viewAge&GenderWise"
+            component={AsyncAgeGenderWise}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/viewDepartmentWiseTests"
+            component={AsyncDepartmentWiseTests}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/viewDepartmentWisePatients"
+            component={AsyncDeparmentWisePatients}
             layout={AsyncAppLayout}
             forEdit
             showSider

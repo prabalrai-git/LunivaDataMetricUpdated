@@ -1,5 +1,7 @@
 import {
+  GetDatametricReportType,
   GetDatewiseSampleStatusOfEachTest,
+  GetGeographyWiseMISReports,
   GetListOfPatientDetailsBydateAndTestDone,
   GetListOfPCRsampleByRequestorForBulkNegative,
   GetMemberShipDetailsByMemberId,
@@ -167,7 +169,37 @@ export const getMemberShipDetailsByMemberId = (data, successCallback) => {
         // console.log("smsgot!", response?.data);
       } else {
         successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const getDatametricReportType = (successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${GetDatametricReportType}`);
+      if (response?.status === 200) {
+        // console.log(response, "resresres");
+        successCallback(response?.data?.ReportDetails);
+      } else {
         console.log("error");
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const getGeographyWiseMISReports = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${GetGeographyWiseMISReports}?provinceid=${data.provinceid}&districtid=${data.districtid}&municipalityId=${data.municipalityId}&fromdate=${data.fromdate}&todate=${data.todate}&reportTypeId=${data.reportTypeId}`
+      );
+      if (response?.status === 200) {
+        successCallback(response?.data?.PatientList);
+        // console.log("smsgot!", response?.data);
+      } else {
+        successCallback([]);
       }
     } catch (error) {}
   };

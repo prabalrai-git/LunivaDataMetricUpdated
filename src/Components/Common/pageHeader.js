@@ -1,22 +1,42 @@
-import { message, Row, Space } from 'antd'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import AppButton from './AppButton'
-import { CSVLink } from 'react-csv';
-import { useDispatch } from "react-redux"
-import { getListofcompany } from '../../services/datametricService';
-import { newTableStyles } from './TableStyles';
+import { message, Row, Space } from "antd";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import AppButton from "./AppButton";
+import { CSVLink } from "react-csv";
+import { useDispatch } from "react-redux";
+import { getListofcompany } from "../../services/datametricService";
+import { newTableStyles } from "./TableStyles";
 
-const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDataName, csvData, forGroup, forGroupButtonClick, forCon, forConButtonClick, printFileName, reportName, tableHead, fromToDate, removetwo, selctorr, forData, forDataButtonClick }) => {
+const PageHeader = ({
+  pageTitle,
+  buttonTitle,
+  buttonOnClick,
+  csvLinkTitle,
+  csvDataName,
+  csvData,
+  forGroup,
+  forGroupButtonClick,
+  forCon,
+  forConButtonClick,
+  printFileName,
+  reportName,
+  tableHead,
+  fromToDate,
+  removetwo,
+  selctorr,
+  forData,
+  forDataButtonClick,
+}) => {
   const dispatch = useDispatch();
   const [companyDetail, setcompanyDetail] = useState([]);
-  
 
   useEffect(() => {
-    dispatch(getListofcompany(data => {
-      setcompanyDetail(data[0])
-    }))
-  }, [])
+    dispatch(
+      getListofcompany((data) => {
+        setcompanyDetail(data[0]);
+      })
+    );
+  }, []);
   // console.log("col", tableHead)
   // console.log('data', csvData)
 
@@ -29,7 +49,7 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
   //<p>Contact no:${companyDetail.COmpanyContactNo} </p>
   const printHandle = () => {
     if (csvData.length !== 0) {
-      let newWindow = window.open()
+      let newWindow = window.open();
 
       var adbs = require("ad-bs-converter");
       var nepaliFromDate = fromToDate.fromdate;
@@ -40,12 +60,12 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
         var nNepaliToDate = nepaliToDate.replaceAll("-", "/");
         var converterNepaliFromDate = adbs.ad2bs(nNepaliFromDate);
         var converterNepalitoDate = adbs.ad2bs(nNepaliToDate);
-        var converteNpFromDate = `${converterNepaliFromDate.en.year}-${converterNepaliFromDate.en.month}-${converterNepaliFromDate.en.day} `
-        var converteNpToDate = `${converterNepalitoDate.en.year}-${converterNepalitoDate.en.month}-${converterNepalitoDate.en.day} `
+        var converteNpFromDate = `${converterNepaliFromDate.en.year}-${converterNepaliFromDate.en.month}-${converterNepaliFromDate.en.day} `;
+        var converteNpToDate = `${converterNepalitoDate.en.year}-${converterNepalitoDate.en.month}-${converterNepalitoDate.en.day} `;
         neaplaiFromToDateString.push(converteNpFromDate, converteNpToDate);
       }
 
-      let newStyle = ``
+      let newStyle = ``;
       if (removetwo)
         newStyle = `<style>thead > tr> th:first-child, thead > tr> th:nth-child(2), tbody > tr > td:first-child,tbody > tr > td:nth-child(2){
         display: none;
@@ -55,7 +75,7 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
     tbody > tr:last-child > td{
         font-size: 12px;
         font-weight: 500;
-    }</style>`
+    }</style>`;
 
       let refName = `
       <div class="gocenter">
@@ -67,45 +87,51 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
       </div>
       <div class="headingContent">
       <div>
-      ${selctorr !== undefined ? `${reportName} Name: ${csvData[0][selctorr]}` : ``}
+      ${
+        selctorr !== undefined
+          ? `${reportName} Name: ${csvData[0][selctorr]}`
+          : ``
+      }
       </div>
       <div>
-      <strong>From</strong> ${neaplaiFromToDateString[0]} - <strong>To</strong> ${neaplaiFromToDateString[1]}
+      <strong>From</strong> ${
+        neaplaiFromToDateString[0]
+      } - <strong>To</strong> ${neaplaiFromToDateString[1]}
       </div>
       </div>
       `;
 
-      let tableBody = '';
-      let tableHeadHtml = '<thead>';
+      let tableBody = "";
+      let tableHeadHtml = "<thead>";
       let columns = [];
 
-      tableHead.forEach(ele => {
+      tableHead.forEach((ele) => {
         tableHeadHtml += `<th>${ele?.dataIndex}</th>`;
         columns.push(ele.dataIndex);
-      })
-      tableHeadHtml += '</thead>';
+      });
+      tableHeadHtml += "</thead>";
 
-      csvData.forEach(ele => {
-        tableBody = tableBody + '<tr>'
-        columns.forEach(cell => {
-          tableBody = tableBody + '<td>' + ele[cell] + '</td>'
-        })
-        tableBody = tableBody + '</tr>'
-      })
+      csvData.forEach((ele) => {
+        tableBody = tableBody + "<tr>";
+        columns.forEach((cell) => {
+          tableBody = tableBody + "<td>" + ele[cell] + "</td>";
+        });
+        tableBody = tableBody + "</tr>";
+      });
 
-      let allTable = `<table>${tableHeadHtml}${tableBody}</table>`
+      let allTable = `<table>${tableHeadHtml}${tableBody}</table>`;
 
-      newWindow.document.body.innerHTML = newTableStyles + newStyle + refName + allTable
+      newWindow.document.body.innerHTML =
+        newTableStyles + newStyle + refName + allTable;
 
       setTimeout(function () {
         newWindow.print();
         newWindow.close();
       }, 300);
-
     } else {
-      message.info('select some data')
+      message.info("select some data");
     }
-  }
+  };
 
   return (
     <PageHeaderContainer>
@@ -124,29 +150,56 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
         </Link>
       </div> */}
       {/* for msi only end */}
-      <Row justify='space-between align-center'>
-
-        <span className='pageTtitle'>{pageTitle}</span>
+      <Row justify="space-between align-center">
+        <span className="pageTtitle">{pageTitle}</span>
         {/* style={{ gap: '10px' }} */}
         <Row>
           <Space size={[8, 16]} wrap>
-            {forCon && <AppButton buttonTitle={forCon} buttonOnClick={forConButtonClick} primaryBtn ></AppButton>}
+            {forCon && (
+              <AppButton
+                buttonTitle={forCon}
+                buttonOnClick={forConButtonClick}
+                primaryBtn
+              ></AppButton>
+            )}
 
-            {buttonTitle && <AppButton buttonTitle={buttonTitle} buttonOnClick={buttonOnClick} primaryBtn ></AppButton>}
+            {buttonTitle && (
+              <AppButton
+                buttonTitle={buttonTitle}
+                buttonOnClick={buttonOnClick}
+                primaryBtn
+              ></AppButton>
+            )}
 
-            {forGroup && <AppButton buttonTitle={forGroup} buttonOnClick={forGroupButtonClick} primaryBtn ></AppButton>}
+            {forGroup && (
+              <AppButton
+                buttonTitle={forGroup}
+                buttonOnClick={forGroupButtonClick}
+                primaryBtn
+              ></AppButton>
+            )}
 
-            {forData && <AppButton buttonTitle={forData} buttonOnClick={forDataButtonClick} primaryBtn ></AppButton>}
+            {forData && (
+              <AppButton
+                buttonTitle={forData}
+                buttonOnClick={forDataButtonClick}
+                primaryBtn
+              ></AppButton>
+            )}
           </Space>
-          {
-            csvDataName &&
-            <div className='link'>
-              <CSVLink filename={csvDataName} className="btn ant-btn btn-primary btn-primary--outline" data={csvData}>Export CSV</CSVLink>
+          {csvDataName && (
+            <div className="link">
+              <CSVLink
+                filename={csvDataName}
+                className="btn ant-btn btn-primary btn-primary--outline"
+                data={csvData}
+              >
+                Export CSV
+              </CSVLink>
             </div>
-          }
+          )}
 
-          {
-            printFileName &&
+          {printFileName && (
             <button
               onClick={printHandle}
               className="btn ant-btn btn-primary btn-primary--outline"
@@ -156,15 +209,14 @@ const PageHeader = ({ pageTitle, buttonTitle, buttonOnClick, csvLinkTitle, csvDa
             >
               Print
             </button>
-          }
-
+          )}
         </Row>
       </Row>
     </PageHeaderContainer>
-  )
-}
+  );
+};
 
-export default PageHeader
+export default PageHeader;
 
 const PageHeaderContainer = styled.div`
   /* background-color: #fefefe; */
@@ -197,4 +249,4 @@ const PageHeaderContainer = styled.div`
 
   } */
   /* for MIS end */
-`
+`;

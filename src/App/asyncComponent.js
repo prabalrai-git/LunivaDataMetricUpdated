@@ -391,3 +391,39 @@ export const AsyncAddUpdateBill = lazy(() =>
 export const AsyncViewUpdateBill = lazy(() =>
   pMinDelay(import("../Components/AddBill/ViewUpdateBill"), 300)
 );
+// neReports
+
+export const AsyncProvienceDistrictWise = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/newReports/Provience&DistrictWise"),
+    300
+  )
+);
+
+export const AsyncAgeGenderWise = lazy(() =>
+  pMinDelay(import("../Components/CareLabFolder/newReports/AgeGenderWise"), 300)
+);
+export const AsyncProvienceCovidRecords = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/newReports/ProvienceCovidRecords"),
+    300
+  )
+);
+export const AsyncDistrictCovidRecords = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/newReports/DistrictCovidRecords"),
+    300
+  )
+);
+export const AsyncDepartmentWiseTests = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/newReports/DepartmentWiseTests"),
+    300
+  )
+);
+export const AsyncDeparmentWisePatients = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/newReports/DepartmentWisePatients"),
+    300
+  )
+);

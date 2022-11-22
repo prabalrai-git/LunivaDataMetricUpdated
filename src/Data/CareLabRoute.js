@@ -151,6 +151,45 @@ export const useCareLabRoute = () => {
     },
   ];
 
+  const newReportsNav = [
+    {
+      icon: "icon-bars1",
+      key: "viewProvience&DisticeWise",
+      name: "Provience Wise Report",
+      path: "viewProvience&DistrictWise",
+    },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewAge&GenderWise",
+    //   name: "Age/Gender Wise",
+    //   path: "viewAge&GenderWise",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewDepartmentWiseTests",
+    //   name: "Department Wise Tests",
+    //   path: "viewDepartmentWiseTests",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewDepartmentWisePatients",
+    //   name: "Department Wise Patients",
+    //   path: "viewDepartmentWisePatients",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewDistrictCovidRecords",
+    //   name: "District Covid Records",
+    //   path: "viewDistrictCovidRecords",
+    // },
+    // {
+    //   icon: "icon-bars1",
+    //   key: "viewProvienceCovidRecords",
+    //   name: "Provience Covid Records",
+    //   path: "viewProvienceCovidRecords",
+    // },
+  ];
+
   const mainRoute = [
     {
       icon: "icon-line-file",
@@ -187,6 +226,7 @@ export const useCareLabRoute = () => {
       subNavData: testAnalysisNav,
       showTab: false,
     },
+
     {
       icon: "icon-line-bar-graph",
       key: "finance1",
@@ -215,7 +255,7 @@ export const useCareLabRoute = () => {
     {
       icon: "icon-line-file",
       key: "marketanlaytic",
-      name: 'Marketing Analytic',
+      name: "Marketing Analytic",
       path: "/carddash",
       hasSubNav: false,
       showTab: true,
@@ -298,7 +338,7 @@ export const useCareLabRoute = () => {
       key: "addtable",
       name: "Billing",
       path: "/viewbill",
-      showTab: true,
+      showTab: false,
     },
     // {
     //   icon: "icon-line-calendar",
@@ -317,6 +357,15 @@ export const useCareLabRoute = () => {
       hasSubNav: false,
       showTab: false,
     },
+    {
+      icon: "icon-line2-doc",
+      key: "newReports",
+      name: "New Reports",
+      path: "/newReports",
+      hasSubNav: true,
+      subNavData: newReportsNav,
+      showTab: true,
+    },
   ];
 
   return {
@@ -328,6 +377,7 @@ export const useCareLabRoute = () => {
     reportStatNav: reportStatNav,
     qcControlNav: qcControlNav,
     testAnalysisNav: testAnalysisNav,
+    newReportsNav: newReportsNav,
     // dateChangeNav: dateChangeNav,
     // bulkNegativeNav: bulkNegativeNav,
   };
