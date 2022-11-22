@@ -1,4 +1,4 @@
-import { Form, Input, Button, Row, Col, Switch, message, InputNumber } from 'antd';
+import { Form, Input, Button, Row, Col, Switch, message, Select } from 'antd';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -8,23 +8,31 @@ import { formItemLayout } from '../../Common/FormItemLayout';
 import { tokenString } from '../../Common/HandleUser';
 import moment from 'moment'
 import { carelabStat } from '../../Common/StateList';
+import { getListListOfTestToInsertUpdateCutoffTimeAndCriticalValuesApi } from '../../../services/Tat';
 
 const AddControlTest = (props) => {
     const history = useHistory();
     const [form] = Form.useForm()
     const { TextArea } = Input
+    const { Option } = Select
     const { forEdit } = props;
     const dispatch = useDispatch();
     const [butDis, setButDis] = useState(false);
     const CuId = props?.match?.params?.id;
     const category = useSelector(state => state.testcontrol)
     const [previousValues, setpreviousValues] = useState(forEdit ? category?.testcontrollisttest[CuId] : {})
+    const [labTestList, setLabTestList] = useState([]);
 
     useEffect(() => {
         if (forEdit && previousValues === undefined) {
-            dispatch(getControlTestListApi({analyzerId: CuId}, (res) => {
+            dispatch(getControlTestListApi({ analyzerId: CuId }, (res) => {
             }))
         }
+
+        dispatch(getListListOfTestToInsertUpdateCutoffTimeAndCriticalValuesApi((res) => {
+            setLabTestList(res);
+        }))
+
     }, [])
 
     useEffect(() => {
@@ -136,7 +144,29 @@ const AddControlTest = (props) => {
                                 },
                             ]}
                         >
-                            <InputNumber style={{width: '100%'}} keyboard={false} />
+                            <Select
+                                showSearch
+                                optionFilterProp="children"
+                                placeholder="Select Lab test"
+                                filterOption={(input, option) => {
+                                    return (
+                                        option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                                        option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    );
+                                }}
+                                allowClear
+                            >
+                                {labTestList?.map(cList => (
+                                    <Option
+                                        title={cList?.TestName}
+                                        key={cList?.Id}
+                                        value={cList?.Id}>
+                                        {cList?.TestName}
+                                    </Option>
+                                )
+                                )
+                                }
+                            </Select>
                         </Form.Item>
 
                         <Form.Item
