@@ -82,7 +82,7 @@ const CarelabFilter = (props) => {
               )}
               {showTestControlList && (
                 <Col lg={4} md={12} sm={12} xs={24}>
-                  <Form.Item name="controlId" label="Test Control">
+                  <Form.Item name="controlId" label="Test Control ">
                     <Select
                       showSearch
                       optionFilterProp="children"
@@ -229,8 +229,15 @@ const CarelabFilter = (props) => {
               {showSampleId && (
                 <>
                   <Col lg={4} md={12} sm={12} xs={24}>
-                    <Form.Item name="sampleId" label={showSampleId != '' ? showSampleId : 'Sample Id'}>
-                      <Input placeholder={showSampleId != '' ? showSampleId : 'Sample Id'} />
+                    <Form.Item
+                      name="sampleId"
+                      label={showSampleId != "" ? showSampleId : "Sample Id"}
+                    >
+                      <Input
+                        placeholder={
+                          showSampleId != "" ? showSampleId : "Sample Id"
+                        }
+                      />
                     </Form.Item>
                   </Col>
                 </>

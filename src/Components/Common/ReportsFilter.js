@@ -67,7 +67,6 @@ function ReportsFilter({ ...props }) {
   }, []);
 
   const printHandle = () => {
-
     if (csvData.length !== 0) {
       let newWindow = window.open();
 
@@ -88,7 +87,7 @@ function ReportsFilter({ ...props }) {
       let newStyle = ``;
       // if (removetwo)
       newStyle = `<style>thead > tr> th:first-child, thead > tr> th:nth-child(2), tbody > tr > td:first-child,tbody > tr > td:nth-child(2){
-        display: none;
+        
        }tbody > tr:last-child{
     background-color: #f0f0f2;
     }
@@ -241,21 +240,24 @@ function ReportsFilter({ ...props }) {
               </Col>
             )}
             {serchButton && (
-              <Col>
-                <AppButton
-                  className="primary-btn"
-                  buttonTitle="Load"
-                  buttonOnClick={() => {
-                    OnLoad();
-                  }}
-                  priamryOutlineBtn
-                />
-              </Col>
+              <div className="load-btnreport">
+                <Col>
+                  <AppButton
+                    className="primary-btn"
+                    buttonTitle="Load"
+                    buttonOnClick={() => {
+                      OnLoad();
+                    }}
+                    priamryOutlineBtn
+                  />
+                </Col>
+              </div>
             )}
             <div
               style={{
                 position: "absolute",
                 right: "-210px",
+
                 top: "-60px",
                 display: "flex",
                 justifyContent: "space-between",
@@ -316,5 +318,11 @@ const FilterContainer = styled.div`
   }
   .labelTop {
     display: block;
+  }
+  .primary-btn {
+    float: right !important;
+  }
+  .load-btnreport {
+    margin-left: auto;
   }
 `;

@@ -17,6 +17,7 @@ import {
 import PageHeader from "../../Common/pageHeader";
 import ReportsFilter from "../../Common/ReportsFilter";
 import ReportsFilterGeo from "../../Common/ReportFilterGeo";
+import { getControlValueByControlTestIdApi } from "../../../services/qcService";
 function GeoGraphicalWise() {
   const [states, setStates] = useState([]);
   const [district, setDistrict] = useState([]);
@@ -30,7 +31,7 @@ function GeoGraphicalWise() {
   const [reportsColumn, setReportsColumn] = useState([]);
   const [reportType, setReportType] = useState();
   const [reportId, setReportId] = useState();
-  const [test, setTest] = useState();
+  const [test, setTest] = useState([]);
   const [testId, setTestId] = useState(0);
   const [diagnosis, setDiagnosis] = useState([]);
   const [diagnosisId, setDiagnosisId] = useState(0);
@@ -125,6 +126,16 @@ function GeoGraphicalWise() {
     );
   }, [diagnosisId]);
 
+  useEffect(() => {
+    dispatch(
+      getControlValueByControlTestIdApi((val) => {
+        console.log(data, "valge");
+        console.log(val, "diagnosisreportval");
+        setTest(val);
+      })
+    );
+  }, [diagnosisId]);
+
   // var dateData = {
   //   fromdate: val[0].format("YYYY-MM-DD"),
   //   todate: val[1].format("YYYY-MM-DD"),
@@ -141,6 +152,7 @@ function GeoGraphicalWise() {
           states={states}
           district={district}
           municipality={municipality}
+          test={test}
           setStateId={setStateId}
           setDistrictId={setDistrictId}
           setMunicipalityId={setMunicipalityId}

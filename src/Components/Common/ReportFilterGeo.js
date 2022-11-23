@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { CSVLink } from "react-csv";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { useControlDetails } from "../../CustomHook/useControlDetails";
 import { getDatametricReportType } from "../../services/careLabService";
 import AppButton from "./AppButton";
 import Datepicker from "./Datepicker";
@@ -13,7 +14,6 @@ import { newTableStyles } from "./TableStyles";
 function ReportsFilterGeo({ ...props }) {
   const dispatch = useDispatch();
   const [dateRanges, setDateRanges] = useState();
-
   const {
     states,
     district,
@@ -41,11 +41,12 @@ function ReportsFilterGeo({ ...props }) {
     diagnosis,
     test,
     diagnosisId,
+    showTestControlList,
     testId,
   } = props;
 
   const { Option } = Select;
-
+  const controlList = useControlDetails();
   const getLocationDetails = (
     stateId,
     districtId,
@@ -253,18 +254,15 @@ function ReportsFilterGeo({ ...props }) {
                     setReportId(val);
                   }}
                 >
-                  {diagnosis?.map((iTy) => {
-                    return (
-                      <Option value={iTy?.diagnosisId}>
-                        {iTy?.diagnosisId}
-                      </Option>
-                    );
-                  })}
+                  {/* {diagnosis?.map((iTy) => { */}
+                  return (<Option value="All">All</Option>
+                  );
+                  {/* })} */}
                 </Select>
               </Col>
             )}
             <Col lg={8} md={12} sm={11} xs={24}>
-              <span className="labelTop">Test Id</span>
+              <span className="labelTop">Test </span>
               <Select
                 style={{ width: "100%" }}
                 // defaultValue="0"
@@ -273,8 +271,16 @@ function ReportsFilterGeo({ ...props }) {
                   setReportId(val);
                 }}
               >
-                {municipality?.map((iTy) => {
-                  return <Option value={iTy?.RId}>{iTy?.ReportName}</Option>;
+                {controlList?.map((cList) => {
+                  return (
+                    <Option
+                      title={cList?.ControlName}
+                      key={cList?.CId}
+                      value={cList?.CId}
+                    >
+                      {cList?.ControlName}
+                    </Option>
+                  );
                 })}
               </Select>
             </Col>
