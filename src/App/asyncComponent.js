@@ -400,6 +400,13 @@ export const AsyncProvienceDistrictWise = lazy(() =>
   )
 );
 
+export const AsyncGeoGraphicalWise = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/newReports/GeoGraphicalWise"),
+    300
+  )
+);
+
 export const AsyncAgeGenderWise = lazy(() =>
   pMinDelay(import("../Components/CareLabFolder/newReports/AgeGenderWise"), 300)
 );

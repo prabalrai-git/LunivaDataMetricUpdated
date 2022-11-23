@@ -106,6 +106,7 @@ import {
   AsyncDepartmentWiseTests,
   AsyncDistrictCovidRecords,
   AsyncProvienceCovidRecords,
+  AsyncGeoGraphicalWise,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1386,6 +1387,14 @@ function App() {
             exact
             path="/viewProvience&DistrictWise"
             component={AsyncProvienceDistrictWise}
+            layout={AsyncAppLayout}
+            forEdit
+            showSider
+          />
+          <PrivateRouter
+            exact
+            path="/viewGeoGraphicalWise"
+            component={AsyncGeoGraphicalWise}
             layout={AsyncAppLayout}
             forEdit
             showSider

@@ -188,9 +188,10 @@ export const getDatametricReportType = (successCallback) => {
     } catch (error) {}
   };
 };
-
+//province
 export const getGeographyWiseMISReports = (data, successCallback) => {
   return async (dispatch) => {
+    console.log(data);
     try {
       const response = await fetch(
         `${GetGeographyWiseMISReports}?provinceid=${data.provinceid}&districtid=${data.districtid}&municipalityId=${data.municipalityId}&fromdate=${data.fromdate}&todate=${data.todate}&reportTypeId=${data.reportTypeId}`

@@ -158,6 +158,12 @@ export const useCareLabRoute = () => {
       name: "Provience Wise Report",
       path: "viewProvience&DistrictWise",
     },
+    {
+      icon: "icon-bars1",
+      key: "viewGeoGraphicalWise",
+      name: "Geographical Wise Report",
+      path: "viewGeoGraphicalWise",
+    },
     // {
     //   icon: "icon-bars1",
     //   key: "viewAge&GenderWise",

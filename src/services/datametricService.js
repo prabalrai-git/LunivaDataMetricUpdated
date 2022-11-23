@@ -314,9 +314,30 @@ export const getMunicipalitiesByDistrictId = (data, successCallback) => {
     } catch (error) {}
   };
 };
+// GeographicalTestwisePatientCountReport
+export const getGeographicalTestwisePatientCountReport = (
+  data,
+  successCallback
+) => {
+  console.log(data, "dataapppppp");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `GeographicalTestwisePatientCountReport?provinceid=${data.provinceid}&districtid=${data.districtid}&municipalityId=${data.municipalityId}&fromdate=${data.fromdate}&todate=${data.todate}&diagnosisId=${data.diagnosisId}&testId=${data.testId}`
+      );
+      console.log(response);
+      if (response?.status === 200) {
+        successCallback(response?.data?.TestWiseCount);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
 export const getPatientDetailsByLocationWise = (data, successCallback) => {
   return async (dispatch) => {
     try {
+      console.log(data, "dataasss");
       const response = await fetch(
         `${GetPatientDetailsByLocationWise}?provinceid=${data.provinceid}&districtid=${data.districtid}&municipalityId=${data.municipalityId}&fromdate=${data.fromdate}&todate=${data.todate}`
       );

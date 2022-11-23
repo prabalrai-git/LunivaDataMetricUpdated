@@ -10,7 +10,7 @@ import Datepicker from "./Datepicker";
 import FilterTable from "./FilterTable";
 import { newTableStyles } from "./TableStyles";
 
-function ReportsFilter({ ...props }) {
+function ReportsFilterGeo({ ...props }) {
   const dispatch = useDispatch();
   const [dateRanges, setDateRanges] = useState();
 
@@ -38,13 +38,20 @@ function ReportsFilter({ ...props }) {
     stateId,
     districtId,
     municipalityId,
+    diagnosis,
+    test,
     diagnosisId,
     testId,
   } = props;
 
   const { Option } = Select;
 
-  const getLocationDetails = (stateId, districtId, municipalityId) => {
+  const getLocationDetails = (
+    stateId,
+    districtId,
+    municipalityId,
+    diagnosisId
+  ) => {
     const sProvince = states.map((index) => {
       if (index.Id === stateId) {
         return index.Name;
@@ -60,7 +67,26 @@ function ReportsFilter({ ...props }) {
         return index.Name;
       }
     });
-    console.log(sProvince, sDistrict, sMunicipality);
+
+    const sDiagnosis = diagnosis.map((index) => {
+      if (index.Id === diagnosisId) {
+        return index.Name;
+      }
+    });
+
+    const sTest = diagnosis.map((index) => {
+      if (index.Id === testId) {
+        return index.Name;
+      }
+    });
+
+    console.log(
+      sProvince,
+      sDistrict,
+      sMunicipality,
+      sDiagnosis,
+      "asbdasdalldetails"
+    );
   };
 
   useEffect(() => {
@@ -216,9 +242,29 @@ function ReportsFilter({ ...props }) {
                 </Select>
               </Col>
             )}
-
+            {diagnosis !== undefined && (
+              <Col lg={8} md={12} sm={11} xs={24}>
+                <span className="labelTop">Diagnosis Id</span>
+                <Select
+                  style={{ width: "100%" }}
+                  // defaultValue="0"
+                  onChange={(val) => {
+                    console.log(val, "valvalval");
+                    setReportId(val);
+                  }}
+                >
+                  {diagnosis?.map((iTy) => {
+                    return (
+                      <Option value={iTy?.diagnosisId}>
+                        {iTy?.diagnosisId}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </Col>
+            )}
             <Col lg={8} md={12} sm={11} xs={24}>
-              <span className="labelTop">Report Type</span>
+              <span className="labelTop">Test Id</span>
               <Select
                 style={{ width: "100%" }}
                 // defaultValue="0"
@@ -227,7 +273,7 @@ function ReportsFilter({ ...props }) {
                   setReportId(val);
                 }}
               >
-                {reportType?.map((iTy) => {
+                {municipality?.map((iTy) => {
                   return <Option value={iTy?.RId}>{iTy?.ReportName}</Option>;
                 })}
               </Select>
@@ -313,7 +359,7 @@ function ReportsFilter({ ...props }) {
   );
 }
 
-export default ReportsFilter;
+export default ReportsFilterGeo;
 
 const FilterContainer = styled.div`
   /* background-color: #fefefe; */
