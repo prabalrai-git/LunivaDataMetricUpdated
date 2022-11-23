@@ -161,7 +161,7 @@ const AddControlTest = (props) => {
                                         title={cList?.TestName}
                                         key={cList?.Id}
                                         value={cList?.Id}>
-                                        {cList?.TestName}
+                                        {`${cList?.TestName} (${cList?.Specimen})`}
                                     </Option>
                                 )
                                 )

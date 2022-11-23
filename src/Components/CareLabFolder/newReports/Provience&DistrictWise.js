@@ -46,7 +46,6 @@ function ProvienceDistrictWise() {
     );
   }, []);
   const OnLoad = () => {
-    console.log("fromtodate", fromDate, toDate);
     setPatientData([]);
     let data = {
       provinceid: stateId ? stateId : 0,
@@ -56,11 +55,9 @@ function ProvienceDistrictWise() {
       todate: toDate,
       reportTypeId: reportId,
     };
-    console.log(data, "data");
 
     dispatch(
       getGeographyWiseMISReports(data, (val) => {
-        console.log("data", data, "val", val);
         if (val.length > 0) {
           let tableKeys = Object.keys(val[0]);
           let data = [];
@@ -87,7 +84,6 @@ function ProvienceDistrictWise() {
     dispatch(
       getStates((val) => {
         setStates(val);
-        console.log(val);
       })
     );
 

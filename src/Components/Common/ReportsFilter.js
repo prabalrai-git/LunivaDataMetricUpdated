@@ -58,7 +58,6 @@ function ReportsFilter({ ...props }) {
         return index.Name;
       }
     });
-    console.log(sProvince, sDistrict, sMunicipality);
   };
 
   useEffect(() => {
@@ -66,7 +65,6 @@ function ReportsFilter({ ...props }) {
   }, []);
 
   const printHandle = () => {
-    // console.log("fromtodate", fromDate, toDate, dateRanges);
 
     if (csvData.length !== 0) {
       let newWindow = window.open();
@@ -80,11 +78,9 @@ function ReportsFilter({ ...props }) {
         // var nNepaliToDate = nepaliToDate.replaceAll("-", "/");
         var converterNepaliFromDate = adbs.ad2bs(nepaliFromDate);
         var converterNepalitoDate = adbs.ad2bs(nepaliToDate);
-        console.log(converterNepaliFromDate, "hihihi");
         var converteNpFromDate = `${converterNepaliFromDate.en.year}-${converterNepaliFromDate.en.month}-${converterNepaliFromDate.en.day} `;
         var converteNpToDate = `${converterNepalitoDate.en.year}-${converterNepalitoDate.en.month}-${converterNepalitoDate.en.day} `;
         neaplaiFromToDateString.push(converteNpFromDate, converteNpToDate);
-        console.log(neaplaiFromToDateString, "hello world");
       }
 
       let newStyle = ``;
@@ -168,7 +164,6 @@ function ReportsFilter({ ...props }) {
                   // defaultValue="0"
                   onChange={(val) => {
                     setStateId(val);
-                    // console.log(val, "valval");
                   }}
                 >
                   <Option value={0}>All</Option>
@@ -221,7 +216,6 @@ function ReportsFilter({ ...props }) {
                 style={{ width: "100%" }}
                 // defaultValue="0"
                 onChange={(val) => {
-                  console.log(val, "valvalval");
                   setReportId(val);
                 }}
               >
@@ -237,7 +231,6 @@ function ReportsFilter({ ...props }) {
                 <Datepicker
                   //   defaultValuer={fromDate}
                   onChanger={(value) => {
-                    console.log("value", value);
                     setDateRanges(value);
                     setFromDate(value[0].format("YYYY-MM-DD"));
                     setToDate(value[1].format("YYYY-MM-DD"));
