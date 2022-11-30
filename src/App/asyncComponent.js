@@ -434,3 +434,12 @@ export const AsyncDeparmentWisePatients = lazy(() =>
     300
   )
 );
+export const AsyncCountCharts = lazy(() =>
+  pMinDelay(
+    import("../Components/CareLabFolder/newReports/ProvienceCharts"),
+    300
+  )
+);
+export const AsyncMainCharts = lazy(() =>
+  pMinDelay(import("../Components/CareLabFolder/newReports/MainPageChart"), 300)
+);

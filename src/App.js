@@ -107,6 +107,8 @@ import {
   AsyncDistrictCovidRecords,
   AsyncProvienceCovidRecords,
   AsyncGeoGraphicalWise,
+  AsyncCountCharts,
+  AsyncMainCharts,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1389,6 +1391,24 @@ function App() {
             component={AsyncProvienceDistrictWise}
             layout={AsyncAppLayout}
             forEdit
+            showSider
+          />
+
+          <PrivateRouter
+            exact
+            path="/viewProvience&DistrictWise/charts"
+            component={AsyncCountCharts}
+            layout={AsyncAppLayout}
+            // forEdit
+            showSider
+          />
+          {/* //charts dropdown menu */}
+          <PrivateRouter
+            exact
+            path="/viewProvience&DistrictWise/MainPage"
+            component={AsyncMainCharts}
+            layout={AsyncAppLayout}
+            // forEdit
             showSider
           />
           <PrivateRouter

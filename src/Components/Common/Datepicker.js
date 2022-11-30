@@ -12,7 +12,7 @@ const Datepicker = (props) => {
         <RangePicker
           defaultValue={defaultValuer}
           onChange={onChanger}
-          style={{ width: "123%" }}
+          style={{ width: "110%" }}
           size="default"
         />
       </Space>

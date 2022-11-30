@@ -119,7 +119,7 @@ function ReportsFilterGeo({ ...props }) {
       let newStyle = ``;
       // if (removetwo)
       newStyle = `<style>thead > tr> th:first-child, thead > tr> th:nth-child(2), tbody > tr > td:first-child,tbody > tr > td:nth-child(2){
-        display: none;
+       
        }tbody > tr:last-child{
     background-color: #f0f0f2;
     }
@@ -245,7 +245,7 @@ function ReportsFilterGeo({ ...props }) {
             )}
             {diagnosis !== undefined && (
               <Col lg={8} md={12} sm={11} xs={24}>
-                <span className="labelTop">Diagnosis Id</span>
+                <span className="labelTop">Diagnosis </span>
                 <Select
                   style={{ width: "100%" }}
                   // defaultValue="0"
