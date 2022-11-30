@@ -54,7 +54,7 @@ const options = {
     },
     y: {
       grid: {
-        display: true,
+        display: false,
       },
     },
   },
@@ -151,6 +151,7 @@ const ProvienceCharts = () => {
           datasets: [
             {
               label: "Male Patient",
+              data: maleCount,
               borderColor: "rgb(55,123,132)",
               backgroundColor: "rgb(106, 90, 205)",
             },
