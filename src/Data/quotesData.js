@@ -1,5 +1,5 @@
 export const quotes =[
-  'Today’s goals: Coffee and kindness. Maybe two coffees, and then kindness.',
+  'Today’s goals: A cup of Coffee and kindness. Maybe two cups of coffee, and then kindness.',
   'Some people dream of success, while other people get up every morning and make it happen.',
   'I’m a greater believer in luck, and I find the harder I work the more I have of it.',
   'When we strive to become better than we are, everything around us becomes better too.',
