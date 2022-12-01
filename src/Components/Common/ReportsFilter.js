@@ -3,17 +3,19 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { CSVLink } from "react-csv";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { getDatametricReportType } from "../../services/careLabService";
 import AppButton from "./AppButton";
 import Datepicker from "./Datepicker";
 import FilterTable from "./FilterTable";
 import { newTableStyles } from "./TableStyles";
+import { carelabStat } from "../Common/StateList";
 
 function ReportsFilter({ ...props }) {
   const dispatch = useDispatch();
   const [dateRanges, setDateRanges] = useState();
-
   const {
     states,
     district,
@@ -227,9 +229,10 @@ function ReportsFilter({ ...props }) {
             </Col>
 
             {dateRange && (
-              <Col lg={8} md={10} sm={12} xs={24}>
+              <Col lg={8} md={12} sm={11} xs={24}>
                 <span className="labelTop">Date Range</span>
                 <Datepicker
+                  className
                   //   defaultValuer={fromDate}
                   onChanger={(value) => {
                     setDateRanges(value);
@@ -250,6 +253,22 @@ function ReportsFilter({ ...props }) {
                     }}
                     priamryOutlineBtn
                   />
+                </Col>
+                <Col>
+                  <NavLink
+                    to={{
+                      pathname: `/viewProvience&DistrictWise/MainPage`,
+                      state: carelabStat,
+                    }}
+                  >
+                    <div className="graphbtnsection">
+                      <AppButton
+                        className="primary-btn graphbtn"
+                        buttonTitle="View Graph"
+                        priamryOutlineBtn
+                      />
+                    </div>
+                  </NavLink>
                 </Col>
               </div>
             )}
@@ -316,13 +335,16 @@ const FilterContainer = styled.div`
   .filterRow > div {
     padding: 4px;
   }
-  .labelTop {
-    display: block;
-  }
   .primary-btn {
     float: right !important;
   }
   .load-btnreport {
     margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    /* justify-content: space-between; */
+  }
+  .graphbtnsection {
+    margin-left: 10px;
   }
 `;

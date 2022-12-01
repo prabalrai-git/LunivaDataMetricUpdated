@@ -1,119 +1,139 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
-import { MenuRoute } from '../Data/MenuRoute'
-import imgOne from '../assets/images/logobig.png'
-import { Col, Row } from 'antd'
-import { quotes } from '../Data/quotesData'
-import bkg from '../assets/images/svg.png'
-import day from '../assets/images/day.jpg'
-import night from '../assets/images/night.jpg'
-import { inventoryStat } from '../Components/Common/StateList'
-
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { MenuRoute } from "../Data/MenuRoute";
+import imgOne from "../assets/images/logobig.png";
+import { Col, Row } from "antd";
+import { quotes } from "../Data/quotesData";
+import bkg from "../assets/images/svg.png";
+import day from "../assets/images/day.jpg";
+import night from "../assets/images/night.jpg";
+// import { carelabStat } from "../Components/Common/StateList";
+// ../Components/Common/StateList
 
 const DashBoardContainer = () => {
   const data = MenuRoute;
-  const token = JSON.parse(sessionStorage.getItem('token'));
-  const [randomElement, setrandomElement] = useState(quotes[Math.floor(Math.random() * quotes.length)])
+  const token = JSON.parse(sessionStorage.getItem("token"));
+  const [randomElement, setrandomElement] = useState(
+    quotes[Math.floor(Math.random() * quotes.length)]
+  );
   // const cardImgBkg = useMemo(() => day);
 
   const [date, setDate] = useState(new Date());
   const [cardBkg, setcardBkg] = useState();
-  const daysNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const daysNames = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
   const monthsNames = [
-    'jan',
-    'feb',
-    'mar',
-    'apr',
-    'may',
-    'jun',
-    'jul',
-    'aug',
-    'sep',
-    'oct',
-    'nov',
-    'dec'
-  ]
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec",
+  ];
 
   useEffect(() => {
     var timerID = setInterval(() => tick(), 1000);
     return function cleanup() {
       clearInterval(timerID);
     };
-
-
   });
   function tick() {
     setDate(new Date());
     const temp = date.getHours;
-    temp >= 18 || temp < 6 ? setcardBkg('night') : setcardBkg('day');
-
+    temp >= 18 || temp < 6 ? setcardBkg("night") : setcardBkg("day");
   }
-
 
   return (
     <DashbordContainer>
       <div className="welcome">
         <Row gutter={[16, 16]}>
-          <Col sm={24} md={16} xs={24} lg={16} >
+          <Col sm={24} md={16} xs={24} lg={16}>
             <div className="right maiTopContainer">
               <h3> Welcome back {token.username}</h3>
-              <p><span><i className="icon-quote-left1"></i></span> {randomElement} <span><i className="icon-quote-right1"></i></span></p>
+              <p>
+                <span>
+                  <i className="icon-quote-left1"></i>
+                </span>{" "}
+                {randomElement}{" "}
+                <span>
+                  <i className="icon-quote-right1"></i>
+                </span>
+              </p>
             </div>
           </Col>
           <Col sm={24} md={8} xs={24} lg={8}>
             <div className="left maiTopContainer">
               <img src={imgOne} alt="" />
             </div>
-          </Col >
-
+          </Col>
         </Row>
-
       </div>
       <Row gutter={[16, 16]}>
-        
         <Col sm={24} md={8} xs={24} lg={6}>
           <div className={`dContainer ${cardBkg}`}>
             <div className="detail ">
               <span>{daysNames[date.getDay()]}</span>
-              <h2>{date.getHours()} : {date.getMinutes()}</h2>
-              <p>{date.getFullYear()} {monthsNames[date.getMonth()]} {date.getDate()} </p>
+              <h2>
+                {date.getHours()} : {date.getMinutes()}
+              </h2>
+              <p>
+                {date.getFullYear()} {monthsNames[date.getMonth()]}{" "}
+                {date.getDate()}{" "}
+              </p>
             </div>
           </div>
         </Col>
 
         <Col sm={24} md={16} xs={24} lg={18}>
           <Row gutter={[16, 16]}>
-            {data.map(e => (
+            {data.map((e) => (
               <>
-                {e.key !== "dashbord" ?
+                {e.key !== "dashbord" ? (
                   <Col sm={24} md={12} xs={12} lg={12} xl={8}>
-                    <NavLink to={{
-                      pathname: e.path,
-                      state: inventoryStat
-                    }} key={e.name}>
-                      <div className='cButton' >
-                        <span><i className={e.icon}></i> </span>
+                    <NavLink
+                      to={{
+                        pathname: e.path,
+                        state: inventoryStat,
+                      }}
+                      key={e.name}
+                    >
+                      <div className="cButton">
+                        <span>
+                          <i className={e.icon}></i>{" "}
+                        </span>
                         <span>{e.name}</span>
                       </div>
                     </NavLink>
                   </Col>
-                  : ''}
+                ) : (
+                  ""
+                )}
               </>
             ))}
-
           </Row>
         </Col>
       </Row>
 
-
       {/* </div> */}
     </DashbordContainer>
+  );
+};
 
-  )
-}
-
-export default DashBoardContainer
+export default DashBoardContainer;
 
 const DashbordContainer = styled.div`
 .ant-row {
@@ -338,4 +358,4 @@ const DashbordContainer = styled.div`
       }
     }
   }
-`
+`;

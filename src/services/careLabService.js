@@ -190,6 +190,7 @@ export const getDatametricReportType = (successCallback) => {
 };
 //province
 export const getGeographyWiseMISReports = (data, successCallback) => {
+  console.log(data, "data");
   return async (dispatch) => {
     console.log(data);
     try {
