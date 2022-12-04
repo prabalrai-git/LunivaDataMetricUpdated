@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   Chart as ChartJS,
@@ -15,7 +15,7 @@ import {
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
-import { Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 
 ChartJS.register(
   LinearScale,
@@ -52,11 +52,18 @@ const options = {
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
 const ProvienceLinechart = () => {
+  const ref = useRef(null);
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
 
+  const downloadImage = useCallback(() => {
+    const link = document.createElement("a");
+    link.download = "chart.png";
+    link.href = ref.current.toBase64Image();
+    link.click();
+  }, []);
   const [datas, setData] = useState({
     labels,
     datasets: [
@@ -135,37 +142,14 @@ const ProvienceLinechart = () => {
               label: "Male Patient",
               data: maleCount,
               borderColor: "rgb(85,123,132)",
-              backgroundColor: [
-                "rgb(255, 0, 0)",
-                "rgb(0, 0, 255)",
-                "rgb(60, 179, 113)",
-                "rgb(238, 130, 238)",
-                "rgb(255, 165, 0)",
-                "rgb(106, 90, 205)",
-                "rgba(125,5,90,82)",
-                "rgb(190, 0, 05)",
-                "rgba(125,5,90,82)",
-                "rgb(255, 65, 0)",
-              ],
+              backgroundColor: ["rgb(0, 0, 255)"],
             },
-          ],
-          datasets: [
+
             {
-              label: "Male Patient",
+              label: "FeMale Patient",
               data: femaleCount,
-              borderColor: "rgb(85,123,132)",
-              backgroundColor: [
-                "rgb(255, 0, 0)",
-                "rgb(0, 0, 255)",
-                "rgb(60, 179, 113)",
-                "rgb(238, 130, 238)",
-                "rgb(255, 165, 0)",
-                "rgb(106, 90, 205)",
-                "rgba(125,5,90,82)",
-                "rgb(190, 0, 05)",
-                "rgba(125,5,90,82)",
-                "rgb(255, 65, 0)",
-              ],
+              //   borderColor: "rgb(85,123,132)",
+              backgroundColor: ["rgb(255, 0, 0)"],
             },
           ],
         });
@@ -177,9 +161,21 @@ const ProvienceLinechart = () => {
   return (
     <>
       <PieChartsProvience>
+        <Button
+          onClick={downloadImage}
+          className="export-btn-charts"
+          type="primary"
+        >
+          Export charts
+        </Button>
         <Row gutter={16}>
           <Col span={16}>
-            <Line className="piecharts-pie" data={datas} options={options} />
+            <Line
+              ref={ref}
+              className="piecharts-pie"
+              data={datas}
+              options={options}
+            />
           </Col>
         </Row>
       </PieChartsProvience>
@@ -188,4 +184,8 @@ const ProvienceLinechart = () => {
 };
 
 export default ProvienceLinechart;
-const PieChartsProvience = styled.div``;
+const PieChartsProvience = styled.div`
+  .export-btn-charts {
+    float: right;
+  }
+`;

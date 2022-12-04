@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   Chart as ChartJS,
@@ -15,7 +15,7 @@ import {
 import { Bar, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
-import { Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import ProviencePieFemale from "./ProviencePieFemale";
 
 ChartJS.register(
@@ -57,7 +57,13 @@ const ProviencePiechart = () => {
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
-
+  const ref = useRef(null);
+  const downloadImage = useCallback(() => {
+    const link = document.createElement("a");
+    link.download = "chart.png";
+    link.href = ref.current.toBase64Image();
+    link.click();
+  }, []);
   const [datas, setData] = useState({
     labels,
     datasets: [
@@ -159,9 +165,21 @@ const ProviencePiechart = () => {
   return (
     <>
       <PieChartsProvience>
+        <Button
+          onClick={downloadImage}
+          className="export-btn-charts"
+          type="primary"
+        >
+          Export charts
+        </Button>
         <Row gutter={16}>
           <Col span={8}>
-            <Pie className="piecharts-pie" data={datas} options={options} />
+            <Pie
+              className="piecharts-pie"
+              ref={ref}
+              data={datas}
+              options={options}
+            />
           </Col>
           <Col span={8} offset={6}>
             <ProviencePieFemale />
@@ -173,4 +191,8 @@ const ProviencePiechart = () => {
 };
 
 export default ProviencePiechart;
-const PieChartsProvience = styled.div``;
+const PieChartsProvience = styled.div`
+  .export-btn-charts {
+    float: right;
+  }
+`;

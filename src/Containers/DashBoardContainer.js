@@ -8,8 +8,7 @@ import { quotes } from "../Data/quotesData";
 import bkg from "../assets/images/svg.png";
 import day from "../assets/images/day.jpg";
 import night from "../assets/images/night.jpg";
-// import { carelabStat } from "../Components/Common/StateList";
-// ../Components/Common/StateList
+import { inventoryStat } from "../Components/Common/StateList";
 
 const DashBoardContainer = () => {
   const data = MenuRoute;

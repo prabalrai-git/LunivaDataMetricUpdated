@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   Chart as ChartJS,
@@ -15,7 +15,7 @@ import {
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
-import { Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import DonutChartFemale from "./DonutChartFemale";
 
 ChartJS.register(
@@ -53,10 +53,18 @@ const options = {
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
 const DonutChart = () => {
+  const ref = useRef(null);
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
+
+  const downloadImage = useCallback(() => {
+    const link = document.createElement("a");
+    link.download = "chart.png";
+    link.href = ref.current.toBase64Image();
+    link.click();
+  }, []);
 
   const [datas, setData] = useState({
     labels,
@@ -159,9 +167,17 @@ const DonutChart = () => {
   return (
     <>
       <PieChartsProvience>
+        <Button
+          onClick={downloadImage}
+          className="export-btn-charts"
+          type="primary"
+        >
+          Export charts
+        </Button>
         <Row gutter={16}>
           <Col span={8}>
             <Doughnut
+              ref={ref}
               className="piecharts-pie"
               data={datas}
               options={options}
@@ -177,4 +193,8 @@ const DonutChart = () => {
 };
 
 export default DonutChart;
-const PieChartsProvience = styled.div``;
+const PieChartsProvience = styled.div`
+  .export-btn-charts {
+    float: right;
+  }
+`;

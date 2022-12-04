@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   Chart as ChartJS,
@@ -15,9 +15,10 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
-import { Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import ProviencePiechart from "./ProviencePiechart";
 import ProvienceLineCharts from "./ProvienceLineChart";
+import AppButton from "../../Common/AppButton";
 
 ChartJS.register(
   LinearScale,
@@ -54,7 +55,7 @@ const options = {
     },
     y: {
       grid: {
-        display: false,
+        display: true,
       },
     },
   },
@@ -63,6 +64,7 @@ const options = {
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
 const ProvienceCharts = () => {
+  const ref = useRef(null);
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
@@ -85,6 +87,12 @@ const ProvienceCharts = () => {
       },
     ],
   });
+  const downloadImage = useCallback(() => {
+    const link = document.createElement("a");
+    link.download = "chart.png";
+    link.href = ref.current.toBase64Image();
+    link.click();
+  }, []);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -171,9 +179,16 @@ const ProvienceCharts = () => {
   return (
     <>
       <ChartsProvience>
+        <Button
+          onClick={downloadImage}
+          className="export-btn-charts"
+          type="primary"
+        >
+          Export charts
+        </Button>
         <Row gutter={16}>
           <Col span={20}>
-            <Bar data={datas} options={options} />
+            <Bar ref={ref} data={datas} options={options} />
           </Col>
         </Row>
       </ChartsProvience>
@@ -184,4 +199,7 @@ const ProvienceCharts = () => {
 export default ProvienceCharts;
 const ChartsProvience = styled.div`
   /* align-items: center; */
+  .export-btn-charts {
+    float: right;
+  }
 `;
