@@ -380,7 +380,7 @@ export const useCareLabRoute = () => {
       showTab: true,
     },
     {
-      icon: "icon-line2-home",
+      icon: "icon-line2-doc",
       key: "datametricdash",
       name: "View Bill ",
       path: "/addbill",
