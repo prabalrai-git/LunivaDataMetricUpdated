@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
-import { Radio, Tabs } from "antd";
+import { Radio, Row, Tabs } from "antd";
+import ProviencePiechart from "../CareLabFolder/newReports/ProviencePiechart";
+import DemoDonutcharts from "./DemoDonutcharts";
+import DemoRadioTransaction from "./DemoRadioTransaction";
 
 const DesciptionTab = () => {
-  const [size, setSize] = useState("small");
+  const [size, setSize] = useState("daily");
   const onChange = (e) => {
     setSize(e.target.value);
+    const valueclicked = e.target.value;
+    console.log(e.target.value, "value clicked");
   };
   return (
     <div>
@@ -17,10 +22,11 @@ const DesciptionTab = () => {
             marginBottom: 16,
           }}
         >
-          <Radio.Button value="small">Daily Transaction</Radio.Button>
-          <Radio.Button value="middle">ItemQty</Radio.Button>
-          <Radio.Button value="large">Control Value</Radio.Button>
+          <Radio.Button value="daily">Daily Transaction</Radio.Button>
+          <Radio.Button value="item">ItemQty</Radio.Button>
+          <Radio.Button value="control">Control Value</Radio.Button>
           <Radio.Button value="org">Organization Wise</Radio.Button>
+          <Radio.Button value="company">Company Wise</Radio.Button>
         </Radio.Group>
         <Tabs
           defaultActiveKey="1"
@@ -51,6 +57,13 @@ const DesciptionTab = () => {
           })}
         />
       </div>
+      <Row>
+        {size === "daily" ? <DemoRadioTransaction /> : ""}
+        {size === "company" ? <h4>clicked company value</h4> : ""}
+        {size === "org" ? <h4>clicked org value</h4> : ""}
+        {size === "control" ? <h4>clicked control value</h4> : ""}
+        {size === "item" ? <h4>clicked item value</h4> : ""}
+      </Row>
     </div>
   );
 };

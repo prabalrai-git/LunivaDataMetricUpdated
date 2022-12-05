@@ -4,12 +4,12 @@ import { Col, Divider, Row } from "antd";
 import DashBoardReferalView from "./DashBoardReferalView";
 import DonutChartFemale from "../CareLabFolder/newReports/DonutChartFemale";
 import DemoDonutcharts from "./DemoDonutcharts";
-const DashboardReferal = () => {
+const Dashboardorg = () => {
   return (
     <>
       <Dashboardsection>
         <div>
-          <h4>Top Referals</h4>
+          <h4>Top Organization</h4>
         </div>
         <div className="financeCards">
           <Row justify="space-around">
@@ -56,7 +56,7 @@ const DashboardReferal = () => {
   );
 };
 
-export default DashboardReferal;
+export default Dashboardorg;
 const Dashboardsection = styled.div`
   .topic-referal {
     display: flex;
@@ -76,7 +76,8 @@ const Dashboardsection = styled.div`
     border-bottom: 0.5px solid grey;
   }
 
-  td:nth-child(even) {
+  td,
+  th:nth-child(even) {
     /* background-color: #dddddd; */
     /* border-bottom: 1px solid grey; */
   }

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   Chart as ChartJS,
@@ -12,15 +12,10 @@ import {
   ArcElement,
   Title,
 } from "chart.js";
+import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../services/careLabService";
-import { Button, Col, Row } from "antd";
-import ProviencePieFemale from "../CareLabFolder/newReports/ProviencePieFemale";
-import DesciptionTab from "./DesciptionTab";
-import DashboardReferal from "./DashboardReferal";
-import Democharts from "./Democharts";
-import Dashboardorg from "./Dashboardorg";
-import DayWiseCollection from "./DayWiseCollection";
+import { Col, Row } from "antd";
 
 ChartJS.register(
   LinearScale,
@@ -35,54 +30,33 @@ ChartJS.register(
 );
 
 const options = {
-  indexAxis: "x",
+  //   indexAxis: "x",
   elements: {
     bar: {
       borderWidth: 2,
     },
   },
   responsive: true,
-  //   maintainAspectRatio: false,
-
   plugins: {
     legend: {
-      position: "bottom",
+      display: false,
     },
     title: {
-      display: true,
-      text: "Patient Dashboard",
+      display: false,
+      text: " Female Patient Ratio According to Provience",
       font: { size: 25 },
-    },
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-    },
-    y: {
-      grid: {
-        display: false,
-      },
     },
   },
 };
 
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
-const DashboardMetric = () => {
-  const ref = useRef(null);
+const DemoDonutcharts = () => {
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
 
-  const downloadImage = useCallback(() => {
-    const link = document.createElement("a");
-    link.download = "chart.png";
-    link.href = ref.current.toBase64Image();
-    link.click();
-  }, []);
   const [datas, setData] = useState({
     labels,
     datasets: [
@@ -159,15 +133,20 @@ const DashboardMetric = () => {
           datasets: [
             {
               label: "Male Patient",
-              data: maleCount,
-              borderColor: "rgb(85,123,132)",
-              backgroundColor: "rgb(0, 51, 102)",
-            },
-
-            {
-              label: "FeMale Patient",
               data: femaleCount,
-              backgroundColor: "rgb(0, 204, 102)",
+              borderColor: "rgb(85,123,132)",
+              backgroundColor: [
+                "rgb(255, 0, 0)",
+                "rgb(0, 0, 255)",
+                "rgb(60, 179, 113)",
+                "rgb(238, 130, 238)",
+                "rgb(255, 165, 0)",
+                "rgb(106, 90, 205)",
+                "rgba(125,5,90,82)",
+                "rgb(190, 0, 05)",
+                "rgba(125,5,90,82)",
+                "rgb(255, 65, 0)",
+              ],
             },
           ],
         });
@@ -179,80 +158,17 @@ const DashboardMetric = () => {
   return (
     <>
       <PieChartsProvience>
-        <Row justify="space-around" gutter={16}>
-          <Col
-            className="line-charts-col"
-            sm={24}
-            md={24}
-            xs={12}
-            lg={16}
-            xl={16}
-          >
-            <div className="financeCards">
-              <Democharts />
-            </div>
-          </Col>
-
-          <Col
-            className="line-charts-col"
-            sm={12}
-            md={12}
-            xs={12}
-            lg={12}
-            xl={8}
-          >
-            <div className="financeCards">
-              <ProviencePieFemale />
-            </div>
-          </Col>
-        </Row>
-        {/* next row  */}
-        <Row gutter={12}>
-          <Col
-            className="line-charts-col"
-            sm={12}
-            md={12}
-            xs={12}
-            lg={12}
-            xl={12}
-          >
-            <DashboardReferal />
-          </Col>
-          <Col
-            className="line-charts-col"
-            sm={12}
-            md={12}
-            xs={12}
-            lg={12}
-            xl={12}
-          >
-            <Dashboardorg />
-          </Col>
-        </Row>
-        <Row>
-          <div className="financeCards">
-            <DesciptionTab />
-          </div>
-        </Row>
-        <Row>
-          <DayWiseCollection />
-        </Row>
+        <Doughnut
+          className="piecharts-pie"
+          //   height={500}
+          //   width={500}
+          data={datas}
+          options={options}
+        />
       </PieChartsProvience>
     </>
   );
 };
 
-export default DashboardMetric;
-const PieChartsProvience = styled.div`
-  .export-btn-charts {
-    float: right;
-  }
-  .piechartsdes {
-    width: 50%;
-  }
-  @media (min-width: 500px) {
-    /* .line-charts-col {
-      height: 70% !important;
-    } */
-  }
-`;
+export default DemoDonutcharts;
+const PieChartsProvience = styled.div``;
