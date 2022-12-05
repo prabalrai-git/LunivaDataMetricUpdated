@@ -38,10 +38,12 @@ const options = {
     },
   },
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: "bottom",
     },
+
     title: {
       display: true,
       text: "Male Patient Ratio According to Provience",
@@ -165,26 +167,36 @@ const ProviencePiechart = () => {
   return (
     <>
       <PieChartsProvience>
-        <Button
-          onClick={downloadImage}
-          className="export-btn-charts"
-          type="primary"
-        >
-          Export charts
-        </Button>
-        <Row gutter={16}>
-          <Col span={8}>
-            <Pie
-              className="piecharts-pie"
-              ref={ref}
-              data={datas}
-              options={options}
-            />
-          </Col>
-          <Col span={8} offset={6}>
-            <ProviencePieFemale />
-          </Col>
-        </Row>
+        <div id="canvas-container">
+          <Button
+            onClick={downloadImage}
+            className="export-btn-charts"
+            type="primary"
+          >
+            Export charts
+          </Button>
+          <Row justify="space-between" gutter={16}>
+            <Col
+              span={8}
+              sm={24}
+              md={12}
+              xs={12}
+              lg={12}
+              xl={8}
+              className="first-pie"
+            >
+              <Pie
+                className="piecharts-pie"
+                ref={ref}
+                data={datas}
+                options={options}
+              />
+            </Col>
+            <Col sm={24} md={12} xs={12} lg={12} xl={8} span={8}>
+              <ProviencePieFemale />
+            </Col>
+          </Row>
+        </div>
       </PieChartsProvience>
     </>
   );
@@ -194,5 +206,26 @@ export default ProviencePiechart;
 const PieChartsProvience = styled.div`
   .export-btn-charts {
     float: right;
+  }
+  #canvas-container {
+    height: 60vh;
+    width: 60vw;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    #canvas-container {
+      height: auto;
+      width: auto;
+    }
+  }
+  @media (max-width: 480px) {
+    .piecharts-pie {
+      /* width: auto; */
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: bottom;
+    }
   }
 `;

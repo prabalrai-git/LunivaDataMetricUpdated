@@ -443,3 +443,6 @@ export const AsyncCountCharts = lazy(() =>
 export const AsyncMainCharts = lazy(() =>
   pMinDelay(import("../Components/CareLabFolder/newReports/MainPageChart"), 300)
 );
+export const AsyncDatametricDashboard = lazy(() =>
+  pMinDelay(import("../Components/DatametricDashboard/DashboardMetric"), 300)
+);

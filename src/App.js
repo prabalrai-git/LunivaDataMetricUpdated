@@ -109,6 +109,7 @@ import {
   AsyncGeoGraphicalWise,
   AsyncCountCharts,
   AsyncMainCharts,
+  AsyncDatametricDashboard,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -1061,6 +1062,14 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
+
+          <PrivateRouter
+            exact
+            path="/datametricdash/"
+            component={AsyncDatametricDashboard}
+            layout={AsyncAppLayout}
+            showSider
+          />
           <PrivateRouter
             exact
             path="/newReports/"
@@ -1325,14 +1334,15 @@ function App() {
             // forEdit
             showSider
           />
-          {/* <PrivateRouter
+          {/* dashboard datametric */}
+          <PrivateRouter
             exact
-            path='/samplestatus'
-            component={AsyncSampleStatus}
+            path="/dashdata"
+            component={AsyncDatametricDashboard}
             layout={AsyncAppLayout}
             // forEdit
             showSider
-          /> */}
+          />
 
           <PrivateRouter
             exact
@@ -1396,7 +1406,7 @@ function App() {
 
           <PrivateRouter
             exact
-            path="/viewProvience&DistrictWise/charts"
+            path="/charts"
             component={AsyncCountCharts}
             layout={AsyncAppLayout}
             // forEdit
@@ -1405,7 +1415,7 @@ function App() {
           {/* //charts dropdown menu */}
           <PrivateRouter
             exact
-            path="/viewProvience&DistrictWise/MainPage"
+            path="/MainPage"
             component={AsyncMainCharts}
             layout={AsyncAppLayout}
             // forEdit

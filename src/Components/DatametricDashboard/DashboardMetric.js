@@ -12,11 +12,17 @@ import {
   ArcElement,
   Title,
 } from "chart.js";
-import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
+import { Bar, Line, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
-import { getGeographyWiseMISReports } from "../../../services/careLabService";
+import { getGeographyWiseMISReports } from "../../services/careLabService";
 import { Button, Col, Row } from "antd";
-import DonutChartFemale from "./DonutChartFemale";
+import ProviencePieFemale from "../CareLabFolder/newReports/ProviencePieFemale";
+import DesciptionTab from "./DesciptionTab";
+import DashboardReferal from "./DashboardReferal";
+import ProvienceCharts from "../CareLabFolder/newReports/ProvienceCharts";
+import DashBoardReferalView from "./DashBoardReferalView";
+import Democharts from "./Democharts";
+import DonutChartFemale from "../CareLabFolder/newReports/DonutChartFemale";
 
 ChartJS.register(
   LinearScale,
@@ -38,21 +44,35 @@ const options = {
     },
   },
   responsive: true,
+  //   maintainAspectRatio: false,
+
   plugins: {
     legend: {
       position: "bottom",
     },
     title: {
       display: true,
-      text: " Male Patient Ratio According to Provience",
+      text: "Patient Dashboard",
       font: { size: 25 },
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
     },
   },
 };
 
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
-const DonutChart = () => {
+const DashboardMetric = () => {
   const ref = useRef(null);
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
@@ -65,7 +85,6 @@ const DonutChart = () => {
     link.href = ref.current.toBase64Image();
     link.click();
   }, []);
-
   const [datas, setData] = useState({
     labels,
     datasets: [
@@ -144,18 +163,13 @@ const DonutChart = () => {
               label: "Male Patient",
               data: maleCount,
               borderColor: "rgb(85,123,132)",
-              backgroundColor: [
-                "rgb(255, 0, 0)",
-                "rgb(0, 0, 255)",
-                "rgb(60, 179, 113)",
-                "rgb(238, 130, 238)",
-                "rgb(255, 165, 0)",
-                "rgb(106, 90, 205)",
-                "rgba(125,5,90,82)",
-                "rgb(190, 0, 05)",
-                "rgba(125,5,90,82)",
-                "rgb(255, 65, 0)",
-              ],
+              backgroundColor: "rgb(0, 51, 102)",
+            },
+
+            {
+              label: "FeMale Patient",
+              data: femaleCount,
+              backgroundColor: "rgb(0, 204, 102)",
             },
           ],
         });
@@ -167,34 +181,65 @@ const DonutChart = () => {
   return (
     <>
       <PieChartsProvience>
-        <Button
-          onClick={downloadImage}
-          className="export-btn-charts"
-          type="primary"
-        >
-          Export charts
-        </Button>
-        <Row gutter={16}>
-          <Col sm={24} md={12} xs={12} lg={12} xl={8}>
-            <Doughnut
-              ref={ref}
-              className="piecharts-pie"
-              data={datas}
-              options={options}
-            />
+        <Row justify="space-around" gutter={16}>
+          <Col
+            className="line-charts-col"
+            sm={24}
+            md={24}
+            xs={12}
+            lg={16}
+            xl={16}
+          >
+            <div className="financeCards">
+              <Democharts />
+            </div>
           </Col>
-          <Col sm={24} md={12} xs={12} lg={12} xl={8} offset={6}>
-            <DonutChartFemale />
+
+          <Col
+            className="line-charts-col"
+            sm={12}
+            md={12}
+            xs={12}
+            lg={12}
+            xl={8}
+          >
+            <div className="financeCards">
+              <ProviencePieFemale />
+            </div>
           </Col>
         </Row>
+        {/* next row  */}
+        <Row>
+          <Col
+            className="line-charts-col"
+            sm={12}
+            md={12}
+            xs={12}
+            lg={12}
+            xl={12}
+          >
+            <DashboardReferal />
+          </Col>
+        </Row>
+        <div className="financeCards">
+          <DesciptionTab />
+        </div>
       </PieChartsProvience>
     </>
   );
 };
 
-export default DonutChart;
+export default DashboardMetric;
 const PieChartsProvience = styled.div`
   .export-btn-charts {
     float: right;
+  }
+  .piechartsdes {
+    width: 50%;
+  }
+  @media (min-width: 500px) {
+    /* .line-charts-col {
+      height: 70% !important;
+    } */
   }
 `;

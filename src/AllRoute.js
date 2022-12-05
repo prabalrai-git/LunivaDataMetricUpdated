@@ -98,7 +98,7 @@ function AllRoute() {
       />
       <PrivateRouter
         exact
-        path="/item/addbill"
+        path="/addbill"
         component={AsyncAddBill}
         layout={AsyncAppLayout}
       />

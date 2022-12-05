@@ -187,7 +187,7 @@ const ProvienceCharts = () => {
           Export charts
         </Button>
         <Row gutter={16}>
-          <Col span={20}>
+          <Col span={20} sm={12} md={12} xs={8} lg={24} xl={24}>
             <Bar ref={ref} data={datas} options={options} />
           </Col>
         </Row>

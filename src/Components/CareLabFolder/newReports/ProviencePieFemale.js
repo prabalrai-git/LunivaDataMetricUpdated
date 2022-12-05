@@ -15,7 +15,6 @@ import {
 import { Bar, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
-import { Col, Row } from "antd";
 
 ChartJS.register(
   LinearScale,

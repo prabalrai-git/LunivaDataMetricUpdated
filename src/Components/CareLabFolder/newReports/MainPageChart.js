@@ -39,7 +39,15 @@ const MainPageChart = () => {
         <div className="financeCards">
           <span className="pageTtitle">Chart Status of Patient</span>
           <Row>
-            <Col className="dropmenu" span={6}>
+            <Col
+              sm={24}
+              md={12}
+              xs={12}
+              lg={12}
+              xl={8}
+              className="dropmenu"
+              span={6}
+            >
               <Select
                 id="storeItemName"
                 style={{
@@ -58,7 +66,7 @@ const MainPageChart = () => {
               </Select>
             </Col>
             <div className="btn-section">
-              <Col span={6}>
+              <Col sm={24} md={12} xs={12} lg={12} xl={8} span={8}>
                 <Form.Item
                   wrapperCol={{
                     offset: 8,

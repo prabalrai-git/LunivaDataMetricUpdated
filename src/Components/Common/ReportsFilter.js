@@ -257,7 +257,7 @@ function ReportsFilter({ ...props }) {
                 <Col>
                   <NavLink
                     to={{
-                      pathname: `/viewProvience&DistrictWise/MainPage`,
+                      pathname: `MainPage`,
                       state: carelabStat,
                     }}
                   >

@@ -12,7 +12,7 @@ import {
   ArcElement,
   Title,
 } from "chart.js";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
 import { Button, Col, Row } from "antd";
@@ -148,7 +148,6 @@ const ProvienceLinechart = () => {
             {
               label: "FeMale Patient",
               data: femaleCount,
-              //   borderColor: "rgb(85,123,132)",
               backgroundColor: ["rgb(255, 0, 0)"],
             },
           ],
@@ -169,7 +168,14 @@ const ProvienceLinechart = () => {
           Export charts
         </Button>
         <Row gutter={16}>
-          <Col span={16}>
+          <Col
+            className="line-charts-col"
+            sm={24}
+            md={24}
+            xs={12}
+            lg={24}
+            xl={24}
+          >
             <Line
               ref={ref}
               className="piecharts-pie"
@@ -187,5 +193,10 @@ export default ProvienceLinechart;
 const PieChartsProvience = styled.div`
   .export-btn-charts {
     float: right;
+  }
+  @media (min-width: 500px) {
+    /* .line-charts-col {
+      height: 70% !important;
+    } */
   }
 `;
