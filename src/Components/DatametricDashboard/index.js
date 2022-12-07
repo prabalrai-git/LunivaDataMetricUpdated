@@ -115,6 +115,7 @@ const Index = () => {
   }
 
   const getDataForReport = (data) => {
+    console.log(data, "mydatatsadfs");
     setIsLoading(true);
     dispatch(
       getDataMetricReportByReportTypeAndDateRange(data, (val) => {

@@ -274,13 +274,13 @@ export const dataMetricCon = [
   //   path: '/qccontrol',
   //   isactive: MenuSettings.qccontrol,
   // },
-  // {
-  //   icon: 'icon-line2-screen-desktop',
-  //   key: 'dynamicreporrt',
-  //   name: 'dynamicreport',
-  //   path: '/dynamicreporrt',
-  //   isactive: MenuSettings.dynamicreporrt,
-  // },
+  {
+    icon: "icon-line2-screen-desktop",
+    key: "dynamicreporrt",
+    name: "dynamicreport",
+    path: "/dynamicreporrt",
+    isactive: MenuSettings.dynamicreporrt,
+  },
 
   // {
   //   icon: 'icon-line2-screen-desktop',

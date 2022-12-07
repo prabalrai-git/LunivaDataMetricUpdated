@@ -355,14 +355,14 @@ export const useCareLabRoute = () => {
       path: "/viewbill",
       showTab: false,
     },
-    // {
-    //   icon: "icon-line-calendar",
-    //   key: "datedash",
-    //   name: "Date Change",
-    //   path: "/datedash",
-    //   hasSubNav: true,
-    //   subNavData: dateChangeNav,
-    // },
+    {
+      icon: "icon-line-calendar",
+      key: "datedash",
+      name: "Date Change",
+      path: "/datedash",
+      hasSubNav: true,
+      subNavData: dateChangeNav,
+    },
 
     {
       icon: "icon-receipt",
@@ -387,12 +387,7 @@ export const useCareLabRoute = () => {
       name: "View Bill ",
       path: "/addbill",
     },
-    {
-      icon: "icon-line2-screen-desktop",
-      key: "datechange",
-      name: "datechange",
-      path: "/datechanges",
-    },
+
     {
       icon: "icon-line2-screen-desktop",
       key: "outsourcing",
@@ -428,7 +423,7 @@ export const useCareLabRoute = () => {
     qcControlNav: qcControlNav,
     testAnalysisNav: testAnalysisNav,
     newReportsNav: newReportsNav,
-    // dateChangeNav: dateChangeNav,
+    dateChangeNav: dateChangeNav,
     bulkNegativeNav: bulkNegativeNav,
   };
 };

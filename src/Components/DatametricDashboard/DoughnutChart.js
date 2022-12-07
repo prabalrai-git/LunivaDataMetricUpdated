@@ -39,7 +39,6 @@ export const options = {
 const DoughnutChart = (props) => {
   const data = props.data;
   const labels = props.labels;
-  console.log(labels, data, "labels");
   const dataDo = {
     labels,
     datasets: [
