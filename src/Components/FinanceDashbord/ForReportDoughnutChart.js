@@ -15,6 +15,9 @@ import {
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import styled from 'styled-components';
+import { Row, Col } from 'antd'
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 ChartJS.register(
   LinearScale,
@@ -36,8 +39,31 @@ export const options = {
   },
 };
 
-const DoughnutChart = (props) => {
-  const labels = props.labels
+const ForReportDoughnutChart = (props) => {
+  const [newData, setnewData] = useState([]);
+  const labels = props.labels;
+  const data = props.data;
+ 
+
+  function sort() {
+    let dataObjArr = [];
+    let temp;
+    for (let i = 0; i < labels.length; i++) {
+      temp = [labels[i],data[i]];
+      dataObjArr.push(temp)
+      
+      
+    }
+    console.log(dataObjArr)
+    setnewData(dataObjArr);
+
+    console.log("the nes datre",newData)
+  }
+  useEffect(() => {
+    sort()
+  }, [])
+  
+
 
   const dataDo = {
     labels,
@@ -60,21 +86,31 @@ const DoughnutChart = (props) => {
     <DoughnutContainer>
       <div className='financeCards' >
         <h3>{props.title}</h3>
-        <Doughnut options={options} data={dataDo} />
-        <div className="dTable">
-          <ul>
-            <li><h6>Cash:</h6> <span>{props.data[0]}</span></li>
-            <li><h6>Cash:</h6> <span>{props.data[1]}</span></li>
-            <li><h6>Total:</h6> <span>{total}</span></li>
-          </ul>
-        </div>
+        <>
+          <Row gutter={[10, 10]}>
+            <Col lg={16}>
+              <Doughnut options={options} data={dataDo} />
+            </Col>
+            <Col lg={8}>
+              <div className="dTable">
+                <ul>
+                  <li><h6>Cash:</h6> <span>{props.data[0]}</span></li>
+                  <li><h6>Cash:</h6> <span>{props.data[1]}</span></li>
+                  <li><h6>Cash:</h6> <span>{props.data[1]}</span></li>
+                  <li><h6>Total:</h6> <span>{total}</span></li>
+                </ul>
+              </div></Col>
+          </Row>
+        </>
+
+
 
       </div>
     </DoughnutContainer>
   )
 }
 
-export default DoughnutChart
+export default ForReportDoughnutChart
 
 const DoughnutContainer = styled.div`
   .dTable{

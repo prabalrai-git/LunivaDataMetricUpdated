@@ -32,10 +32,15 @@ export const options = {
     legend: {
       position: 'top',
     },
+    title: {
+      display: true,
+      text: 'Paymet Report',
+      position: 'bottom'
+    },
   },
   scales: {
     x: {
-      stacked: true
+      stacked: true,
     },
     y: {
       stacked: true
@@ -51,25 +56,34 @@ const BarChart = (props) => {
       {
         type: 'bar',
         label: 'paid',
-        backgroundColor: ChartColor[4],
+        backgroundColor: ChartColor[2],
         data: props.data1,
         borderColor: [
-          '#fff',
+          '#3bf3cb',
+
         ],
         borderWidth: 1,
       },
       {
         type: 'bar',
-        label: 'unpaid',
+        label: 'unpid',
         backgroundColor: ChartColor[1],
         data: props.data2,
         borderColor: [
-          '#fff',
+          '#3bf3cb',
+
         ],
         borderWidth: 1,
       },
+      
     ],
   };
+
+  const conffig ={
+    type: 'bar'
+  }
+
+
   return (
     <div>
       <Bar options={options} data={dataBar}/>

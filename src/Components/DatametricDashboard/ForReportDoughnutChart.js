@@ -49,7 +49,6 @@ const ForReportDoughnutChart = (props) => {
       temp = [labels[i], data[i]];
       dataObjArr.push(temp);
     }
-    console.log(dataObjArr);
     setnewData(dataObjArr);
 
     console.log("the nes datre", newData);

@@ -39,7 +39,6 @@ export const options = {
 const DoughnutChart = (props) => {
   const data = props.data;
   const labels = props.labels;
-  console.log(labels, data, "labels");
   const dataDo = {
     labels,
     datasets: [
@@ -61,11 +60,11 @@ const DoughnutChart = (props) => {
         <Doughnut options={options} data={dataDo} />
 
         <div className="">
-          <Row justify="space-around" gutter={[10, 10]}>
+          <Row justify="space-between" gutter={[10, 10]}>
             <Col lg={10}>
               <div>
                 <div className="refererename">
-                  <h4>Referer Name</h4>
+                  <h4 className="paymenttype">Payment Type</h4>
                 </div>
 
                 {labels.map((item) => (
@@ -119,5 +118,8 @@ const DoughnutContainer = styled.div`
         margin-bottom: 0px;
       }
     }
+  }
+  .paymenttype {
+    white-space: nowrap;
   }
 `;
