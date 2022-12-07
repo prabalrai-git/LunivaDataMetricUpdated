@@ -398,6 +398,7 @@ export const useCareLabRoute = () => {
       key: "outsourcing",
       name: "outsourcing",
       path: "/outsourcing",
+      showTab: true,
     },
     {
       icon: "icon-chat-3",
