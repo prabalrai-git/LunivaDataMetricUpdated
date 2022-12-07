@@ -39,15 +39,22 @@ export const useCareLabRoute = () => {
   const reportStatNav = [
     {
       icon: "icon-line-file",
-      key: "carelabreport",
-      name: "Sample Stat",
-      path: "/carelab",
-    },
-    {
-      icon: "icon-line-file",
       key: "reportlist",
       name: "Report List",
       path: "/reportlist",
+    },
+    {
+      icon: "icon-file-alt",
+      key: "dynareportlist",
+      name: "Test Status",
+      path: "/dynarep",
+    },
+    {
+      icon: "icon-lab",
+      key: "testanalytics",
+      name: "Test Name",
+      path: "/testanalytics",
+      hasSubNav: false,
     },
   ];
 
@@ -230,7 +237,7 @@ export const useCareLabRoute = () => {
       path: "/reportdash",
       hasSubNav: true,
       subNavData: reportStatNav,
-      showTab: false,
+      showTab: true,
     },
     {
       icon: "icon-stack2",
@@ -386,6 +393,7 @@ export const useCareLabRoute = () => {
       key: "viewbillss",
       name: "View Bill ",
       path: "/addbill",
+      showTab: true,
     },
     {
       icon: "icon-line2-screen-desktop",
@@ -416,10 +424,9 @@ export const useCareLabRoute = () => {
       isactive: MenuSettings.theme,
     },
   ];
-  const lateadded = [];
 
   return {
-    lateadded: lateadded,
+    // lateadded: lateadded,
     mainRoute: mainRoute,
     sampleStatusNav: sampleStatusNav,
     financeNav: financeNav,
