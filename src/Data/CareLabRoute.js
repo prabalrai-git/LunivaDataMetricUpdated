@@ -387,7 +387,13 @@ export const useCareLabRoute = () => {
       name: "View Bill ",
       path: "/addbill",
     },
-
+    {
+      icon: "icon-line2-screen-desktop",
+      key: "dynamicreporrt",
+      name: "dynamicreport",
+      path: "/dynarep",
+      isactive: MenuSettings.dynamicreporrt,
+    },
     {
       icon: "icon-line2-screen-desktop",
       key: "outsourcing",
