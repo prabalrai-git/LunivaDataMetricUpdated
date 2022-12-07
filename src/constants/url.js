@@ -675,8 +675,8 @@ export const GetMunicipalitiesByDistrictId = "GetMunicipalitiesByDistrictId";
  * @param: ?districtId={districtId}
  */
 
-// export const GetPatientDetailsByLocationWise =
-//   "GetPatientDetailsByLocationWise";
+export const GetPatientDetailsByLocationWise =
+  "GetPatientDetailsByLocationWise";
 
 // /**
 //  * @desc: GetPatientDetailsByLocationWise

@@ -6,36 +6,45 @@
   --primaryBackground: #f0f0f0;
   --secondaryBackground: #fefefe;
 } */
-.ant-layout-content{
+.ant-layout-content {
   background-color: var(--primaryBackground);
 }
 
-.btn-primary--outline{
+.btn-primary--outline {
   background-color: transparent;
-  color:  var(--secondary);
-  border-radius: 3px!important;
+  color: var(--secondary);
+  border-radius: 3px !important;
   min-height: 30PX;
   display: flex;
   align-items: center;
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 400;
-  border: 1px solid  var(--secondary);
+  border: 1px solid var(--secondary);
 }
-.btn-primary--outline:hover{
-  background-color:   var(--secondary);
+
+.btn-primary--outline:hover {
+  background-color: var(--secondary);
   color: #fefefe;
   border: 1px solid var(--secondary);
 }
-.ant-menu-submenu-arrow::before, .ant-menu-submenu-arrow::after {
+
+.ant-menu-submenu-arrow::before,
+.ant-menu-submenu-arrow::after {
   background-color: var(--primary);
 }
-.ant-menu-item a:hover ,.ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active, .ant-menu-item {
+
+.ant-menu-item a:hover,
+.ant-menu-light .ant-menu-item:hover,
+.ant-menu-light .ant-menu-item-active,
+.ant-menu-item {
   color: var(--primary);
 }
-.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
   color: var(--primary);
 }
+
 /* .ant-input:focus, .ant-input-focused{
   border-color: var(--primary);
   box-shadow:  0 0 0 2px rgba(123, 124, 126, 0.123);
@@ -77,6 +86,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -89,19 +99,23 @@ h1 {
   font-weight: 700;
   letter-spacing: 3px;
 }
+
 h2 {
   color: var(--primary);
 }
+
 h4 {
   color: var(--primary);
 }
+
 .pageTtitle {
   font-size: 30px;
   font-weight: 600;
   letter-spacing: 1.2px;
   color: var(--titleTxt);
 }
-a{
+
+a {
   color: var(--primary);
 }
 
@@ -109,13 +123,16 @@ a{
   0% {
     transform: scale(1);
   }
-  20%{
+
+  20% {
     transform: scale(1.2);
   }
-  60%{
+
+  60% {
     transform: scale(0.9);
   }
-  80%{
+
+  80% {
     transform: scale(1.2);
   }
 
@@ -123,6 +140,7 @@ a{
     transform: scale(0.9);
   }
 }
+
 .fallback-container {
   display: flex;
   width: 100%;
@@ -130,6 +148,7 @@ a{
   justify-content: center;
   align-items: center;
 }
+
 .fallback-container img {
   width: 80px;
   animation: beat 900ms infinite;
@@ -138,19 +157,21 @@ a{
 .tableisRes {
   overflow: auto;
   background-color: #fefefe;
-  box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.10 );
-  backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
+  box-shadow: 0 2px 22px 0 rgba(31, 38, 135, 0.10);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: 7px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
   overflow: hidden;
 }
-.tableWidth{
+
+.tableWidth {
   overflow-x: scroll;
   -ms-overflow-style: hidden;
   scrollbar-width: none;
 }
-.tableWidth::-webkit-scrollbar{
+
+.tableWidth::-webkit-scrollbar {
   display: none;
 }
 
@@ -163,39 +184,42 @@ a{
   width: 100%;
   padding: 0 10px;
 }
-.maiTopContainer{
+
+.maiTopContainer {
   background: var(--cardColor);
   box-shadow: 0 2px 22px 0 rgb(31 38 135 / 20%);
-  backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: 7px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
   overflow: hidden;
   margin-bottom: 20px;
 }
 
-.financeCards{
-  background: rgba( 255, 255, 255, 1 );
+.financeCards {
+  background: rgba(255, 255, 255, 1);
   box-shadow: 0 2px 22px 0 rgb(31 38 135 / 20%);
-  backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: 7px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
   margin-bottom: 30px;
   padding: 5px 8px;
   /* width: 100%;
   height: 100%; */
-  
+
 }
-.financeCards h3{
+
+.financeCards h3 {
   border-bottom: 1px solid #c6c6cb;
 }
 
-@media(max-width: 576px) { 
-  .ant-picker-panels { 
+@media(max-width: 576px) {
+  .ant-picker-panels {
     flex-direction: column;
-  } 
+  }
 }
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -210,8 +234,8 @@ a{
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: rgb(238,174,202);
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  background: rgb(238, 174, 202);
+  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
 }
 
 .allStat div {
