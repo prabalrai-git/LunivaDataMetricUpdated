@@ -198,7 +198,8 @@ export const getDataMetricReportByReportTypeAndDateRange = (
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `${GetDataMetricReportByReportTypeAndDateRange}?from=${data.fromdate}&to=${data.todate}&reportType=dashboard`
+        `${GetDataMetricReportByReportTypeAndDateRange}?from=2022-1-11&to=2022-2-11&reportType=dashboard`
+        // `${GetDataMetricReportByReportTypeAndDateRange}?from=${data.fromdate}&to=${data.todate}&reportType=dashboard`
       );
       if (response?.status === 200) {
         successCallback(response?.data);

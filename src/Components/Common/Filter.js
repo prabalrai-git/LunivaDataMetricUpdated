@@ -703,7 +703,7 @@ const Filter = ({ dataReturn, ...props }) => {
             <Col>
               {serchButton && (
                 <AppButton
-                  className="primary-btn"
+                  className="load-btn primary-btn"
                   buttonTitle="Load"
                   buttonOnClick={() => {
                     handleClicker();
@@ -737,6 +737,7 @@ const FilterContainer = styled.div`
   padding: 5px;
   .filterRow > div {
     padding: 4px;
+    margin-left: 20px;
   }
   .labelTop {
     display: block;

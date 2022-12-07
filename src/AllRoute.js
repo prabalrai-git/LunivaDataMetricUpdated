@@ -46,6 +46,8 @@ import {
   AsyncDailySummary,
   AsyncDailyTransaction,
   AsyncFinance,
+  AsyncDateChanges,
+  AsyncBulkNegative,
 } from "./App/asyncComponent";
 import PrintLayout from "./Components/PrintDetails/PrintLayout";
 import PrivateRouter from "./Routes/PrivateRouter";
@@ -324,6 +326,12 @@ function AllRoute() {
         component={AsyncSettings}
         layout={AsyncAppLayout}
       />
+      <PrivateRouter
+        exact
+        path="/bulknegative"
+        component={AsyncBulkNegative}
+        layout={AsyncAppLayout}
+      />
 
       <PrivateRouter
         exact
@@ -421,6 +429,12 @@ function AllRoute() {
         exact
         path="/datametric/testtype"
         component={AsyncTestTypeReport}
+        layout={AsyncAppLayout}
+      />
+      <PrivateRouter
+        exact
+        path="/datechange"
+        component={AsyncDateChanges}
         layout={AsyncAppLayout}
       />
 

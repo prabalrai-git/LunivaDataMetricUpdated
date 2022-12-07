@@ -1,5 +1,7 @@
 // import useTokenHook from "../CustomHook/useTokenHook";
 
+import { MenuSettings } from "./MenuSettings";
+
 export const useCareLabRoute = () => {
   const sampleStatusNav = [
     {
@@ -213,14 +215,14 @@ export const useCareLabRoute = () => {
       subNavData: sampleStatusNav,
       showTab: true,
     },
-    // {
-    //   icon: "icon-sticky-note1",
-    //   key: "bulknegative",
-    //   name: "Bulk Negative",
-    //   path: "/bulknegativedash",
-    //   hasSubNav: true,
-    //   subNavData: bulkNegativeNav,
-    // },
+    {
+      icon: "icon-sticky-note1",
+      key: "bulknegative",
+      name: "Bulk Negative",
+      path: "/bulknegativedash",
+      hasSubNav: true,
+      subNavData: bulkNegativeNav,
+    },
     {
       icon: "icon-line-file",
       key: "reportstatus",
@@ -381,13 +383,41 @@ export const useCareLabRoute = () => {
     },
     {
       icon: "icon-line2-doc",
-      key: "datametricdash",
+      key: "viewbillss",
       name: "View Bill ",
       path: "/addbill",
     },
+    {
+      icon: "icon-line2-screen-desktop",
+      key: "datechange",
+      name: "datechange",
+      path: "/datechanges",
+    },
+    {
+      icon: "icon-line2-screen-desktop",
+      key: "outsourcing",
+      name: "outsourcing",
+      path: "/outsourcing",
+    },
+    {
+      icon: "icon-chat-3",
+      key: "sms",
+      name: "sms",
+      path: "/sms",
+    },
+
+    {
+      icon: "icon-line2-settings",
+      key: "theme",
+      name: "Settings",
+      path: "/theme",
+      isactive: MenuSettings.theme,
+    },
   ];
+  const lateadded = [];
 
   return {
+    lateadded: lateadded,
     mainRoute: mainRoute,
     sampleStatusNav: sampleStatusNav,
     financeNav: financeNav,
@@ -398,6 +428,6 @@ export const useCareLabRoute = () => {
     testAnalysisNav: testAnalysisNav,
     newReportsNav: newReportsNav,
     // dateChangeNav: dateChangeNav,
-    // bulkNegativeNav: bulkNegativeNav,
+    bulkNegativeNav: bulkNegativeNav,
   };
 };
