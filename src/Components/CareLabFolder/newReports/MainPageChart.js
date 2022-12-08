@@ -76,13 +76,13 @@ const MainPageChart = () => {
               </Col>
             </div>
           </Row>
-          {newdata === 1 ? <ProviencePiechart /> : ""}
-          {newdata === 2 ? <ProvienceLinechart /> : ""}
-          {/* Bar chart */}
-          {newdata === 3 ? <ProvienceCharts /> : ""}
-          {newdata === 4 ? <DonutChart /> : ""}
-          {/* DonutChart */}
         </div>
+        {newdata === 1 ? <ProviencePiechart /> : ""}
+        {newdata === 2 ? <ProvienceLinechart /> : ""}
+        {/* Bar chart */}
+        {newdata === 3 ? <ProvienceCharts /> : ""}
+        {newdata === 4 ? <DonutChart /> : ""}
+        {/* DonutChart */}
       </MainPageChartComp>
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { ChartColor } from "../../Common/ChartColor";
 import {
   Chart as ChartJS,
   LinearScale,
@@ -12,13 +13,10 @@ import {
   ArcElement,
   Title,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
 import { Button, Col, Row } from "antd";
-import ProviencePiechart from "./ProviencePiechart";
-import ProvienceLineCharts from "./ProvienceLineChart";
-import AppButton from "../../Common/AppButton";
 
 ChartJS.register(
   LinearScale,
@@ -41,35 +39,32 @@ const options = {
   },
   responsive: true,
   plugins: {
+    legend: {
+      position: "bottom",
+    },
     title: {
       display: true,
-      text: "Patient Ratio According to District",
+      text: "Patient Ratio According to Provience",
       font: { size: 25 },
-    },
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-    },
-    y: {
-      grid: {
-        display: true,
-      },
     },
   },
 };
 
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
-const ProvienceCharts = () => {
+const Proviencecharts = () => {
   const ref = useRef(null);
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
 
+  const downloadImage = useCallback(() => {
+    const link = document.createElement("a");
+    link.download = "chart.png";
+    link.href = ref.current.toBase64Image();
+    link.click();
+  }, []);
   const [datas, setData] = useState({
     labels,
     datasets: [
@@ -87,12 +82,6 @@ const ProvienceCharts = () => {
       },
     ],
   });
-  const downloadImage = useCallback(() => {
-    const link = document.createElement("a");
-    link.download = "chart.png";
-    link.href = ref.current.toBase64Image();
-    link.click();
-  }, []);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -123,7 +112,6 @@ const ProvienceCharts = () => {
           districtname.forEach((element) => {
             if (element == vars.DistrictName) storMale = 111;
           });
-
           if (storMale == 111) continue;
 
           districtname.forEach((element) => {
@@ -133,6 +121,7 @@ const ProvienceCharts = () => {
 
           districtname.push(vars.DistrictName);
 
+          femaleCount.push(vars.Female);
           Provincename.push(vars.ProvinceName);
 
           val.forEach((element) => {
@@ -147,27 +136,21 @@ const ProvienceCharts = () => {
         }
         console.log(maleCount, "before");
 
-        console.log(
-          maleCount,
-          femaleCount,
-          Provincename,
-          districtname,
-          "after"
-        );
         setData({
           labels: districtname,
           datasets: [
             {
               label: "Male Patient",
               data: maleCount,
-              borderColor: "rgb(55,123,132)",
-              backgroundColor: "rgb(106, 90, 205)",
+              borderColor: "rgb(85,123,132)",
+
+              backgroundColor: "#3dad6f",
             },
+
             {
-              label: "Female Patient",
+              label: "FeMale Patient",
               data: femaleCount,
-              borderColor: "rgb(255,123,132)",
-              backgroundColor: "rgb(60, 179, 113)",
+              backgroundColor: "#2b4d41",
             },
           ],
         });
@@ -178,28 +161,32 @@ const ProvienceCharts = () => {
 
   return (
     <>
-      <ChartsProvience>
-        <Button
-          onClick={downloadImage}
-          className="export-btn-charts"
-          type="primary"
-        >
-          Export charts
-        </Button>
-        <Row gutter={16}>
-          <Col span={20} sm={12} md={12} xs={8} lg={24} xl={24}>
+      <PieChartsProvience>
+        <Row justify="end" gutter={[16, 16]}>
+          <Button
+            onClick={downloadImage}
+            className="export-btn-charts"
+            type="primary"
+          >
+            Export charts
+          </Button>
+        </Row>
+
+        <Row justify="space-around" gutter={[16, 16]}>
+          <Col lg={24} md={24} sm={24} xs={24} className="financeCards">
             <Bar ref={ref} data={datas} options={options} />
           </Col>
         </Row>
-      </ChartsProvience>
+      </PieChartsProvience>
     </>
   );
 };
 
-export default ProvienceCharts;
-const ChartsProvience = styled.div`
-  /* align-items: center; */
+export default Proviencecharts;
+const PieChartsProvience = styled.div`
   .export-btn-charts {
     float: right;
+  }
+  @media (min-width: 500px) {
   }
 `;
