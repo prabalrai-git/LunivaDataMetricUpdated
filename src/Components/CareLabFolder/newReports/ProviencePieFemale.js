@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { ChartColor } from "../../Common/ChartColor";
 import {
   Chart as ChartJS,
   LinearScale,
@@ -131,21 +132,10 @@ const ProviencePieFemale = () => {
           labels: districtname,
           datasets: [
             {
-              label: "Male Patient",
+              label: "Female Patient",
               data: femaleCount,
               borderColor: "rgb(85,123,132)",
-              backgroundColor: [
-                "rgb(255, 0, 0)",
-                "rgb(0, 0, 255)",
-                "rgb(60, 179, 113)",
-                "rgb(238, 130, 238)",
-                "rgb(255, 165, 0)",
-                "rgb(106, 90, 205)",
-                "rgba(125,5,90,82)",
-                "rgb(190, 0, 05)",
-                "rgba(125,5,90,82)",
-                "rgb(255, 65, 0)",
-              ],
+              backgroundColor: ChartColor,
             },
           ],
         });
@@ -157,7 +147,7 @@ const ProviencePieFemale = () => {
   return (
     <>
       <PieChartsProvience>
-        <Pie className="piecharts-pie" data={datas} options={options} />
+        <Pie className="financeCards" data={datas} options={options} />
       </PieChartsProvience>
     </>
   );

@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
 import { Button, Col, Row } from "antd";
 import DonutChartFemale from "./DonutChartFemale";
+import { ChartColor } from "../../Common/ChartColor";
 
 ChartJS.register(
   LinearScale,
@@ -144,18 +145,7 @@ const DonutChart = () => {
               label: "Male Patient",
               data: maleCount,
               borderColor: "rgb(85,123,132)",
-              backgroundColor: [
-                "rgb(255, 0, 0)",
-                "rgb(0, 0, 255)",
-                "rgb(60, 179, 113)",
-                "rgb(238, 130, 238)",
-                "rgb(255, 165, 0)",
-                "rgb(106, 90, 205)",
-                "rgba(125,5,90,82)",
-                "rgb(190, 0, 05)",
-                "rgba(125,5,90,82)",
-                "rgb(255, 65, 0)",
-              ],
+              backgroundColor: ChartColor,
             },
           ],
         });
@@ -167,23 +157,25 @@ const DonutChart = () => {
   return (
     <>
       <PieChartsProvience>
-        <Button
-          onClick={downloadImage}
-          className="export-btn-charts"
-          type="primary"
-        >
-          Export charts
-        </Button>
-        <Row gutter={16}>
-          <Col sm={24} md={12} xs={12} lg={12} xl={8}>
+        <Row justify="end" gutter={[16, 16]}>
+          <Button
+            onClick={downloadImage}
+            className="export-btn-charts"
+            type="primary"
+          >
+            Export charts
+          </Button>
+        </Row>
+        <Row justify="space-around" gutter={[16, 16]}>
+          <Col sm={24} md={24} xs={24} lg={12} xl={12}>
             <Doughnut
               ref={ref}
-              className="piecharts-pie"
+              className="financeCards"
               data={datas}
               options={options}
             />
           </Col>
-          <Col sm={24} md={12} xs={12} lg={12} xl={8} offset={6}>
+          <Col sm={24} md={24} xs={24} lg={12} xl={12}>
             <DonutChartFemale />
           </Col>
         </Row>
