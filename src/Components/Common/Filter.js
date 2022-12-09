@@ -118,6 +118,7 @@ const Filter = ({ dataReturn, ...props }) => {
       let data = {
         cType: catType,
         iType: iType,
+        reportType: 'Dashboard'
       };
       dataRet(data);
       // console.log('errop')
@@ -334,9 +335,9 @@ const Filter = ({ dataReturn, ...props }) => {
       if (forReportSalesReport) {
         return e.Requestor.toLowerCase().includes(searchText)
           ? // || e.DiscountTotal.toString().includes(searchText)
-            // || e.ActualTotal.toString().includes(searchText)
-            // || e.TotalPrice.toString().includes(searchText)
-            pushedArr.push(e)
+          // || e.ActualTotal.toString().includes(searchText)
+          // || e.TotalPrice.toString().includes(searchText)
+          pushedArr.push(e)
           : "";
       }
     });
@@ -462,9 +463,9 @@ const Filter = ({ dataReturn, ...props }) => {
                   filterOption={(input, option) => {
                     return (
                       option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0 ||
+                      0 ||
                       option.title.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0
+                      0
                     );
                   }}
                   style={{ width: "100%" }}
@@ -497,9 +498,9 @@ const Filter = ({ dataReturn, ...props }) => {
                   filterOption={(input, option) => {
                     return (
                       option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0 ||
+                      0 ||
                       option.title.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0
+                      0
                     );
                   }}
                   style={{ width: "100%" }}
@@ -528,9 +529,9 @@ const Filter = ({ dataReturn, ...props }) => {
                   filterOption={(input, option) => {
                     return (
                       option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0 ||
+                      0 ||
                       option.title.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0
+                      0
                     );
                   }}
                   style={{ width: "100%" }}
@@ -565,9 +566,9 @@ const Filter = ({ dataReturn, ...props }) => {
                   filterOption={(input, option) => {
                     return (
                       option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0 ||
+                      0 ||
                       option.title.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0
+                      0
                     );
                   }}
                   style={{ width: "100%" }}
@@ -629,7 +630,7 @@ const Filter = ({ dataReturn, ...props }) => {
                     filterOption={(input, option) => {
                       return (
                         option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                          0 ||
+                        0 ||
                         option.title
                           .toLowerCase()
                           .indexOf(input.toLowerCase()) >= 0
@@ -679,9 +680,9 @@ const Filter = ({ dataReturn, ...props }) => {
                   filterOption={(input, option) => {
                     return (
                       option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0 ||
+                      0 ||
                       option.title.toLowerCase().indexOf(input.toLowerCase()) >=
-                        0
+                      0
                     );
                   }}
                   style={{ width: "100%" }}

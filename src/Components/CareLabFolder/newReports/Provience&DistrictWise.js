@@ -49,8 +49,8 @@ function ProvienceDistrictWise() {
     setPatientData([]);
     let data = {
       provinceid: stateId ? stateId : 0,
-      districtid: districtId ? districtId : 0,
-      municipalityId: municipalityId ? municipalityId : 0,
+      districtid: districtId ? districtId : -1,
+      municipalityId: municipalityId ? municipalityId : -1,
       fromdate: fromDate,
       todate: toDate,
       reportTypeId: reportId,

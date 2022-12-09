@@ -33,7 +33,7 @@ export const getTestTypeReport = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -48,7 +48,7 @@ export const getReferReport = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -63,7 +63,7 @@ export const getRequestorReport = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -78,7 +78,7 @@ export const getRequestorTotalSalesReport = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -91,7 +91,7 @@ export const getGetRequestorList = (successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -104,7 +104,7 @@ export const getRequestorBillListAll = (successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -117,7 +117,7 @@ export const getGetRefererList = (successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -130,7 +130,7 @@ export const getGetTestTypeList = (successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -145,7 +145,7 @@ export const getDailyTransactionReport = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -160,7 +160,7 @@ export const getDailySummaryReport = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -173,7 +173,7 @@ export const getListofUser = (successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -186,7 +186,7 @@ export const getListofcompany = (successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -198,7 +198,7 @@ export const getDataMetricReportByReportTypeAndDateRange = (
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `${GetDataMetricReportByReportTypeAndDateRange}?from=2022-1-11&to=2022-2-11&reportType=dashboard`
+        `${GetDataMetricReportByReportTypeAndDateRange}?from=${data.fromdate}&to=${data.todate}&reportType=${data.reportType}`
         // `${GetDataMetricReportByReportTypeAndDateRange}?from=${data.fromdate}&to=${data.todate}&reportType=dashboard`
       );
       if (response?.status === 200) {
@@ -206,7 +206,7 @@ export const getDataMetricReportByReportTypeAndDateRange = (
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -221,7 +221,7 @@ export const insertVerifyPatientReport = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -237,7 +237,7 @@ export const addCreateCreditPartyBill = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -253,7 +253,7 @@ export const getPatientBillByBillId = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -269,7 +269,7 @@ export const getPatientBillItemByBillId = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -285,7 +285,7 @@ export const getStates = (successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -298,7 +298,7 @@ export const getDistrictsByStateId = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 export const getMunicipalitiesByDistrictId = (data, successCallback) => {
@@ -312,7 +312,7 @@ export const getMunicipalitiesByDistrictId = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 // GeographicalTestwisePatientCountReport
@@ -332,7 +332,7 @@ export const getGeographicalTestwisePatientCountReport = (
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 export const getPatientDetailsByLocationWise = (data, successCallback) => {
@@ -347,6 +347,6 @@ export const getPatientDetailsByLocationWise = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };

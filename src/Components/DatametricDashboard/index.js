@@ -172,6 +172,7 @@ const Index = () => {
       ...val,
       fromdate: val[0].format("YYYY-MM-DD"),
       todate: val[1].format("YYYY-MM-DD"),
+      reportType: 'Dashboard'
     };
     getDataForReport(data);
   };
@@ -182,6 +183,7 @@ const Index = () => {
     const data = {
       fromdate: date,
       todate: date,
+      reportType: 'dashboard'
     };
     getDataForReport(data);
   }, []);
