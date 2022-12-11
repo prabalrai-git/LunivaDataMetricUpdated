@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { AfterLoginData } from '../Data/MenuRoute'
-import imgOne from '../assets/images/logobig.png'
+import imgOne from '../assets/images/logobig1.png'
 import { CARELAB_LINK } from '../constants/url'
 
 const AfterLogin = () => {

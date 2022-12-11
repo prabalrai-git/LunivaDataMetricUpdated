@@ -81,14 +81,36 @@ function ProvienceDistrictWise() {
   };
 
   useEffect(() => {
+    console.log('newstates', states);
+  }, [states])
+
+  useEffect(() => {
     dispatch(
       getStates((val) => {
+
+
+        let newState = val.unshift({
+
+          Id: 0,
+          Name: "All"
+
+        });
+
+        console.log("log from states", newState);
         setStates(val);
       })
+
     );
 
     dispatch(
       getDistrictsByStateId(stateId, (val) => {
+        let newState = val.unshift({
+
+          Id: 0,
+          Name: "All"
+
+        });
+        console.log(newState, 'districtstsdsfsdfsfd', val);
         setDistrict(val);
       })
     );
@@ -97,6 +119,12 @@ function ProvienceDistrictWise() {
   useEffect(() => {
     dispatch(
       getMunicipalitiesByDistrictId(districtId, (val) => {
+        let newState = val.unshift({
+
+          Id: 0,
+          Name: "All"
+
+        });
         setMunicipality(val);
       })
     );

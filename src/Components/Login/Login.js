@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getLoginApi } from '../../services/loginService';
 import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
-import  logo from '../../assets/images/logobig.png'
+import logo from '../../assets/images/logobig1.png'
 import crystslBkg from '../../assets/images/cover.jpg'
 
 export default function Login() {
@@ -73,7 +73,7 @@ export default function Login() {
   // useEffect(() => {
   //   getData();
   // }, [])
- 
+
   // const openNotification = (placement) => {
   //   if (tableData.length >= 1) {
   //     notification.info({
@@ -89,7 +89,7 @@ export default function Login() {
   return (
     <LoginFormContainer>
       <div className="left" >
-          <img src={crystslBkg} alt="" />
+        <img src={crystslBkg} alt="" />
       </div>
       <div className="right">
         <div className="logo">
@@ -127,9 +127,9 @@ export default function Login() {
           </Form.Item>
         </Form>
 
-      <div className="powerd">
-        <p>Powered by &copy; <span style={{color: "#e95b29"}}> LunivaTech Pvt.Ltd.</span></p>
-      </div>
+        <div className="powerd">
+          <p>Powered by &copy; <span style={{ color: "#e95b29" }}> LunivaTech Pvt.Ltd.</span></p>
+        </div>
       </div>
 
     </LoginFormContainer>

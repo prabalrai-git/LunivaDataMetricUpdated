@@ -169,7 +169,7 @@ function ReportsFilter({ ...props }) {
                     setStateId(val);
                   }}
                 >
-                  <Option value={0}>All</Option>
+                  {/* <Option value={0}>All</Option> */}
 
                   {states?.map((iTy) => {
                     return <Option value={iTy?.Id}>{iTy?.Name}</Option>;
@@ -187,7 +187,7 @@ function ReportsFilter({ ...props }) {
                     setDistrictId(val);
                   }}
                 >
-                  <Option value={0}>All</Option>
+                  {/* <Option value={0}>All</Option> */}
 
                   {district?.map((iTy) => {
                     return <Option value={iTy?.Id}>{iTy?.Name}</Option>;
@@ -205,7 +205,7 @@ function ReportsFilter({ ...props }) {
                     setMunicipalityId(val);
                   }}
                 >
-                  <Option value={0}>All</Option>
+                  {/* <Option value={0}>All</Option> */}
                   {municipality?.map((iTy) => {
                     return <Option value={iTy?.Id}>{iTy?.Name}</Option>;
                   })}

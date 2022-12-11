@@ -118,7 +118,6 @@ const Filter = ({ dataReturn, ...props }) => {
       let data = {
         cType: catType,
         iType: iType,
-        reportType: 'Dashboard'
       };
       dataRet(data);
       // console.log('errop')

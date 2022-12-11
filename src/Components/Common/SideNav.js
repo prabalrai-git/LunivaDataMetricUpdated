@@ -7,8 +7,8 @@ import {
   qcControlNav,
 } from "../../Data/MenuRoute";
 import { NavLink } from "react-router-dom";
-import comlogo from "../../assets/images/logobig.png";
-import comlogo1 from "../../assets/images/logosmall.png";
+import comlogo from "../../assets/images/logobig1.png";
+import comlogo1 from "../../assets/images/logosmall1.png";
 import { Scrollbars } from "react-custom-scrollbars";
 import { Layout, Menu } from "antd";
 import { useLocation } from "react-router-dom";

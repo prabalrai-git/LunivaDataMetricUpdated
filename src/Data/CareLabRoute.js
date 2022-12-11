@@ -105,6 +105,7 @@ export const useCareLabRoute = () => {
       key: "datechanges",
       name: "Date Change",
       path: "/datechanges",
+
     },
 
     {
@@ -229,6 +230,7 @@ export const useCareLabRoute = () => {
       path: "/bulknegativedash",
       hasSubNav: true,
       subNavData: bulkNegativeNav,
+      showTab: false
     },
     {
       icon: "icon-line-file",
@@ -369,6 +371,7 @@ export const useCareLabRoute = () => {
       path: "/datedash",
       hasSubNav: true,
       subNavData: dateChangeNav,
+      showTab: false
     },
 
     {
@@ -393,7 +396,7 @@ export const useCareLabRoute = () => {
       key: "viewbillss",
       name: "View Bill ",
       path: "/addbill",
-      showTab: true,
+      showTab: false,
     },
     {
       icon: "icon-line2-screen-desktop",
@@ -401,6 +404,7 @@ export const useCareLabRoute = () => {
       name: "dynamicreport",
       path: "/dynarep",
       isactive: MenuSettings.dynamicreporrt,
+      showTab: false
     },
     {
       icon: "icon-line2-screen-desktop",
@@ -422,6 +426,7 @@ export const useCareLabRoute = () => {
       name: "Settings",
       path: "/theme",
       isactive: MenuSettings.theme,
+      showTab: false
     },
   ];
 

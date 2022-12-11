@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { MenuRoute } from "../Data/MenuRoute";
-import imgOne from "../assets/images/logobig.png";
+import imgOne from "../assets/images/logobig1.png";
 import { Col, Row } from "antd";
 import { quotes } from "../Data/quotesData";
 import bkg from "../assets/images/svg.png";

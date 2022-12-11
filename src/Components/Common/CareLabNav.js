@@ -14,32 +14,32 @@ const content = (
     flexDirection: 'column',
     gap: '6px',
     color: 'red'
-    }}>
+  }}>
     {/* <Link to=''>change passowrd</Link> */}
     <Link to='/login' onClick={handleLogout}>Logout</Link>
   </div>
 );
 
 const CareLabNav = () => {
- 
+
   return (
     <BottomNavContainer>
       <li>
         <Link to={{
-            pathname: '/caredashboard',
-            state: carelabStat
+          pathname: '/caredashboard',
+          state: carelabStat
         }}><i className='icon-line2-home'></i></Link>
       </li>
       <li>
         <Link to={{
-            pathname: '/carelab',
-            state: carelabStat
+          pathname: '/carelab',
+          state: carelabStat
         }}><i className='icon-line-file'></i></Link>
       </li>
       <li>
         <Link to={{
-            pathname: '/lcchart',
-            state: carelabStat
+          pathname: '/lcchart',
+          state: carelabStat
         }}><i className='icon-stack2'></i></Link>
       </li>
       <li>
@@ -47,7 +47,7 @@ const CareLabNav = () => {
           <i className='icon-user1'></i>
         </Popover>
       </li>
-      
+
     </BottomNavContainer>
   )
 }
