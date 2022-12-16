@@ -18,6 +18,7 @@ import {
   GetDistrictsByStateId,
   GetMunicipalitiesByDistrictId,
   GetPatientDetailsByLocationWise,
+  insertUpdateCreditPartyInPatientForPartyBill,
 } from "../constants/url";
 import { generateUrlEncodedData } from "../utils/generateFormData";
 import { fetch, store, storeNested } from "../utils/httpUtil";
@@ -338,7 +339,7 @@ export const getGeographicalTestwisePatientCountReport = (
 export const getPatientDetailsByLocationWise = (data, successCallback) => {
   return async (dispatch) => {
     try {
-      console.log(data, "dataasss");
+      // console.log(data, "dataasss");
       const response = await fetch(
         `${GetPatientDetailsByLocationWise}?provinceid=${data.provinceid}&districtid=${data.districtid}&municipalityId=${data.municipalityId}&fromdate=${data.fromdate}&todate=${data.todate}`
       );
@@ -350,3 +351,18 @@ export const getPatientDetailsByLocationWise = (data, successCallback) => {
     } catch (error) { }
   };
 };
+
+export const InsertUpdateCreditPartyInPatientForPartyBill = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+
+      const reponse = await fetch(`${insertUpdateCreditPartyInPatientForPartyBill}`);
+      if (response?.status === 200) {
+        successCallback(reponse?.data)
+      } else {
+        successCallback([]);
+      }
+
+    } catch (error) { }
+  }
+}

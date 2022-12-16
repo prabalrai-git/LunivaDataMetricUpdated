@@ -33,6 +33,7 @@ const CarelabFilter = (props) => {
   };
 
   const onFilterReturn = (res) => {
+    console.log(res, 'resres');
     if (dateRange !== null && undefined) {
       returnFilterData(dateRange);
     } else {
@@ -230,12 +231,12 @@ const CarelabFilter = (props) => {
                 <>
                   <Col lg={4} md={12} sm={12} xs={24}>
                     <Form.Item
-                      name="sampleId"
-                      label={showSampleId != "" ? showSampleId : "Sample Id"}
+                      name="memberCode"
+                      label={showSampleId != "" ? showSampleId : "Sample Code"}
                     >
                       <Input
                         placeholder={
-                          showSampleId != "" ? showSampleId : "Sample Id"
+                          showSampleId != "" ? showSampleId : "Sample Code"
                         }
                       />
                     </Form.Item>

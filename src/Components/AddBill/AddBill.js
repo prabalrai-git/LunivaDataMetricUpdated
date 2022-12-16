@@ -33,9 +33,7 @@ const AddBill = () => {
   const [rate, setRate] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [discountamount, setDiscountAmount] = useState(0);
-  // const [discountpercentage, setDiscountPercentage] = useState(0);
-  // const [discountamounttoper, setDiscountAmountToPer] = useState(0);
-  // const [dispercenttoAmt, setDisPercentToAmt] = useState(0);
+  const [discountpercentage, setDiscountPercentage] = useState(0);
   const [total, setTotal] = useState(0);
   const [grandtotals, setGrandTotals] = useState(0);
   const [roundamt, setRoundAmt] = useState(0);
@@ -44,6 +42,7 @@ const AddBill = () => {
   const [requestorList, setrequestorList] = useState([]);
   const [butDis, setButDis] = useState(false);
   const [fiscalYearId, setFiscalYearId] = useState(1)
+  const [dTracker, setDTracker] = useState(false);
   const fiscalYear = useFiscalYear();
   const { Option } = Select;
 
@@ -164,10 +163,6 @@ const AddBill = () => {
     multiply();
     grandtotal();
     roundsfunc();
-    // autopercentagecalculate();
-    // autocalcDisAmount();
-    // autodisountamtcalculate();
-    // autocalcPer();
   }, [rate, quantity, discountamount, grandtotals, total]);
 
   const multiply = () => {
@@ -185,26 +180,74 @@ const AddBill = () => {
     setRoundAmt(rv);
   };
 
-  // const autopercentagecalculate = (e) => {
-  //   let calculate = (e / total) * 100;
-  //   setDiscountPercentage(calculate);
-  //   form.setFieldsValue({
-  //     dispercent: calculate,
-  //   });
-  // };
 
   const onChangeHandler = () => {
     const itemData = requestorList.filter((res) => res.crdId === chData);
     setData(itemData);
   };
 
-  // const autodisountamtcalculate = (e) => {
-  //   let autocalamt = (e / 100) * total;
-  //   setDiscountAmount(autocalamt);
-  //   form.setFieldsValue({
-  //     dis: autocalamt,
-  //   });
-  // };
+
+
+
+  const calculateDiscountPercentage = (e) => {
+    if (rate !== 0 && quantity !== 0) {
+
+
+
+      let originalAmount = rate * quantity;
+      if (e !== null || 0) {
+
+        let discountPercentages = (e / originalAmount) * 100
+        setDiscountPercentage(discountPercentages);
+        if (discountPercentages) {
+          // console.log(discountPercentages, "discount percentage");
+          form.setFieldsValue({
+            discountPercentage: discountPercentages?.toFixed(2) + "%"
+
+          });
+        }
+      }
+      else {
+        form.setFieldsValue({
+          discountPercentage: 0 + "%"
+
+        });
+      }
+
+
+    }
+  }
+
+  const calculateDiscountAmount = (e) => {
+    if (rate !== 0 && quantity !== 0) {
+
+
+      let originalAmount = rate * quantity;
+
+      if (e !== null || 0) {
+
+
+        let discountamounts = (e / 100) * originalAmount;
+        setDiscountAmount(discountamounts);
+        if (discountamounts) {
+          // console.log(discountamounts, "discount amounts");
+
+          form.setFieldsValue({
+            discountAmount: discountamounts?.toFixed(2),
+
+          });
+
+        }
+      }
+      else {
+        form.setFieldsValue({
+          discountAmount: 0
+
+        });
+      }
+
+    }
+  }
 
   return (
     <>
@@ -331,8 +374,8 @@ const AddBill = () => {
                     </Col>
                     <Col span={8}>
                       <Form.Item
-                        label="DiscountAmt"
-                        name="dis"
+                        label="Discount Amount"
+                        name="discountAmount"
                       // rules={[
                       //   {
                       //     required: true,
@@ -347,15 +390,15 @@ const AddBill = () => {
                           min={0}
                           onChange={(e) => {
                             setDiscountAmount(e);
-                            // autopercentagecalculate(e);
+                            calculateDiscountPercentage(e);
                           }}
                         />
                       </Form.Item>
                     </Col>
-                    {/* <Col span={8}>
+                    <Col span={8}>
                       <Form.Item
-                        label="Discount Percent"
-                        name="dispercent"
+                        label="Discount Percentage"
+                        name="discountPercentage"
                         rules={[
                           {
                             required: true,
@@ -369,12 +412,19 @@ const AddBill = () => {
                           }}
                           min={0}
                           onChange={(e) => {
-                            autodisountamtcalculate(e);
+                            setDiscountPercentage(e);
+                            // setDTracker(!dTracker)
+
+                            calculateDiscountAmount(e);
+                            console.log(e, 'log from onchange');
+
+                            // autodisountamtcalculate(e);
                             // autocalcDisAmount(e);
                           }}
+                        // defaultValue={discountpercentage}
                         />
                       </Form.Item>
-                    </Col> */}
+                    </Col>
                     <Col span={8}>
                       <Form.Item
                         label="Payment Type"
@@ -414,6 +464,24 @@ const AddBill = () => {
                         </Select>
                       </Form.Item>
                     </Col>
+                    <Col span={8}>
+                      <Form.Item
+                        label="Remarks"
+                        name="Remarks"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item name!",
+                          },
+                        ]}
+                      >
+                        <Input
+                          style={{
+                            width: "100%",
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
                     <Col span={24}>
                       <div className="s-btn">
                         {/* <Button type="primary" htmlType="submit"> */}
@@ -434,11 +502,11 @@ const AddBill = () => {
                         <Descriptions.Item label="SubTotal">
                           {total}
                         </Descriptions.Item>
-                        {/* <Descriptions.Item label="Discount (%)">
-                          {discountpercentage}
-                        </Descriptions.Item> */}
+                        <Descriptions.Item label="Discount (%)">
+                          {discountpercentage?.toFixed(1)}
+                        </Descriptions.Item>
                         <Descriptions.Item label="Discount Amt">
-                          {discountamount}
+                          {discountamount?.toFixed(1)}
                         </Descriptions.Item>
                         {/* <Descriptions.Item label="Rounded Amount">
                           {roundamt}

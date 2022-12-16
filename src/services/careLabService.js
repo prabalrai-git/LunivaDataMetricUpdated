@@ -4,6 +4,7 @@ import {
   GetGeographyWiseMISReports,
   GetListOfPatientDetailsBydateAndTestDone,
   GetListOfPCRsampleByRequestorForBulkNegative,
+  GetMemberShipDetailsByMembercode,
   GetMemberShipDetailsByMemberId,
   GetSMSConsumptionDetails,
 } from "../constants/url";
@@ -19,7 +20,7 @@ export const careLabTabApi = (data, successCallback) => {
       if (response?.status === 200) {
         successCallback(response?.data?.ReportStatus);
       } else successCallback([]);
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -32,7 +33,7 @@ export const careLabSampleStatusApi = (data, successCallback) => {
       if (response?.status === 200) {
         successCallback(response?.data?.CovidDetails);
       } else successCallback([]);
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -45,7 +46,7 @@ export const careLabTestListApi = (data, successCallback) => {
       if (response?.status === 200) {
         successCallback(response?.data?.RecordList);
       } else successCallback([]);
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -56,7 +57,7 @@ export const careLabFiscalCodeApi = (successCallback) => {
       if (response?.status === 200) {
         successCallback(response?.data?.FIscalYearCode);
       } else successCallback([]);
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -67,7 +68,7 @@ export const careLabDiagnosisApi = (successCallback) => {
       if (response?.status === 200) {
         successCallback(response?.data?.DiagnosisGroup);
       } else successCallback([]);
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -80,7 +81,7 @@ export const dateWiseTestApi = (data, successCallback) => {
       if (response?.status === 200) {
         successCallback(response?.data?.IncompleteSampleList);
       } else successCallback([]);
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -97,7 +98,7 @@ export const GetListOfPatientDetailsBydateAndTest = (data, successCallback) => {
         successCallback([]);
         console.log("error");
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -119,7 +120,7 @@ export const GetListOfPatientDetailsBydateAndTests = (
         successCallback([]);
         console.log("error");
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -139,7 +140,7 @@ export const GetListOfPCRsampleByRequestorForBulkNegatives = (
         successCallback([]);
         console.log("error");
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 export const GetSMSConsumptionDetail = (data, successCallback) => {
@@ -155,7 +156,7 @@ export const GetSMSConsumptionDetail = (data, successCallback) => {
         successCallback([]);
         console.log("error");
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 export const getMemberShipDetailsByMemberId = (data, successCallback) => {
@@ -170,7 +171,7 @@ export const getMemberShipDetailsByMemberId = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -185,7 +186,7 @@ export const getDatametricReportType = (successCallback) => {
         console.log("error");
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 //province
@@ -203,6 +204,22 @@ export const getGeographyWiseMISReports = (data, successCallback) => {
       } else {
         successCallback([]);
       }
-    } catch (error) {}
+    } catch (error) { }
+  };
+};
+
+export const getMemberShipDetailsByMemberCode = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${GetMemberShipDetailsByMembercode}?memcode=${data.memberCode}`
+      );
+      if (response?.status === 200) {
+        successCallback(response?.data?.MemberDetials);
+        // console.log("smsgot!", response?.data);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) { }
   };
 };

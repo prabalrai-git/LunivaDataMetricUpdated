@@ -1,11 +1,11 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
-// export const DEV_URL =
-//   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
 export const DEV_URL =
-  "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
+  "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
+// export const DEV_URL =
+//   "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
 
-// export const Carelab_Url =
-//   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
+export const Carelab_Url =
+  "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
 
 // bill test
 // export const Carelab_Url =
@@ -16,8 +16,8 @@ export const DEV_URL =
 // export const Carelab_Url =
 //   "http://192.168.100.34/CarelabDataMetricServiceCrystal/";
 
-export const Carelab_Url =
-  "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
+// export const Carelab_Url =
+//   "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
 
 // export const DEV_URL = 'https://lunivat.ddns.net/crystal/CarelabDataMetricServiceCrystal/';
 // http://192.168.100.34/CarelabDataMetricServiceCrystal/
@@ -701,3 +701,24 @@ export const GetGeographyWiseMISReports = "GetGeographyWiseMISReports";
 //  * @desc: GetPatientDetailsByLocationWise
 //  * @param: ?provinceid={provinceid}&districtid={districtid}&municipalityId={municipalityId}&fromdate={fromdate}&todate={todate}
 //  */
+
+export const insertUpdateCreditPartyInPatientForPartyBill = "InsertUpdateCreditPartyInPatientForPartyBill";
+
+// @desc: InsertUpdateCreditPartyInPatientForPartyBill
+// @param/body:
+// {
+//   "CreditPartyName": "Astha Kidney Hospital",
+//   "CreditPartyCode": "C100",
+//   "UserId": 3,
+//   "SampleId": 4,
+//   "CreditPartyContactNo": "98512536985",
+//   "CreditPartyPAN": "234324324",
+//   "CreditPartyEmail": "sample string 7",
+//   "Remarks": "sample string 8",
+//   "CreditPartyId": 2
+// }
+
+export const GetMemberShipDetailsByMembercode = "GetMemberShipDetailsByMembercode";
+
+// @desc: GetMemberShipDetailsByMembercode
+// @param: ?memcode={memcode}

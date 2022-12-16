@@ -396,7 +396,7 @@ export const useCareLabRoute = () => {
       key: "viewbillss",
       name: "View Bill ",
       path: "/addbill",
-      showTab: false,
+      showTab: true,
     },
     {
       icon: "icon-line2-screen-desktop",

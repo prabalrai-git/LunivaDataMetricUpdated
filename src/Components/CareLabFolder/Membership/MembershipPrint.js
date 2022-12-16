@@ -53,24 +53,28 @@ export const printMembership = (cry, small, data, e) => {
       }
       
       #a {
-        margin-right: 10mm;
+        margin:2mm 2mm 2mm 2mm;
         font-weight:bold
       
       }
       #c {
-      
+        margin:2mm 2mm 2mm 2mm;
+
         font-weight:bold
       }
       #d {
-      
+        margin:2mm 2mm 2mm 2mm;
+
         font-weight:bold
       }
       #e {
-      
+        margin:2mm 2mm 2mm 2mm;
+
         font-weight:bold
       }
       #f {
-      
+        margin:2mm 2mm 2mm 2mm;
+
         font-weight:bold
       }
       .content-mid {
@@ -82,7 +86,7 @@ export const printMembership = (cry, small, data, e) => {
       }
       
       #b {
-        margin-right: 10mm;
+        margin:2mm 2mm 2mm 2mm;
         font-weight:bold
       }
       .content-sec {

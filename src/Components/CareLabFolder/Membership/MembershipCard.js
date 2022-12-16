@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table } from "antd";
+import { Button, message, Table } from "antd";
 // import CarelabFilter from "../../Common/CarelabFilter";
 import { printMembership } from "./MembershipPrint";
-import { getMemberShipDetailsByMemberId } from "../../../services/careLabService";
+import { getMemberShipDetailsByMemberCode, getMemberShipDetailsByMemberId } from "../../../services/careLabService";
 
 import PageHeader from "../../Common/pageHeader";
 import cry from "../../../assets/images/cry.png";
@@ -64,21 +64,22 @@ function MembershipCard() {
     },
   ];
 
-  useEffect(() => {
-    loadMemberData()
-  }, []);
+  // useEffect(() => {
+  //   loadMemberData()
+  // }, []);
 
-  const loadMemberData = (memberId = 0) => {
+  const loadMemberData = (memberCode) => {
     let a = {
-      mId: memberId,
+      memberCode: memberCode,
     };
     dispatch(
-      getMemberShipDetailsByMemberId(a, (res) => {
+      getMemberShipDetailsByMemberCode(a, (res) => {
         // console.log(res);
         if (res.length > 0) {
           setDyColumnData(res);
           // console.log(res);
         } else {
+          message.info(`No data found for member code ${memberCode}`)
           setDyColumnData([]);
         }
       })
@@ -97,7 +98,7 @@ function MembershipCard() {
   };
 
   const returnFilterData = (res) => {
-    loadMemberData(res?.sampleId)
+    loadMemberData(res?.memberCode)
   }
 
   return (
@@ -107,7 +108,7 @@ function MembershipCard() {
         {/* <Button onClick={onFinish}> Print</Button> */}
       </div>
       <CarelabFilter
-        showSampleId={'Member Id'}
+        showSampleId={'Member Code'}
         returnFilterData={returnFilterData}
       />
       {dyColumnData.length > 0 && (
