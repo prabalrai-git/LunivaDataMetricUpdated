@@ -1,12 +1,11 @@
 export const printMembership = (cry, small, data, e) => {
-
   let newWindow = window.open();
   let newStyle = `
     <style>
     .card {
         min-height: 50mm;
-        max-width: 80mm;
-        max-height: 70mm;
+        max-width: 8.60cm;
+        max-height: 5.49cm;
         background-color: #ddf0f9;
         overflow: hidden;
       }
@@ -58,22 +57,22 @@ export const printMembership = (cry, small, data, e) => {
       
       }
       #c {
-        margin:2mm 2mm 2mm 2mm;
+              margin:2mm 2mm 2mm 2mm;
 
         font-weight:bold
       }
       #d {
-        margin:2mm 2mm 2mm 2mm;
+              margin:2mm 2mm 2mm 2mm;
 
         font-weight:bold
       }
       #e {
-        margin:2mm 2mm 2mm 2mm;
+              margin:2mm 2mm 2mm 2mm;
 
         font-weight:bold
       }
       #f {
-        margin:2mm 2mm 2mm 2mm;
+              margin:2mm 2mm 2mm 2mm;
 
         font-weight:bold
       }
@@ -108,6 +107,14 @@ export const printMembership = (cry, small, data, e) => {
        .noprint {
         visibility : hidden;
       } 
+      @page
+   { margin-top: 4mm;
+    size: 3.39in 2.16in;
+    size: Landscape;
+  }
+  .content{
+    margin-top:3mm !important;
+  }
       }
       
     </style>`;

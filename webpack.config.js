@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index_bundle.js",
-    publicPath: "/",
+    publicPath: "/crystal/luniva360crystaldatametric/",
   },
   module: {
     rules: [
@@ -44,6 +44,6 @@ module.exports = {
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
-  }
+    maxAssetSize: 512000,
+  },
 };
