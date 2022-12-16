@@ -163,6 +163,6 @@ export const printMembership = (cry, small, data, e) => {
 
   setTimeout(function () {
     newWindow.print();
-    // newWindow.close();
+    newWindow.close();
   }, 300);
 };
