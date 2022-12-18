@@ -5,7 +5,7 @@ import { Popover } from 'antd';
 import { inventoryStat } from './StateList';
 
 const handleLogout = () => {
-  sessionStorage.clear()
+  localStorage.clear()
 }
 
 
@@ -16,14 +16,14 @@ const content = (
     flexDirection: 'column',
     gap: '6px',
     color: 'red'
-    }}>
+  }}>
     {/* <Link to=''>change passowrd</Link> */}
     <Link to='/login' onClick={handleLogout}>Logout</Link>
   </div>
 );
 
 const BottomNav = () => {
- 
+
   return (
     <BottomNavContainer>
       <li>
@@ -49,7 +49,7 @@ const BottomNav = () => {
           <i className='icon-user1'></i>
         </Popover>
       </li>
-      
+
     </BottomNavContainer>
   )
 }

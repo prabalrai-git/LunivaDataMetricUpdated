@@ -13,7 +13,7 @@ const Index = () => {
   }
   return (
     <>
-      <div className="maiTopContainer" style={{padding: '10px'}}>
+      <div className="maiTopContainer" style={{ padding: '10px' }}>
         <PageHeader
           pageTitle={'Theme'}
         ></PageHeader>

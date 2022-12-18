@@ -426,7 +426,7 @@ export const useCareLabRoute = () => {
       name: "Settings",
       path: "/theme",
       isactive: MenuSettings.theme,
-      showTab: false
+      showTab: true
     },
   ];
 

@@ -5,7 +5,7 @@ import { Popover } from 'antd';
 import { carelabStat } from './StateList';
 
 const handleLogout = () => {
-  sessionStorage.clear()
+  localStorage.clear()
 }
 
 const content = (

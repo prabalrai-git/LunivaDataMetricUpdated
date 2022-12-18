@@ -1,3 +1,3 @@
 export const LogoutHandle = () => {
-    sessionStorage.clear()
+    localStorage.clear()
 }
