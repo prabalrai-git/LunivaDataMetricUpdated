@@ -1,10 +1,4 @@
-import {
-  Col,
-  Row,
-  Form,
-  Descriptions,
-  Button,
-} from "antd";
+import { Col, Row, Form, Descriptions, Button } from "antd";
 import PageHeader from "../Common/pageHeader";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
@@ -78,8 +72,8 @@ const ViewUpdateBill = (props) => {
     }
   }, [patientinfo, partylistdata]);
 
-  const onFinish = (res) => { };
-  const onFinishFailed = (res) => { };
+  const onFinish = (res) => {};
+  const onFinishFailed = (res) => {};
 
   return (
     <>
@@ -92,7 +86,7 @@ const ViewUpdateBill = (props) => {
               buttonOnClick={() =>
                 history.push({
                   pathname: "/addbill",
-                  state: carelabStat
+                  state: carelabStat,
                 })
               }
             />
@@ -105,13 +99,14 @@ const ViewUpdateBill = (props) => {
                 <ul>Bill Id: {BILLID}</ul>
                 <ul>Bill No: {billDetails[0].BillNo} </ul>
               </Col>
-              <Col>
-              </Col>
+              <Col></Col>
               {finaldata.map(() => (
                 <Col>
                   <ul>Credit Party: {finaldata[0].CrdPartyName} </ul>
                   <ul>Credit Pan: {finaldata[0].CrdPartyPan} </ul>
-                  <ul>Credit Party Code: {billDetails[0].BillCreditPartyCode} </ul>
+                  <ul>
+                    Credit Party Code: {billDetails[0].BillCreditPartyCode}{" "}
+                  </ul>
                 </Col>
               ))}
             </Row>

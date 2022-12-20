@@ -17,7 +17,7 @@ const NewTableSummary = (props) => {
     phone = reqData[0].crdPartyPhoneNo;
     add = reqData[0].CrdPartyAddress;
   }
-  // requestorList
+
   return (
     <NewSummaryContainer>
       <h4>Bill Summary</h4>

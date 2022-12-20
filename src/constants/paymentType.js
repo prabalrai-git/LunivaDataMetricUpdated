@@ -1,10 +1,10 @@
 export const paymentType = [
-    {
-        id: 1,
-        paymentmethod: "credit",
-    },
-    {
-        id: 2,
-        paymentmethod: "credit collection",
-    },
+  {
+    id: 1,
+    paymentmethod: "Credit",
+  },
+  {
+    id: 2,
+    paymentmethod: "Credit collection",
+  },
 ];
