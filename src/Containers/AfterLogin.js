@@ -11,7 +11,7 @@ const AfterLogin = () => {
   const history = useHistory()
 
   const data = AfterLoginData;
-  const token = JSON.parse(sessionStorage.getItem('token'));
+  const token = JSON.parse(localStorage.getItem('token'));
 
 
   useEffect(() => {

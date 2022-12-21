@@ -8,7 +8,7 @@ export default function useToken() {
     const profileReducer = useSelector(state => state.profile);
 
     const getToken = () => {
-        const tokenString = sessionStorage.getItem('token');
+        const tokenString = localStorage.getItem('token');
         if (tokenString || profileReducer?.userData) {
             const userToken = JSON.parse(tokenString);
             if (!profileReducer?.userData) {
@@ -22,7 +22,7 @@ export default function useToken() {
     const [token, setToken] = useState(getToken());
 
     const saveToken = userToken => {
-        sessionStorage.setItem('token', JSON.stringify(userToken));
+        localStorage.setItem('token', JSON.stringify(userToken));
         setToken(userToken.token);
     };
 
