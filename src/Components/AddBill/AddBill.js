@@ -294,7 +294,14 @@ const AddBill = () => {
           {
             <div className="dropdown-section">
               <Row>
-                <Col span={12} className="requestor-section">
+                <Col
+                  sm={24}
+                  md={12}
+                  xs={24}
+                  lg={12}
+                  xl={12}
+                  className="requestor-section"
+                >
                   <Select onChange={handleChange} style={{ width: "50%" }}>
                     {requestorList?.map((iTy) => (
                       <Option
@@ -316,7 +323,6 @@ const AddBill = () => {
                     Load
                   </Button>
                 </Col>
-                <Col span={12}></Col>
               </Row>
             </div>
           }
@@ -347,211 +353,203 @@ const AddBill = () => {
                   onFinishFailed={onFinishFailed}
                   autoComplete="off"
                 >
-                  <Row>
-                    <Col span={24}>
+                  <Row gutter={16}>
+                    <Col sm={24} md={6} xs={24} lg={6} xl={6}>
                       <Descriptions
                         bordered
-                        layout="vertical"
-                        column={5}
+                        layout="horizontal"
+                        column={1}
                         size="small"
                       >
                         <Descriptions.Item label="SubTotal">
-                          {total}
+                          <span className="descriptioncol">{total}</span>
                         </Descriptions.Item>
                         <Descriptions.Item label="Discount (%)">
-                          {discountpercentage?.toFixed(1)}
+                          <span className="descriptioncol">
+                            {" "}
+                            {discountpercentage?.toFixed(1)}
+                          </span>
                         </Descriptions.Item>
                         <Descriptions.Item label="Discount Amt">
-                          {discountamount?.toFixed(1)}
+                          <span className="descriptioncol">
+                            {" "}
+                            {discountamount?.toFixed(1)}
+                          </span>
                         </Descriptions.Item>
                         <Descriptions.Item label="Rounded Amount">
-                          {roundamt}
+                          <span className="descriptioncol"> {roundamt}</span>
                         </Descriptions.Item>
                         <Descriptions.Item label="GrandTotal">
-                          {grandtotals}
+                          <span className="descriptioncol"> {grandtotals}</span>
                         </Descriptions.Item>
                       </Descriptions>
+                    </Col>
+                    {/* span={10} */}
+                    <Col sm={24} md={10} xs={24} lg={10} xl={10}>
+                      <Form.Item
+                        label="Item Name"
+                        name="item"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item name!",
+                          },
+                        ]}
+                      >
+                        <Input
+                          style={{
+                            width: "100%",
+                          }}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        label="Rate"
+                        name="rate"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item rate!",
+                          },
+                        ]}
+                      >
+                        <InputNumber
+                          min={0}
+                          onChange={(e) => {
+                            setRate(e);
+                          }}
+                          style={{
+                            width: "100%",
+                          }}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        label="Quantity"
+                        name="qty"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item quantity!",
+                          },
+                        ]}
+                      >
+                        <InputNumber
+                          style={{
+                            width: "100%",
+                          }}
+                          min={0}
+                          onChange={(e) => setQuantity(e)}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        label="Discount Amount"
+                        name="discountAmount"
+                        // rules={[
+                        //   {
+                        //     required: true,
+                        //     message: "Please input item discount!",
+                        //   },
+                        // ]}
+                      >
+                        <InputNumber
+                          style={{
+                            width: "100%",
+                          }}
+                          min={0}
+                          onChange={(e) => {
+                            setDiscountAmount(e);
+                            calculateDiscountPercentage(e);
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col sm={24} md={8} xs={24} lg={8} xl={8}>
+                      <Form.Item
+                        label="Discount Percentage"
+                        name="discountPercentage"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item discount!",
+                          },
+                        ]}
+                      >
+                        <InputNumber
+                          style={{
+                            width: "100%",
+                          }}
+                          min={0}
+                          onChange={(e) => {
+                            setDiscountPercentage(e);
+                            // setDTracker(!dTracker)
+
+                            calculateDiscountAmount(e);
+                            console.log(e, "log from onchange");
+
+                            // autodisountamtcalculate(e);
+                            // autocalcDisAmount(e);
+                          }}
+                          // defaultValue={discountpercentage}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        label="Payment Type"
+                        name="pmt"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please select payment type!",
+                          },
+                        ]}
+                      >
+                        <Select onChange={handleChange}>
+                          {paymentType.map((item) => {
+                            return (
+                              <Option value={item.paymentmethod} key={item.id}>
+                                {item.paymentmethod}
+                              </Option>
+                            );
+                          })}
+                        </Select>
+                      </Form.Item>
+                      <Form.Item name="fiscalYear" label="Fiscal Year">
+                        <Select
+                          style={{ width: "100%" }}
+                          size="default"
+                          onChange={(res) => {
+                            setFiscalYearId(res);
+                          }}
+                        >
+                          {fiscalYear.map((lis) => (
+                            <Option
+                              title={lis?.Year}
+                              key={lis?.Id}
+                              value={lis?.Id}
+                            >
+                              {lis?.Year}
+                            </Option>
+                          ))}
+                        </Select>
+                      </Form.Item>
+                      <Form.Item
+                        label="Remarks"
+                        name="Remarks"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input item name!",
+                          },
+                        ]}
+                      >
+                        <Input
+                          style={{
+                            width: "100%",
+                          }}
+                        />
+                      </Form.Item>
                     </Col>
                   </Row>
                   <div className="itemsection">
                     <Row gutter={16}>
-                      <Col span={16}>
-                        <Form.Item
-                          label="Item Name"
-                          name="item"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input item name!",
-                            },
-                          ]}
-                        >
-                          <Input
-                            style={{
-                              width: "100%",
-                            }}
-                          />
-                        </Form.Item>
-                      </Col>
-                      <Col span={8}>
-                        <Form.Item
-                          label="Rate"
-                          name="rate"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input item rate!",
-                            },
-                          ]}
-                        >
-                          <InputNumber
-                            min={0}
-                            onChange={(e) => {
-                              setRate(e);
-                            }}
-                            style={{
-                              width: "100%",
-                            }}
-                          />
-                        </Form.Item>
-                      </Col>
-                      <Col span={8}>
-                        <Form.Item
-                          label="Quantity"
-                          name="qty"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input item quantity!",
-                            },
-                          ]}
-                        >
-                          <InputNumber
-                            style={{
-                              width: "100%",
-                            }}
-                            min={0}
-                            onChange={(e) => setQuantity(e)}
-                          />
-                        </Form.Item>
-                      </Col>
-                      <Col span={8}>
-                        <Form.Item
-                          label="Discount Amount"
-                          name="discountAmount"
-                          // rules={[
-                          //   {
-                          //     required: true,
-                          //     message: "Please input item discount!",
-                          //   },
-                          // ]}
-                        >
-                          <InputNumber
-                            style={{
-                              width: "100%",
-                            }}
-                            min={0}
-                            onChange={(e) => {
-                              setDiscountAmount(e);
-                              calculateDiscountPercentage(e);
-                            }}
-                          />
-                        </Form.Item>
-                      </Col>
-                      <Col span={8}>
-                        <Form.Item
-                          label="Discount Percentage"
-                          name="discountPercentage"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input item discount!",
-                            },
-                          ]}
-                        >
-                          <InputNumber
-                            style={{
-                              width: "100%",
-                            }}
-                            min={0}
-                            onChange={(e) => {
-                              setDiscountPercentage(e);
-                              // setDTracker(!dTracker)
-
-                              calculateDiscountAmount(e);
-                              console.log(e, "log from onchange");
-
-                              // autodisountamtcalculate(e);
-                              // autocalcDisAmount(e);
-                            }}
-                            // defaultValue={discountpercentage}
-                          />
-                        </Form.Item>
-                      </Col>
-                      <Col span={8}>
-                        <Form.Item
-                          label="Payment Type"
-                          name="pmt"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please select payment type!",
-                            },
-                          ]}
-                        >
-                          <Select onChange={handleChange}>
-                            {paymentType.map((item) => {
-                              return (
-                                <Option
-                                  value={item.paymentmethod}
-                                  key={item.id}
-                                >
-                                  {item.paymentmethod}
-                                </Option>
-                              );
-                            })}
-                          </Select>
-                        </Form.Item>
-                      </Col>
-                      <Col span={8}>
-                        <Form.Item name="fiscalYear" label="Fiscal Year">
-                          <Select
-                            style={{ width: "100%" }}
-                            size="default"
-                            onChange={(res) => {
-                              setFiscalYearId(res);
-                            }}
-                          >
-                            {fiscalYear.map((lis) => (
-                              <Option
-                                title={lis?.Year}
-                                key={lis?.Id}
-                                value={lis?.Id}
-                              >
-                                {lis?.Year}
-                              </Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      </Col>
-                      <Col span={8}>
-                        <Form.Item
-                          label="Remarks"
-                          name="Remarks"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input item name!",
-                            },
-                          ]}
-                        >
-                          <Input
-                            style={{
-                              width: "100%",
-                            }}
-                          />
-                        </Form.Item>
-                      </Col>
                       <Col span={24}>
                         <div className="s-btn">
                           {/* <Button type="primary" htmlType="submit"> */}
@@ -604,4 +602,15 @@ const AddBillSection = styled.div`
   .itemsection {
     margin-top: 20px;
   }
+  .descriptioncol {
+    white-space: nowrap;
+  }
+  .ant-descriptions-bordered.ant-descriptions-small
+    .ant-descriptions-item-label,
+  .ant-descriptions-bordered.ant-descriptions-small
+    .ant-descriptions-item-content {
+    padding: 8px 16px;
+    font-weight: 500;
+  }
+  /* ant-descriptions-item-label */
 `;
