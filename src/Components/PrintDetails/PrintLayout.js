@@ -32,9 +32,11 @@ const PrintLayout = (props) => {
       sampleId: billId,
       fiscalYear: fiscalYear,
     };
-    dispatch(getListofcompany(data => {
-      setcompanyDetail(data[0])
-    }))
+    dispatch(
+      getListofcompany((data) => {
+        setcompanyDetail(data[0]);
+      })
+    );
 
     dispatch(
       getRequestorBillListAll((val) => {
@@ -48,6 +50,7 @@ const PrintLayout = (props) => {
       getPatientBillByBillId(ALLDATA, (val) => {
         if (val.length > 0) {
           setBillDetails(val);
+          console.log(val, "billval");
         }
       })
     );
@@ -79,10 +82,9 @@ const PrintLayout = (props) => {
       const oneParty = partyListData.filter(
         (res) => billDetails[0].BillCreditPartyCode === res.crdPartyCode
       );
-      if (oneParty.length > 0)
-        setSinglePartyData(oneParty[0]);
+      if (oneParty.length > 0) setSinglePartyData(oneParty[0]);
     }
-  }, [partyListData, billDetails])
+  }, [partyListData, billDetails]);
 
   return (
     <div>
@@ -109,10 +111,12 @@ const PrintLayout = (props) => {
                   <tr>
                     <td>
                       <div>
-                        <strong>Bill No: </strong><span>{billDetails[0].BillNo}</span>
+                        <strong>Bill No: </strong>
+                        <span>{billDetails[0].BillNo}</span>
                       </div>
                       <div>
-                        <strong>Bill Id: </strong><span>{BILLID}</span>
+                        <strong>Bill Id: </strong>
+                        <span>{BILLID}</span>
                       </div>
                       <div>
                         <strong>
@@ -165,6 +169,7 @@ const PrintLayout = (props) => {
                       <th className="money">Rate</th>
                       {/* <th className="money">Quantity</th> */}
                       <th className="money">Discount</th>
+                      <th className="money">Round Amount (Rs)</th>
                       <th className="money">Price (Rs)</th>
                     </tr>
                   </thead>
@@ -180,6 +185,7 @@ const PrintLayout = (props) => {
                         <td className="money">
                           {billItemVal.BillDiscountAmount}
                         </td>
+                        <td className="money">{billItemVal.RoundAmount}</td>
                         <td className="money">{billItemVal.BillPriceFinal}</td>
                       </tr>
                     ))}
@@ -198,14 +204,22 @@ const PrintLayout = (props) => {
                       <th></th>
                       <th className="total-below">
                         <span>Net Total</span> <br></br>
-                        <span>Discount Total</span> <br></br>
+                        <span>Discount Amount </span> <br></br>
+                        <span>Round Amount </span> <br></br>
                         <span>Grand Total</span> <br></br>
                         <span>Paid Amount</span> <br></br>
                       </th>
                       <td className="money" colSpan="3">
-                        <span>{billDetails[0].Price}</span> <br></br>
-                        <span>{billDetails[0].BillDiscountPrice}</span>{" "}
+                        <span>{billDetails[0].Price}</span>
                         <br></br>
+                        {billItemDetails.map((billItemVal, index) => (
+                          <>
+                            <span>{billItemVal.BillDiscountAmount} </span>
+                            <br></br>
+                            <span>{billItemVal.RoundAmount}</span>
+                            <br></br>
+                          </>
+                        ))}
                         <span>{billDetails[0].TotalPrice}</span> <br></br>
                         <span>{billDetails[0].BillAmtPaid}</span> <br></br>
                       </td>

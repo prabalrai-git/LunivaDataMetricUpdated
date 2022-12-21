@@ -49,6 +49,7 @@ const ViewUpdateBill = (props) => {
     setIsLoading(true);
     dispatch(
       getPatientBillItemByBillId(ALLDATA, (val) => {
+        console.log(val, "valcomes");
         if (val.length > 0) {
           setBillItemDetails(val);
           setTableData(val);
@@ -154,8 +155,9 @@ const ViewUpdateBill = (props) => {
                           <th>SN</th>
                           <th>Test Name</th>
                           <th>Rate</th>
-                          <th>Discount</th>
+                          <th>Discount Amount</th>
                           <th>Price</th>
+                          <th>Round Amount</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -167,6 +169,7 @@ const ViewUpdateBill = (props) => {
                               <td>{data.billPrice}</td>
                               <td>{data.BillDiscountAmount}</td>
                               <td>{data.BillPriceFinal}</td>
+                              <td>{data.RoundAmount}</td>
                             </tr>
                           );
                         })}
@@ -183,10 +186,14 @@ const ViewUpdateBill = (props) => {
                           <Descriptions.Item label="Net Total">
                             {billDetails[0].Price}
                           </Descriptions.Item>
-                          <Descriptions.Item label="Discount">
-                            {billDetails[0].BillDiscountPrice}
-                          </Descriptions.Item>
-                          <br></br>
+                          {billItemDetails.map((data, index) => {
+                            return (
+                              <Descriptions.Item label="Discount Amount">
+                                {data.BillDiscountAmount}
+                              </Descriptions.Item>
+                            );
+                          })}
+
                           <Descriptions.Item label="Grand Total">
                             {billDetails[0].TotalPrice}
                           </Descriptions.Item>
