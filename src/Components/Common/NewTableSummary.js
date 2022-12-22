@@ -17,22 +17,25 @@ const NewTableSummary = (props) => {
     phone = reqData[0].crdPartyPhoneNo;
     add = reqData[0].CrdPartyAddress;
   }
-  // requestorList
+
   return (
     <NewSummaryContainer>
       <h4>Bill Summary</h4>
+      {/* <div> */}
       <Row justify="space-between">
-        <Col>
-          <li>Id:{id}</li>
-          <li>Name:{names} </li>
-          <li>Code:{code} </li>
+        {/* Col sm={24} md={24} xs={24} lg={12} xl={12} */}
+        <Col sm={24} md={12} xs={24} lg={12} xl={12}>
+          <ul>Id:{id}</ul>
+          <ul>Name:{names} </ul>
+          <ul>Code:{code} </ul>
         </Col>
-        <Col>
-          <li>Phone No:{phone} </li>
-          <li>Pan No:{pan} </li>
-          <li>Address: {add}</li>
+        <Col sm={24} md={12} xs={24} lg={12} xl={12}>
+          <ul>Phone No:{phone} </ul>
+          <ul>Pan No:{pan} </ul>
+          <ul>Address: {add}</ul>
         </Col>
       </Row>
+      {/* </div> */}
     </NewSummaryContainer>
   );
 };
