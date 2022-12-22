@@ -55,7 +55,7 @@ const AddBill = () => {
   useEffect(() => {
     dispatch(
       getRequestorBillListAll((val) => {
-        console.log(val, "billvalue");
+        // console.log(val, "billvalue");
         setrequestorList(val);
         setPartydata(val);
       })
@@ -76,11 +76,11 @@ const AddBill = () => {
 
     dispatch(
       InsertUpdateCreditPartyInPatientForPartyBill(billdata, (val) => {
-        console.log(val, "ssdflksjdsdfsdfsdf");
+        // console.log(val, "ssdflksjdsdfsdfsdf");
         if (val[0].SampleId > 0) {
-          console.log(val[0].SampleId, "Sampleid");
+          // console.log(val[0].SampleId, "Sampleid");
           if (data.length > 0) {
-            console.log(data, "iam data");
+            // console.log(data, "iam data");
             setButDis(true);
             ///creditparty save
 
@@ -178,14 +178,14 @@ const AddBill = () => {
               SampleId: val[0].SampleId,
               FiscalYearId: fiscalYearId,
             };
-            console.log(allDataSend, "alldatasend");
+            // console.log(allDataSend, "alldatasend");
 
             dispatch(
               addCreateCreditPartyBill(allDataSend, (res) => {
-                console.log(res, "resho");
+                // console.log(res, "resho");
                 if (res?.SuccessMsg === true) {
                   message.success(res?.Message);
-                  console.log(res, "myres");
+                  // console.log(res, "myres");
                   setTimeout(() => {
                     history.push({
                       pathname: `/viewupdatebill/${res.CreatedId}/${fiscalYearId}`,
@@ -245,7 +245,7 @@ const AddBill = () => {
     const BillData = requestorList.filter((res) => res.crdId === chData);
     setData(BillData);
     setPartydata(BillData);
-    console.log(BillData, "itemdata");
+    // console.log(BillData, "itemdata");
   };
 
   const calculateDiscountPercentage = (e) => {
