@@ -2,7 +2,7 @@
 // export const DEV_URL =
 //   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
 export const DEV_URL =
-  "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
+  "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
 
 // export const Carelab_Url =
 //   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
@@ -15,7 +15,7 @@ export const DEV_URL =
 //   "http://192.168.100.34/CarelabDataMetricServiceCrystal/";
 
 export const Carelab_Url =
-  "https://lunivacare.ddns.net/CarelabDataMetricServiceCrystalLive/";
+  "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
 
 // export const DEV_URL = 'https://lunivat.ddns.net/crystal/CarelabDataMetricServiceCrystal/';
 // http://192.168.100.34/CarelabDataMetricServiceCrystal/

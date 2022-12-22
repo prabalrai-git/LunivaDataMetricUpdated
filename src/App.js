@@ -121,7 +121,7 @@ import { themedata } from "./Components/theme/themdata";
 
 function App() {
   useEffect(() => {
-    localStorage.clear();
+    // localStorage.clear();
     localStorage.setItem("theme", JSON.stringify(themedata.theme3));
     return () => {};
   }, []);
