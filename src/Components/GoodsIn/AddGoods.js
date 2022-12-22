@@ -30,7 +30,7 @@ const AddGoods = (props) => {
   const fromDat = props?.match?.params?.from;
   const goodsInReducer = useSelector(state => state.goodsin);
   const [previousValues, setPreviousValues] = useState(forEdit ? goodsInReducer?.goodsin[GId] : {});
-  const [handleValue , sethandleValue] = useState(1);
+  const [handleValue, sethandleValue] = useState(1);
   const [itemSourceList, setitemSourceList] = useState([])
 
   const dateFormat = 'YYYY-MM-DD';
@@ -147,7 +147,7 @@ const AddGoods = (props) => {
     }
   }
 
-  function handleStatusChange(event){
+  function handleStatusChange(event) {
     sethandleValue(event.target.value)
   }
 
@@ -358,15 +358,15 @@ const AddGoods = (props) => {
                 allowClear>
                 {itemSourceList?.map(iTy => {
                   return (
-                    iTy?.IsActive === true ? 
-                    <Option
-                      title={iTy?.ItemSource}
-                      key={iTy?.Id}
-                      value={iTy?.Id}>
-                      {iTy?.ItemSource}
-                    </Option>
-                    :
-                    ''
+                    iTy?.IsActive === true ?
+                      <Option
+                        title={iTy?.ItemSource}
+                        key={iTy?.Id}
+                        value={iTy?.Id}>
+                        {iTy?.ItemSource}
+                      </Option>
+                      :
+                      ''
                   )
                 })
                 }
@@ -383,10 +383,10 @@ const AddGoods = (props) => {
                 },
               ]}
             >
-              <Select allowClear 
-              // defaultValue='1'
-               onChange={handleStatusChange}
-               >
+              <Select allowClear
+                // defaultValue='1'
+                onChange={handleStatusChange}
+              >
                 {
                   !forEdit ? (
                     <>

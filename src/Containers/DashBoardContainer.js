@@ -12,7 +12,7 @@ import { inventoryStat } from "../Components/Common/StateList";
 
 const DashBoardContainer = () => {
   const data = MenuRoute;
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(localStorage.getItem("userData"));
   const [randomElement, setrandomElement] = useState(
     quotes[Math.floor(Math.random() * quotes.length)]
   );

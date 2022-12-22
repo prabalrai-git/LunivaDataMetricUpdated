@@ -20,12 +20,12 @@ const UserBar = () => {
 
   const handleUser = () => {
     // if cookies edit here and set
-    const tokenStrings = JSON.parse(localStorage.getItem('token'));
+    const tokenStrings = JSON.parse(localStorage.getItem('userData'));
     if (tokenStrings === null) {
       history.push('/login');
       return
     }
-    setUserHere(tokenStrings.username);
+    setUserHere(tokenStrings.token.userName);
   }
 
   const content = (

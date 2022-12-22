@@ -7,6 +7,7 @@ import {
   GetMemberShipDetailsByMembercode,
   GetMemberShipDetailsByMemberId,
   GetSMSConsumptionDetails,
+  InsertUpdateCreditPartyInPatientForPartyBill,
 } from "../constants/url";
 import { fetchCarelab } from "../utils/carelabUtil";
 import { fetch } from "../utils/httpUtil";
@@ -216,6 +217,25 @@ export const getMemberShipDetailsByMemberCode = (data, successCallback) => {
       );
       if (response?.status === 200) {
         successCallback(response?.data?.MemberDetials);
+        // console.log("smsgot!", response?.data);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) { }
+  };
+};
+
+
+export const InsertUpdateCreditPartyInPatientForPartyBills = (data, successCallback) => {
+  console.log(data, "data");
+  return async (dispatch) => {
+    console.log(data);
+    try {
+      const response = await fetch(
+        `${InsertUpdateCreditPartyInPatientForPartyBill}?id=${data.id}&creditparty=${data.creditparty}&partycode=${data.partycode}&userId=${data.userId}&email=${data.email}&contactno=${data.contactno}&pan=${data.pan}&remarks=${data.remarks}`
+      );
+      if (response?.status === 200) {
+        successCallback(response?.data?.SampleId);
         // console.log("smsgot!", response?.data);
       } else {
         successCallback([]);
