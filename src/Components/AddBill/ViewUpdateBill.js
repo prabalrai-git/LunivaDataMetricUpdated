@@ -22,11 +22,8 @@ const ViewUpdateBill = (props) => {
   const [partylistdata, setPartyListData] = useState([]);
   const [patientinfo, setPatientInfo] = useState([]);
   const [finaldata, setFinaldata] = useState([]);
-  const [tokenstr, setTokenStr] = useState("");
 
   const loadPrintDataFun = (billId, fiscalYear) => {
-    const tokenString = localStorage.getItem("token");
-    setTokenStr(tokenString);
     const ALLDATA = {
       sampleId: billId,
       fiscalYear: fiscalYear,
