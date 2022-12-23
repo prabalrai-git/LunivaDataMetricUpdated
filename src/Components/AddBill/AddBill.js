@@ -104,7 +104,7 @@ const AddBill = () => {
                   //needs percent
                   billDiscountAmt:
                     values?.discountAmount !== undefined &&
-                    values?.discountAmount !== null
+                      values?.discountAmount !== null
                       ? values?.discountAmount
                       : 0,
                   billPriceFinal:
@@ -180,6 +180,8 @@ const AddBill = () => {
             console.log(allDataSend, "alldatasend");
             dispatch(
               addCreateCreditPartyBill(allDataSend, (res) => {
+
+                console.log('this is the response', res);
                 if (res?.SuccessMsg === true) {
                   message.success(res?.Message);
                   setTimeout(() => {
@@ -443,12 +445,12 @@ const AddBill = () => {
                       <Form.Item
                         label="Discount Amount"
                         name="discountAmount"
-                        // rules={[
-                        //   {
-                        //     required: true,
-                        //     message: "Please input item discount!",
-                        //   },
-                        // ]}
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: "Please input item discount!",
+                      //   },
+                      // ]}
                       >
                         <InputNumber
                           style={{
@@ -488,7 +490,7 @@ const AddBill = () => {
                             // autodisountamtcalculate(e);
                             // autocalcDisAmount(e);
                           }}
-                          // defaultValue={discountpercentage}
+                        // defaultValue={discountpercentage}
                         />
                       </Form.Item>
                       <Form.Item

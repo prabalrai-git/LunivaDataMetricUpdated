@@ -13,6 +13,9 @@ const UserBar = () => {
   useEffect(() => {
     handleUser()
   }, [])
+  useEffect(() => {
+    console.log('userHere', userHere);
+  }, [userHere])
 
   const handleLogout = () => {
     localStorage.clear()
@@ -21,11 +24,12 @@ const UserBar = () => {
   const handleUser = () => {
     // if cookies edit here and set
     const tokenStrings = JSON.parse(localStorage.getItem('userData'));
+    console.log('this is the token strings', tokenStrings);
     if (tokenStrings === null) {
       history.push('/login');
       return
     }
-    setUserHere(tokenStrings.token.userName);
+    setUserHere(tokenStrings.token.username);
   }
 
   const content = (
