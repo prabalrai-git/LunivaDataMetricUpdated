@@ -244,7 +244,7 @@ function ReportsFilter({ ...props }) {
             )}
             {serchButton && (
               <div className="load-btnreport">
-                <Col>
+                <Col lg={8} md={12} sm={11} xs={24}>
                   <AppButton
                     className="primary-btn"
                     buttonTitle="Load"
