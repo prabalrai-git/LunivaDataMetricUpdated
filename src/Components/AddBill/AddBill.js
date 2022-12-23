@@ -182,7 +182,7 @@ const AddBill = () => {
 
             dispatch(
               addCreateCreditPartyBill(allDataSend, (res) => {
-                // console.log(res, "resho");
+                console.log(res, "resho");
                 if (res?.SuccessMsg === true) {
                   message.success(res?.Message);
                   // console.log(res, "myres");
