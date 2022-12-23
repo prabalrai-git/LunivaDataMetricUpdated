@@ -38,7 +38,7 @@ const AddBill = () => {
   const [total, setTotal] = useState(0);
   const [grandtotals, setGrandTotals] = useState(0);
   const [roundamt, setRoundAmt] = useState(0);
-  const [partydata, setPartydata] = useState();
+  const [partydata, setPartydata] = useState([]);
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
@@ -55,7 +55,7 @@ const AddBill = () => {
   useEffect(() => {
     dispatch(
       getRequestorBillListAll((val) => {
-        // console.log(val, "billvalue");
+        console.log(val, "billvalue");
         setrequestorList(val);
         setPartydata(val);
       })
@@ -64,23 +64,23 @@ const AddBill = () => {
 
   const onFinish = (values) => {
     let billdata = {
-      id: 1,
-      creditparty: "Astha Kidney Hospital",
-      partycode: "C100",
-      userId: 1,
-      email: "a",
-      contactno: 1,
-      pan: 1,
-      remarks: "a",
+      id: partydata[0].crdId,
+      creditparty: partydata[0].CrdPartyName,
+      partycode: partydata[0].crdPartyCode,
+      userId: partydata[0].crdId,
+      email: "N/A",
+      contactno: partydata[0].crdPartyPhoneNo,
+      pan: partydata[0].CrdPartyPan,
+      remarks: "N/A",
     };
 
     dispatch(
       InsertUpdateCreditPartyInPatientForPartyBill(billdata, (val) => {
-        // console.log(val, "ssdflksjdsdfsdfsdf");
+        console.log(val, "ssdflksjdsdfsdfsdf");
         if (val[0].SampleId > 0) {
-          // console.log(val[0].SampleId, "Sampleid");
+          console.log(val[0].SampleId, "Sampleid");
           if (data.length > 0) {
-            // console.log(data, "iam data");
+            console.log(data, "iam data");
             setButDis(true);
             ///creditparty save
 
@@ -178,7 +178,7 @@ const AddBill = () => {
               SampleId: val[0].SampleId,
               FiscalYearId: fiscalYearId,
             };
-            // console.log(allDataSend, "alldatasend");
+            console.log(allDataSend, "alldatasend");
 
             dispatch(
               addCreateCreditPartyBill(allDataSend, (res) => {
@@ -245,7 +245,7 @@ const AddBill = () => {
     const BillData = requestorList.filter((res) => res.crdId === chData);
     setData(BillData);
     setPartydata(BillData);
-    // console.log(BillData, "itemdata");
+    console.log(BillData, "itemdata");
   };
 
   const calculateDiscountPercentage = (e) => {

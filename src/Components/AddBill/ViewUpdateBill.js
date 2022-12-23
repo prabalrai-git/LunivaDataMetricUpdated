@@ -96,18 +96,18 @@ const ViewUpdateBill = (props) => {
             <h4>Bill Summary</h4>
             <Row justify="space-between">
               <Col>
-                <ul>Patient Id: {billDetails[0].patId}</ul>
-                <ul>Bill Id: {BILLID}</ul>
-                <ul>Bill No: {billDetails[0].BillNo} </ul>
+                <p>Patient Id: {billDetails[0].patId}</p>
+                <p>Bill Id: {BILLID}</p>
+                <p>Bill No: {billDetails[0].BillNo} </p>
               </Col>
               <Col></Col>
               {finaldata.map(() => (
                 <Col>
-                  <ul>Credit Party: {finaldata[0].CrdPartyName} </ul>
-                  <ul>Credit Pan: {finaldata[0].CrdPartyPan} </ul>
-                  <ul>
+                  <p>Credit Party: {finaldata[0].CrdPartyName} </p>
+                  <p>Credit Pan: {finaldata[0].CrdPartyPan} </p>
+                  <p>
                     Credit Party Code: {billDetails[0].BillCreditPartyCode}{" "}
-                  </ul>
+                  </p>
                 </Col>
               ))}
             </Row>

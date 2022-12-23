@@ -145,7 +145,7 @@ function GeoGraphicalWise() {
   return (
     <>
       <div className="maiTopContainer">
-        <PageHeader pageTitle={"Geographical Wise Reports  & Details"} />
+        <PageHeader pageTitle={"Geographical Wise Reports & Details"} />
         <ReportsFilterGeo
           dateRange
           serchButton
