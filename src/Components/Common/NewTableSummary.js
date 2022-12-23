@@ -23,13 +23,13 @@ const NewTableSummary = (props) => {
       <h4>Bill Summary</h4>
       {/* <div> */}
       <Row justify="space-between">
-        {/* Col sm={24} md={24} xs={24} lg={12} xl={12} */}
-        <Col sm={24} md={12} xs={24} lg={12} xl={12}>
+        {/* Col sm={24} md={12} xs={24} lg={12} xl={12} */}
+        <Col>
           <ul>Id:{id}</ul>
           <ul>Name:{names} </ul>
           <ul>Code:{code} </ul>
         </Col>
-        <Col sm={24} md={12} xs={24} lg={12} xl={12}>
+        <Col>
           <ul>Phone No:{phone} </ul>
           <ul>Pan No:{pan} </ul>
           <ul>Address: {add}</ul>

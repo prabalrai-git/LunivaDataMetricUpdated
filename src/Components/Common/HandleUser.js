@@ -1,1 +1,1 @@
-export const tokenString = JSON.parse(localStorage.getItem('userData'));
+export const tokenString = JSON.parse(localStorage.getItem("token"));

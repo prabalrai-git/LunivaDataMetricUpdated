@@ -26,12 +26,12 @@ const PrintLayout = (props) => {
   const [partyListData, setPartyListData] = useState([]);
   const [singlePartyData, setSinglePartyData] = useState([]);
   const [shouldPrint, setShouldPrint] = useState(false);
-
   const loadPrintDataFun = (billId, fiscalYear) => {
     const ALLDATA = {
       sampleId: billId,
       fiscalYear: fiscalYear,
     };
+
     dispatch(
       getListofcompany((data) => {
         setcompanyDetail(data[0]);
@@ -230,6 +230,7 @@ const PrintLayout = (props) => {
                   <span>
                     <strong>Printed On:</strong> {todaydate}
                   </span>
+
                   <span>
                     <strong>Printed By:</strong> {tokenString.username}
                   </span>

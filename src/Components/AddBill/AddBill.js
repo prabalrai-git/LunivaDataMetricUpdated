@@ -78,7 +78,9 @@ const AddBill = () => {
       InsertUpdateCreditPartyInPatientForPartyBill(billdata, (val) => {
         // console.log(val, "ssdflksjdsdfsdfsdf");
         if (val[0].SampleId > 0) {
+          // console.log(val[0].SampleId, "Sampleid");
           if (data.length > 0) {
+            // console.log(data, "iam data");
             setButDis(true);
             ///creditparty save
 
@@ -176,14 +178,14 @@ const AddBill = () => {
               SampleId: val[0].SampleId,
               FiscalYearId: fiscalYearId,
             };
+            // console.log(allDataSend, "alldatasend");
 
-            console.log(allDataSend, "alldatasend");
             dispatch(
               addCreateCreditPartyBill(allDataSend, (res) => {
-
-                console.log('this is the response', res);
+                // console.log(res, "resho");
                 if (res?.SuccessMsg === true) {
                   message.success(res?.Message);
+                  // console.log(res, "myres");
                   setTimeout(() => {
                     history.push({
                       pathname: `/viewupdatebill/${res.CreatedId}/${fiscalYearId}`,
@@ -378,7 +380,7 @@ const AddBill = () => {
                             {discountamount?.toFixed(1)}
                           </span>
                         </Descriptions.Item>
-                        <Descriptions.Item label="Rounded Amount">
+                        <Descriptions.Item label="Round Amt">
                           <span className="descriptioncol"> {roundamt}</span>
                         </Descriptions.Item>
                         <Descriptions.Item label="GrandTotal">
