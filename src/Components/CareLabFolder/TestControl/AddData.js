@@ -49,7 +49,7 @@ const AddData = (props) => {
             "TestId": values?.TestId,
             "ControlValue": values?.ControlValue,
             "QCDate": values?.QCDate.format('YYYY-MM-DD'),
-            "UserId": tokenString.UId,
+            "UserId": tokenString.token.UId,
             "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false
         }
         dispatch(setControlValueApi(data, (res) => {

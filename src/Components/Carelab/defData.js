@@ -135,10 +135,10 @@ const DefData = (props) => {
     let newData = {
       "Id": 0,
       "RecordId": allData.RecordId,
-      "CreatedBy": tokenString.UId,
+      "CreatedBy": tokenString.token.UId,
       "CreatedOn": todaydate,
-      "Remarks": `Verified by ${tokenString.username}, user id ${tokenString.UId}`,
-      "IsApproved": tokenString.UId,
+      "Remarks": `Verified by ${tokenString.token.username}, user id ${tokenString.token.UId}`,
+      "IsApproved": tokenString.token.UId,
       "IsVerifier": true,
       "IsActive": true,
       "IsCurrent": true

@@ -232,7 +232,7 @@ const PrintLayout = (props) => {
                   </span>
 
                   <span>
-                    <strong>Printed By:</strong> {tokenString.username}
+                    <strong>Printed By:</strong> {tokenString.token.username}
                   </span>
                 </div>
                 <span className="total-amt">

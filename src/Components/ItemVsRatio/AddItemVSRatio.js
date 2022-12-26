@@ -66,7 +66,7 @@ const AddItemVsRatio = (props) => {
       "ItemPerUnitTest": values?.ItemPerUnitTest,
       "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
       "CreatedDate": values?.CreatedDate.format('YYYY-MM-DD'),
-      "CreatedBy": tokenString.UId,
+      "CreatedBy": tokenString.token.UId,
       "IsGroup": false,
       "IsConsumptionGroup": false,
       "TestPerUnit": values?.TestPerUnit,

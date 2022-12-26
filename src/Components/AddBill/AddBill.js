@@ -160,9 +160,9 @@ const AddBill = () => {
                   ? values?.dis
                   : 0,
               BillOutGngAmtPc: 1,
-              UserId: tokenString.UId,
+              UserId: tokenString.token.UId,
               BillIsVoid: false,
-              BillLastModifiedUser: tokenString.UId,
+              BillLastModifiedUser: tokenString.token.UId,
               BillAdvanceAmt: 0,
               BillCollectionAmt: grandtotals,
               BillNepaliDate: nepaliDateConverter(todaydate),

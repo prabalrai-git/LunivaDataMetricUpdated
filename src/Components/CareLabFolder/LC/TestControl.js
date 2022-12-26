@@ -59,7 +59,7 @@ const TestControl = (props) => {
             "IISDMin": values.IISDMin,
             "IIISDMin": values.IIISDMin,
             "EntryDate": forEdit ? moment().format('YYYY-MM-DD') : moment().format('YYYY-MM-DD'),
-            "UserId": tokenString.UId,
+            "UserId": tokenString.token.UId,
             "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false
         }
         dispatch(setControlWiseSDApi(data, (res) => {

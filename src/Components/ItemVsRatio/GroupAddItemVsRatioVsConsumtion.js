@@ -48,7 +48,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
 
   useEffect(() => {
     if (forEdit && previousValues === undefined) {
-      dispatch(getItemVsRatioApi((val) => {}, RId));
+      dispatch(getItemVsRatioApi((val) => { }, RId));
     }
     getAllLabItem();
     if (forGroup !== undefined) {
@@ -107,7 +107,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
           ? true
           : false,
       CreatedDate: values?.CreatedDate.format("YYYY-MM-DD"),
-      CreatedBy: tokenString.UId,
+      CreatedBy: tokenString.token.UId,
       IsGroup: forGroup ? true : false,
       IsConsumptionGroup: forCon ? true : false,
       TestPerUnit: values?.TestPerUnit,
@@ -174,7 +174,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                      0 ||
+                    0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
@@ -209,7 +209,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                      0 ||
+                    0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}

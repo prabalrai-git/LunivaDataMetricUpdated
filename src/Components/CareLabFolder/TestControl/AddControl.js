@@ -44,7 +44,7 @@ const AddControl = (props) => {
             "ControlName": values?.ControlName,
             "ControlDescription": values?.ControlDescription,
             "EntryDate": forEdit ? moment().format('YYYY-MM-DD') : moment().format('YYYY-MM-DD'),
-            "UserId": tokenString.UId,
+            "UserId": tokenString.token.UId,
             "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false
         }
         dispatch(setControlDetailsApi(data, (res) => {

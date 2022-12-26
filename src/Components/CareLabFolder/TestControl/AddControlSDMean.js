@@ -60,7 +60,7 @@ const AddControlSDMean = (props) => {
             "CV": values?.CV,
             // "EntryDate": forEdit ? moment().format('YYYY-MM-DD') : moment().format('YYYY-MM-DD'),
             "EntryDate": values?.EntryDate.format('YYYY-MM-DD'),
-            "UserId": tokenString.UId,
+            "UserId": tokenString.token.UId,
             "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
             "QcLevel": values?.QcLevel,
         }
