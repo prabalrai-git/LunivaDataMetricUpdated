@@ -1,77 +1,86 @@
-import { Form, Input, Button, message, Row, Col, Switch } from 'antd';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { getItemUnitApi, insertItemUnitApi } from '../../services/itemUnitService';
-import { formItemLayout } from '../Common/FormItemLayout';
-import { inventoryStat } from '../Common/StateList';
+import { Form, Input, Button, message, Row, Col, Switch } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import {
+  getItemUnitApi,
+  insertItemUnitApi,
+} from "../../services/itemUnitService";
+import { formItemLayout } from "../Common/FormItemLayout";
+import { inventoryStat } from "../Common/StateList";
 
 const AddUnits = (props) => {
   const [form] = Form.useForm();
-  const history = useHistory()
+  const history = useHistory();
   const { forEdit } = props;
   const unId = props?.match?.params?.id;
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-  const unitReducer = useSelector(state => state.units);
-  const [previousValues, setPreviousValues] = useState(forEdit ? unitReducer?.units[unId] : {});
+  const unitReducer = useSelector((state) => state.units);
+  const [previousValues, setPreviousValues] = useState(
+    forEdit ? unitReducer?.units[unId] : {}
+  );
 
   useEffect(() => {
     if (forEdit && previousValues === undefined) {
-      dispatch(getItemUnitApi((val) => {
-      }, unId));
+      dispatch(getItemUnitApi((val) => {}, unId));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     setPreviousValues(unitReducer?.units[unId]);
-  }, [unitReducer?.units[unId]])
+  }, [unitReducer?.units[unId]]);
 
   useEffect(() => {
     if (previousValues !== undefined) {
-      form.resetFields()
+      form.resetFields();
     }
-  }, [previousValues])
+  }, [previousValues]);
 
   const onFinish = (values) => {
-    setButDis(true)
+    setButDis(true);
     let data = {
-      "UnId": forEdit ? unId : 0,
-      "Units": values?.unit_name,
-      "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
-    }
-    dispatch(insertItemUnitApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-        message.success(res?.Message)
-        setTimeout(() => {
-          history.push({
-            pathname: '/units',
-            state: inventoryStat
-          })
-        }, 1000);
-      } else {
-        setButDis(false)
-        message.error('Something went wrong please try again')
-      }
-    }))
+      UnId: forEdit ? unId : 0,
+      Units: values?.unit_name,
+      IsActive:
+        values?.IsActive === undefined || values?.IsActive === true
+          ? true
+          : false,
+    };
+    dispatch(
+      insertItemUnitApi(data, (res) => {
+        if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
+          message.success(res?.Message);
+          setTimeout(() => {
+            history.push({
+              pathname: "/units",
+              state: inventoryStat,
+            });
+          }, 1000);
+        } else {
+          setButDis(false);
+          message.error("Something went wrong please try again");
+        }
+      })
+    );
   };
 
   const onFinishFailed = (errorInfo) => {
-    setButDis(false)
+    setButDis(false);
   };
 
-  let prevVal = {}
+  let prevVal = {};
   if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
-      unit_name: previousValues?.Units
-    }
+      unit_name: previousValues?.Units,
+    };
   }
 
   return (
     <AddUnitsContainer>
-      <Row justify='center'>
+      <Row justify="center">
         <Col span={16}>
           <Form
             name="add_items"
@@ -82,14 +91,13 @@ const AddUnits = (props) => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-
             <Form.Item
               label="Unit Name"
               name="unit_name"
               rules={[
                 {
                   required: true,
-                  message: 'Please input unit name!',
+                  message: "Please input unit name!",
                 },
               ]}
             >
@@ -97,7 +105,7 @@ const AddUnits = (props) => {
             </Form.Item>
 
             <Form.Item
-              label='Is Active'
+              label="Is Active"
               name="IsActive"
               valuePropName="checked"
             >
@@ -110,13 +118,16 @@ const AddUnits = (props) => {
                 span: 16,
               }}
             >
-              <Button htmlType="submit" disabled={butDis} className='btnPrimary'>
-                {forEdit ? 'Edit' : 'Submit'}
+              <Button
+                htmlType="submit"
+                disabled={butDis}
+                className="btnPrimary"
+              >
+                {forEdit ? "Edit" : "Submit"}
               </Button>
             </Form.Item>
           </Form>
         </Col>
-
       </Row>
     </AddUnitsContainer>
   );
@@ -127,4 +138,4 @@ export default AddUnits;
 const AddUnitsContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
-`
+`;

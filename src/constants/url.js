@@ -703,6 +703,9 @@ export const GetGeographyWiseMISReports = "GetGeographyWiseMISReports";
 export const insertUpdateCreditPartyInPatientForPartyBill =
   "InsertUpdateCreditPartyInPatientForPartyBill";
 
+export const GetEmailServerDetails = "GetEmailServerDetails";
+export const GetReportFormatDetails = "GetReportFormatDetails";
+
 // @desc: InsertUpdateCreditPartyInPatientForPartyBill
 // @param/body:
 // {
@@ -723,9 +726,8 @@ export const GetMemberShipDetailsByMembercode =
 // @desc: GetMemberShipDetailsByMembercode
 // @param: ?memcode={memcode}
 
-
-export const InsertUpdateCreditPartyInPatientForPartyBill = 'InsertUpdateCreditPartyInPatientForPartyBill'
-
+export const InsertUpdateCreditPartyInPatientForPartyBill =
+  "InsertUpdateCreditPartyInPatientForPartyBill";
 
 //@desc: InsertUpdateCreditPartyInPatientForPartyBill
 // @param: ?id={id}&creditparty={creditparty}&partycode={partycode}&userId={userId}&email={email}&contactno={contactno}&pan={pan}&remarks={remarks}

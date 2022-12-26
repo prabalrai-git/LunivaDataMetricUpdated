@@ -48,6 +48,7 @@ import {
   AsyncFinance,
   AsyncDateChanges,
   AsyncBulkNegative,
+  AsyncAddEmailField,
 } from "./App/asyncComponent";
 import PrintLayout from "./Components/PrintDetails/PrintLayout";
 import PrivateRouter from "./Routes/PrivateRouter";
@@ -352,7 +353,13 @@ function AllRoute() {
         layout={AsyncAppLayout}
         forEdit
       />
-
+      <PrivateRouter
+        exact
+        path="/settingsemail/addemail"
+        component={AsyncAddEmailField}
+        layout={AsyncAppLayout}
+        forEdit
+      />
       <PrivateRouter
         exact
         path="/reports/stocks"
