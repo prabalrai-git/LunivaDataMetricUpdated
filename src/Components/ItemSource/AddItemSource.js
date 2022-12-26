@@ -43,7 +43,7 @@ const AddItemSource = (props) => {
         let data = {
             "Id": forEdit ? TId : 0,
             "ItemSource": values?.ItemSource,
-            "UserId": tokenString.UId,
+            "UserId": tokenString.token.UId,
             "EntryDate": values?.EntryDate.format('YYYY-MM-DD'),
             "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false,
         }

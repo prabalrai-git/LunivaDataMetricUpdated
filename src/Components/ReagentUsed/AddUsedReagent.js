@@ -84,7 +84,7 @@ const AddUsedReagent = (props) => {
       "Reason": values?.Reason,
       "Remarks": values?.Remarks,
       "CreatedDate": values?.CreatedDate.format("YYYY-MM-DD"),
-      "CreatedBy": tokenString.UId,
+      "CreatedBy": tokenString.token.UId,
       "IsActive": forEdit ? false : true,
       "Title": values?.Title
     }

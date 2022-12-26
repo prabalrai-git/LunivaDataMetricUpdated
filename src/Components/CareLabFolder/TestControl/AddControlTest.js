@@ -53,7 +53,7 @@ const AddControlTest = (props) => {
             "TestDescription": values?.TestDescription,
             "LabTestId": values?.LabTestId,
             "EntryDate": forEdit ? moment().format('YYYY-MM-DD') : moment().format('YYYY-MM-DD'),
-            "UserId": tokenString.UId,
+            "UserId": tokenString.token.UId,
             "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false
         }
         dispatch(setTestControlTestApi(data, (res) => {

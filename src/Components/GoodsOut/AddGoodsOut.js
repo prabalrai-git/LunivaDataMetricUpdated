@@ -115,7 +115,7 @@ const AddGoodsOut = (props) => {
       "ItemId": values?.ItemId,
       "GoodReceivedNo": values?.GoodReceivedNo,
       "Quantity": values?.Quantity,
-      "UserId": tokenString.UId,
+      "UserId": tokenString.token.UId,
       "GoodsOutDate": values?.GoodsOutDate.format('YYYY-MM-DD'),
       "IsActive": forEdit ? false : (values?.IsActive === undefined || values?.IsActive === true ? true : false),
       "Remarks": values?.Remarks,

@@ -105,7 +105,7 @@ const AddItem = (props) => {
       "LocationId": values?.LocationId,
       "RackId": values?.RackId,
       "MinQty": values?.MinQty,
-      "CreatedBy": tokenString.UId, //needs login userid
+      "CreatedBy": tokenString.token.UId, //needs login userid
       "CreatedDate": moment().format('YYYY-MM-DD'), //default date for now update
       "IsActive": values?.IsActive === undefined || values?.IsActive === true ? true : false
     }

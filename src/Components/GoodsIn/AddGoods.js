@@ -104,7 +104,7 @@ const AddGoods = (props) => {
       "LotNo": values?.LotNO,
       "ItmTrackId": `${itemTrack}${values?.ItmTrackId}`,
       "CreatedDate": values?.create_date.format("YYYY-MM-DD"),
-      "CreatedBy": tokenString.UId,
+      "CreatedBy": tokenString.token.UId,
       // "ItemStatus": forEdit ? 3 : values?.ItemStatus,
       "ItemStatus": forEdit ? 3 : handleValue,
       "ItemSource": values?.ItemSource
