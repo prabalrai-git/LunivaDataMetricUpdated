@@ -11,10 +11,11 @@ const AfterLogin = () => {
   const history = useHistory()
 
   const data = AfterLoginData;
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = JSON.parse(localStorage.getItem('userData'));
 
 
   useEffect(() => {
+    console.log(token, 'from token');
     if (token === null) {
       history.push('/login');
       return
