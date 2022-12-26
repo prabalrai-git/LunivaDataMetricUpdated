@@ -110,6 +110,12 @@ import {
   AsyncCountCharts,
   AsyncMainCharts,
   AsyncDatametricDashboard,
+  AsyncSettingsserver,
+  AsyncEmailServer,
+  AsyncAddEmailField,
+  AsyncEditEmailField,
+  AsyncReportdataSettings,
+  AsyncAddReportSettings,
 } from "./App/asyncComponent";
 import PublicRoute from "./Routes/PublicRoute";
 import { MenuSettings } from "./Data/MenuSettings";
@@ -183,7 +189,6 @@ function App() {
           <Route exact path="/">
             <Redirect to="/afterlogin" />
           </Route>
-
           <PublicRoute
             exact
             path="/login"
@@ -196,14 +201,12 @@ function App() {
             component={AddTable}
             layout={AsyncTableLayout}
           /> */}
-
           <PublicRoute
             exact
             path="/afterlogin"
             component={AsyncAfterLogin}
             layout={AsyncPublicLayout}
           />
-
           {MenuSettings.dashboard ? (
             <PrivateRouter
               exact
@@ -215,7 +218,6 @@ function App() {
           ) : (
             ""
           )}
-
           {MenuSettings.goodsin
             ? [
                 <PrivateRouter
@@ -247,7 +249,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.item
             ? [
                 <PrivateRouter
@@ -287,7 +288,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.goodsout
             ? [
                 <PrivateRouter
@@ -319,7 +319,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.type
             ? [
                 <PrivateRouter
@@ -351,7 +350,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.category
             ? [
                 <PrivateRouter
@@ -383,7 +381,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.location
             ? [
                 <PrivateRouter
@@ -415,7 +412,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.rack
             ? [
                 <PrivateRouter
@@ -447,7 +443,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.wastage
             ? [
                 <PrivateRouter
@@ -479,7 +474,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.itemvsratio
             ? [
                 <PrivateRouter
@@ -553,7 +547,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.units
             ? [
                 <PrivateRouter
@@ -585,7 +578,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.reports
             ? [
                 <PrivateRouter
@@ -670,7 +662,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.consumption
             ? [
                 <PrivateRouter
@@ -702,7 +693,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.consumptionlook
             ? [
                 <PrivateRouter
@@ -753,7 +743,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.misreports
             ? [
                 <PrivateRouter
@@ -842,7 +831,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.reagentused
             ? [
                 <PrivateRouter
@@ -874,7 +862,6 @@ function App() {
                 />,
               ]
             : ""}
-
           {MenuSettings.units
             ? [
                 <PrivateRouter
@@ -906,7 +893,6 @@ function App() {
                 />,
               ]
             : ""}
-
           <PrivateRouter
             exact
             path="/settings"
@@ -914,7 +900,56 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
+          {MenuSettings.settingsserver
+            ? [
+                <PrivateRouter
+                  exact
+                  key="settings"
+                  path="/settingsserver"
+                  component={AsyncEmailServer}
+                  layout={AsyncAppLayout}
+                  forEdit
+                  showSider
+                />,
+                <PrivateRouter
+                  exact
+                  path="/settingsemail"
+                  component={AsyncEmailServer}
+                  layout={AsyncAppLayout}
+                  showSider
+                />,
+                <PrivateRouter
+                  exact
+                  path="/reportdata"
+                  component={AsyncReportdataSettings}
+                  layout={AsyncAppLayout}
+                  showSider
+                />,
+                <PrivateRouter
+                  exact
+                  path="/reportdata/addreport"
+                  component={AsyncAddReportSettings}
+                  layout={AsyncAppLayout}
+                  showSider
+                />,
+                <PrivateRouter
+                  exact
+                  path="/settingsemail/addemail"
+                  component={AsyncAddEmailField}
+                  layout={AsyncAppLayout}
+                  showSider
+                />,
+                <PrivateRouter
+                  exact
+                  key="editemails"
+                  path="/settingsemail/edit/:id"
+                  component={AsyncAddEmailField}
+                  layout={AsyncAppLayout}
+                  forEdit
+                  showSider
+                />,
+              ]
+            : ""}
           <PrivateRouter
             exact
             path="/aboutluniva"
@@ -922,7 +957,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/carelab"
@@ -930,7 +964,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/qccontrol"
@@ -938,7 +971,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/lcchart"
@@ -946,7 +978,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/viewtestcontrol"
@@ -954,7 +985,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/addtestcontrol"
@@ -962,7 +992,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/edittestcontrol/:id/:SId"
@@ -971,7 +1000,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/viewcontroltest/"
@@ -979,7 +1007,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/addcontroltest/"
@@ -987,7 +1014,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/editcontroltest/:id"
@@ -996,7 +1022,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/viewcontroltesttest/"
@@ -1004,7 +1029,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/addcontroltesttest/"
@@ -1012,7 +1036,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/editcontroltesttest/:id"
@@ -1021,7 +1044,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/viewtestdata/"
@@ -1029,7 +1051,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/addcontroldata/"
@@ -1037,7 +1058,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/editcontroldata/:id/:tid"
@@ -1046,7 +1066,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/caredashboard/"
@@ -1054,7 +1073,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/sampledash/"
@@ -1062,7 +1080,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/datametricdash/"
@@ -1077,7 +1094,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/reportdash/"
@@ -1085,7 +1101,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/bulknegativedash/"
@@ -1094,7 +1109,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/financedash/"
@@ -1102,7 +1116,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/departmentdash/"
@@ -1110,7 +1123,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/outsourcedash/"
@@ -1118,7 +1130,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/marketingdash/"
@@ -1126,7 +1137,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/tatdash/"
@@ -1134,7 +1144,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/testdash/"
@@ -1142,7 +1151,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/qcdash/"
@@ -1150,7 +1158,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/testanalysis/"
@@ -1159,7 +1166,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/viewcontrolsdmean/"
@@ -1167,7 +1173,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/addcontrolsdmean/"
@@ -1175,7 +1180,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/editcontrolsdmean/:cid/:id/:tid/:ent"
@@ -1184,14 +1188,12 @@ function App() {
             forEdit
             showSider
           />
-
           <PublicRoute
             exact
             path="/printtestreport/:sid/:fid"
             component={AsyncPrintTestReport}
             layout={AsyncPublicLayout}
           />
-
           <PrivateRouter
             exact
             path="/dynarep"
@@ -1200,7 +1202,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/testanalytics"
@@ -1209,7 +1210,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/testList"
@@ -1242,7 +1242,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/outsourceanalytics"
@@ -1259,7 +1258,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/sms"
@@ -1284,7 +1282,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/datechanges"
@@ -1325,7 +1322,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/tatanalysis"
@@ -1343,7 +1339,6 @@ function App() {
             // forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/itemsource"
@@ -1351,7 +1346,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/itemsource/add"
@@ -1359,7 +1353,6 @@ function App() {
             layout={AsyncAppLayout}
             showSider
           />
-
           <PrivateRouter
             exact
             path="/itemsource/edit/:id"
@@ -1377,7 +1370,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/viewupdatebill/:id/:fiscalyear"
@@ -1386,7 +1378,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/viewbill"
@@ -1403,7 +1394,6 @@ function App() {
             forEdit
             showSider
           />
-
           <PrivateRouter
             exact
             path="/charts"
@@ -1469,7 +1459,6 @@ function App() {
             forEdit
             showSider
           />
-
           {/* Design Purpose */}
           <PublicRoute
             exact
@@ -1478,7 +1467,6 @@ function App() {
             layout={AsyncAppLayout}
             forEdit
           />
-
           <Route component={AsyncNotFound} />
         </Switch>
       </Suspense>

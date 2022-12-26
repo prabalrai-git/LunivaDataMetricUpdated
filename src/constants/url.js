@@ -1,6 +1,5 @@
 // export const DEV_URL = 'http://192.168.100.34/CarelabInventory/';
-// export const DEV_URL =
-//   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
+
 export const DEV_URL =
   "https://lunivacare.ddns.net/CarelabDataMetricService_qc/";
 
@@ -702,6 +701,9 @@ export const GetGeographyWiseMISReports = "GetGeographyWiseMISReports";
 
 export const insertUpdateCreditPartyInPatientForPartyBill =
   "InsertUpdateCreditPartyInPatientForPartyBill";
+
+export const GetEmailServerDetails = "GetEmailServerDetails";
+export const GetReportFormatDetails = "GetReportFormatDetails";
 
 // @desc: InsertUpdateCreditPartyInPatientForPartyBill
 // @param/body:

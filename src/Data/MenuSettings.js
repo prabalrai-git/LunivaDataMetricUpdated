@@ -41,4 +41,5 @@ export const MenuSettings = {
   gettestlist: true,
   datametrictab: true,
   printanalysis: true,
+  settingsserver: true,
 };

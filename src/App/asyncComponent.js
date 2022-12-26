@@ -121,11 +121,30 @@ export const AsyncSettings = lazy(() =>
   pMinDelay(import("../Components/Common/Settings"), 300)
 );
 
+// export const AsyncSettingsserver = lazy
+export const AsyncSettingsserver = lazy(() =>
+  pMinDelay(import("../Components/Common/SettingsServer"), 300)
+);
+export const AsyncEmailServer = lazy(() =>
+  pMinDelay(import("../Components/SettingsField/EmailRetrieve"), 300)
+);
+export const AsyncReportdataSettings = lazy(() =>
+  pMinDelay(import("../Components/SettingsField/ReportRetrieve"), 300)
+);
 export const AsyncUnits = lazy(() =>
   pMinDelay(import("../Components/Units/index"), 300)
 );
 export const AsyncAddUnits = lazy(() =>
   pMinDelay(import("../Components/Units/AddUnits"), 300)
+);
+export const AsyncAddEmailField = lazy(() =>
+  pMinDelay(import("../Components/SettingsField/EmailAdditionField"), 300)
+);
+export const AsyncEditEmailField = lazy(() =>
+  pMinDelay(import("../Components/SettingsField/EmailEditField"), 300)
+);
+export const AsyncAddReportSettings = lazy(() =>
+  pMinDelay(import("../Components/SettingsField/ReportAdditonField"), 300)
 );
 
 export const AsyncStocks = lazy(() =>

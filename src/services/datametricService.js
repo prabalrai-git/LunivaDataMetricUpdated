@@ -371,3 +371,43 @@ export const InsertUpdateCreditPartyInPatientForPartyBill = (
     } catch (error) {}
   };
 };
+
+export const GetEmailServerDetails = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      // console.log(data, "dataasss");
+      const response = await fetch(`GetEmailServerDetails?eId=${data.id}`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.EmailSettings);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const GetReportFormatDetails = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      // console.log(data, "dataasss");
+      const response = await fetch(`GetReportFormatById?rId=${data.id}`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.ReportFormat);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const InsertUpdateEmailserverDetails = (data, successCallback) => {
+  return async (dispatch) => {
+    const newData = generateUrlEncodedData(data);
+    try {
+      const response = await store(`InsertUpdateEmailserverDetails`, newData);
+      if (response?.status === 200) {
+        successCallback(response?.data);
+      } else successCallback([]);
+    } catch (error) {}
+  };
+};

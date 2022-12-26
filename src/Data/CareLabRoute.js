@@ -11,6 +11,20 @@ export const useCareLabRoute = () => {
       path: "/dynarep",
     },
   ];
+  const settingsServerdata = [
+    {
+      icon: "icon-file-alt",
+      key: "Email",
+      name: "Email",
+      path: "/settingsemail",
+    },
+    {
+      icon: "icon-file-alt",
+      key: "Report Format",
+      name: "report",
+      path: "/reportdata",
+    },
+  ];
 
   const financeNav = [
     {
@@ -105,7 +119,6 @@ export const useCareLabRoute = () => {
       key: "datechanges",
       name: "Date Change",
       path: "/datechanges",
-
     },
 
     {
@@ -230,7 +243,7 @@ export const useCareLabRoute = () => {
       path: "/bulknegativedash",
       hasSubNav: true,
       subNavData: bulkNegativeNav,
-      showTab: false
+      showTab: false,
     },
     {
       icon: "icon-line-file",
@@ -371,7 +384,7 @@ export const useCareLabRoute = () => {
       path: "/datedash",
       hasSubNav: true,
       subNavData: dateChangeNav,
-      showTab: false
+      showTab: false,
     },
 
     {
@@ -404,7 +417,7 @@ export const useCareLabRoute = () => {
       name: "dynamicreport",
       path: "/dynarep",
       isactive: MenuSettings.dynamicreporrt,
-      showTab: false
+      showTab: false,
     },
     {
       icon: "icon-line2-screen-desktop",
@@ -419,6 +432,17 @@ export const useCareLabRoute = () => {
       name: "sms",
       path: "/sms",
     },
+    {
+      icon: "icon-line2-settings",
+      key: "settings",
+      name: "Settingsmenu",
+      path: "/settingsServer",
+      subNavData: settingsServerdata,
+
+      // isactive: MenuSettings.theme,
+      hasSubNav: true,
+      showTab: true,
+    },
 
     {
       icon: "icon-line2-settings",
@@ -426,7 +450,7 @@ export const useCareLabRoute = () => {
       name: "Settings",
       path: "/theme",
       isactive: MenuSettings.theme,
-      showTab: true
+      showTab: true,
     },
   ];
 
