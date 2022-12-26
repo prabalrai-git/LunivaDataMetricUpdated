@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row, Switch } from "antd";
+import { Button, Col, Form, Input, message, Row, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -8,16 +8,18 @@ import {
   InsertUpdateEmailserverDetails,
 } from "../../services/datametricService";
 import { formItemLayout } from "../Common/FormItemLayout";
+import { carelabStat } from "../Common/StateList";
 const EmailAdditionField = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const { forEdit } = props;
-  const Id = props;
-  // const Id = props?.match?.params?.Id;
+  // const Id = props;
+  const Id = props?.match?.params?.Id;
   console.log(Id, "i am iddsada");
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const unitReducer = useSelector((state) => state.units);
+  const [datainsert, setDatainsert] = useState([]);
   const [previousValues, setPreviousValues] = useState(
     forEdit ? unitReducer?.units[Id] : {}
   );
@@ -38,6 +40,7 @@ const EmailAdditionField = (props) => {
 
   useEffect(() => {
     if (previousValues !== undefined) {
+      console.log(previousValues, "i am prev values");
       form.resetFields();
     }
   }, [previousValues]);
@@ -61,9 +64,13 @@ const EmailAdditionField = (props) => {
     dispatch(
       InsertUpdateEmailserverDetails(data, (res) => {
         console.log(data, "dataofinsert");
+        setDatainsert(data);
+        message.success("inserted");
+        console.log(res, "responsedata");
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
           message.success(res?.Message);
           setTimeout(() => {
+            // /editcontroltesttest/${record.TId}
             history.push({
               pathname: "/settingsemail",
               state: carelabStat,
@@ -85,7 +92,12 @@ const EmailAdditionField = (props) => {
   if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
-      // unit_name: previousValues?.Units,
+      Host: previousValues?.Host,
+      Port: previousValues?.Port,
+      UserName: previousValues?.UserName,
+      Password: previousValues?.Password,
+      From: previousValues?.From,
+      Bcc: previousValues?.Bcc,
     };
   }
 
@@ -123,7 +135,7 @@ const EmailAdditionField = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input port num !",
                   },
                 ]}
               >

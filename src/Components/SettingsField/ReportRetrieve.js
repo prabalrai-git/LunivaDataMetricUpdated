@@ -20,7 +20,7 @@ const ReportRetrieve = () => {
 
   const getEmailData = () => {
     let data = {
-      id: "1",
+      id: 0,
     };
     dispatch(
       GetReportFormatDetails(data, (val) => {
@@ -113,9 +113,8 @@ const ReportRetrieve = () => {
           <Edit
             onClick={() =>
               history.push({
-                pathname: "./reportdata/addreport",
-                // pathname: `./units/edit/${record.eId}`,
-                state: inventoryStat,
+                pathname: `./reportdata/edit/${record.Id}`,
+                state: carelabStat,
               })
             }
           >

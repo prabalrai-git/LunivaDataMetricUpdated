@@ -1,11 +1,23 @@
-import { Button, Col, DatePicker, Form, Input, Row, Switch } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Row,
+  Switch,
+} from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { todaydate } from "../Common/TodayDate";
+import { tokenString } from "../Common/HandleUser";
 import styled from "styled-components";
 import {
   GetEmailServerDetails,
   InsertUpdateEmailserverDetails,
+  InsertUpdateLabReportFormats,
 } from "../../services/datametricService";
 import { formItemLayout } from "../Common/FormItemLayout";
 import { carelabStat } from "../Common/StateList";
@@ -16,8 +28,10 @@ const ReportAdditonField = (props) => {
   const { forEdit } = props;
   const Id = props?.match?.params?.Id;
   const dispatch = useDispatch();
+  const [Datainsert, setDatainsert] = useState([]);
   const [butDis, setButDis] = useState(false);
   const unitReducer = useSelector((state) => state.units);
+  console.log(unitReducer, "i am unitreducer");
   const [previousValues, setPreviousValues] = useState(
     forEdit ? unitReducer?.units[Id] : {}
   );
@@ -31,41 +45,36 @@ const ReportAdditonField = (props) => {
       );
     }
   }, []);
-
-  useEffect(() => {
-    setPreviousValues(unitReducer?.units[Id]);
-  }, [unitReducer?.units[Id]]);
-
-  useEffect(() => {
-    if (previousValues !== undefined) {
-      form.resetFields();
-    }
-  }, [previousValues]);
-
   const onFinish = (values) => {
     setButDis(true);
     let data = {
       Id: forEdit ? Id : 0,
-      Host: values?.Host,
-      Port: values?.Port,
-      UserName: values?.UserName,
-      Password: values?.Password,
-      From: values?.From,
-      Bcc: values?.Bcc,
+      Description: values?.Description,
+      ReportType: values?.ReportType,
+      GroupId: values?.GroupId,
+      IndividualId: values?.IndividualId,
+      ReportFormat: values?.ReportFormat,
+      ReportGroup: values?.ReportGroup,
+      HideInOtherReport: values?.HideInOtherReport,
+      SeparateYellowPage: values?.SeparateYellowPage,
 
-      // Units: values?.unit_name,
+      CreatedBy: tokenString.UId,
+      CreatedOn: todaydate,
       IsActive:
         values?.IsActive === undefined || values?.IsActive === true
           ? true
           : false,
     };
     dispatch(
-      InsertUpdateEmailserverDetails(data, (res) => {
+      InsertUpdateLabReportFormats(data, (res) => {
+        console.log(data, "insertdata");
+        console.log(res, "ia ma response");
+        setDatainsert(data);
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
           message.success(res?.Message);
           setTimeout(() => {
             history.push({
-              pathname: "/settingsemail",
+              pathname: "/reportdata",
               state: carelabStat,
             });
           }, 1000);
@@ -76,6 +85,15 @@ const ReportAdditonField = (props) => {
       })
     );
   };
+  useEffect(() => {
+    setPreviousValues(unitReducer?.units[Id]);
+  }, [unitReducer?.units[Id]]);
+
+  useEffect(() => {
+    if (previousValues !== undefined) {
+      form.resetFields();
+    }
+  }, [previousValues]);
 
   const onFinishFailed = (errorInfo) => {
     setButDis(false);
@@ -106,7 +124,7 @@ const ReportAdditonField = (props) => {
               <Form.Item
                 label="Description"
                 // name="unit_name"
-                name="Host"
+                name="Description"
                 rules={[
                   {
                     required: true,
@@ -119,7 +137,7 @@ const ReportAdditonField = (props) => {
               <Form.Item
                 label="ReportType"
                 // name="unit_name"
-                name="Port"
+                name="ReportType"
                 rules={[
                   {
                     required: true,
@@ -183,6 +201,18 @@ const ReportAdditonField = (props) => {
                 <Input />
               </Form.Item>
               <Form.Item
+                label="Created By"
+                name="CreatedBy"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Created Date!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
                 label="Created Date"
                 name="CreatedOn"
                 rules={[
@@ -193,6 +223,30 @@ const ReportAdditonField = (props) => {
                 ]}
               >
                 <DatePicker format={dateFormat} style={{ width: "100%" }} />
+              </Form.Item>
+              <Form.Item
+                label="HideInOtherReport"
+                name="HideInOtherReport"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Created Date!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="SeparateYellowPage"
+                name="SeparateYellowPage"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Created Date!",
+                  },
+                ]}
+              >
+                <Input />
               </Form.Item>
 
               <Form.Item

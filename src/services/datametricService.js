@@ -375,7 +375,7 @@ export const InsertUpdateCreditPartyInPatientForPartyBill = (
 export const GetEmailServerDetails = (data, successCallback) => {
   return async (dispatch) => {
     try {
-      // console.log(data, "dataasss");
+      console.log(data, "dataasss");
       const response = await fetch(`GetEmailServerDetails?eId=${data.id}`);
       if (response?.status === 200) {
         successCallback(response?.data?.EmailSettings);
@@ -405,6 +405,18 @@ export const InsertUpdateEmailserverDetails = (data, successCallback) => {
     const newData = generateUrlEncodedData(data);
     try {
       const response = await store(`InsertUpdateEmailserverDetails`, newData);
+      if (response?.status === 200) {
+        successCallback(response?.data);
+      } else successCallback([]);
+    } catch (error) {}
+  };
+};
+
+export const InsertUpdateLabReportFormats = (data, successCallback) => {
+  return async (dispatch) => {
+    const newDatas = generateUrlEncodedData(data);
+    try {
+      const response = await store(`InsertUpdateLabReportFormats`, newDatas);
       if (response?.status === 200) {
         successCallback(response?.data);
       } else successCallback([]);

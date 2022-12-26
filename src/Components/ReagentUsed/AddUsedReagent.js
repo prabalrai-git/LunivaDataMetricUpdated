@@ -1,28 +1,46 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Modal } from 'antd';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { getLabItemsApi } from '../../services/itemNewItemService';
-import { getConsumptionReagentApi, getReagentUsedApi, insertReagentUsedApi } from '../../services/reagentService';
-import moment from 'moment';
-import { tokenString } from '../Common/HandleUser';
-import { formItemLayout } from '../Common/FormItemLayout';
-import { inventoryStat } from '../Common/StateList';
+import {
+  Form,
+  Input,
+  Button,
+  DatePicker,
+  Select,
+  InputNumber,
+  message,
+  Row,
+  Col,
+  Modal,
+} from "antd";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { getLabItemsApi } from "../../services/itemNewItemService";
+import {
+  getConsumptionReagentApi,
+  getReagentUsedApi,
+  insertReagentUsedApi,
+} from "../../services/reagentService";
+import moment from "moment";
+import { tokenString } from "../Common/HandleUser";
+import { formItemLayout } from "../Common/FormItemLayout";
+import { inventoryStat } from "../Common/StateList";
 
 const AddUsedReagent = (props) => {
   const { forEdit } = props;
   const { Option } = Select;
   const { TextArea } = Input;
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-  const [itemList, setItemList] = useState([])
+  const [itemList, setItemList] = useState([]);
   const WId = props?.match?.params?.id;
+  console.log(WId, "IAM Wid");
   const FromDater = props?.match?.params?.from;
-  const reagentReducer = useSelector(state => state.reagent);
-  const [previousValues, setPreviousValues] = useState(forEdit ? reagentReducer?.reagents[WId] : {});
+  const reagentReducer = useSelector((state) => state.reagent);
+  const [previousValues, setPreviousValues] = useState(
+    forEdit ? reagentReducer?.reagents[WId] : {}
+  );
   const [itemTitleHead, setitemTitleHead] = useState([]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -40,87 +58,95 @@ const AddUsedReagent = (props) => {
     setIsModalVisible(false);
   };
 
-
-
   useEffect(() => {
-    getAllLabItem(0, 0)
+    getAllLabItem(0, 0);
     if (forEdit && previousValues === undefined) {
-      dispatch(getReagentUsedApi({ fromdate: FromDater, todate: FromDater }, (val) => { }))
+      dispatch(
+        getReagentUsedApi(
+          { fromdate: FromDater, todate: FromDater },
+          (val) => {}
+        )
+      );
     }
 
-    dispatch(getConsumptionReagentApi(val => {
-      setitemTitleHead(val);
-    }))
-  }, [])
+    dispatch(
+      getConsumptionReagentApi((val) => {
+        setitemTitleHead(val);
+      })
+    );
+  }, []);
 
   useEffect(() => {
     setPreviousValues(reagentReducer?.reagents[WId]);
     // return () => {
     //   setPreviousValues({})
     // };
-  }, [reagentReducer?.reagents[WId]])
+  }, [reagentReducer?.reagents[WId]]);
 
   useEffect(() => {
     if (previousValues !== undefined) {
-      form.resetFields()
+      form.resetFields();
     }
-  }, [previousValues])
+  }, [previousValues]);
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {
       typeId: ty,
-      categoryId: cI
-    }
-    dispatch(getLabItemsApi(data, (val) => {
-      setItemList(val)
-    }))
-  }
+      categoryId: cI,
+    };
+    dispatch(
+      getLabItemsApi(data, (val) => {
+        setItemList(val);
+      })
+    );
+  };
 
   const onFinish = (values) => {
-    setButDis(true)
+    setButDis(true);
     let data = {
-      "CId": forEdit ? WId : 0,
-      "ItemId": values?.ItemId,
-      "ControlAmount": values?.ControlAmount,
-      "Reason": values?.Reason,
-      "Remarks": values?.Remarks,
-      "CreatedDate": values?.CreatedDate.format("YYYY-MM-DD"),
-      "CreatedBy": tokenString.UId,
-      "IsActive": forEdit ? false : true,
-      "Title": values?.Title
-    }
+      CId: forEdit ? WId : 0,
+      ItemId: values?.ItemId,
+      ControlAmount: values?.ControlAmount,
+      Reason: values?.Reason,
+      Remarks: values?.Remarks,
+      CreatedDate: values?.CreatedDate.format("YYYY-MM-DD"),
+      CreatedBy: tokenString.UId,
+      IsActive: forEdit ? false : true,
+      Title: values?.Title,
+    };
 
-    dispatch(insertReagentUsedApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-        message.success(res?.Message)
-        setTimeout(() => {
-          history.push({
-            pathname: '/reagentused',
-            state: inventoryStat
-          })
-        }, 1000);
-      } else {
-        setButDis(false)
-        message.error('Something went wrong Try again')
-      }
-    }))
-
+    dispatch(
+      insertReagentUsedApi(data, (res) => {
+        if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
+          message.success(res?.Message);
+          setTimeout(() => {
+            history.push({
+              pathname: "/reagentused",
+              state: inventoryStat,
+            });
+          }, 1000);
+        } else {
+          setButDis(false);
+          message.error("Something went wrong Try again");
+        }
+      })
+    );
   };
 
   const onFinishFailed = (errorInfo) => {
-    setButDis(false)
+    setButDis(false);
   };
 
-  let prevVal = {}
+  let prevVal = {};
   if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
-      CreatedDate: moment(previousValues?.CreatedDate)
-    }
+      CreatedDate: moment(previousValues?.CreatedDate),
+    };
   }
 
   return (
     <AddUsedReagentContainer>
-      <Row justify='center'>
+      <Row justify="center">
         <Col span={16}>
           <Form
             form={form}
@@ -131,37 +157,38 @@ const AddUsedReagent = (props) => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-
             <Form.Item
               label="Consumption Head"
               name="Title"
               rules={[
                 {
                   required: true,
-                  message: 'Please select Consumption Head!',
+                  message: "Please select Consumption Head!",
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder='Select a Consumption Head'
+                placeholder="Select a Consumption Head"
                 filterOption={(input, option) => {
                   return (
-                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                      0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
               >
-                {itemTitleHead?.map(iTy => {
+                {itemTitleHead?.map((iTy) => {
                   return (
                     <Option
                       title={iTy?.ConsumptionHead}
                       key={iTy?.HId}
-                      value={iTy?.ConsumptionHead}>
+                      value={iTy?.ConsumptionHead}
+                    >
                       {iTy?.ConsumptionHead}
                     </Option>
-                  )
+                  );
                 })}
               </Select>
             </Form.Item>
@@ -172,30 +199,32 @@ const AddUsedReagent = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select reagent name!',
+                  message: "Please select reagent name!",
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder='Select a Reagent'
+                placeholder="Select a Reagent"
                 filterOption={(input, option) => {
                   return (
-                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                      0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
               >
-                {itemList?.map(iTy => {
+                {itemList?.map((iTy) => {
                   return (
                     <Option
                       title={iTy?.ItemName}
                       key={iTy?.TId}
-                      value={iTy?.TId}>
+                      value={iTy?.TId}
+                    >
                       {iTy?.ItemName} ({iTy?.Unit})
                     </Option>
-                  )
+                  );
                 })}
               </Select>
             </Form.Item>
@@ -206,14 +235,11 @@ const AddUsedReagent = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input used control amount!',
+                  message: "Please input used control amount!",
                 },
               ]}
             >
-              <InputNumber
-                min={0}
-                style={{ width: '100%' }}
-              />
+              <InputNumber min={0} style={{ width: "100%" }} />
             </Form.Item>
 
             <Form.Item
@@ -222,7 +248,7 @@ const AddUsedReagent = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input Reason!',
+                  message: "Please input Reason!",
                 },
               ]}
             >
@@ -235,7 +261,7 @@ const AddUsedReagent = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input Remarks!',
+                  message: "Please input Remarks!",
                 },
               ]}
             >
@@ -248,14 +274,11 @@ const AddUsedReagent = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input created Date!',
+                  message: "Please input created Date!",
                 },
               ]}
             >
-              <DatePicker
-                format='YYYY-MM-DD'
-                style={{ width: '100%' }}
-              />
+              <DatePicker format="YYYY-MM-DD" style={{ width: "100%" }} />
             </Form.Item>
 
             <Form.Item
@@ -264,26 +287,30 @@ const AddUsedReagent = (props) => {
                 span: 16,
               }}
             >
-              {
-                forEdit && previousValues?.IsActive === false ? '' :
-                  (
-                    <Button
-                      htmlType={forEdit ? 'button' : "submit"} disabled={butDis}
-                      onClick={forEdit ? showModal : ''}
-                      className='btnPrimary'
-                    >
-                      {forEdit ? 'Cancel' : 'Submit'}
-                    </Button>
-                  )
-              }
+              {forEdit && previousValues?.IsActive === false ? (
+                ""
+              ) : (
+                <Button
+                  htmlType={forEdit ? "button" : "submit"}
+                  disabled={butDis}
+                  onClick={forEdit ? showModal : ""}
+                  className="btnPrimary"
+                >
+                  {forEdit ? "Cancel" : "Submit"}
+                </Button>
+              )}
 
-              <Modal title="Warning" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+              <Modal
+                title="Warning"
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
                 <p>Do You want to Cancel the Reagent Used?</p>
               </Modal>
             </Form.Item>
           </Form>
         </Col>
-
       </Row>
     </AddUsedReagentContainer>
   );
@@ -295,4 +322,4 @@ const AddUsedReagentContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
   margin-bottom: 50px;
-`
+`;

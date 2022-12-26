@@ -353,6 +353,7 @@ function AllRoute() {
         layout={AsyncAppLayout}
         forEdit
       />
+
       <PrivateRouter
         exact
         path="/settingsemail/addemail"
@@ -360,6 +361,7 @@ function AllRoute() {
         layout={AsyncAppLayout}
         forEdit
       />
+
       <PrivateRouter
         exact
         path="/reports/stocks"

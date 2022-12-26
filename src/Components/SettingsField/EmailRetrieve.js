@@ -6,28 +6,13 @@ import { GetEmailServerDetails } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
 import Edit from "../Common/Edit";
 import { useHistory } from "react-router-dom";
+import Filter from "../Common/Filter";
 const EmailRetrieve = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [emailId, setemailId] = useState([]);
   const [emailsettingsdetails, setEmailSettingsDetails] = useState([]);
-  useEffect(() => {
-    getEmailData();
-  }, []);
+  const [newEmailDetails, setnewEmailDetails] = useState([]);
 
-  const getEmailData = () => {
-    let data = {
-      id: "1",
-    };
-    dispatch(
-      GetEmailServerDetails(data, (val) => {
-        console.log(val);
-        setEmailSettingsDetails(val);
-        // setunitList(val)
-        setemailId(val);
-      })
-    );
-  };
   const columns = [
     {
       title: "Id",
@@ -88,8 +73,7 @@ const EmailRetrieve = () => {
           <Edit
             onClick={() =>
               history.push({
-                pathname: "./settingsemail/edit/${record.eId}",
-                // pathname: `./units/edit/${record.eId}`,
+                pathname: `/settingsemail/edit/${record.Id}`,
                 state: inventoryStat,
               })
             }
@@ -100,9 +84,49 @@ const EmailRetrieve = () => {
       ),
     },
   ];
+  useEffect(() => {
+    getEmailData();
+  }, []);
+
+  //   useEffect(() => {
+  //     if (forEdit && previousValues === undefined) {
+  //         let data = {
+  //             analyzerId: CuId
+  //         }
+  //         dispatch(GetEmailServerDetails(data, (res) => {
+  //             getControlFun(res[0]?.TestId)
+  //         }))
+  //     }
+  // }, [])
+
+  const getEmailData = () => {
+    let data = {
+      id: 0,
+    };
+    dispatch(
+      GetEmailServerDetails(data, (val) => {
+        console.log(data, "iam all data");
+        console.log(val, "iam vals");
+        setEmailSettingsDetails(val);
+        // setunitList(val)
+        setnewEmailDetails(val);
+      })
+    );
+  };
+  const handleSearch = (val) => {
+    if (val === undefined || val === "") {
+      setnewEmailDetails(setEmailSettingsDetails);
+    } else {
+      setnewEmailDetails(val);
+    }
+  };
   return (
     <>
       <div className="maiTopContainer">
+        <Filter
+          dataReturn={handleSearch}
+          toCompareData={emailsettingsdetails}
+        />
         <PageHeader
           pageTitle={"Email"}
           buttonTitle="Add Email Details"
@@ -115,7 +139,12 @@ const EmailRetrieve = () => {
         />
       </div>
       <div className="tableisRes">
-        <Table className="tableWidth" columns={columns} dataSource={emailId} />
+        <Table
+          className="tableWidth"
+          columns={columns}
+          // dataReturn={handleSearch}
+          dataSource={newEmailDetails}
+        />
       </div>
     </>
   );
