@@ -22,7 +22,7 @@ import {
 } from "../constants/url";
 import { generateUrlEncodedData } from "../utils/generateFormData";
 import { fetch, store, storeNested } from "../utils/httpUtil";
-
+import GetReportFormatById from "../constants/url";
 export const getTestTypeReport = (data, successCallback) => {
   return async (dispatch) => {
     try {
@@ -393,6 +393,20 @@ export const GetReportFormatDetails = (data, successCallback) => {
       const response = await fetch(`GetReportFormatById?rId=${data.id}`);
       if (response?.status === 200) {
         successCallback(response?.data?.ReportFormat);
+      } else {
+        successCallback([]);
+      }
+    } catch (error) {}
+  };
+};
+
+export const GetReportGroupLookUpById = (data, successCallback) => {
+  return async (dispatch) => {
+    try {
+      // console.log(data, "dataasss");
+      const response = await fetch(`GetReportGroupLookUpById?rId=${data.id}`);
+      if (response?.status === 200) {
+        successCallback(response?.data?.ReportGroup);
       } else {
         successCallback([]);
       }

@@ -73,11 +73,29 @@ const ReportRetrieve = () => {
       title: "HideInOtherReport",
       dataIndex: "HideInOtherReport",
       key: "HideInOtherReport",
+      render: (text) => {
+        let retText = "false";
+        let retColor = "red";
+        if (text === true) {
+          retText = "true";
+          retColor = "green";
+        }
+        return <Tag color={retColor}>{retText}</Tag>;
+      },
     },
     {
       title: "SeparateYellowPage",
       dataIndex: "SeparateYellowPage",
       key: "SeparateYellowPage",
+      render: (text) => {
+        let retText = "false";
+        let retColor = "red";
+        if (text === true) {
+          retText = "true";
+          retColor = "green";
+        }
+        return <Tag color={retColor}>{retText}</Tag>;
+      },
     },
     {
       title: "CreatedBy",
@@ -114,7 +132,7 @@ const ReportRetrieve = () => {
             onClick={() =>
               history.push({
                 pathname: `./reportdata/edit/${record.Id}`,
-                state: carelabStat,
+                state: { carelabStat: carelabStat, record: record },
               })
             }
           >

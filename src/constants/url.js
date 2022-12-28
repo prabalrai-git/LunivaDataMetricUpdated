@@ -705,6 +705,7 @@ export const insertUpdateCreditPartyInPatientForPartyBill =
 
 export const GetEmailServerDetails = "GetEmailServerDetails";
 export const GetReportFormatDetails = "GetReportFormatDetails";
+export const GetReportGroupLookUpById = "GetReportGroupLookUpById";
 
 // @desc: InsertUpdateCreditPartyInPatientForPartyBill
 // @param/body:

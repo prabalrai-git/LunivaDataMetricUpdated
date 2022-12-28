@@ -916,6 +916,7 @@ function App() {
                   path="/settingsemail"
                   component={AsyncEmailServer}
                   layout={AsyncAppLayout}
+                  forEdit
                   showSider
                 />,
 
@@ -924,6 +925,7 @@ function App() {
                   path="/reportdata"
                   component={AsyncReportdataSettings}
                   layout={AsyncAppLayout}
+                  forEdit
                   showSider
                 />,
                 <PrivateRouter
@@ -931,6 +933,7 @@ function App() {
                   path="/reportdata/addreport"
                   component={AsyncAddReportSettings}
                   layout={AsyncAppLayout}
+                  forEdit
                   showSider
                 />,
                 <PrivateRouter
@@ -947,6 +950,7 @@ function App() {
                   path="/settingsemail/addemail"
                   component={AsyncAddEmailField}
                   layout={AsyncAppLayout}
+                  forEdit
                   showSider
                 />,
                 <PrivateRouter

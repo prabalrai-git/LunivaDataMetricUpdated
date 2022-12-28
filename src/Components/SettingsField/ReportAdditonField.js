@@ -6,6 +6,7 @@ import {
   Input,
   message,
   Row,
+  Select,
   Switch,
 } from "antd";
 import React, { useEffect, useState } from "react";
@@ -16,28 +17,100 @@ import { tokenString } from "../Common/HandleUser";
 import styled from "styled-components";
 import {
   GetEmailServerDetails,
+  GetReportFormatDetails,
+  GetReportGroupLookUpById,
   InsertUpdateEmailserverDetails,
   InsertUpdateLabReportFormats,
 } from "../../services/datametricService";
 import { formItemLayout } from "../Common/FormItemLayout";
 import { carelabStat } from "../Common/StateList";
+import { getListListOfTestToInsertUpdateCutoffTimeAndCriticalValuesApi } from "../../services/Tat";
+import { getGroupTestForInventory } from "../../services/itemVsRatioService";
 const ReportAdditonField = (props) => {
   const dateFormat = "YYYY-MM-DD";
   const [form] = Form.useForm();
   const history = useHistory();
-  const { forEdit } = props;
-  const Id = props?.match?.params?.Id;
+  const { forEdit, forGroup, forCon } = props;
+  const Id = props?.match?.params?.id;
+  console.log(Id, "reportId");
   const dispatch = useDispatch();
   const [Datainsert, setDatainsert] = useState([]);
   const [butDis, setButDis] = useState(false);
-  const unitReducer = useSelector((state) => state.units);
-  console.log(unitReducer, "i am unitreducer");
-  const [previousValues, setPreviousValues] = useState(
-    forEdit ? unitReducer?.units[Id] : {}
-  );
+  const [reportlookup, setReportLookup] = useState([]);
+  const [reportchangedvalue, setReportChangedvalue] = useState([]);
+  const [ReportgroupChangedvalue, setReportgroupChangedvalue] = useState([]);
+  const [reportformatvalue, setReportFormatValue] = useState([]);
+  const [reprtgroupdatas, setreprtGroupdatas] = useState([]);
+  const [testlistdata, setTestListData] = useState([]);
+  const [groupData, setgroupData] = useState([]);
+  const reportgroupdata = [
+    {
+      reportId: 1,
+      ReportGroup: "Normal",
+    },
+    {
+      reportId: 2,
+      ReportGroup: "Histo",
+    },
+  ];
 
   useEffect(() => {
-    if (forEdit && previousValues === undefined) {
+    getReportData();
+    getReportFormat();
+    getTestData();
+  }, []);
+  const retrievevalueforedit = props.location.state.record;
+  console.log(retrievevalueforedit, "retrievevalueforedit");
+
+  const getReportData = () => {
+    let data = {
+      id: 0,
+    };
+    dispatch(
+      GetReportGroupLookUpById(data, (val) => {
+        console.log(val);
+        setReportLookup(val);
+      })
+    );
+  };
+
+  useEffect(() => {
+    dispatch(
+      getGroupTestForInventory((val) => {
+        setgroupData(val);
+        console.log(val, "vals");
+      })
+    );
+  }, []);
+
+  // if (forGroup !== undefined) {
+
+  // }
+  const getTestData = () => {};
+
+  const getReportFormat = () => {
+    let data = {
+      id: 0,
+    };
+    dispatch(
+      GetReportFormatDetails(data, (val) => {
+        console.log(val, "reportformatvaluelkloval");
+        console.log(val);
+        setReportFormatValue(val);
+      })
+    );
+    dispatch(
+      getListListOfTestToInsertUpdateCutoffTimeAndCriticalValuesApi((val) => {
+        // setTestListData(val);
+
+        setTestListData(val);
+        console.log(val[0], "iam testlistvals");
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (forEdit && retrievevalueforedit === undefined) {
       dispatch(
         GetEmailServerDetails((val) => {
           console.log(val, "vals");
@@ -46,6 +119,7 @@ const ReportAdditonField = (props) => {
     }
   }, []);
   const onFinish = (values) => {
+    // console.log(values, "values");
     setButDis(true);
     let data = {
       Id: forEdit ? Id : 0,
@@ -55,16 +129,26 @@ const ReportAdditonField = (props) => {
       IndividualId: values?.IndividualId,
       ReportFormat: values?.ReportFormat,
       ReportGroup: values?.ReportGroup,
-      HideInOtherReport: values?.HideInOtherReport,
-      SeparateYellowPage: values?.SeparateYellowPage,
-
-      CreatedBy: tokenString.UId,
+      SeparateYellowPage:
+        values?.SeparateYellowPage === undefined ||
+        values?.SeparateYellowPage === true
+          ? true
+          : false,
+      HideInOtherReport:
+        values?.HideInOtherReport === undefined ||
+        values?.SeparateYellowPage === true
+          ? true
+          : false,
+      // CreatedBy: tokenString.UId,
+      // CreatedOn: values?.CreatedOn.format("YYYY-MM-DD"),
+      CreatedBy: tokenString.token.UId,
       CreatedOn: todaydate,
       IsActive:
         values?.IsActive === undefined || values?.IsActive === true
           ? true
           : false,
     };
+    console.log(data, "datasubmit");
     dispatch(
       InsertUpdateLabReportFormats(data, (res) => {
         console.log(data, "insertdata");
@@ -85,27 +169,10 @@ const ReportAdditonField = (props) => {
       })
     );
   };
-  useEffect(() => {
-    setPreviousValues(unitReducer?.units[Id]);
-  }, [unitReducer?.units[Id]]);
-
-  useEffect(() => {
-    if (previousValues !== undefined) {
-      form.resetFields();
-    }
-  }, [previousValues]);
 
   const onFinishFailed = (errorInfo) => {
     setButDis(false);
   };
-
-  let prevVal = {};
-  if (previousValues !== undefined) {
-    prevVal = {
-      ...previousValues,
-      // unit_name: previousValues?.Units,
-    };
-  }
 
   return (
     <div>
@@ -116,7 +183,7 @@ const ReportAdditonField = (props) => {
               name="add_items"
               form={form}
               {...formItemLayout}
-              initialValues={prevVal}
+              initialValues={retrievevalueforedit}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
@@ -128,7 +195,7 @@ const ReportAdditonField = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input desciption !",
                   },
                 ]}
               >
@@ -141,11 +208,41 @@ const ReportAdditonField = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input report type !",
                   },
                 ]}
               >
-                <Input />
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select report format"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0
+                    );
+                  }}
+                  onChange={(val) => {
+                    console.log(val, "iam seleected report type");
+                  }}
+                  allowClear
+                >
+                  {reportlookup?.map((iTy) => {
+                    return iTy?.IsActive === true ? (
+                      <Option
+                        title={iTy?.ReportType}
+                        key={iTy?.RId}
+                        value={iTy?.RId}
+                      >
+                        {iTy?.ReportType}
+                      </Option>
+                    ) : (
+                      ""
+                    );
+                  })}
+                </Select>
               </Form.Item>
               <Form.Item
                 label="GroupId"
@@ -154,37 +251,111 @@ const ReportAdditonField = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input group id !",
                   },
                 ]}
               >
-                <Input />
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="select group"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0
+                    );
+                  }}
+                  allowClear
+                >
+                  {groupData?.map((ele) => (
+                    <Option title={ele.TestName} key={ele?.Id} value={ele?.Id}>
+                      {ele.TestName}
+                    </Option>
+                  ))}
+                </Select>
               </Form.Item>
               <Form.Item
                 label="IndividualId"
-                // name="unit_name"
                 name="IndividualId"
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input individual id !",
                   },
                 ]}
               >
-                <Input />
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select report format"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0
+                    );
+                  }}
+                  // onChange={(val) => {
+                  //   console.log(val, "val");
+                  // }}
+                  allowClear
+                >
+                  {testlistdata?.map((cList) => (
+                    <Option
+                      title={cList?.TestName}
+                      key={cList?.Id}
+                      value={cList?.Id}
+                    >
+                      {`${cList?.TestName} (${cList?.Specimen})`}
+                    </Option>
+                  ))}
+                </Select>
               </Form.Item>
               <Form.Item
                 label="ReportFormat"
-                // name="unit_name"
                 name="ReportFormat"
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input report format !",
                   },
                 ]}
               >
-                <Input />
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select report format"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0
+                    );
+                  }}
+                  onChange={(val) => {
+                    setReportChangedvalue(val);
+                    console.log(val, "val");
+                  }}
+                  allowClear
+                >
+                  {reportformatvalue?.map((iTy) => {
+                    return iTy?.IsActive === true ? (
+                      <Option
+                        title={iTy?.ReportFormat}
+                        key={iTy?.ReportFormat}
+                        value={iTy?.ReportFormat}
+                      >
+                        {iTy?.ReportFormat}
+                      </Option>
+                    ) : (
+                      ""
+                    );
+                  })}
+                </Select>
               </Form.Item>
 
               <Form.Item
@@ -194,11 +365,38 @@ const ReportAdditonField = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input report group !",
                   },
                 ]}
               >
-                <Input />
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  placeholder="Select report group"
+                  filterOption={(input, option) => {
+                    return (
+                      option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0 ||
+                      option.title.toLowerCase().indexOf(input.toLowerCase()) >=
+                        0
+                    );
+                  }}
+                  onChange={(val) => {
+                    setReportgroupChangedvalue(val);
+                    console.log(val, "val");
+                  }}
+                  allowClear
+                >
+                  {reportgroupdata?.map((ele) => (
+                    <Option
+                      title={ele.ReportGroup}
+                      key={ele?.ReportGroup}
+                      value={ele?.reportId}
+                    >
+                      {ele.ReportGroup}
+                    </Option>
+                  ))}
+                </Select>
               </Form.Item>
               <Form.Item
                 label="Created By"
@@ -206,13 +404,14 @@ const ReportAdditonField = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input Created Date!",
+                    message: "Please input Created by person name!",
                   },
                 ]}
               >
                 <Input />
               </Form.Item>
-              <Form.Item
+
+              {/* <Form.Item
                 label="Created Date"
                 name="CreatedOn"
                 rules={[
@@ -223,30 +422,21 @@ const ReportAdditonField = (props) => {
                 ]}
               >
                 <DatePicker format={dateFormat} style={{ width: "100%" }} />
-              </Form.Item>
+              </Form.Item> */}
+
               <Form.Item
                 label="HideInOtherReport"
                 name="HideInOtherReport"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Created Date!",
-                  },
-                ]}
+                valuePropName="checked"
               >
-                <Input />
+                <Switch defaultChecked />
               </Form.Item>
               <Form.Item
                 label="SeparateYellowPage"
                 name="SeparateYellowPage"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input Created Date!",
-                  },
-                ]}
+                valuePropName="checked"
               >
-                <Input />
+                <Switch defaultChecked />
               </Form.Item>
 
               <Form.Item

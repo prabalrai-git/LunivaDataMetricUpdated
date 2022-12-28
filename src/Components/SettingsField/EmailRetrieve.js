@@ -7,12 +7,13 @@ import { useDispatch } from "react-redux";
 import Edit from "../Common/Edit";
 import { useHistory } from "react-router-dom";
 import Filter from "../Common/Filter";
+import EmailAdditionField from "./EmailAdditionField";
 const EmailRetrieve = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [emailsettingsdetails, setEmailSettingsDetails] = useState([]);
   const [newEmailDetails, setnewEmailDetails] = useState([]);
-
+  const [selectdata, setSelectdata] = useState([]);
   const columns = [
     {
       title: "Id",
@@ -68,25 +69,37 @@ const EmailRetrieve = () => {
     {
       title: "Action",
       key: "action",
-      render: (text, record) => (
-        <Space size="middle">
-          <Edit
-            onClick={() =>
-              history.push({
-                pathname: `/settingsemail/edit/${record.Id}`,
-                state: inventoryStat,
-              })
-            }
-          >
-            Edit
-          </Edit>
-        </Space>
-      ),
+      render: (text, record) => {
+        return (
+          <>
+            <Space size="middle">
+              <Edit
+                onClick={
+                  //  () => console.log(record, "dfs")
+                  () => {
+                    // console.log(record, "recordofselectedfiled");
+                    // datarecord = { selectdata };
+                    history.push({
+                      pathname: `/settingsemail/edit/${record.Id}`,
+                      state: { carelabStat: carelabStat, record: record },
+                    });
+                  }
+                }
+              >
+                Edit
+              </Edit>
+            </Space>
+          </>
+        );
+      },
     },
   ];
   useEffect(() => {
     getEmailData();
   }, []);
+  useEffect(() => {
+    console.log(selectdata, "selectdsbvvbvb");
+  }, [selectdata]);
 
   //   useEffect(() => {
   //     if (forEdit && previousValues === undefined) {
@@ -123,10 +136,6 @@ const EmailRetrieve = () => {
   return (
     <>
       <div className="maiTopContainer">
-        <Filter
-          dataReturn={handleSearch}
-          toCompareData={emailsettingsdetails}
-        />
         <PageHeader
           pageTitle={"Email"}
           buttonTitle="Add Email Details"
@@ -145,6 +154,7 @@ const EmailRetrieve = () => {
           // dataReturn={handleSearch}
           dataSource={newEmailDetails}
         />
+        {/* <EmailAdditionField datarecord={selectdata} /> */}
       </div>
     </>
   );

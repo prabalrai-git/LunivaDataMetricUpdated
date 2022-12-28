@@ -13,42 +13,48 @@ const EmailAdditionField = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const { forEdit } = props;
-  // const Id = props;
-  const Id = props?.match?.params?.Id;
-  console.log(Id, "i am iddsada");
+  const alllistedvalue = props.location.state.record;
+  console.log("this is the prop", alllistedvalue);
+  const CID = props?.match?.params?.id;
+
+  console.log(CID, "i am props id");
   const dispatch = useDispatch();
+  const labels = props.datarecord;
+  console.log(labels, "i am labels");
   const [butDis, setButDis] = useState(false);
-  const unitReducer = useSelector((state) => state.units);
   const [datainsert, setDatainsert] = useState([]);
-  const [previousValues, setPreviousValues] = useState(
-    forEdit ? unitReducer?.units[Id] : {}
-  );
+  // const [hostname, setHostname] = useState(a.Host);
+  // const [portnum, setPOrtnum] = useState(a.Port);
+  // const [username, setUsername] = useState(a.UserName);
+  // const [Password, setPassword] = useState(a.Password);
+  // const [From, setFrom] = useState(a.From);
+  // const [IsActive, setIsActive] = useState(a.IsActive);
+  // const [Bcc, setBcc] = useState(a.Bcc);
 
   useEffect(() => {
-    if (forEdit && previousValues === undefined) {
+    if (forEdit && alllistedvalue === undefined) {
       dispatch(
         GetEmailServerDetails((val) => {
           console.log(val, "vals");
-        }, Id)
+        }, CID)
       );
     }
   }, []);
+  // useEffect(() => {
+  //   datasets();
+  // }, []);
 
-  useEffect(() => {
-    setPreviousValues(unitReducer?.units[Id]);
-  }, [unitReducer?.units[Id]]);
-
-  useEffect(() => {
-    if (previousValues !== undefined) {
-      console.log(previousValues, "i am prev values");
-      form.resetFields();
-    }
-  }, [previousValues]);
+  // const datasets = () => {
+  //   setHostname(a.Host);
+  // };
+  // useEffect(() => {
+  //   console.log(hostname, "hostname");
+  // }, [hostname]);
 
   const onFinish = (values) => {
     setButDis(true);
     let data = {
-      Id: forEdit ? Id : 0,
+      Id: forEdit ? CID : 0,
       Host: values?.Host,
       Port: values?.Port,
       UserName: values?.UserName,
@@ -65,12 +71,10 @@ const EmailAdditionField = (props) => {
       InsertUpdateEmailserverDetails(data, (res) => {
         console.log(data, "dataofinsert");
         setDatainsert(data);
-        message.success("inserted");
         console.log(res, "responsedata");
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
           message.success(res?.Message);
           setTimeout(() => {
-            // /editcontroltesttest/${record.TId}
             history.push({
               pathname: "/settingsemail",
               state: carelabStat,
@@ -88,19 +92,6 @@ const EmailAdditionField = (props) => {
     setButDis(false);
   };
 
-  let prevVal = {};
-  if (previousValues !== undefined) {
-    prevVal = {
-      ...previousValues,
-      Host: previousValues?.Host,
-      Port: previousValues?.Port,
-      UserName: previousValues?.UserName,
-      Password: previousValues?.Password,
-      From: previousValues?.From,
-      Bcc: previousValues?.Bcc,
-    };
-  }
-
   return (
     <div>
       <EmailAddField Field>
@@ -110,19 +101,18 @@ const EmailAdditionField = (props) => {
               name="add_items"
               form={form}
               {...formItemLayout}
-              initialValues={prevVal}
+              initialValues={alllistedvalue}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
               <Form.Item
                 label="HostName"
-                // name="unit_name"
                 name="Host"
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input hostname !",
                   },
                 ]}
               >
@@ -130,7 +120,6 @@ const EmailAdditionField = (props) => {
               </Form.Item>
               <Form.Item
                 label="Port"
-                // name="unit_name"
                 name="Port"
                 rules={[
                   {
@@ -143,12 +132,11 @@ const EmailAdditionField = (props) => {
               </Form.Item>
               <Form.Item
                 label="UserName"
-                // name="unit_name"
                 name="UserName"
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input username !",
                   },
                 ]}
               >
@@ -156,12 +144,11 @@ const EmailAdditionField = (props) => {
               </Form.Item>
               <Form.Item
                 label="Password"
-                // name="unit_name"
                 name="Password"
                 rules={[
                   {
                     required: true,
-                    message: "Please input password !",
+                    message: "Please input the password !",
                   },
                 ]}
               >
@@ -169,12 +156,11 @@ const EmailAdditionField = (props) => {
               </Form.Item>
               <Form.Item
                 label="From"
-                // name="unit_name"
                 name="From"
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input from name !",
                   },
                 ]}
               >
@@ -183,12 +169,11 @@ const EmailAdditionField = (props) => {
 
               <Form.Item
                 label="Bcc"
-                // name="unit_name"
                 name="Bcc"
                 rules={[
                   {
                     required: true,
-                    message: "Please input email !",
+                    message: "Please input bcc !",
                   },
                 ]}
               >
