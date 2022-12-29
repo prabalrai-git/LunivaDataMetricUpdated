@@ -13,6 +13,7 @@ const EmailAdditionField = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const { forEdit } = props;
+  console.log(props, "props");
   const alllistedvalue = props.location.state.record;
   console.log("this is the prop", alllistedvalue);
   const CID = props?.match?.params?.id;
@@ -21,14 +22,22 @@ const EmailAdditionField = (props) => {
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [datainsert, setDatainsert] = useState([]);
-  // const [hostname, setHostname] = useState(a.Host);
+  const [userselecteddata, setuseriddetails] = useState({});
+  // const [hostname, setHostname] = useState(user.home);
   // const [portnum, setPOrtnum] = useState(a.Port);
   // const [username, setUsername] = useState(a.UserName);
   // const [Password, setPassword] = useState(a.Password);
   // const [From, setFrom] = useState(a.From);
   // const [IsActive, setIsActive] = useState(a.IsActive);
   // const [Bcc, setBcc] = useState(a.Bcc);
+  // var arr = [{key:"11", value:"1100"},{key:"22", value:"2200"}];
+  // var object = arr.reduce(
+  //   (obj, item) => Object.assign(obj, { [item.key]: item.value }), {});
 
+  // console.log(object)
+  let prevVal = {
+    ...userselecteddata,
+  };
   useEffect(() => {
     if (forEdit && alllistedvalue === undefined) {
       dispatch(
@@ -38,16 +47,46 @@ const EmailAdditionField = (props) => {
       );
     }
   }, []);
-  // useEffect(() => {
-  //   datasets();
-  // }, []);
 
-  // const datasets = () => {
-  //   setHostname(a.Host);
-  // };
-  // useEffect(() => {
-  //   console.log(hostname, "hostname");
-  // }, [hostname]);
+  useEffect(() => {
+    let data = {
+      id: CID,
+    };
+    dispatch(
+      GetEmailServerDetails(data, (val) => {
+        console.log(data, "iam all data of server details");
+        console.log(val[0], "iam vals iam all data of server details");
+        setuseriddetails(val[0]);
+        // let finalres = val[0];
+        // setuseriddetails(finalres);
+        const array = val;
+        console.log(finalres, "finalres");
+
+        // const newObject = Object.assign(
+        //   {},
+        //   ...array.map((item) => ({
+        //     ["Id"]: item.Id,
+        //     ["Port"]: item.Port,
+        //     ["Host"]: item.Host,
+        //     ["UserName"]: item.UserName,
+        //     ["Password"]: item.Password,
+        //     ["From"]: item.From,
+        //     ["IsActive"]: item.IsActive,
+        //     ["Bcc"]: item.Bcc,
+        //   }))
+        // );
+        // console.log(newObject, "newobject");
+        // setuseriddetails(newObject);
+      })
+    );
+    // form.setFieldsValue({
+    //   Port: userselecteddata.Port,
+    //   UserName: UserName,
+    // });
+  }, []);
+  useEffect(() => {
+    console.log(userselecteddata, "userselecteddata");
+  }, [userselecteddata]);
 
   const onFinish = (values) => {
     setButDis(true);
@@ -96,9 +135,10 @@ const EmailAdditionField = (props) => {
         <Row justify="center">
           <Col span={16}>
             <Form
-              name="add_items"
+              // name="add_items"
               form={form}
               {...formItemLayout}
+              // initialValues={userselecteddata}
               initialValues={alllistedvalue}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}

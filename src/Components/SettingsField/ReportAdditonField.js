@@ -236,7 +236,7 @@ const ReportAdditonField = (props) => {
                 </Select>
               </Form.Item>
               <Form.Item
-                label="GroupId"
+                label="Group"
                 // name="unit_name"
                 name="GroupId"
                 rules={[
@@ -268,7 +268,7 @@ const ReportAdditonField = (props) => {
                 </Select>
               </Form.Item>
               <Form.Item
-                label="IndividualId"
+                label="TestType"
                 name="IndividualId"
                 rules={[
                   {

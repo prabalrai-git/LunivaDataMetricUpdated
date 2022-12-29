@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Table, Space, Tag } from "antd";
 import PageHeader from "../Common/pageHeader";
-import { carelabStat, inventoryStat } from "../Common/StateList";
+import { carelabStat } from "../Common/StateList";
 import { GetEmailServerDetails } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
 import Edit from "../Common/Edit";
 import { useHistory } from "react-router-dom";
-import Filter from "../Common/Filter";
-import EmailAdditionField from "./EmailAdditionField";
 const EmailRetrieve = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -81,7 +79,10 @@ const EmailRetrieve = () => {
                     // datarecord = { selectdata };
                     history.push({
                       pathname: `/settingsemail/edit/${record.Id}`,
-                      state: { carelabStat: carelabStat, record: record },
+                      state: { record: record, carelabStat: carelabStat },
+                      // carelabStat,
+                      // state: carelabStat,
+                      // state: location.state,
                     });
                   }
                 }
