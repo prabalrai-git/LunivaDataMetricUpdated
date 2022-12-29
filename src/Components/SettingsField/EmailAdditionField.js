@@ -19,8 +19,6 @@ const EmailAdditionField = (props) => {
 
   console.log(CID, "i am props id");
   const dispatch = useDispatch();
-  const labels = props.datarecord;
-  console.log(labels, "i am labels");
   const [butDis, setButDis] = useState(false);
   const [datainsert, setDatainsert] = useState([]);
   // const [hostname, setHostname] = useState(a.Host);

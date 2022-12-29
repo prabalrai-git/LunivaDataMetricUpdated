@@ -30,9 +30,7 @@ const ReportAdditonField = (props) => {
   const dateFormat = "YYYY-MM-DD";
   const [form] = Form.useForm();
   const history = useHistory();
-  const { forEdit, forGroup, forCon } = props;
-  const Id = props?.match?.params?.id;
-  console.log(Id, "reportId");
+  const { forEdit } = props;
   const dispatch = useDispatch();
   const [Datainsert, setDatainsert] = useState([]);
   const [butDis, setButDis] = useState(false);
@@ -40,9 +38,13 @@ const ReportAdditonField = (props) => {
   const [reportchangedvalue, setReportChangedvalue] = useState([]);
   const [ReportgroupChangedvalue, setReportgroupChangedvalue] = useState([]);
   const [reportformatvalue, setReportFormatValue] = useState([]);
-  const [reprtgroupdatas, setreprtGroupdatas] = useState([]);
   const [testlistdata, setTestListData] = useState([]);
   const [groupData, setgroupData] = useState([]);
+  const retrievevalueforedit = props.location.state.record;
+  console.log(retrievevalueforedit, "retrievevalueforedit");
+  const CId = props?.match?.params?.id;
+  console.log(CId, "reportId");
+  console.log(props, "iam props data");
   const reportgroupdata = [
     {
       reportId: 1,
@@ -53,14 +55,19 @@ const ReportAdditonField = (props) => {
       ReportGroup: "Histo",
     },
   ];
-
+  useEffect(() => {
+    if (forEdit && retrievevalueforedit === undefined) {
+      dispatch(
+        GetEmailServerDetails((val) => {
+          console.log(val, "vals");
+        }, CId)
+      );
+    }
+  }, []);
   useEffect(() => {
     getReportData();
     getReportFormat();
-    getTestData();
   }, []);
-  const retrievevalueforedit = props.location.state.record;
-  console.log(retrievevalueforedit, "retrievevalueforedit");
 
   const getReportData = () => {
     let data = {
@@ -83,11 +90,6 @@ const ReportAdditonField = (props) => {
     );
   }, []);
 
-  // if (forGroup !== undefined) {
-
-  // }
-  const getTestData = () => {};
-
   const getReportFormat = () => {
     let data = {
       id: 0,
@@ -101,28 +103,17 @@ const ReportAdditonField = (props) => {
     );
     dispatch(
       getListListOfTestToInsertUpdateCutoffTimeAndCriticalValuesApi((val) => {
-        // setTestListData(val);
-
         setTestListData(val);
         console.log(val[0], "iam testlistvals");
       })
     );
   };
 
-  useEffect(() => {
-    if (forEdit && retrievevalueforedit === undefined) {
-      dispatch(
-        GetEmailServerDetails((val) => {
-          console.log(val, "vals");
-        }, Id)
-      );
-    }
-  }, []);
   const onFinish = (values) => {
     // console.log(values, "values");
     setButDis(true);
     let data = {
-      Id: forEdit ? Id : 0,
+      Id: forEdit ? CId : 0,
       Description: values?.Description,
       ReportType: values?.ReportType,
       GroupId: values?.GroupId,
