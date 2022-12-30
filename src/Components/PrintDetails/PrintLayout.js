@@ -169,7 +169,7 @@ const PrintLayout = (props) => {
                       <th className="money">Rate</th>
                       {/* <th className="money">Quantity</th> */}
                       <th className="money">Discount</th>
-                      <th className="money">Round Amount (Rs)</th>
+                      {/* <th className="money">Round Amount (Rs)</th> */}
                       <th className="money">Price (Rs)</th>
                     </tr>
                   </thead>
@@ -185,7 +185,7 @@ const PrintLayout = (props) => {
                         <td className="money">
                           {billItemVal.BillDiscountAmount}
                         </td>
-                        <td className="money">{billItemVal.RoundAmount}</td>
+                        {/* <td className="money">{billItemVal.RoundAmount}</td> */}
                         <td className="money">{billItemVal.BillPriceFinal}</td>
                       </tr>
                     ))}
