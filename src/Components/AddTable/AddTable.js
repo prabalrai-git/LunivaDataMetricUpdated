@@ -14,53 +14,66 @@ const AddTable = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState([]);
-  const [returnDataList, setReturnDataList] = useState({})
+  const [returnDataList, setReturnDataList] = useState({});
   const [IsLoading, setIsLoading] = useState(false);
 
   const tableHeads = [
     {
-      title: 'BillNo',
-      dataIndex: 'BillNo',
-      key: 'BillNo',
+      title: "BillNo",
+      dataIndex: "BillNo",
+      key: "BillNo",
     },
     {
-      title: 'Price',
-      dataIndex: 'Price',
-      key: 'Price',
+      title: "Price",
+      dataIndex: "Price",
+      key: "Price",
     },
     {
-      title: 'TotalPrice',
-      dataIndex: 'TotalPrice',
-      key: 'TotalPrice',
+      title: "TotalPrice",
+      dataIndex: "TotalPrice",
+      key: "TotalPrice",
     },
     {
-      title: 'Action',
-      dataIndex: 'Action',
-      key: 'SampleId',
+      title: "Action",
+      dataIndex: "Action",
+      key: "SampleId",
       render: (text, record) => (
         <Space size="middle">
-          <View onClick={() => history.push({
-            pathname: `/viewupdatebill/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
-            state: carelabStat
-          })}>View</View>
-          <Print onClick={() => {
-            window.open(`/${homePageName}/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`, "_blank");
-            // history.push({
-            //   pathname: `/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
-            //   state: carelabStat
-            // })}
-          }}>Print</Print>
-
+          <View
+            onClick={() =>
+              history.push({
+                pathname: `/viewupdatebill/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
+                state: carelabStat,
+              })
+            }
+          >
+            View
+          </View>
+          <Print
+            onClick={() => {
+              window.open(
+                `/${homePageName}/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
+                "_blank"
+              );
+              // history.push({
+              //   pathname: `/printlayout/${returnDataList?.sampleId}/${returnDataList?.fiscalYear}`,
+              //   state: carelabStat
+              // })}
+            }}
+          >
+            Print
+          </Print>
         </Space>
       ),
-    }
-  ]
+    },
+  ];
 
   const getDataForReport = (data) => {
     setIsLoading(true);
     dispatch(
       getPatientBillByBillId(data, (val) => {
         setTableData(val);
+        console.log(setTableData, "Hell");
       })
     );
     setIsLoading(false);
@@ -82,9 +95,9 @@ const AddTable = () => {
   // };
 
   const returnFilterData = (res) => {
-    setReturnDataList(res)
-    getDataForReport(res)
-  }
+    setReturnDataList(res);
+    getDataForReport(res);
+  };
 
   return (
     <>
@@ -97,12 +110,12 @@ const AddTable = () => {
           buttonOnClick={() =>
             history.push({
               pathname: "/addbill",
-              state: carelabStat
+              state: carelabStat,
             })
           }
         />
         <CarelabFilter
-          showSampleId={'Bill Id'}
+          showSampleId={"Bill Id"}
           fiscalService
           returnFilterData={returnFilterData}
         />

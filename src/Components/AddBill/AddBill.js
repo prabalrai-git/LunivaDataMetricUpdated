@@ -26,6 +26,7 @@ import { useHistory } from "react-router-dom";
 import { tokenString } from "../Common/HandleUser";
 import { carelabStat, homePageName, inventoryStat } from "../Common/StateList";
 import { useFiscalYear } from "../../CustomHook/useFiscalYear";
+import PrintLayout from "../PrintDetails/PrintLayout";
 
 const AddBill = () => {
   const [form] = Form.useForm();
@@ -106,7 +107,7 @@ const AddBill = () => {
                   //needs percent
                   billDiscountAmt:
                     values?.discountAmount !== undefined &&
-                      values?.discountAmount !== null
+                    values?.discountAmount !== null
                       ? values?.discountAmount
                       : 0,
                   billPriceFinal:
@@ -115,6 +116,7 @@ const AddBill = () => {
                       : 0,
                   IsSync: true,
                   RoundAmt: roundamt,
+
                   Remarks: "N/A",
                   OutgoingLabId: 1,
                 },
@@ -167,7 +169,7 @@ const AddBill = () => {
               BillCollectionAmt: grandtotals,
               BillNepaliDate: nepaliDateConverter(todaydate),
               BillLastModifiedNepaliDate: nepaliDateConverter(todaydate),
-              BillRoundedAmt: "",
+              // BillRoundedAmt: "",
               BillWithoutRound: grandtotals,
               BillCreditPartyCode: data[0].crdPartyCode,
               BillPassword: "",
@@ -447,12 +449,12 @@ const AddBill = () => {
                       <Form.Item
                         label="Discount Amount"
                         name="discountAmount"
-                      // rules={[
-                      //   {
-                      //     required: true,
-                      //     message: "Please input item discount!",
-                      //   },
-                      // ]}
+                        // rules={[
+                        //   {
+                        //     required: true,
+                        //     message: "Please input item discount!",
+                        //   },
+                        // ]}
                       >
                         <InputNumber
                           style={{
@@ -492,7 +494,7 @@ const AddBill = () => {
                             // autodisountamtcalculate(e);
                             // autocalcDisAmount(e);
                           }}
-                        // defaultValue={discountpercentage}
+                          // defaultValue={discountpercentage}
                         />
                       </Form.Item>
                       <Form.Item
