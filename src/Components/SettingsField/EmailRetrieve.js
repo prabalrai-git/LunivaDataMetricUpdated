@@ -5,7 +5,7 @@ import { carelabStat } from "../Common/StateList";
 import { GetEmailServerDetails } from "../../services/datametricService";
 import { useDispatch } from "react-redux";
 import Edit from "../Common/Edit";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 const EmailRetrieve = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -79,10 +79,7 @@ const EmailRetrieve = () => {
                     // datarecord = { selectdata };
                     history.push({
                       pathname: `/settingsemail/edit/${record.Id}`,
-                      state: { record: record, carelabStat: carelabStat },
-                      // carelabStat,
-                      // state: carelabStat,
-                      // state: location.state,
+                      state: carelabStat,
                     });
                   }
                 }

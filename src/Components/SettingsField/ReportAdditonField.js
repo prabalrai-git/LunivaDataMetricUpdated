@@ -40,6 +40,7 @@ const ReportAdditonField = (props) => {
   const [reportformatvalue, setReportFormatValue] = useState([]);
   const [testlistdata, setTestListData] = useState([]);
   const [groupData, setgroupData] = useState([]);
+  const [reportformatid, setreportformatidapi] = useState();
   const retrievevalueforedit = props.location.state.record;
   console.log(retrievevalueforedit, "retrievevalueforedit");
   const CId = props?.match?.params?.id;
@@ -80,12 +81,28 @@ const ReportAdditonField = (props) => {
       })
     );
   };
-
+  useEffect(() => {
+    if (reportformatid !== undefined) form.resetFields();
+  }, [reportformatid]);
   useEffect(() => {
     dispatch(
       getGroupTestForInventory((val) => {
         setgroupData(val);
         console.log(val, "vals");
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    let data = {
+      id: CId,
+    };
+    dispatch(
+      GetReportFormatDetails(data, (val) => {
+        // console.log(data, "iam all data of server details");
+        // console.log(val[0], "iam vals iam all data of server details");
+
+        setreportformatidapi(val[0]);
       })
     );
   }, []);
@@ -96,15 +113,15 @@ const ReportAdditonField = (props) => {
     };
     dispatch(
       GetReportFormatDetails(data, (val) => {
-        console.log(val, "reportformatvaluelkloval");
-        console.log(val);
+        // console.log(val, "reportformatvaluelkloval");
+        // console.log(val);
         setReportFormatValue(val);
       })
     );
     dispatch(
       getListListOfTestToInsertUpdateCutoffTimeAndCriticalValuesApi((val) => {
         setTestListData(val);
-        console.log(val[0], "iam testlistvals");
+        // console.log(val[0], "iam testlistvals");
       })
     );
   };
@@ -142,8 +159,8 @@ const ReportAdditonField = (props) => {
     console.log(data, "datasubmit");
     dispatch(
       InsertUpdateLabReportFormats(data, (res) => {
-        console.log(data, "insertdata");
-        console.log(res, "ia ma response");
+        // console.log(data, "insertdata");
+        // console.log(res, "ia ma response");
         setDatainsert(data);
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
           message.success(res?.Message);
@@ -174,7 +191,7 @@ const ReportAdditonField = (props) => {
               name="add_items"
               form={form}
               {...formItemLayout}
-              initialValues={retrievevalueforedit}
+              initialValues={reportformatid}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"

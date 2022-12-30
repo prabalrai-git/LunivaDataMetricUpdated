@@ -132,7 +132,8 @@ const ReportRetrieve = () => {
             onClick={() =>
               history.push({
                 pathname: `./reportdata/edit/${record.Id}`,
-                state: { carelabStat: carelabStat, record: record },
+                // state: { carelabStat: carelabStat, record: record },
+                state: carelabStat,
               })
             }
           >

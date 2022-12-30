@@ -26,6 +26,10 @@ const PrintLayout = (props) => {
   const [partyListData, setPartyListData] = useState([]);
   const [singlePartyData, setSinglePartyData] = useState([]);
   const [shouldPrint, setShouldPrint] = useState(false);
+  useEffect(() => {
+    console.log(billItemDetails, "billItemDetails");
+  }, [billItemDetails]);
+
   const loadPrintDataFun = (billId, fiscalYear) => {
     const ALLDATA = {
       sampleId: billId,

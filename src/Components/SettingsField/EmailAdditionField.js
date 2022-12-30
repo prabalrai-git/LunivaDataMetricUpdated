@@ -1,5 +1,5 @@
 import { Button, Col, Form, Input, message, Row, Switch } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -13,31 +13,16 @@ const EmailAdditionField = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const { forEdit } = props;
-  console.log(props, "props");
-  const alllistedvalue = props.location.state.record;
-  console.log("this is the prop", alllistedvalue);
-  const CID = props?.match?.params?.id;
-
-  console.log(CID, "i am props id");
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
   const [datainsert, setDatainsert] = useState([]);
-  const [userselecteddata, setuseriddetails] = useState({});
-  // const [hostname, setHostname] = useState(user.home);
-  // const [portnum, setPOrtnum] = useState(a.Port);
-  // const [username, setUsername] = useState(a.UserName);
-  // const [Password, setPassword] = useState(a.Password);
-  // const [From, setFrom] = useState(a.From);
-  // const [IsActive, setIsActive] = useState(a.IsActive);
-  // const [Bcc, setBcc] = useState(a.Bcc);
-  // var arr = [{key:"11", value:"1100"},{key:"22", value:"2200"}];
-  // var object = arr.reduce(
-  //   (obj, item) => Object.assign(obj, { [item.key]: item.value }), {});
+  const [useridselected, setuseriddetails] = useState();
+  // console.log(props, "props");
+  const alllistedvalue = props.location.state.record;
+  // console.log("this is the prop", alllistedvalue);
+  const CID = props?.match?.params?.id;
+  console.log(CID, "i am props id");
 
-  // console.log(object)
-  let prevVal = {
-    ...userselecteddata,
-  };
   useEffect(() => {
     if (forEdit && alllistedvalue === undefined) {
       dispatch(
@@ -56,6 +41,8 @@ const EmailAdditionField = (props) => {
       GetEmailServerDetails(data, (val) => {
         console.log(data, "iam all data of server details");
         console.log(val[0], "iam vals iam all data of server details");
+        let userdtat = val[0];
+        // setpreviousValues(val[0]);
         setuseriddetails(val[0]);
         // let finalres = val[0];
         // setuseriddetails(finalres);
@@ -80,13 +67,18 @@ const EmailAdditionField = (props) => {
       })
     );
     // form.setFieldsValue({
-    //   Port: userselecteddata.Port,
+    //   Port: useridselected.Port,
     //   UserName: UserName,
     // });
   }, []);
+  // useEffect(() => form.resetFields(), [props.initialValues]);
   useEffect(() => {
-    console.log(userselecteddata, "userselecteddata");
-  }, [userselecteddata]);
+    if (useridselected === undefined) {
+      Host: "";
+    }
+    console.log(useridselected, "useridselected");
+    const selecteddata = useridselected;
+  }, [useridselected]);
 
   const onFinish = (values) => {
     setButDis(true);
@@ -123,8 +115,12 @@ const EmailAdditionField = (props) => {
         }
       })
     );
+    form.resetFields();
   };
 
+  useEffect(() => {
+    if (useridselected !== undefined) form.resetFields();
+  }, [useridselected]);
   const onFinishFailed = (errorInfo) => {
     setButDis(false);
   };
@@ -138,8 +134,11 @@ const EmailAdditionField = (props) => {
               // name="add_items"
               form={form}
               {...formItemLayout}
-              // initialValues={userselecteddata}
-              initialValues={alllistedvalue}
+              // initialValues={prevVal}
+              initialValues={useridselected}
+              // initialValues={useridselected}
+              // initialValues={previousValues}
+              // initialValues={alllistedvalue}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"
@@ -147,6 +146,8 @@ const EmailAdditionField = (props) => {
               <Form.Item
                 label="HostName"
                 name="Host"
+                placeholder="Host"
+                values="Host"
                 rules={[
                   {
                     required: true,
