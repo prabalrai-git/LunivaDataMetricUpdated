@@ -14,6 +14,7 @@ import { tokenString } from "../Common/HandleUser";
 import { todaydate } from "../Common/TodayDate";
 
 const PrintLayout = (props) => {
+  console.log(props, "Saurey  ");
   const dispatch = useDispatch();
   const paramVal =
     props !== undefined ? props?.location?.pathname.split("/") : "";
@@ -63,12 +64,16 @@ const PrintLayout = (props) => {
       })
     );
   };
+  // console.log(billItemDetails, "Saurey");
+  useEffect(() => {
+    console.log(billItemDetails, "billItemDetails");
+  }, [billItemDetails]);
 
   useEffect(() => {
     if (shouldPrint) {
       setTimeout(() => {
         window.print();
-        window.close();
+        // window.close();
       }, [1000]);
     }
   }, [shouldPrint]);
@@ -168,7 +173,7 @@ const PrintLayout = (props) => {
                       <th>Test Name</th>
                       <th className="money">Rate</th>
                       {/* <th className="money">Quantity</th> */}
-                      <th className="money">Discount</th>
+                      {/* <th className="money">Discount</th> */}
                       {/* <th className="money">Round Amount (Rs)</th> */}
                       <th className="money">Price (Rs)</th>
                     </tr>
@@ -182,9 +187,9 @@ const PrintLayout = (props) => {
                         </td>
                         <td className="money">{billItemVal.billPrice}</td>
                         {/* <td className="money">1</td> */}
-                        <td className="money">
+                        {/* <td className="money">
                           {billItemVal.BillDiscountAmount}
-                        </td>
+                        </td> */}
                         {/* <td className="money">{billItemVal.RoundAmount}</td> */}
                         <td className="money">{billItemVal.BillPriceFinal}</td>
                       </tr>
@@ -194,11 +199,11 @@ const PrintLayout = (props) => {
                       <th></th>
                       <th className="money">{billDetails[0].Price}</th>
                       {/* <th></th> */}
-                      <th className="money"></th>
-                      {/* {billDetails[0].BillDiscountPrice} */}
                       <th className="money grandTotalAmount">
                         {billDetails[0].TotalPrice}
                       </th>
+                      <th className="money"></th>
+                      {/* {billDetails[0].BillDiscountPrice} */}
                     </tr>
                     <tr>
                       <th></th>
