@@ -102,6 +102,7 @@ const MainPageChart = () => {
               </div>
             </Row>
           </div>
+          {newdata == "" ? <ProviencePiechart /> : ""}
           {newdata === 1 ? <ProviencePiechart /> : ""}
           {newdata === 2 ? <ProvienceLinechart /> : ""}
           {/* Bar chart */}
