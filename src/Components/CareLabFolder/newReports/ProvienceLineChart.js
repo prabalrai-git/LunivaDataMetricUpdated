@@ -148,7 +148,7 @@ const ProvienceLinechart = () => {
             },
 
             {
-              label: "FeMale Patient",
+              label: "Female Patient",
               data: femaleCount,
               backgroundColor: ChartColor,
             },
@@ -164,7 +164,7 @@ const ProvienceLinechart = () => {
       <PieChartsProvience>
         <Row justify="end" gutter={[16, 16]}>
           <Button onClick={downloadImage} type="primary">
-            Export charts
+            {/* Export charts */}
           </Button>
         </Row>
         <Row justify="space-around" gutter={[16, 16]}>

@@ -35,7 +35,7 @@ const options = {
   indexAxis: "x",
   elements: {
     bar: {
-      borderWidth: 2,
+      // borderWidth: 2,
     },
   },
   responsive: true,
@@ -163,7 +163,7 @@ const DonutChart = () => {
             className="export-btn-charts"
             type="primary"
           >
-            Export charts
+            {/* Export charts */}
           </Button>
         </Row>
         <Row justify="space-around" gutter={[16, 16]}>

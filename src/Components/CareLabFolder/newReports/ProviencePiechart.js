@@ -20,7 +20,7 @@ const ProviencePiechart = () => {
             className="export-btn-charts"
             type="primary"
           >
-            Export charts
+            {/* Export charts */}
           </Button>
         </Row>
         <Row gutter={[16, 16]}>

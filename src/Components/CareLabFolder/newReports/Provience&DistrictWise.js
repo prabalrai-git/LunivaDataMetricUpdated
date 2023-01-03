@@ -2,7 +2,6 @@ import { message, Table } from "antd";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { VerifyPatientReport } from "../../../constants/url";
 import {
   getDatametricReportType,
   getGeographyWiseMISReports,
@@ -15,6 +14,7 @@ import {
 } from "../../../services/datametricService";
 import PageHeader from "../../Common/pageHeader";
 import ReportsFilter from "../../Common/ReportsFilter";
+import MainPageChart from "./MainPageChart";
 
 function ProvienceDistrictWise() {
   const [states, setStates] = useState([]);
@@ -81,36 +81,29 @@ function ProvienceDistrictWise() {
   };
 
   useEffect(() => {
-    console.log('newstates', states);
-  }, [states])
+    console.log("newstates", states);
+  }, [states]);
 
   useEffect(() => {
     dispatch(
       getStates((val) => {
-
-
         let newState = val.unshift({
-
           Id: 0,
-          Name: "All"
-
+          Name: "All",
         });
 
         console.log("log from states", newState);
         setStates(val);
       })
-
     );
 
     dispatch(
       getDistrictsByStateId(stateId, (val) => {
         let newState = val.unshift({
-
           Id: 0,
-          Name: "All"
-
+          Name: "All",
         });
-        console.log(newState, 'districtstsdsfsdfsfd', val);
+        console.log(newState, "districtstsdsfsdfsfd", val);
         setDistrict(val);
       })
     );
@@ -120,10 +113,8 @@ function ProvienceDistrictWise() {
     dispatch(
       getMunicipalitiesByDistrictId(districtId, (val) => {
         let newState = val.unshift({
-
           Id: 0,
-          Name: "All"
-
+          Name: "All",
         });
         setMunicipality(val);
       })
@@ -175,6 +166,7 @@ function ProvienceDistrictWise() {
           </div>
         )}
       </div>
+      {/* <MainPageChart /> */}
     </>
   );
 }

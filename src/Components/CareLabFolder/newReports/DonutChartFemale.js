@@ -42,6 +42,7 @@ const options = {
     legend: {
       position: "bottom",
     },
+
     title: {
       display: true,
       text: " Female Patient Ratio According to Provience",

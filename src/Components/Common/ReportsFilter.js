@@ -12,6 +12,7 @@ import Datepicker from "./Datepicker";
 import FilterTable from "./FilterTable";
 import { newTableStyles } from "./TableStyles";
 import { carelabStat } from "../Common/StateList";
+import MainPageChart from "../CareLabFolder/newReports/MainPageChart";
 
 function ReportsFilter({ ...props }) {
   const dispatch = useDispatch();
@@ -244,7 +245,7 @@ function ReportsFilter({ ...props }) {
             )}
             {serchButton && (
               <div className="load-btnreport">
-                <Col lg={8} md={12} sm={11} xs={24}>
+                <Col lg={9} md={12} sm={11} xs={24}>
                   <AppButton
                     className="primary-btn"
                     buttonTitle="Load"
@@ -255,7 +256,8 @@ function ReportsFilter({ ...props }) {
                   />
                 </Col>
                 <Col>
-                  <NavLink
+                  <MainPageChart />
+                  {/* <NavLink
                     to={{
                       pathname: `MainPage`,
                       state: carelabStat,
@@ -268,7 +270,7 @@ function ReportsFilter({ ...props }) {
                         priamryOutlineBtn
                       />
                     </div>
-                  </NavLink>
+                  </NavLink> */}
                 </Col>
               </div>
             )}
@@ -339,7 +341,7 @@ const FilterContainer = styled.div`
     float: right !important;
   }
   .load-btnreport {
-    margin-left: auto;
+    /* margin-left: auto; */
     display: flex;
     justify-content: space-around;
     /* justify-content: space-between; */

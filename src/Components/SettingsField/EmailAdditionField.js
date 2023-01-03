@@ -131,14 +131,9 @@ const EmailAdditionField = (props) => {
         <Row justify="center">
           <Col span={16}>
             <Form
-              // name="add_items"
               form={form}
               {...formItemLayout}
-              // initialValues={prevVal}
               initialValues={useridselected}
-              // initialValues={useridselected}
-              // initialValues={previousValues}
-              // initialValues={alllistedvalue}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               autoComplete="off"

@@ -31,6 +31,7 @@ ChartJS.register(
 
 const options = {
   indexAxis: "x",
+
   elements: {
     bar: {
       borderWidth: 2,
@@ -43,7 +44,7 @@ const options = {
     },
     title: {
       display: true,
-      text: " Female Patient Ratio According to Provience",
+      text: " Male Patient Ratio According to Provience",
       font: { size: 25 },
     },
   },

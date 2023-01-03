@@ -104,12 +104,18 @@ const Proviencecharts = () => {
         var femaleCount = [];
         var Provincename = [];
         var districtname = [];
+        var districtId = [];
 
         for (const vars of val) {
           var storMale = 0;
           var storeFemale = 0;
 
+          districtId.forEach((element, index) => {
+            console.log(index, "index");
+          });
+
           districtname.forEach((element) => {
+            console.log(element, "element of district name");
             if (element == vars.DistrictName) storMale = 111;
           });
           if (storMale == 111) continue;
@@ -135,6 +141,7 @@ const Proviencecharts = () => {
           femaleCount.push(storeFemale);
         }
         console.log(maleCount, "before");
+        console.log(femaleCount, "femalecount");
 
         setData({
           labels: districtname,
@@ -143,12 +150,11 @@ const Proviencecharts = () => {
               label: "Male Patient",
               data: maleCount,
               borderColor: "rgb(85,123,132)",
-
               backgroundColor: "#3dad6f",
             },
 
             {
-              label: "FeMale Patient",
+              label: "Female Patient",
               data: femaleCount,
               backgroundColor: "#2b4d41",
             },
@@ -168,7 +174,7 @@ const Proviencecharts = () => {
             className="export-btn-charts"
             type="primary"
           >
-            Export charts
+            {/* Export charts */}
           </Button>
         </Row>
 
