@@ -45,7 +45,7 @@ const options = {
 
     title: {
       display: true,
-      text: " Female Patient Ratio According to Provience",
+      text: " Female Patient Ratio According to District",
       font: { size: 25 },
     },
   },
@@ -115,7 +115,7 @@ const DonutChartFemale = () => {
 
           districtname.push(vars.DistrictName);
 
-          femaleCount.push(vars.Female);
+          // femaleCount.push(vars.Female);
           Provincename.push(vars.ProvinceName);
 
           val.forEach((element) => {
@@ -137,7 +137,16 @@ const DonutChartFemale = () => {
               label: "Male Patient",
               data: femaleCount,
               borderColor: "rgb(85,123,132)",
-              backgroundColor: ChartColor,
+              // backgroundColor: ChartColor,
+              backgroundColor: [
+                "#0070ff",
+                "#24cb1c",
+                "#d72e3d",
+                "#249d3d",
+                "#ffb90c",
+                "#1698af",
+                "#616a72",
+              ],
             },
           ],
         });

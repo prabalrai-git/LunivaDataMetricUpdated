@@ -121,7 +121,7 @@ const ProvienceLinechart = () => {
 
           districtname.push(vars.DistrictName);
 
-          femaleCount.push(vars.Female);
+          // femaleCount.push(vars.Female);
           Provincename.push(vars.ProvinceName);
 
           val.forEach((element) => {
@@ -143,6 +143,7 @@ const ProvienceLinechart = () => {
               label: "Male Patient",
               data: maleCount,
               borderColor: "rgb(85,123,132)",
+              // borderColor: "red",
 
               backgroundColor: ChartColor,
             },
@@ -150,6 +151,7 @@ const ProvienceLinechart = () => {
             {
               label: "Female Patient",
               data: femaleCount,
+              borderColor: "rgb(255,123,132)",
               backgroundColor: ChartColor,
             },
           ],

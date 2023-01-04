@@ -45,7 +45,7 @@ const options = {
     },
     title: {
       display: true,
-      text: " Male Patient Ratio According to Provience",
+      text: " Male Patient Ratio According to District",
       font: { size: 25 },
     },
   },
@@ -145,7 +145,16 @@ const DonutChart = () => {
               label: "Male Patient",
               data: maleCount,
               borderColor: "rgb(85,123,132)",
-              backgroundColor: ChartColor,
+              // backgroundColor: ChartColor,
+              backgroundColor: [
+                "#0070ff",
+                "#24cb1c",
+                "#d72e3d",
+                "#249d3d",
+                "#ffb90c",
+                "#1698af",
+                "#616a72",
+              ],
             },
           ],
         });

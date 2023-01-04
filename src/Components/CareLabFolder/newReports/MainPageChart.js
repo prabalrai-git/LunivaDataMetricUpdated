@@ -74,6 +74,7 @@ const MainPageChart = () => {
                 span={6}
               >
                 <Select
+                  defaultValue="Pie Charts"
                   id="storeItemName"
                   style={{
                     width: "100%",

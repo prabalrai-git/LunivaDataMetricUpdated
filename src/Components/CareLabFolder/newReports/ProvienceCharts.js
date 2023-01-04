@@ -100,22 +100,34 @@ const Proviencecharts = () => {
     dispatch(
       getGeographyWiseMISReports(data, (val) => {
         console.log("data", data, val, "val");
+        console.log(val, "value ho");
+        let maleval = 0;
+        let femaleval = 0;
+        val.forEach(
+          (element) => {
+            if (element.DistrictId == 1) {
+              maleval += element.Male;
+              femaleval += element.Female;
+              // console.log(maleval, "maleval");
+            }
+            console.log(maleval, "finalmaleval");
+            console.log(femaleval, "femalefinalval");
+          }
+
+          // console.log(element.Male, "valforeachelement");
+          // console.log(element.Female, "valforfemale");
+        );
         var maleCount = [];
         var femaleCount = [];
         var Provincename = [];
         var districtname = [];
-        var districtId = [];
 
         for (const vars of val) {
           var storMale = 0;
           var storeFemale = 0;
 
-          districtId.forEach((element, index) => {
-            console.log(index, "index");
-          });
-
           districtname.forEach((element) => {
-            console.log(element, "element of district name");
+            // console.log(element, "element of district name");
             if (element == vars.DistrictName) storMale = 111;
           });
           if (storMale == 111) continue;
@@ -127,12 +139,12 @@ const Proviencecharts = () => {
 
           districtname.push(vars.DistrictName);
 
-          femaleCount.push(vars.Female);
+          // femaleCount.push(vars.Female);
           Provincename.push(vars.ProvinceName);
 
           val.forEach((element) => {
             if (element.DistrictName == vars.DistrictName) {
-              console.log(element.DistrictName);
+              console.log(element.DistrictName, "elementsdistrictname");
               storMale += element.Male;
               storeFemale += element.Female;
             }

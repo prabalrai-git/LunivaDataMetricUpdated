@@ -43,7 +43,7 @@ const options = {
     },
     title: {
       display: true,
-      text: " Female Patient Ratio According to Provience",
+      text: " Female Patient Ratio According to District",
       font: { size: 25 },
     },
   },
@@ -56,9 +56,11 @@ const ProviencePieFemale = () => {
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
+  const [districtlabels, setDistrictlabels] = useState([]);
 
   const [datas, setData] = useState({
     labels,
+    label: true,
     datasets: [
       {
         label: "Male",
@@ -92,14 +94,14 @@ const ProviencePieFemale = () => {
     dispatch(
       getGeographyWiseMISReports(data, (val) => {
         console.log("data", data, val, "val");
-        var maleCount = [];
-        var femaleCount = [];
-        var Provincename = [];
-        var districtname = [];
+        let maleCount = [];
+        let femaleCount = [];
+        let Provincename = [];
+        let districtname = [];
 
         for (const vars of val) {
-          var storMale = 0;
-          var storeFemale = 0;
+          let storMale = 0;
+          let storeFemale = 0;
 
           districtname.forEach((element) => {
             if (element == vars.DistrictName) storMale = 111;
@@ -111,9 +113,9 @@ const ProviencePieFemale = () => {
           });
           if (storeFemale == 111) continue;
 
-          districtname.push(vars.DistrictName);
+          // districtname.push(vars.DistrictName);
 
-          femaleCount.push(vars.Female);
+          // femaleCount.push(vars.Female);
           Provincename.push(vars.ProvinceName);
 
           val.forEach((element) => {
@@ -122,8 +124,17 @@ const ProviencePieFemale = () => {
               storMale += element.Male;
               storeFemale += element.Female;
             }
+            if (element.Female < 1) {
+              console.log(element.DistrictName, "femlaeelement0");
+            }
+          });
+          val.forEach((element) => {
+            console.log(element, "newelementval");
           });
           maleCount.push(storMale);
+          districtname.push(vars.DistrictName);
+          console.log(districtname);
+          setDistrictlabels(districtname);
           femaleCount.push(storeFemale);
         }
         console.log(maleCount, "before");
@@ -135,7 +146,16 @@ const ProviencePieFemale = () => {
               label: "Female Patient",
               data: femaleCount,
               borderColor: "rgb(85,123,132)",
-              backgroundColor: ChartColor,
+              // backgroundColor: ChartColor,
+              backgroundColor: [
+                "#0070ff",
+                "#24cb1c",
+                "#d72e3d",
+                "#249d3d",
+                "#ffb90c",
+                "#1698af",
+                "#616a72",
+              ],
             },
           ],
         });
