@@ -102,6 +102,7 @@ const ProviencePieFemale = () => {
         for (const vars of val) {
           let storMale = 0;
           let storeFemale = 0;
+          let districtlabels = "";
 
           districtname.forEach((element) => {
             if (element == vars.DistrictName) storMale = 111;
@@ -116,7 +117,7 @@ const ProviencePieFemale = () => {
           // districtname.push(vars.DistrictName);
 
           // femaleCount.push(vars.Female);
-          Provincename.push(vars.ProvinceName);
+          // Provincename.push(vars.ProvinceName);
 
           val.forEach((element) => {
             if (element.DistrictName == vars.DistrictName) {
@@ -138,7 +139,6 @@ const ProviencePieFemale = () => {
           femaleCount.push(storeFemale);
         }
         console.log(maleCount, "before");
-
         setData({
           labels: districtname,
           datasets: [
