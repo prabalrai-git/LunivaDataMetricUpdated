@@ -5,7 +5,8 @@ import { Select, Row, Col, Form } from "antd";
 import ProvienceLinechart from "./ProvienceLineChart";
 import ProviencePiechart from "./ProviencePiechart";
 import ProvienceCharts from "./ProvienceCharts";
-import DonutChart from "./DonutChart";
+import DonutChart from "./DonutChartMale";
+import RootDonutChart from "./RootDonutChart";
 const MainPageChart = () => {
   const [newdata, setNewData] = useState([]);
   const { Option, OptGroup } = Select;
@@ -53,12 +54,13 @@ const MainPageChart = () => {
         <Modal
           title=" Charts Details"
           visible={isModalOpen}
+          footer={null}
           style={{
             top: 20,
           }}
           onOk={handleOk}
           onCancel={handleCancel}
-          width={1000}
+          width={800}
         >
           <div className="financeCards">
             {/* <span className="pageTtitle">Chart Status of Patient</span> */}
@@ -108,7 +110,7 @@ const MainPageChart = () => {
           {newdata === 2 ? <ProvienceLinechart /> : ""}
           {/* Bar chart */}
           {newdata === 3 ? <ProvienceCharts /> : ""}
-          {newdata === 4 ? <DonutChart /> : ""}
+          {newdata === 4 ? <RootDonutChart /> : ""}
         </Modal>
       </MainPageChartStyle>
     </>

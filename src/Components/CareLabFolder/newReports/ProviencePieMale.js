@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { ChartColor } from "../../Common/ChartColor";
 import {
@@ -13,10 +13,12 @@ import {
   ArcElement,
   Title,
 } from "chart.js";
+import { DownloadOutlined } from "@ant-design/icons";
+import { saveAs } from "file-saver";
 import { Bar, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
-
+import { Button, Row } from "antd";
 ChartJS.register(
   LinearScale,
   CategoryScale,
@@ -45,7 +47,7 @@ const options = {
     title: {
       display: true,
       text: " Male Patient Ratio According to District",
-      font: { size: 25 },
+      font: { size: 20 },
     },
   },
 };
@@ -53,11 +55,18 @@ const options = {
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
 const ProviencePieMale = () => {
+  const ref = useRef(null);
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
 
+  const saveCanvas = () => {
+    const canvasSave = document.getElementById("chartsid");
+    canvasSave.toBlob(function (blob) {
+      saveAs(blob, "chart.png");
+    });
+  };
   const [datas, setData] = useState({
     labels,
 
@@ -158,11 +167,24 @@ const ProviencePieMale = () => {
   return (
     <>
       <PieChartsProvience>
-        <Pie className="financeCards" data={datas} options={options} />
+        <Button className="download-icons" onClick={saveCanvas}>
+          <DownloadOutlined />
+        </Button>
+        <Pie
+          className="financeCards"
+          id="chartsid"
+          ref={ref}
+          data={datas}
+          options={options}
+        />
       </PieChartsProvience>
     </>
   );
 };
 
 export default ProviencePieMale;
-const PieChartsProvience = styled.div``;
+const PieChartsProvience = styled.div`
+  .download-icons {
+    float: right;
+  }
+`;

@@ -16,6 +16,9 @@ import {
 import { Bar, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
+import { DownloadOutlined } from "@ant-design/icons";
+import { saveAs } from "file-saver";
+import { Button } from "antd";
 
 ChartJS.register(
   LinearScale,
@@ -44,7 +47,7 @@ const options = {
     title: {
       display: true,
       text: " Female Patient Ratio According to District",
-      font: { size: 25 },
+      font: { size: 20 },
     },
   },
 };
@@ -58,6 +61,12 @@ const ProviencePieFemale = () => {
   const [reportTypeId, setReportTypeId] = useState();
   const [districtlabels, setDistrictlabels] = useState([]);
 
+  const saveCanvas = () => {
+    const canvasSave = document.getElementById("chartsidfemale");
+    canvasSave.toBlob(function (blob) {
+      saveAs(blob, "chart.png");
+    });
+  };
   const [datas, setData] = useState({
     labels,
     label: true,
@@ -167,11 +176,23 @@ const ProviencePieFemale = () => {
   return (
     <>
       <PieChartsProvience>
-        <Pie className="financeCards" data={datas} options={options} />
+        <Button className="download-icons" onClick={saveCanvas}>
+          <DownloadOutlined />
+        </Button>
+        <Pie
+          className="financeCards"
+          id="chartsidfemale"
+          data={datas}
+          options={options}
+        />
       </PieChartsProvience>
     </>
   );
 };
 
 export default ProviencePieFemale;
-const PieChartsProvience = styled.div``;
+const PieChartsProvience = styled.div`
+  .download-icons {
+    float: right;
+  }
+`;

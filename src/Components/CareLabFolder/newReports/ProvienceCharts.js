@@ -17,6 +17,8 @@ import { Bar, Line } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
 import { Button, Col, Row } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
+import { saveAs } from "file-saver";
 
 ChartJS.register(
   LinearScale,
@@ -44,7 +46,7 @@ const options = {
     },
     title: {
       display: true,
-      text: "Patient Ratio According to Provience",
+      text: "Patient Ratio According to District",
       font: { size: 25 },
     },
   },
@@ -59,12 +61,18 @@ const Proviencecharts = () => {
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
 
-  const downloadImage = useCallback(() => {
-    const link = document.createElement("a");
-    link.download = "chart.png";
-    link.href = ref.current.toBase64Image();
-    link.click();
-  }, []);
+  const saveCanvas = () => {
+    const canvasSave = document.getElementById("barchartid");
+    canvasSave.toBlob(function (blob) {
+      saveAs(blob, "chart.png");
+    });
+  };
+  // const downloadImage = useCallback(() => {
+  //   const link = document.createElement("a");
+  //   link.download = "chart.png";
+  //   link.href = ref.current.toBase64Image();
+  //   link.click();
+  // }, []);
   const [datas, setData] = useState({
     labels,
     datasets: [
@@ -181,18 +189,14 @@ const Proviencecharts = () => {
     <>
       <PieChartsProvience>
         <Row justify="end" gutter={[16, 16]}>
-          <Button
-            onClick={downloadImage}
-            className="export-btn-charts"
-            type="primary"
-          >
-            {/* Export charts */}
+          <Button className="download-icons" onClick={saveCanvas}>
+            <DownloadOutlined />
           </Button>
         </Row>
 
         <Row justify="space-around" gutter={[16, 16]}>
           <Col lg={24} md={24} sm={24} xs={24} className="financeCards">
-            <Bar ref={ref} data={datas} options={options} />
+            <Bar id="barchartid" ref={ref} data={datas} options={options} />
           </Col>
         </Row>
       </PieChartsProvience>

@@ -16,8 +16,9 @@ import {
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
-import { Col, Row } from "antd";
-
+import { Button, Col, Row } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
+import { saveAs } from "file-saver";
 ChartJS.register(
   LinearScale,
   CategoryScale,
@@ -58,7 +59,12 @@ const DonutChartFemale = () => {
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
-
+  const saveCanvas = () => {
+    const canvasSave = document.getElementById("donutchartfemale");
+    canvasSave.toBlob(function (blob) {
+      saveAs(blob, "chart.png");
+    });
+  };
   const [datas, setData] = useState({
     labels,
     datasets: [
@@ -158,11 +164,23 @@ const DonutChartFemale = () => {
   return (
     <>
       <PieChartsProvience>
-        <Doughnut className="financeCards" data={datas} options={options} />
+        <Button className="download-icons" onClick={saveCanvas}>
+          <DownloadOutlined />
+        </Button>
+        <Doughnut
+          id="donutchartfemale"
+          className="financeCards"
+          data={datas}
+          options={options}
+        />
       </PieChartsProvience>
     </>
   );
 };
 
 export default DonutChartFemale;
-const PieChartsProvience = styled.div``;
+const PieChartsProvience = styled.div`
+  .download-icons {
+    float: right;
+  }
+`;

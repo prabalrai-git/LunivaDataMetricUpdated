@@ -17,6 +17,8 @@ import { Line } from "react-chartjs-2";
 import { useDispatch } from "react-redux";
 import { getGeographyWiseMISReports } from "../../../services/careLabService";
 import { Button, Col, Row } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
+import { saveAs } from "file-saver";
 
 ChartJS.register(
   LinearScale,
@@ -44,7 +46,7 @@ const options = {
     },
     title: {
       display: true,
-      text: "Patient Ratio According to Provience",
+      text: "Patient Ratio According to District",
       font: { size: 25 },
     },
   },
@@ -58,6 +60,12 @@ const ProvienceLinechart = () => {
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
+  const saveCanvas = () => {
+    const canvasSave = document.getElementById("linechartsid");
+    canvasSave.toBlob(function (blob) {
+      saveAs(blob, "linechart.png");
+    });
+  };
 
   const downloadImage = useCallback(() => {
     const link = document.createElement("a");
@@ -165,13 +173,17 @@ const ProvienceLinechart = () => {
     <>
       <PieChartsProvience>
         <Row justify="end" gutter={[16, 16]}>
-          <Button onClick={downloadImage} type="primary">
+          {/* <Button onClick={downloadImage} type="primary">
+            Export charts */}
+          {/* </Button> */}
+          <Button className="" onClick={saveCanvas}>
             {/* Export charts */}
+            <DownloadOutlined />
           </Button>
         </Row>
         <Row justify="space-around" gutter={[16, 16]}>
           <Col className="financeCards" sm={24} md={24} xs={24} lg={24} xl={24}>
-            <Line ref={ref} data={datas} options={options} />
+            <Line id="linechartsid" ref={ref} data={datas} options={options} />
           </Col>
         </Row>
       </PieChartsProvience>

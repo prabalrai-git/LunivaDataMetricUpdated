@@ -18,6 +18,8 @@ import { getGeographyWiseMISReports } from "../../../services/careLabService";
 import { Button, Col, Row } from "antd";
 import DonutChartFemale from "./DonutChartFemale";
 import { ChartColor } from "../../Common/ChartColor";
+import { DownloadOutlined } from "@ant-design/icons";
+import { saveAs } from "file-saver";
 
 ChartJS.register(
   LinearScale,
@@ -53,19 +55,25 @@ const options = {
 
 const labels = ["sun ", "mon", "tues", "wed", "thurs"];
 
-const DonutChart = () => {
+const DonutChartMale = () => {
   const ref = useRef(null);
   const [stateId, setStateId] = useState(0);
   const [districtId, setDistrictId] = useState(0);
   const [municipalityId, setMunicipalityId] = useState(0);
   const [reportTypeId, setReportTypeId] = useState();
 
-  const downloadImage = useCallback(() => {
-    const link = document.createElement("a");
-    link.download = "chart.png";
-    link.href = ref.current.toBase64Image();
-    link.click();
-  }, []);
+  // const downloadImage = useCallback(() => {
+  //   const link = document.createElement("a");
+  //   link.download = "chart.png";
+  //   link.href = ref.current.toBase64Image();
+  //   link.click();
+  // }, []);
+  const saveCanvas = () => {
+    const canvasSave = document.getElementById("donutchartsmale");
+    canvasSave.toBlob(function (blob) {
+      saveAs(blob, "chart.png");
+    });
+  };
 
   const [datas, setData] = useState({
     labels,
@@ -166,36 +174,28 @@ const DonutChart = () => {
   return (
     <>
       <PieChartsProvience>
-        <Row justify="end" gutter={[16, 16]}>
-          <Button
-            onClick={downloadImage}
-            className="export-btn-charts"
-            type="primary"
-          >
-            {/* Export charts */}
-          </Button>
-        </Row>
-        <Row justify="space-around" gutter={[16, 16]}>
-          <Col sm={24} md={24} xs={24} lg={12} xl={12}>
-            <Doughnut
-              ref={ref}
-              className="financeCards"
-              data={datas}
-              options={options}
-            />
-          </Col>
-          <Col sm={24} md={24} xs={24} lg={12} xl={12}>
-            <DonutChartFemale />
-          </Col>
-        </Row>
+        <Button className="download-icons" onClick={saveCanvas}>
+          <DownloadOutlined />
+        </Button>
+
+        <Doughnut
+          id="donutchartsmale"
+          ref={ref}
+          className="financeCards"
+          data={datas}
+          options={options}
+        />
       </PieChartsProvience>
     </>
   );
 };
 
-export default DonutChart;
+export default DonutChartMale;
 const PieChartsProvience = styled.div`
   .export-btn-charts {
+    float: right;
+  }
+  .download-icons {
     float: right;
   }
 `;
