@@ -61,8 +61,10 @@ const PrintLayout = (props) => {
     );
     dispatch(
       getPatientBillItemByBillId(ALLDATA, (val) => {
+        console.log(val, "patientbillitembybillid");
         if (val.length > 0) {
           setBillItemDetails(val);
+          console.log(val, "patientbillitembybillid");
           setShouldPrint(true);
         }
       })

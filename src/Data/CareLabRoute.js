@@ -13,16 +13,22 @@ export const useCareLabRoute = () => {
   ];
   const settingsServerdata = [
     {
-      icon: "icon-file-alt",
+      icon: "icon-envelope",
       key: "Email",
       name: "Email",
       path: "/settingsemail",
     },
     {
-      icon: "icon-file-alt",
+      icon: "icon-book",
       key: "Report Format",
       name: "report",
       path: "/reportdata",
+    },
+    {
+      icon: "icon-picture",
+      key: "theme",
+      name: "Theme",
+      path: "/theme",
     },
   ];
 
@@ -228,7 +234,7 @@ export const useCareLabRoute = () => {
       path: "/datametricdash",
     },
     {
-      icon: "icon-line-file",
+      icon: "icon-folder-open-alt",
       key: "samplestatus",
       name: "Sample Status",
       path: "/sampledash",
@@ -246,7 +252,7 @@ export const useCareLabRoute = () => {
       showTab: false,
     },
     {
-      icon: "icon-line-file",
+      icon: "icon-paste",
       key: "reportstatus",
       name: "Report Status",
       path: "/reportdash",
@@ -356,7 +362,7 @@ export const useCareLabRoute = () => {
       showTab: true,
     },
     {
-      icon: "icon-line2-doc",
+      icon: "icon-book",
       key: "misreports",
       name: "MIS Reports",
       path: "/datametric",
@@ -405,7 +411,7 @@ export const useCareLabRoute = () => {
       showTab: true,
     },
     {
-      icon: "icon-line2-doc",
+      icon: "icon-file-text",
       key: "viewbillss",
       name: "View Bill ",
       path: "/addbill",
@@ -435,7 +441,7 @@ export const useCareLabRoute = () => {
     {
       icon: "icon-line2-settings",
       key: "settings",
-      name: "Settingsmenu",
+      name: "Settings",
       path: "/settingsServer",
       subNavData: settingsServerdata,
 
@@ -444,14 +450,14 @@ export const useCareLabRoute = () => {
       showTab: true,
     },
 
-    {
-      icon: "icon-line2-settings",
-      key: "theme",
-      name: "Settings",
-      path: "/theme",
-      isactive: MenuSettings.theme,
-      showTab: true,
-    },
+    // {
+    //   icon: "icon-line2-settings",
+    //   key: "theme",
+    //   name: "Settings",
+    //   path: "/theme",
+    //   isactive: MenuSettings.theme,
+    //   showTab: true,
+    // },
   ];
 
   return {

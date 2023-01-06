@@ -913,6 +913,14 @@ function App() {
                 />,
                 <PrivateRouter
                   exact
+                  key="theme"
+                  path="/theme"
+                  component={AsyncTheme}
+                  layout={AsyncAppLayout}
+                  showSider
+                />,
+                <PrivateRouter
+                  exact
                   path="/settingsemail"
                   component={AsyncEmailServer}
                   layout={AsyncAppLayout}

@@ -249,6 +249,9 @@ export const getPatientBillByBillId = (data, successCallback) => {
       const response = await fetch(
         `${GetPatientBillInfoByBillId}?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`
       );
+      // const response = await fetch(
+      //   `GetPatientBillInfoByBillId?billId=${data.sampleId}&fiscalyear=${data.fiscalYear}`
+      // );
       if (response?.status === 200) {
         successCallback(response?.data?.billDetails);
         // dispatch(response?.data)
