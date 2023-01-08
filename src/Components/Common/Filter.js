@@ -703,12 +703,14 @@ const Filter = ({ dataReturn, ...props }) => {
             <Col>
               {serchButton && (
                 <AppButton
-                  className="load-btn primary-btn"
+                  // className="load-btn primary-btn"
+                  className="load-btn"
                   buttonTitle="Load"
                   buttonOnClick={() => {
                     handleClicker();
                   }}
-                  priamryOutlineBtn
+                  // priamryOutlineBtn
+                  LoadprimaryBtn
                 />
               )}
             </Col>

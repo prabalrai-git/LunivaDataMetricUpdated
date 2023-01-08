@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, message, Table } from "antd";
+import { Button, message, Table, notification } from "antd";
 // import CarelabFilter from "../../Common/CarelabFilter";
 import { printMembership } from "./MembershipPrint";
 import {
@@ -46,7 +46,12 @@ function MembershipCard() {
             // }
             // console.log(res);
           } else {
-            message.info(`No data found for member code ${memberCode}`);
+            notification.error({
+              duration: 3,
+              placement: "topRight",
+              message: `No data found for member code ${memberCode}`,
+              rtl: true,
+            });
             setDyColumnData([]);
           }
         })
@@ -125,7 +130,12 @@ function MembershipCard() {
           setDyColumnData(res);
           // console.log(res);
         } else {
-          message.info(`No data found for member code ${memberCode}`);
+          notification.info({
+            duration: 3,
+            placement: "topRight",
+            message: `No data found for member code ${memberCode}`,
+            rtl: true,
+          });
           setDyColumnData([]);
         }
       })

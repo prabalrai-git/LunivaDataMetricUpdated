@@ -6,6 +6,7 @@ import {
   Input,
   message,
   Row,
+  notification,
   Select,
   Switch,
 } from "antd";
@@ -172,7 +173,13 @@ const ReportAdditonField = (props) => {
           }, 1000);
         } else {
           setButDis(false);
-          message.error("Something went wrong please try again");
+          // message.error("Something went wrong please try again");
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Something went wrong please try again",
+            rtl: true,
+          });
         }
       })
     );

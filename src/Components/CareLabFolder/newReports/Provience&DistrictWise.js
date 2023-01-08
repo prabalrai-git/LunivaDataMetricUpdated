@@ -1,4 +1,4 @@
-import { message, Table } from "antd";
+import { message, Table, notification } from "antd";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -74,7 +74,12 @@ function ProvienceDistrictWise() {
           setReportsColumn(data);
           setPatientData(val);
         } else {
-          message.info("No data found");
+          notification.info({
+            duration: 3,
+            placement: "topRight",
+            message: `No data found `,
+            rtl: true,
+          });
         }
       })
     );

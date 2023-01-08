@@ -7,6 +7,7 @@ import {
   Button,
   InputNumber,
   Descriptions,
+  notification,
   message,
 } from "antd";
 import { useState, useEffect } from "react";
@@ -27,8 +28,10 @@ import { tokenString } from "../Common/HandleUser";
 import { carelabStat, homePageName, inventoryStat } from "../Common/StateList";
 import { useFiscalYear } from "../../CustomHook/useFiscalYear";
 import PrintLayout from "../PrintDetails/PrintLayout";
+import AppButton from "../Common/AppButton";
 
-const AddBill = () => {
+const AddBill = ({ ...props }) => {
+  const { serchButton } = props;
   const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -186,7 +189,13 @@ const AddBill = () => {
               addCreateCreditPartyBill(allDataSend, (res) => {
                 console.log(res, "resho");
                 if (res?.SuccessMsg === true) {
-                  message.success(res?.Message);
+                  // message.success(res?.Message);
+                  notification.success({
+                    duration: 3,
+                    placement: "topRight",
+                    message: res?.Message,
+                    rtl: true,
+                  });
                   // console.log(res, "myres");
                   setTimeout(() => {
                     history.push({
@@ -200,13 +209,24 @@ const AddBill = () => {
                   }, 1000);
                 } else {
                   setButDis(false);
-                  message.error(res?.Message);
+                  notification.error({
+                    duration: 3,
+                    placement: "topRight",
+                    message: res?.Message,
+                    rtl: true,
+                  });
                 }
               })
             );
           } else {
             setButDis(false);
-            message.warning("Requestor is not selected");
+            // message.warning("Requestor is not selected");
+            notification.warning({
+              duration: 3,
+              placement: "topRight",
+              message: "Requestor is not selected",
+              rtl: true,
+            });
           }
         }
       })
@@ -319,15 +339,19 @@ const AddBill = () => {
                       </Option>
                     ))}
                   </Select>
-                  <Button
-                    onClick={onChangeHandler}
-                    htmlType="submit"
-                    className="load-btn"
-                    type="primary"
-                    id="submitBtn"
-                  >
-                    Load
-                  </Button>
+                  {/* {serchButton && ( */}
+                  {/* <Col> */}
+                  <AppButton
+                    // onClick={onChangeHandler}
+                    className="primary-btn load-btn"
+                    buttonTitle="Load"
+                    buttonOnClick={() => {
+                      onChangeHandler();
+                    }}
+                    LoadprimaryBtn
+                  />
+                  {/* </Col> */}
+                  {/* )} */}
                 </Col>
               </Row>
             </div>
@@ -558,15 +582,22 @@ const AddBill = () => {
                     <Row gutter={16}>
                       <Col span={24}>
                         <div className="s-btn">
+                          <AppButton
+                            buttonTitle="Save"
+                            butDis={false}
+                            buttonOnClick={form.submit}
+                            savebutton
+                          ></AppButton>
+
                           {/* <Button type="primary" htmlType="submit"> */}
-                          <Button
+                          {/* <Button
                             htmlType="submit"
                             disabled={butDis}
                             type="primary"
                             className=""
                           >
                             Save
-                          </Button>
+                          </Button> */}
                         </div>
                       </Col>
                     </Row>
@@ -593,9 +624,9 @@ const AddBillSection = styled.div`
     margin-left: 20px;
     float: right;
   }
-  .load-btn {
+  /* .load-btn {
     margin-left: 20px;
-  }
+  } */
   .dropdown-section {
     margin: 20px;
   }

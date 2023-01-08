@@ -7,6 +7,7 @@ import ProviencePiechart from "./ProviencePiechart";
 import ProvienceCharts from "./ProvienceCharts";
 import DonutChart from "./DonutChartMale";
 import RootDonutChart from "./RootDonutChart";
+import AppButton from "../../Common/AppButton";
 const MainPageChart = () => {
   const [newdata, setNewData] = useState([]);
   const { Option, OptGroup } = Select;
@@ -48,9 +49,12 @@ const MainPageChart = () => {
   return (
     <>
       <MainPageChartStyle>
-        <Button className="modalcharts" type="primary" onClick={showModal}>
-          View Charts
-        </Button>
+        <AppButton
+          buttonTitle="View Charts"
+          buttonOnClick={showModal}
+          viewButton
+        ></AppButton>
+
         <Modal
           title=" Charts Details"
           visible={isModalOpen}

@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useControlDetails } from "../../CustomHook/useControlDetails";
 import { useFiscalYear } from "../../CustomHook/useFiscalYear";
 import { getControlTestListApi } from "../../services/qcService";
+import AppButton from "./AppButton";
 
 const CarelabFilter = (props) => {
   const {
@@ -33,7 +34,7 @@ const CarelabFilter = (props) => {
   };
 
   const onFilterReturn = (res) => {
-    console.log(res, 'resres');
+    console.log(res, "resres");
     if (dateRange !== null && undefined) {
       returnFilterData(dateRange);
     } else {
@@ -279,9 +280,14 @@ const CarelabFilter = (props) => {
 
               <Col>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                    Load
-                  </Button>
+                  <AppButton
+                    className="primary-btn load-btn"
+                    buttonTitle="Load"
+                    buttonOnClick={() => {
+                      form.submit();
+                    }}
+                    LoadprimaryBtn
+                  />
                 </Form.Item>
               </Col>
             </Row>

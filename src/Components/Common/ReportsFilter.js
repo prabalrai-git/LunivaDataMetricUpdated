@@ -1,4 +1,4 @@
-import { Col, message, Row, Select } from "antd";
+import { Col, message, notification, Row, Select } from "antd";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { CSVLink } from "react-csv";
@@ -151,7 +151,12 @@ function ReportsFilter({ ...props }) {
         newWindow.close();
       }, 300);
     } else {
-      message.info("select some data");
+      notification.info({
+        duration: 3,
+        placement: "topRight",
+        message: "select some data",
+        rtl: true,
+      });
     }
   };
 
@@ -245,16 +250,17 @@ function ReportsFilter({ ...props }) {
             )}
             {serchButton && (
               <div className="load-btnreport">
-                <Col lg={9} md={12} sm={11} xs={24}>
-                  <AppButton
-                    className="primary-btn"
-                    buttonTitle="Load"
-                    buttonOnClick={() => {
-                      OnLoad();
-                    }}
-                    priamryOutlineBtn
-                  />
-                </Col>
+                {/* <Col lg={9} md={12} sm={11} xs={24}> */}
+                <AppButton
+                  className="load-btn"
+                  buttonTitle="Load"
+                  buttonOnClick={() => {
+                    OnLoad();
+                  }}
+                  // priamryOutlineBtn
+                  LoadprimaryBtn
+                />
+                {/* </Col> */}
                 <Col>
                   <MainPageChart />
                   {/* <NavLink
@@ -277,7 +283,7 @@ function ReportsFilter({ ...props }) {
             <div
               style={{
                 position: "absolute",
-                right: "-210px",
+                right: "-185px",
 
                 top: "-60px",
                 display: "flex",
@@ -298,7 +304,16 @@ function ReportsFilter({ ...props }) {
                   </CSVLink>
                 </div>
               )}
-              {printFileName && (
+              <AppButton
+                buttonTitle="Print"
+                buttonOnClick={() => {
+                  printHandle();
+                }}
+                // buttonOnClick={form.submit}
+                // savebutton
+                printprimarybutton
+              ></AppButton>
+              {/* {printFileName && (
                 <button
                   onClick={printHandle}
                   className="btn ant-btn btn-primary btn-primary--outline"
@@ -309,7 +324,7 @@ function ReportsFilter({ ...props }) {
                 >
                   Print
                 </button>
-              )}
+              )} */}
             </div>
           </Row>
         </Col>

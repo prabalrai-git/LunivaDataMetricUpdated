@@ -1,4 +1,13 @@
-import { Button, Col, Form, Input, message, Row, Switch } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Row,
+  Switch,
+  notification,
+} from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -111,7 +120,12 @@ const EmailAdditionField = (props) => {
           }, 1000);
         } else {
           setButDis(false);
-          message.error("Something went wrong please try again");
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Something went wrong please try again",
+            rtl: true,
+          });
         }
       })
     );

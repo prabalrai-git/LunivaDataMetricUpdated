@@ -1,4 +1,4 @@
-import { message, Row, Space } from "antd";
+import { message, notification, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AppButton from "./AppButton";
@@ -129,7 +129,12 @@ const PageHeader = ({
         newWindow.close();
       }, 300);
     } else {
-      message.info("select some data");
+      notification.info({
+        duration: 3,
+        placement: "topRight",
+        message: "select some data",
+        rtl: true,
+      });
     }
   };
 
@@ -159,7 +164,8 @@ const PageHeader = ({
               <AppButton
                 buttonTitle={forCon}
                 buttonOnClick={forConButtonClick}
-                primaryBtn
+                // primaryBtn
+                addprimarybutton
               ></AppButton>
             )}
 
@@ -167,7 +173,8 @@ const PageHeader = ({
               <AppButton
                 buttonTitle={buttonTitle}
                 buttonOnClick={buttonOnClick}
-                primaryBtn
+                // primaryBtn
+                addprimarybutton
               ></AppButton>
             )}
 
@@ -175,7 +182,8 @@ const PageHeader = ({
               <AppButton
                 buttonTitle={forGroup}
                 buttonOnClick={forGroupButtonClick}
-                primaryBtn
+                // primaryBtn
+                addprimarybutton
               ></AppButton>
             )}
 
@@ -183,32 +191,33 @@ const PageHeader = ({
               <AppButton
                 buttonTitle={forData}
                 buttonOnClick={forDataButtonClick}
-                primaryBtn
+                // primaryBtn
+                addprimarybutton
               ></AppButton>
             )}
           </Space>
           {csvDataName && (
             <div className="link">
-              <CSVLink
-                filename={csvDataName}
-                className="btn ant-btn btn-primary btn-primary--outline"
-                data={csvData}
-              >
-                Export CSV
-              </CSVLink>
+              <i class="fas fa-cloud">
+                <CSVLink
+                  filename={csvDataName}
+                  // className="load-btn"
+                  className="btn ant-btn btn-primary btn-primary--outline"
+                  data={csvData}
+                >
+                  Export CSV
+                </CSVLink>
+              </i>
             </div>
           )}
-
           {printFileName && (
-            <button
-              onClick={printHandle}
-              className="btn ant-btn btn-primary btn-primary--outline"
-              style={{
-                marginLeft: "8px",
-              }}
-            >
-              Print
-            </button>
+            <AppButton
+              buttonTitle="Print"
+              buttonOnClick={printHandle}
+              // primaryBtn
+              // addprimarybutton
+              printprimarybutton
+            ></AppButton>
           )}
         </Row>
       </Row>

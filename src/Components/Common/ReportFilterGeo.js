@@ -1,4 +1,4 @@
-import { Col, message, Row, Select } from "antd";
+import { Col, message, notification, Row, Select } from "antd";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { CSVLink } from "react-csv";
@@ -180,7 +180,12 @@ function ReportsFilterGeo({ ...props }) {
         newWindow.close();
       }, 300);
     } else {
-      message.info("select some data");
+      notification.info({
+        duration: 3,
+        placement: "topRight",
+        message: "select some data",
+        rtl: true,
+      });
     }
   };
 
@@ -307,14 +312,15 @@ function ReportsFilterGeo({ ...props }) {
                   buttonOnClick={() => {
                     OnLoad();
                   }}
-                  priamryOutlineBtn
+                  // priamryOutlineBtn
+                  LoadprimaryBtn
                 />
               </Col>
             )}
             <div
               style={{
                 position: "absolute",
-                right: "-210px",
+                right: "-185px",
                 top: "-60px",
                 display: "flex",
                 justifyContent: "space-between",
@@ -335,16 +341,11 @@ function ReportsFilterGeo({ ...props }) {
                 </div>
               )}
               {printFileName && (
-                <button
-                  onClick={printHandle}
-                  className="btn ant-btn btn-primary btn-primary--outline"
-                  style={{
-                    marginLeft: "8px",
-                    marginBottom: "4px",
-                  }}
-                >
-                  Print
-                </button>
+                <AppButton
+                  buttonTitle="Print"
+                  buttonOnClick={printHandle}
+                  printprimarybutton
+                ></AppButton>
               )}
             </div>
           </Row>

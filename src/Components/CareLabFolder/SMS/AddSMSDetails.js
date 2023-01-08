@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Checkbox, Form, Input, InputNumber, message } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  notification,
+} from "antd";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { carelabStat } from "../../Common/StateList";
+import AppButton from "../../Common/AppButton";
 
 function AddSMSDetails() {
   const [smsCount, setSmsCount] = useState();
@@ -45,7 +54,12 @@ function AddSMSDetails() {
         newLoadings[index] = true;
         return newLoadings;
       });
-      message.success("data is saved");
+      notification.success({
+        duration: 3,
+        placement: "topRight",
+        message: `Data is saved`,
+        rtl: true,
+      });
       setTimeout(() => {
         setLoadings((prevLoadings) => {
           const newLoadings = [...prevLoadings];
@@ -57,7 +71,13 @@ function AddSMSDetails() {
         });
       }, 2000);
     } else {
-      message.error("please input the values");
+      // message.error("please input the values");
+      notification.error({
+        duration: 3,
+        placement: "topRight",
+        message: "please input the values",
+        rtl: true,
+      });
     }
   };
 
@@ -140,6 +160,14 @@ function AddSMSDetails() {
       >
         Save
       </Button>
+      {/* <AppButton
+        buttonTitle="Save"
+        buttonOnClick={() => {
+          handleChange();
+          enterLoading(1);
+        }}
+        savebutton
+      ></AppButton> */}
     </AddGoodsContainer>
   );
 }

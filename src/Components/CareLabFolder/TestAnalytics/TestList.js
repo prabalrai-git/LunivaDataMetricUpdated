@@ -4,6 +4,7 @@ import {
   InputNumber,
   message,
   Modal,
+  notification,
   Space,
   Table,
   Tag,
@@ -141,12 +142,22 @@ const TestList = () => {
     dispatch(
       UpdateCriticalValueAndCutoffTimeofTests(data, (res) => {
         if (res?.SuccessMsg === true) {
-          message.success("Data has been updated");
+          notification.success({
+            duration: 3,
+            placement: "topRight",
+            message: `Data has been updated`,
+            rtl: true,
+          });
 
           // setisbutdis(false)
           // onReset()
         } else {
-          message.warning("error");
+          notification.warning({
+            duration: 3,
+            placement: "topRight",
+            message: `Error`,
+            rtl: true,
+          });
           // setisbutdis(false)
         }
       })

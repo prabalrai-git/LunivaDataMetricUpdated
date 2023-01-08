@@ -1,4 +1,13 @@
-import { Form, Input, Button, message, Row, Col, Switch } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  message,
+  Row,
+  Col,
+  Switch,
+  notification,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -60,7 +69,13 @@ const AddUnits = (props) => {
           }, 1000);
         } else {
           setButDis(false);
-          message.error("Something went wrong please try again");
+          // message.error("Something went wrong please try again");
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Something went wrong please try again",
+            rtl: true,
+          });
         }
       })
     );
