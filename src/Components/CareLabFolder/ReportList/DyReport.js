@@ -88,7 +88,7 @@ const DyReport = () => {
         <PageHeader pageTitle={"Test Status"} />
         <Filter dateRange serchButton dateRet={dataRet} forTestStatus />
       </div>
-      {dyColumnData.length > 0 && (
+      {dyColumnData.length > 0 ? (
         <div className="tableisRes">
           <Table
             className="tableWidth"
@@ -96,9 +96,21 @@ const DyReport = () => {
             dataSource={dyColumnData}
           />
         </div>
+      ) : (
+        ""
       )}
     </>
   );
 };
 
 export default DyReport;
+//  <div className="maiTopContainer">
+//           <div className="message-field">
+//             <i class="icon-frown">
+//               <span>
+//                 <h2>!Data is not available </h2>
+//               </span>
+//               {/* <h3> !Data is not available </h3> */}
+//               </i>
+//               </div>
+//             </div>

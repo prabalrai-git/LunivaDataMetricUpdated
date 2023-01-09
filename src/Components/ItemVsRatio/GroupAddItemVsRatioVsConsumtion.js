@@ -9,6 +9,7 @@ import {
   Col,
   Switch,
   Input,
+  notification,
 } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,7 +49,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
 
   useEffect(() => {
     if (forEdit && previousValues === undefined) {
-      dispatch(getItemVsRatioApi((val) => { }, RId));
+      dispatch(getItemVsRatioApi((val) => {}, RId));
     }
     getAllLabItem();
     if (forGroup !== undefined) {
@@ -116,7 +117,13 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
     dispatch(
       insertItemVsRatioApi(data, (res) => {
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-          message.success(res?.Message);
+          // message.success(res?.Message);
+          notification.success({
+            duration: 3,
+            placement: "topRight",
+            message: res?.Message,
+            rtl: true,
+          });
 
           setTimeout(() => {
             history.push({
@@ -126,7 +133,12 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
           }, 1000);
         } else {
           setButDis(false);
-          message.error("Something went wrong try again");
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Something went wrong try again",
+            rtl: true,
+          });
         }
       })
     );
@@ -174,7 +186,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                    0 ||
+                      0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
@@ -209,7 +221,7 @@ const GroupAddItemVsRatioVsConsumtion = (props) => {
                 filterOption={(input, option) => {
                   return (
                     option.key.toLowerCase().indexOf(input.toLowerCase()) >=
-                    0 ||
+                      0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}

@@ -241,3 +241,22 @@ a {
 .allStat div {
   padding-bottom: 5px;
 }
+.csvbutton{
+    background-color: var(--primary);
+    color: #fefefe;
+    border-radius: 3px !important;
+    width: auto;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 0 10px;
+    letter-spacing: 1px;
+    justify-content: center;
+    font-weight: 400;
+    border: 1px solid var(--primary);
+    /* box-shadow: 0 4px 14px 0 rgb(0 118 255 / 19%); */
+}
+.icon-file::before{
+  margin-right: 4px;
+}

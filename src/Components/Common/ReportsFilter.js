@@ -281,10 +281,10 @@ function ReportsFilter({ ...props }) {
               </div>
             )}
             <div
+              className="excelprint-section"
               style={{
                 position: "absolute",
                 right: "-185px",
-
                 top: "-60px",
                 display: "flex",
                 justifyContent: "space-between",
@@ -304,15 +304,18 @@ function ReportsFilter({ ...props }) {
                   </CSVLink>
                 </div>
               )}
-              <AppButton
-                buttonTitle="Print"
-                buttonOnClick={() => {
-                  printHandle();
-                }}
-                // buttonOnClick={form.submit}
-                // savebutton
-                printprimarybutton
-              ></AppButton>
+
+              {printFileName && (
+                <AppButton
+                  buttonTitle="Print"
+                  buttonOnClick={() => {
+                    printHandle();
+                  }}
+                  // buttonOnClick={form.submit}
+                  // savebutton
+                  printprimarybutton
+                ></AppButton>
+              )}
               {/* {printFileName && (
                 <button
                   onClick={printHandle}
@@ -363,5 +366,54 @@ const FilterContainer = styled.div`
   }
   .graphbtnsection {
     margin-left: 10px;
+  }
+
+  @media only screen and (max-width: 992px) {
+    .excelprint-section {
+      position: absolute;
+      right: -100px !important;
+      top: -58px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .excelprint-section {
+      position: absolute;
+      right: -130px !important;
+      top: -58px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .excelprint-section {
+      position: absolute;
+      right: -4px !important;
+      top: -27px !important;
+      display: flex;
+      justify-content: space-between;
+    }
+    .filterRow {
+      margin-top: 15px;
+    }
+  }
+  @media only screen and (max-width: 576px) {
+    .excelprint-section {
+      position: absolute;
+      right: 2px !important;
+      top: -58px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .excelprint-section {
+      position: absolute;
+      right: -3px !important;
+      top: -23px !important;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `;

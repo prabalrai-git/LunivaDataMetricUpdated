@@ -111,7 +111,13 @@ const EmailAdditionField = (props) => {
         setDatainsert(data);
         console.log(res, "responsedata");
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-          message.success(res?.Message);
+          // message.success(res?.Message);
+          notification.success({
+            duration: 3,
+            placement: "topRight",
+            message: res?.Message,
+            rtl: true,
+          });
           setTimeout(() => {
             history.push({
               pathname: "/settingsemail",

@@ -201,11 +201,15 @@ const PageHeader = ({
               <i class="fas fa-cloud">
                 <CSVLink
                   filename={csvDataName}
-                  // className="load-btn"
-                  className="btn ant-btn btn-primary btn-primary--outline"
+                  // className="btn ant-btn btn-primary btn-primary--outline"
+                  className="csvbutton"
                   data={csvData}
                 >
-                  Export CSV
+                  {/* <i class="icon-frown">Export CSV</i> */}
+                  <i class="icon-file">
+                    Export Csv
+                    {/* <span>Export CSV</span> */}
+                  </i>
                 </CSVLink>
               </i>
             </div>

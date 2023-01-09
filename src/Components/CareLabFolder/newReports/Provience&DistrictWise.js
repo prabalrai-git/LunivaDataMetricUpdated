@@ -2,6 +2,7 @@ import { message, Table, notification } from "antd";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import {
   getDatametricReportType,
   getGeographyWiseMISReports,
@@ -134,46 +135,49 @@ function ProvienceDistrictWise() {
 
   return (
     <>
-      <div className="maiTopContainer">
-        <PageHeader
-          pageTitle={"Province & District-Wise Patient Count & Details"}
-        />
-        <ReportsFilter
-          dateRange
-          serchButton
-          states={states}
-          district={district}
-          municipality={municipality}
-          setStateId={setStateId}
-          setDistrictId={setDistrictId}
-          setMunicipalityId={setMunicipalityId}
-          setFromDate={setFromDate}
-          setToDate={setToDate}
-          OnLoad={OnLoad}
-          csvDataName="PatientReport.csv"
-          csvData={patientData}
-          reportName={reportId === 1 ? "Patient's" : "Patient's Count"}
-          printFileName
-          fromDate
-          toDate
-          tableHead={reportsColumn}
-          reportType={reportType}
-          setReportId={setReportId}
-        />
+      <Provincedistrictwise>
+        <div className="maiTopContainer">
+          <PageHeader
+            pageTitle={"Province & District-Wise Patient Count & Details"}
+          />
+          <ReportsFilter
+            dateRange
+            serchButton
+            states={states}
+            district={district}
+            municipality={municipality}
+            setStateId={setStateId}
+            setDistrictId={setDistrictId}
+            setMunicipalityId={setMunicipalityId}
+            setFromDate={setFromDate}
+            setToDate={setToDate}
+            OnLoad={OnLoad}
+            csvDataName="PatientReport.csv"
+            csvData={patientData}
+            reportName={reportId === 1 ? "Patient's" : "Patient's Count"}
+            printFileName
+            fromDate
+            toDate
+            tableHead={reportsColumn}
+            reportType={reportType}
+            setReportId={setReportId}
+          />
 
-        {patientData?.length > 0 && (
-          <div className="tableisRes">
-            <Table
-              className="tableWidth"
-              columns={reportsColumn}
-              dataSource={patientData}
-            />
-          </div>
-        )}
-      </div>
-      {/* <MainPageChart /> */}
+          {patientData?.length > 0 && (
+            <div className="tableisRes">
+              <Table
+                className="tableWidth"
+                columns={reportsColumn}
+                dataSource={patientData}
+              />
+            </div>
+          )}
+        </div>
+        {/* <MainPageChart /> */}
+      </Provincedistrictwise>
     </>
   );
 }
 
 export default ProvienceDistrictWise;
+export const Provincedistrictwise = styled.div``;

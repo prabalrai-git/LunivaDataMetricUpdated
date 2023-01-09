@@ -1,4 +1,13 @@
-import { Form, Input, Button, message, Row, Col, Switch } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  message,
+  Row,
+  Col,
+  Switch,
+  notification,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -51,7 +60,13 @@ const AddConsumptionGroup = (props) => {
     dispatch(
       insertUpdateConsumptionGroupApi(data, (res) => {
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-          message.success(res?.Message);
+          // message.success(res?.Message);
+          notification.success({
+            duration: 3,
+            placement: "topRight",
+            message: res?.Message,
+            rtl: true,
+          });
           setTimeout(() => {
             history.push({
               pathname: "/consumption",
@@ -60,7 +75,13 @@ const AddConsumptionGroup = (props) => {
           }, 1000);
         } else {
           setButDis(false);
-          message.error("Something went wrong Try again");
+          // message.error("Something went wrong Try again");
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Something went wrong Try again",
+            rtl: true,
+          });
         }
       })
     );

@@ -117,7 +117,13 @@ const AddUsedReagent = (props) => {
     dispatch(
       insertReagentUsedApi(data, (res) => {
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-          message.success(res?.Message);
+          // message.success(res?.Message);
+          notification.success({
+            duration: 3,
+            placement: "topRight",
+            message: res?.Message,
+            rtl: true,
+          });
           setTimeout(() => {
             history.push({
               pathname: "/reagentused",
@@ -126,7 +132,13 @@ const AddUsedReagent = (props) => {
           }, 1000);
         } else {
           setButDis(false);
-          message.error("Something went wrong Try again");
+          // message.error("Something went wrong Try again");
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Something went wrong please try again",
+            rtl: true,
+          });
         }
       })
     );

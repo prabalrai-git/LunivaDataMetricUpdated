@@ -1,14 +1,14 @@
-import { message, notification } from 'antd';
-import pMinDelay from 'p-min-delay';
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import useToken from './useToken';
-import { useDispatch } from 'react-redux';
-import { getLoginApi } from '../../services/loginService';
-import { Form, Input, Button } from 'antd';
-import styled from 'styled-components';
-import logo from '../../assets/images/logobig1.png'
-import crystslBkg from '../../assets/images/cover.jpg'
+import { message, notification } from "antd";
+import pMinDelay from "p-min-delay";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import useToken from "./useToken";
+import { useDispatch } from "react-redux";
+import { getLoginApi } from "../../services/loginService";
+import { Form, Input, Button } from "antd";
+import styled from "styled-components";
+import logo from "../../assets/images/logobig1.png";
+import crystslBkg from "../../assets/images/cover.jpg";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ export default function Login() {
   const onFinish = (values) => {
     let data = {
       user: values?.username,
-      pass: values?.password
-    }
+      pass: values?.password,
+    };
     // setToken({
     //   token: 'admin',
     //   username: 'admin',
@@ -33,32 +33,42 @@ export default function Login() {
     //   pathname: '/'
     // })
 
-    dispatch(getLoginApi(data, (val) => {
-      if (val.length !== 0) {
-        let andd = val?.CheckValidLoginForInventory;
-        if (andd[0]?.usruserid > 0) {
-          setToken({
-            token: andd[0]?.usrUsername,
-            username: andd[0]?.usrUsername,
-            roleId: andd[0]?.usrrole,
-            UId: andd[0]?.usruserid
-          })
-          history.push({
-            pathname: '/'
-          })
-          // pMinDelay(openNotification('topLeft'), 2000);
+    dispatch(
+      getLoginApi(data, (val) => {
+        if (val.length !== 0) {
+          let andd = val?.CheckValidLoginForInventory;
+          if (andd[0]?.usruserid > 0) {
+            setToken({
+              token: andd[0]?.usrUsername,
+              username: andd[0]?.usrUsername,
+              roleId: andd[0]?.usrrole,
+              UId: andd[0]?.usruserid,
+            });
+            history.push({
+              pathname: "/",
+            });
+            // pMinDelay(openNotification('topLeft'), 2000);
+          } else {
+            notification.error({
+              duration: 3,
+              placement: "topRight",
+              message: "Username or password incorrect",
+              rtl: true,
+            });
+          }
         } else {
-          message.error('Username or password incorrect');
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Username or password incorrect",
+            rtl: true,
+          });
         }
-      } else {
-        message.error('Username or password incorrect')
-      }
-    }))
-
+      })
+    );
   };
 
-  const onFinishFailed = (errorInfo) => {
-  };
+  const onFinishFailed = (errorInfo) => {};
 
   // const getData = () => {
   //   const pushedArr = []
@@ -88,7 +98,7 @@ export default function Login() {
 
   return (
     <LoginFormContainer>
-      <div className="left" >
+      <div className="left">
         <img src={crystslBkg} alt="" />
       </div>
       <div className="right">
@@ -106,7 +116,7 @@ export default function Login() {
           <Form.Item
             label="Username"
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input autoFocus={true} />
           </Form.Item>
@@ -114,7 +124,7 @@ export default function Login() {
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
           </Form.Item>
@@ -123,17 +133,18 @@ export default function Login() {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-
           </Form.Item>
         </Form>
 
         <div className="powerd">
-          <p>Powered by &copy; <span style={{ color: "#e95b29" }}> LunivaTech Pvt.Ltd.</span></p>
+          <p>
+            Powered by &copy;{" "}
+            <span style={{ color: "#e95b29" }}> LunivaTech Pvt.Ltd.</span>
+          </p>
         </div>
       </div>
-
     </LoginFormContainer>
-  )
+  );
 }
 
 const LoginFormContainer = styled.div`
@@ -141,42 +152,42 @@ const LoginFormContainer = styled.div`
   // flex-direction: column;
   align-items: center;
   // gap: 20px;
-  .logo{
+  .logo {
     width: 360px;
     margin-bottom: 60px;
     text-align: center;
-    @media(max-width: 768px){
+    @media (max-width: 768px) {
       width: 260px;
       margin-bottom: 40px;
     }
-    img{
+    img {
       width: 100%;
     }
   }
-  
-  .left{
+
+  .left {
     display: flex;
     flex: 0.5;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
-    img{
+    img {
       width: 100%;
       object-fit: cover;
       object-postion: ceter;
     }
-    @media(max-width: 576px){
+    @media (max-width: 576px) {
       display: none;
     }
   }
-  .right{
+  .right {
     display: flex;
     flex: 0.4;
     flex-direction: column;
     height: 100vh;
     justify-content: center;
     align-items: center;
-    @media(max-width: 576px){
+    @media (max-width: 576px) {
       flex: 1;
       width: 100%;
       height: 100vh;
@@ -185,14 +196,14 @@ const LoginFormContainer = styled.div`
     }
   }
 
-  .powerd{
+  .powerd {
     margin-top: 70px;
-    p{
+    p {
       letter-spacing: 1.2px;
     }
-    span{
+    span {
       font-size: 20px;
       letter-spacing: 1.2px;
     }
   }
-`
+`;

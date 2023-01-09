@@ -1,28 +1,42 @@
-import { Form, Input, Button, DatePicker, Select, InputNumber, message, Row, Col, Modal } from 'antd';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { getLabItemsApi } from '../../services/itemNewItemService';
-import { getWastageApi, insertWastageApi } from '../../services/wastageService';
-import moment from 'moment';
-import { tokenString } from '../Common/HandleUser';
-import { formItemLayout } from '../Common/FormItemLayout';
-import { inventoryStat } from '../Common/StateList';
+import {
+  Form,
+  Input,
+  Button,
+  DatePicker,
+  Select,
+  InputNumber,
+  message,
+  Row,
+  Col,
+  Modal,
+  notification,
+} from "antd";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { getLabItemsApi } from "../../services/itemNewItemService";
+import { getWastageApi, insertWastageApi } from "../../services/wastageService";
+import moment from "moment";
+import { tokenString } from "../Common/HandleUser";
+import { formItemLayout } from "../Common/FormItemLayout";
+import { inventoryStat } from "../Common/StateList";
 
 const AddWastage = (props) => {
   const { forEdit } = props;
   const { Option } = Select;
   const { TextArea } = Input;
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useDispatch();
   const [butDis, setButDis] = useState(false);
-  const [itemList, setItemList] = useState([])
+  const [itemList, setItemList] = useState([]);
   const WId = props?.match?.params?.id;
   const FromDater = props?.match?.params?.from;
-  const wastageReducer = useSelector(state => state.wastage);
-  const [previousValues, setPreviousValues] = useState(forEdit ? wastageReducer?.wastages[WId] : {});
+  const wastageReducer = useSelector((state) => state.wastage);
+  const [previousValues, setPreviousValues] = useState(
+    forEdit ? wastageReducer?.wastages[WId] : {}
+  );
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -40,74 +54,91 @@ const AddWastage = (props) => {
   };
 
   useEffect(() => {
-    getAllLabItem(0, 0)
+    getAllLabItem(0, 0);
     if (forEdit && previousValues === undefined) {
-      dispatch(getWastageApi({ fromdate: FromDater, todate: FromDater }, (val) => { }))
+      dispatch(
+        getWastageApi({ fromdate: FromDater, todate: FromDater }, (val) => {})
+      );
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     setPreviousValues(wastageReducer?.wastages[WId]);
-  }, [wastageReducer?.wastages[WId]])
+  }, [wastageReducer?.wastages[WId]]);
 
   useEffect(() => {
     if (previousValues !== undefined) {
-      form.resetFields()
+      form.resetFields();
     }
-  }, [previousValues])
+  }, [previousValues]);
   const getAllLabItem = (ty = 0, cI = 0) => {
     let data = {
       typeId: ty,
-      categoryId: cI
-    }
-    dispatch(getLabItemsApi(data, (val) => {
-      setItemList(val)
-    }))
-  }
+      categoryId: cI,
+    };
+    dispatch(
+      getLabItemsApi(data, (val) => {
+        setItemList(val);
+      })
+    );
+  };
 
   const onFinish = (values) => {
-    setButDis(true)
+    setButDis(true);
     let data = {
-      "WId": forEdit ? WId : 0,
-      "ItemId": values?.ItemId,
-      "WastageAmount": values?.WastageAmount,
-      "Reason": values?.Reason,
-      "Remarks": values?.Remarks,
-      "CreatedDate": values?.CreatedDate.format("YYYY-MM-DD"),
-      "CreatedBy": tokenString.token.UId,
-      "IsActive": forEdit ? false : true
-    }
-    dispatch(insertWastageApi(data, (res) => {
-      if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-        message.success(res?.Message)
-        setTimeout(() => {
-          history.push({
-            pathname: '/wastage',
-            state: inventoryStat
-          })
-        }, 1000);
-      } else {
-        setButDis(false)
-        message.error('Something went wrong Try again')
-      }
-    }))
+      WId: forEdit ? WId : 0,
+      ItemId: values?.ItemId,
+      WastageAmount: values?.WastageAmount,
+      Reason: values?.Reason,
+      Remarks: values?.Remarks,
+      CreatedDate: values?.CreatedDate.format("YYYY-MM-DD"),
+      CreatedBy: tokenString.token.UId,
+      IsActive: forEdit ? false : true,
+    };
+    dispatch(
+      insertWastageApi(data, (res) => {
+        if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
+          // message.success(res?.Message);
+          notification.success({
+            duration: 3,
+            placement: "topRight",
+            message: res?.Message,
+            rtl: true,
+          });
+          setTimeout(() => {
+            history.push({
+              pathname: "/wastage",
+              state: inventoryStat,
+            });
+          }, 1000);
+        } else {
+          setButDis(false);
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "something went wrong",
+            rtl: true,
+          });
+        }
+      })
+    );
   };
 
   const onFinishFailed = (errorInfo) => {
-    setButDis(false)
+    setButDis(false);
   };
 
-  let prevVal = {}
+  let prevVal = {};
   if (previousValues !== undefined) {
     prevVal = {
       ...previousValues,
-      CreatedDate: moment(previousValues?.CreatedDate)
-    }
+      CreatedDate: moment(previousValues?.CreatedDate),
+    };
   }
 
   return (
     <AddWastageContainer>
-      <Row justify='center'>
+      <Row justify="center">
         <Col span={16}>
           <Form
             form={form}
@@ -118,37 +149,38 @@ const AddWastage = (props) => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-
             <Form.Item
               label="Reagent Name"
               name="ItemId"
               rules={[
                 {
                   required: true,
-                  message: 'Please select reagent name!',
+                  message: "Please select reagent name!",
                 },
               ]}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
-                placeholder='Select A Reagent'
+                placeholder="Select A Reagent"
                 filterOption={(input, option) => {
                   return (
-                    option.key.toLowerCase().indexOf(input.toLowerCase()) >= 0 ||
+                    option.key.toLowerCase().indexOf(input.toLowerCase()) >=
+                      0 ||
                     option.title.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   );
                 }}
               >
-                {itemList?.map(iTy => {
+                {itemList?.map((iTy) => {
                   return (
                     <Option
                       title={iTy?.ItemName}
                       key={iTy?.TId}
-                      value={iTy?.TId}>
+                      value={iTy?.TId}
+                    >
                       {iTy?.ItemName} ({iTy?.Unit})
                     </Option>
-                  )
+                  );
                 })}
               </Select>
             </Form.Item>
@@ -159,14 +191,11 @@ const AddWastage = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input wastage amount!',
+                  message: "Please input wastage amount!",
                 },
               ]}
             >
-              <InputNumber
-                min={0}
-                style={{ width: '100%' }}
-              />
+              <InputNumber min={0} style={{ width: "100%" }} />
             </Form.Item>
 
             <Form.Item
@@ -175,7 +204,7 @@ const AddWastage = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input Reason!',
+                  message: "Please input Reason!",
                 },
               ]}
             >
@@ -188,7 +217,7 @@ const AddWastage = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input Remarks!',
+                  message: "Please input Remarks!",
                 },
               ]}
             >
@@ -201,14 +230,11 @@ const AddWastage = (props) => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input created Date!',
+                  message: "Please input created Date!",
                 },
               ]}
             >
-              <DatePicker
-                format='YYYY-MM-DD'
-                style={{ width: '100%' }}
-              />
+              <DatePicker format="YYYY-MM-DD" style={{ width: "100%" }} />
             </Form.Item>
 
             <Form.Item
@@ -217,26 +243,30 @@ const AddWastage = (props) => {
                 span: 16,
               }}
             >
-              {
-                forEdit && previousValues?.IsActive === false ? '' :
-                  (
-                    <Button
-                      htmlType={forEdit ? 'button' : "submit"} disabled={butDis}
-                      onClick={forEdit ? showModal : ''}
-                      className='btnPrimary'
-                    >
-                      {forEdit ? 'Cancel' : 'Submit'}
-                    </Button>
-                  )
-              }
+              {forEdit && previousValues?.IsActive === false ? (
+                ""
+              ) : (
+                <Button
+                  htmlType={forEdit ? "button" : "submit"}
+                  disabled={butDis}
+                  onClick={forEdit ? showModal : ""}
+                  className="btnPrimary"
+                >
+                  {forEdit ? "Cancel" : "Submit"}
+                </Button>
+              )}
 
-              <Modal title="Warning" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+              <Modal
+                title="Warning"
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
                 <p>Do You want to Cancel the Wastage</p>
               </Modal>
             </Form.Item>
           </Form>
         </Col>
-
       </Row>
     </AddWastageContainer>
   );
@@ -248,4 +278,4 @@ const AddWastageContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
   margin-bottom: 50px;
-`
+`;

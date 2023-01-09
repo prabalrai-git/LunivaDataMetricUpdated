@@ -333,10 +333,11 @@ function ReportsFilterGeo({ ...props }) {
                 >
                   <CSVLink
                     filename={csvDataName}
-                    className="btn ant-btn btn-primary btn-primary--outline"
+                    // className="btn ant-btn btn-primary btn-primary--outline"
+                    className="csvbutton"
                     data={csvData}
                   >
-                    Export CSV
+                    <i class="icon-file">Export Csv</i>
                   </CSVLink>
                 </div>
               )}

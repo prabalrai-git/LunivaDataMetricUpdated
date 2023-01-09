@@ -1,4 +1,13 @@
-import { Form, Input, Button, Row, Col, Switch, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Switch,
+  message,
+  notification,
+} from "antd";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -61,7 +70,13 @@ const AddControl = (props) => {
     dispatch(
       setControlDetailsApi(data, (res) => {
         if (res?.CreatedId > 0 && res?.SuccessMsg === true) {
-          message.success(res?.Message);
+          // message.success(res?.Message);
+          notification.success({
+            duration: 3,
+            placement: "topRight",
+            message: res?.Message,
+            rtl: true,
+          });
           setTimeout(() => {
             history.push({
               pathname: "/viewcontroltest",
@@ -70,7 +85,13 @@ const AddControl = (props) => {
           }, 1000);
         } else {
           setButDis(false);
-          message.error("Something went wrong Try again");
+          // message.error("Something went wrong Try again");
+          notification.error({
+            duration: 3,
+            placement: "topRight",
+            message: "Something went wrong Try again",
+            rtl: true,
+          });
         }
       })
     );
