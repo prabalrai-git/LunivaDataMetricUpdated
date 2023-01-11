@@ -14,7 +14,7 @@ import { tokenString } from "../Common/HandleUser";
 import { todaydate } from "../Common/TodayDate";
 
 const PrintLayout = (props) => {
-  console.log(props, "Saurey  ");
+  console.log(props, "propsdatat  ");
   const dispatch = useDispatch();
   const paramVal =
     props !== undefined ? props?.location?.pathname.split("/") : "";
@@ -177,7 +177,7 @@ const PrintLayout = (props) => {
                     <tr>
                       <th>S.N</th>
                       <th>Test Name</th>
-                      <th className="money">Rate</th>
+                      <th className="money"></th>
                       {/* <th className="money">Quantity</th> */}
                       {/* <th className="money">Discount</th> */}
                       {/* <th className="money">Round Amount (Rs)</th> */}
@@ -191,7 +191,8 @@ const PrintLayout = (props) => {
                         <td>
                           <div>{billItemVal.billTestName} </div>
                         </td>
-                        <td className="money">{billItemVal.billPrice}</td>
+                        {/* <td className="money">{billItemVal.billPrice}</td> */}
+                        <td></td>
                         {/* <td className="money">1</td> */}
                         {/* <td className="money">
                           {billItemVal.BillDiscountAmount}
@@ -221,7 +222,7 @@ const PrintLayout = (props) => {
                         <span>Paid Amount</span> <br></br>
                       </th>
                       <td className="money" colSpan="3">
-                        <span>{billDetails[0].Price}</span>
+                        <span>{billDetails[0].TotalPrice}</span>
                         <br></br>
                         {billItemDetails.map((billItemVal, index) => (
                           <>

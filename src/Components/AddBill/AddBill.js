@@ -42,12 +42,21 @@ const AddBill = ({ ...props }) => {
   const [total, setTotal] = useState(0);
   const [grandtotals, setGrandTotals] = useState(0);
   const [roundamt, setRoundAmt] = useState(0);
+  const [pointRoundAmt, setPointRoundAmt] = useState(0);
   const [partydata, setPartydata] = useState([]);
   const [data, setData] = useState([]);
   const [chData, setChData] = useState({});
   const [requestorList, setrequestorList] = useState([]);
   const [butDis, setButDis] = useState(false);
   const [fiscalYearId, setFiscalYearId] = useState(1);
+  const [discountpercentfieldvalue, setDiscountPercentFieldValue] = useState(
+    []
+  );
+  const checkvalue = (e) => {
+    if (e > 101) {
+      message.info("only enter the value less than 100");
+    }
+  };
   const [dTracker, setDTracker] = useState(false);
   const fiscalYear = useFiscalYear();
   const { Option } = Select;
@@ -67,6 +76,7 @@ const AddBill = ({ ...props }) => {
   }, []);
 
   const onFinish = (values) => {
+    console.log(values, "formvalues");
     let billdata = {
       id: partydata[0].crdId,
       creditparty: partydata[0].CrdPartyName,
@@ -118,7 +128,8 @@ const AddBill = ({ ...props }) => {
                       ? grandtotals
                       : 0,
                   IsSync: true,
-                  RoundAmt: roundamt,
+                  // RoundAmt: roundamt,
+                  RoundAmt: pointRoundAmt,
 
                   Remarks: "N/A",
                   OutgoingLabId: 1,
@@ -153,7 +164,7 @@ const AddBill = ({ ...props }) => {
                   : 0,
               BillHst: 0,
               BillHstAmt: 0,
-              BillAmtPaid: grandtotals,
+              BillAmtPaid: 0,
               BillRemainingAmt: 0,
               BillPaymentType:
                 values?.pmt !== undefined && values?.pmt !== null
@@ -260,7 +271,11 @@ const AddBill = ({ ...props }) => {
   };
   const roundsfunc = () => {
     let rv = Math.round(discountamount);
+    let totalrv = rv - discountamount;
+    setPointRoundAmt(totalrv);
+    console.log(totalrv, "totalrv");
     setRoundAmt(rv);
+    console.log(rv, "roundedvalues");
   };
 
   const onChangeHandler = () => {
@@ -276,10 +291,25 @@ const AddBill = ({ ...props }) => {
       if (e !== null || 0) {
         let discountPercentages = (e / originalAmount) * 100;
         setDiscountPercentage(discountPercentages);
-        if (discountPercentages) {
+        if (discountPercentages <= 100) {
           // console.log(discountPercentages, "discount percentage");
+          form.setFieldsValue(
+            {
+              discountPercentage: discountPercentages?.toFixed(2) + "%",
+            }
+            // setDiscountPercentFieldValue(discountPercentage);
+          );
+        } else {
+          notification.warning({
+            duration: 0,
+            placement: "topRight",
+            message:
+              "Please select the discount amount that is  less than 100%",
+            rtl: true,
+          });
+
           form.setFieldsValue({
-            discountPercentage: discountPercentages?.toFixed(2) + "%",
+            discountPercentage: 0 + "%",
           });
         }
       } else {
@@ -297,11 +327,15 @@ const AddBill = ({ ...props }) => {
       if (e !== null || 0) {
         let discountamounts = (e / 100) * originalAmount;
         setDiscountAmount(discountamounts);
-        if (discountamounts) {
+        if (discountamounts <= total) {
           // console.log(discountamounts, "discount amounts");
 
           form.setFieldsValue({
             discountAmount: discountamounts?.toFixed(2),
+          });
+        } else {
+          form.setFieldsValue({
+            discountAmount: 0,
           });
         }
       } else {
@@ -396,7 +430,6 @@ const AddBill = ({ ...props }) => {
                         </Descriptions.Item>
                         <Descriptions.Item label="Discount (%)">
                           <span className="descriptioncol">
-                            {" "}
                             {discountpercentage?.toFixed(1)}
                           </span>
                         </Descriptions.Item>
@@ -476,7 +509,7 @@ const AddBill = ({ ...props }) => {
                         // rules={[
                         //   {
                         //     required: true,
-                        //     message: "Please input item discount!",
+                        //     message: "Please input max discount!",
                         //   },
                         // ]}
                       >
@@ -507,8 +540,13 @@ const AddBill = ({ ...props }) => {
                           style={{
                             width: "100%",
                           }}
-                          min={0}
+                          // min={0}
+                          max={100}
                           onChange={(e) => {
+                            console.log(e, "discount percentage");
+                            console.log(e.length, "discount lenght");
+
+                            checkvalue();
                             setDiscountPercentage(e);
                             // setDTracker(!dTracker)
 
