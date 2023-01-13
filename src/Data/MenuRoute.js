@@ -62,7 +62,7 @@ export const AfterLoginData = [
     isactive: MenuSettings.outsourcing,
   },
   {
-    icon: "icon-chat",
+    icon: "icon-line2-settings",
     key: "settings",
     name: "Settings",
     path: "/settingsserver",
