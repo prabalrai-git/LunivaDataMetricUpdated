@@ -1,5 +1,6 @@
 // import useTokenHook from "../CustomHook/useTokenHook";
 
+import { datametricStat } from "../Components/Common/StateList";
 import { MenuSettings } from "./MenuSettings";
 
 export const useCareLabRoute = () => {
@@ -44,6 +45,7 @@ export const useCareLabRoute = () => {
       key: "misreports",
       name: "MIS Reports",
       path: "/datametric",
+      statePath: "misreportStat",
     },
   ];
 
@@ -109,6 +111,7 @@ export const useCareLabRoute = () => {
       key: "tatanalysis",
       name: "tat analysis",
       path: "/tatanalysis",
+      statePath: "tatStat",
     },
 
     // by me==========
@@ -117,6 +120,7 @@ export const useCareLabRoute = () => {
       key: "tatGetTestList",
       name: "Get Test List",
       path: "/testList",
+      statePath: "tatStat",
     },
   ];
   const dateChangeNav = [
@@ -232,6 +236,7 @@ export const useCareLabRoute = () => {
       key: "datametricdash",
       name: "Dashboard ",
       path: "/datametricdash",
+      statePath: datametricStat,
     },
     {
       icon: "icon-folder-open-alt",
@@ -330,7 +335,7 @@ export const useCareLabRoute = () => {
     },
     {
       icon: "icon-line-alt",
-      key: "tatanalytics",
+      // key: "tatanalytics",
       name: "TAT analytics",
       path: "/tatdash",
       hasSubNav: true,
@@ -366,6 +371,7 @@ export const useCareLabRoute = () => {
       key: "misreports",
       name: "MIS Reports",
       path: "/datametric",
+
       hasSubNav: false,
       showTab: true,
     },
@@ -437,6 +443,7 @@ export const useCareLabRoute = () => {
       key: "sms",
       name: "sms",
       path: "/sms",
+      statePath: "marketingStat",
     },
     {
       icon: "icon-line2-settings",

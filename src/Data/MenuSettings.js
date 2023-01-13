@@ -42,4 +42,6 @@ export const MenuSettings = {
   datametrictab: true,
   printanalysis: true,
   settingsserver: true,
+  datametricdash: true,
+  labstatus: true,
 };

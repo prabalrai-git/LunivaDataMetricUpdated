@@ -318,6 +318,7 @@ function ReportsFilterGeo({ ...props }) {
               </Col>
             )}
             <div
+              className="excelprint-section"
               style={{
                 position: "absolute",
                 right: "-185px",
@@ -377,5 +378,56 @@ const FilterContainer = styled.div`
   }
   .labelTop {
     display: block;
+  }
+  @media only screen and (max-width: 992px) {
+    .excelprint-section {
+      position: absolute;
+      right: -100px !important;
+      top: -26px !important;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .excelprint-section {
+      position: absolute;
+      right: -130px !important;
+      top: -22px !important;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .excelprint-section {
+      position: absolute;
+      right: -4px !important;
+      top: -27px !important;
+      display: flex;
+      justify-content: space-between;
+    }
+    .filterRow {
+      margin-top: 15px;
+    }
+  }
+  @media only screen and (max-width: 576px) {
+    .excelprint-section {
+      position: absolute;
+      right: 2px !important;
+      top: -58px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .excelprint-section {
+      position: absolute;
+      right: -3px !important;
+      top: -23px !important;
+      display: flex;
+      justify-content: space-between;
+    }
+    .ant-picker {
+      width: 137% !important;
+    }
   }
 `;

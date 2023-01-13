@@ -199,7 +199,7 @@ const ReportAdditonField = (props) => {
     <div>
       <EmailAddField Field>
         <Row justify="center">
-          <Col span={16}>
+          <Col sm={20} md={24} xs={20} lg={18} xl={14}>
             <Form
               name="add_items"
               form={form}
@@ -446,18 +446,20 @@ const ReportAdditonField = (props) => {
               </Form.Item> */}
 
               <Form.Item
+                className="hidereport-separatepage"
                 label="HideInOtherReport"
                 name="HideInOtherReport"
                 valuePropName="checked"
               >
-                <Switch defaultChecked />
+                <Switch defaultChecked className="hidereport-separatepage" />
               </Form.Item>
               <Form.Item
+                className="hidereport-separatepage"
                 label="SeparateYellowPage"
                 name="SeparateYellowPage"
                 valuePropName="checked"
               >
-                <Switch defaultChecked />
+                <Switch defaultChecked className="hidereport-separatepage" />
               </Form.Item>
 
               <Form.Item
@@ -465,7 +467,7 @@ const ReportAdditonField = (props) => {
                 name="IsActive"
                 valuePropName="checked"
               >
-                <Switch defaultChecked />
+                <Switch defaultChecked className="isactive-separatepage" />
               </Form.Item>
 
               <Form.Item
@@ -494,4 +496,12 @@ export default ReportAdditonField;
 const EmailAddField = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
+  @media only screen and (max-width: 768px) {
+    .hidereport-separatepage {
+      margin-left: 10px;
+    }
+    .isactive-separatepage {
+      margin-left: 17px;
+    }
+  }
 `;

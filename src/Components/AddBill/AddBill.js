@@ -9,6 +9,8 @@ import {
   Descriptions,
   notification,
   message,
+  Popconfirm,
+  Modal,
 } from "antd";
 import { useState, useEffect } from "react";
 import PageHeader from "../Common/pageHeader";
@@ -52,6 +54,17 @@ const AddBill = ({ ...props }) => {
   const [discountpercentfieldvalue, setDiscountPercentFieldValue] = useState(
     []
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const checkvalue = (e) => {
     if (e > 101) {
       message.info("only enter the value less than 100");
@@ -76,6 +89,18 @@ const AddBill = ({ ...props }) => {
   }, []);
 
   const onFinish = (values) => {
+    if (discountpercentage == 100) {
+      message.info("Are you giving 100% discount?");
+      // <Popconfirm
+      //   title="Title"
+      //   description="Open Popconfirm with Promise"
+      //   onConfirm={confirm}
+      //   onOpenChange={() => console.log("open change")}
+      // >
+      //   <Button type="primary">Open Popconfirm with Promise</Button>
+      // </Popconfirm>;
+    }
+
     console.log(values, "formvalues");
     let billdata = {
       id: partydata[0].crdId,
@@ -291,12 +316,14 @@ const AddBill = ({ ...props }) => {
       if (e !== null || 0) {
         let discountPercentages = (e / originalAmount) * 100;
         setDiscountPercentage(discountPercentages);
+
         if (discountPercentages <= 100) {
           // console.log(discountPercentages, "discount percentage");
           form.setFieldsValue(
             {
               discountPercentage: discountPercentages?.toFixed(2) + "%",
             }
+
             // setDiscountPercentFieldValue(discountPercentage);
           );
         } else {
@@ -356,9 +383,9 @@ const AddBill = ({ ...props }) => {
               <Row>
                 <Col
                   sm={24}
-                  md={12}
+                  md={24}
                   xs={24}
-                  lg={12}
+                  lg={24}
                   xl={12}
                   className="requestor-section"
                 >
@@ -418,7 +445,14 @@ const AddBill = ({ ...props }) => {
                   autoComplete="off"
                 >
                   <Row gutter={16}>
-                    <Col sm={24} md={6} xs={24} lg={6} xl={6}>
+                    <Col
+                      sm={24}
+                      md={24}
+                      xs={24}
+                      lg={14}
+                      xl={6}
+                      className="description-box"
+                    >
                       <Descriptions
                         bordered
                         layout="horizontal"
@@ -448,7 +482,7 @@ const AddBill = ({ ...props }) => {
                       </Descriptions>
                     </Col>
                     {/* span={10} */}
-                    <Col sm={24} md={10} xs={24} lg={10} xl={10}>
+                    <Col sm={24} md={24} xs={24} lg={14} xl={10}>
                       <Form.Item
                         label="Item Name"
                         name="item"
@@ -525,9 +559,9 @@ const AddBill = ({ ...props }) => {
                         />
                       </Form.Item>
                     </Col>
-                    <Col sm={24} md={8} xs={24} lg={8} xl={8}>
+                    <Col sm={24} md={24} xs={24} lg={10} xl={8}>
                       <Form.Item
-                        label="Discount Percentage"
+                        label="Discount (%)"
                         name="discountPercentage"
                         rules={[
                           {
@@ -688,4 +722,9 @@ const AddBillSection = styled.div`
     font-weight: 500;
   }
   /* ant-descriptions-item-label */
+  @media only screen and (max-width: 1024px) {
+    .description-box {
+      margin-bottom: 20px;
+    }
+  }
 `;

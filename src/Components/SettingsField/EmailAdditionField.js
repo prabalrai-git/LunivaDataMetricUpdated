@@ -148,8 +148,15 @@ const EmailAdditionField = (props) => {
   return (
     <div>
       <EmailAddField Field>
-        <Row justify="center">
-          <Col span={16}>
+        <Row justify="center" gutter={16}>
+          <Col
+            sm={20}
+            md={24}
+            xs={20}
+            lg={18}
+            xl={14}
+            className="description-box"
+          >
             <Form
               form={form}
               {...formItemLayout}

@@ -110,7 +110,7 @@ const AddControl = (props) => {
   return (
     <AddCategoryContainer>
       <Row justify="center">
-        <Col span={16}>
+        <Col sm={20} md={24} xs={20} lg={18} xl={14}>
           <Form
             form={form}
             name="add_testcontrol"
@@ -147,6 +147,7 @@ const AddControl = (props) => {
             </Form.Item>
 
             <Form.Item
+              className="control-descplabel"
               label="Control Description"
               name="ControlDescription"
               rules={[
@@ -194,4 +195,7 @@ export default AddControl;
 const AddCategoryContainer = styled.div`
   background-color: #fefefe;
   padding-top: 30px;
+  /* .control-descplabel{
+
+  } */
 `;

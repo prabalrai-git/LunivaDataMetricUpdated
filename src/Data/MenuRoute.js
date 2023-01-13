@@ -10,36 +10,72 @@ export const AfterLoginData = [
     statePath: "inventory",
     isactive: MenuSettings.dashboard,
   },
-  // {
-  //   icon: "icon-line2-doc",
-  //   key: "misreports",
-  //   name: "MIS Reports",
-  //   path: "/datametric",
-  //   isactive: MenuSettings.misreports,
-  // },
+  {
+    icon: "icon-line2-doc",
+    key: "misreports",
+    name: "MIS Reports",
+    path: "/datametric",
+    statePath: "misreportStat",
+    isactive: MenuSettings.misreports,
+  },
   {
     icon: "icon-line-shopping-bag",
     key: "datametric",
     name: "Datametric",
+    // all menu in datametric appear here[menuroute.js]
     path: "/caredashboard",
     statePath: "datametric",
-    isactive: MenuSettings.datametrictab,
+    path: "/datametricdash",
+    statePath: "datametricStat",
+    isactive: MenuSettings.datametricdash,
   },
   {
     icon: "icon-stack2",
     key: "qcmanagement",
     name: "QC Management",
     path: "/qcdash",
-    statePath: "datametric",
-    isactive: MenuSettings.datametrictab,
+    statePath: "misStat",
+    // isactive: MenuSettings.datametrictab,
   },
   {
-    icon: "icon-chat",
+    icon: "icon-stack2",
+    key: "marketinganalysis",
+    name: "Marketing Analysis",
+    path: "/marketingdash",
+    statePath: "marketingStat",
+    isactive: MenuSettings.sms,
+  },
+  {
+    icon: "icon-beaker",
     key: "tatanalysis",
     name: "tatanalysis",
     path: "/tatanalysis",
-    statePath: "datametric",
-    isactive: MenuSettings.datametrictab,
+    statePath: "tatStat",
+    isactive: MenuSettings.tatanalysis,
+  },
+  {
+    icon: "icon-line2-screen-desktop",
+    key: "outsourcing",
+    name: "Outsourcing",
+    path: "/outsourceanalytics",
+    statePath: "outsourcingStat",
+    isactive: MenuSettings.outsourcing,
+  },
+  {
+    icon: "icon-chat",
+    key: "settings",
+    name: "Settings",
+    path: "/settingsserver",
+    statePath: "settingStat",
+    isactive: MenuSettings.settingsserver,
+  },
+  {
+    icon: "icon-paste",
+    key: "labstatus",
+    name: "Lab Status",
+    path: "/dynarep",
+    statePath: "labstatusStat",
+    isactive: MenuSettings.labstatus,
   },
 ];
 
@@ -223,13 +259,14 @@ export const dataMetricCon = [
     path: "/marketing",
     isactive: MenuSettings.marketing,
   },
-  {
-    icon: "icon-chat",
-    key: "tatanalysis",
-    name: "tat analysis",
-    path: "/tatanalysis",
-    isactive: MenuSettings.tatanalysis,
-  },
+  // {
+  //   icon: "icon-chat",
+  //   key: "tatanalysis",
+  //   name: "tat analysis",
+  //   path: "/tatanalysis",
+  //   statePath: "tatStat",
+  //   isactive: MenuSettings.tatanalysis,
+  // },
   //by ..
   {
     icon: "icon-chat",
@@ -311,6 +348,16 @@ export const dataMetricCon = [
   //   isactive: MenuSettings.bulknegative,
   // },
 ];
+export const tatanalysis = [
+  {
+    icon: "icon-chat",
+    key: "tatanalysis",
+    name: "tat analysis",
+    path: "/tatanalysis",
+    statePath: "tatStat",
+    isactive: MenuSettings.tatanalysis,
+  },
+];
 
 export const qcControlNav = [
   {
@@ -347,5 +394,143 @@ export const qcControlNav = [
     name: "Test Data",
     path: "/viewtestdata",
     isactive: MenuSettings.goodsout,
+  },
+];
+
+export const tatNav = [
+  {
+    icon: "icon-chat",
+    key: "tatanalysis",
+    name: "tat analysis",
+    path: "/tatanalysis",
+    isactive: MenuSettings.tatanalysis,
+    // statePath: "tatStat",
+  },
+
+  // by me==========
+  {
+    icon: "icon-list",
+    key: "tatGetTestList",
+    name: "Get Test List",
+    path: "/testList",
+    isactive: MenuSettings.tatanalysis,
+    // statePath: "tatStat",
+  },
+];
+export const marketinganalyticNav = [
+  {
+    icon: "icon-line-file",
+    key: "marketanlaytic",
+    name: "Analysis",
+    path: "/carddash",
+    isactive: MenuSettings.sms,
+  },
+  {
+    icon: "icon-chat-3",
+    key: "sms",
+    name: "sms",
+    path: "/sms",
+    isactive: MenuSettings.sms,
+  },
+];
+
+export const misreportNav = [
+  {
+    icon: "icon-line2-doc",
+    key: "misreports",
+    name: "MIS Reports",
+    path: "/datametric",
+    isactive: MenuSettings.misreports,
+  },
+  {
+    icon: "icon-bars1",
+    key: "viewProvience&DisticeWise",
+    name: "Provience Wise Report",
+    path: "viewProvience&DistrictWise",
+    isactive: MenuSettings.misreports,
+  },
+  {
+    icon: "icon-bars1",
+    key: "viewGeoGraphicalWise",
+    name: "Geographical Wise Report",
+    path: "viewGeoGraphicalWise",
+    isactive: MenuSettings.misreports,
+  },
+  {
+    icon: "icon-file-text",
+    key: "viewbillss",
+    name: "View Bill ",
+    path: "/addbill",
+    isactive: MenuSettings.misreports,
+  },
+];
+
+// Out Sourcing Report Summary
+export const outsourceNav = [
+  {
+    icon: "icon-line2-screen-desktop",
+    key: "outsourcing",
+    name: "Outsourcing",
+    path: "/outsourcing",
+    isactive: MenuSettings.outsourcing,
+  },
+];
+
+export const settingsNav = [
+  {
+    icon: "icon-envelope",
+    key: "Email",
+    name: "Email",
+    path: "/settingsemail",
+    isactive: MenuSettings.outsourcing,
+  },
+  {
+    icon: "icon-book",
+    key: "Report Format",
+    name: "report",
+    path: "/reportdata",
+    isactive: MenuSettings.outsourcing,
+  },
+  {
+    icon: "icon-picture",
+    key: "theme",
+    name: "Theme",
+    path: "/theme",
+    isactive: MenuSettings.outsourcing,
+  },
+];
+
+export const datametricNav = [
+  {
+    icon: "icon-line2-home",
+    key: "datametricdash",
+    name: "Dashboard ",
+    path: "/datametricdash",
+    isactive: MenuSettings.outsourcing,
+  },
+];
+
+export const labStatusNav = [
+  {
+    icon: "icon-file-alt",
+    key: "datametricdash",
+    name: "Test Status ",
+    path: "/dynarep",
+    isactive: MenuSettings.outsourcing,
+  },
+  {
+    icon: "icon-line-file",
+    key: "reportlist",
+    name: "Report List",
+    path: "/reportlist",
+    isactive: MenuSettings.outsourcing,
+  },
+  {
+    icon: "icon-lab",
+    key: "testanalytics",
+    name: "Test Name",
+    path: "/testanalytics",
+
+    isactive: MenuSettings.outsourcing,
   },
 ];

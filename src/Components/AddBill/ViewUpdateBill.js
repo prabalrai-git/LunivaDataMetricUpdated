@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { carelabStat, homePageName } from "../Common/StateList";
 import { useHistory } from "react-router-dom";
+import AppButton from "../Common/AppButton";
 
 const ViewUpdateBill = (props) => {
   const dispatch = useDispatch();
@@ -22,6 +23,13 @@ const ViewUpdateBill = (props) => {
   const [partylistdata, setPartyListData] = useState([]);
   const [patientinfo, setPatientInfo] = useState([]);
   const [finaldata, setFinaldata] = useState([]);
+
+  const windowopen = () => {
+    window.open(
+      `/${homePageName}/printlayout/${BILLID}/${FISCALYEAR}`,
+      "_blank"
+    );
+  };
 
   const loadPrintDataFun = (billId, fiscalYear) => {
     const ALLDATA = {
@@ -154,9 +162,9 @@ const ViewUpdateBill = (props) => {
                         <tr>
                           <th>SN</th>
                           <th>Test Name</th>
-                          <th>Rate</th>
+                          <th>Total</th>
                           <th>Discount Amount</th>
-                          <th>Price</th>
+                          <th>Grand Total</th>
                           <th>Round Amount</th>
                         </tr>
                       </thead>
@@ -176,7 +184,15 @@ const ViewUpdateBill = (props) => {
                       </tbody>
                     </table>
                     <Row>
-                      <Col span={6}>
+                      {/* <Col span={6}> */}
+                      <Col
+                        sm={12}
+                        md={12}
+                        xs={24}
+                        lg={14}
+                        xl={6}
+                        className="description-box"
+                      >
                         <Descriptions
                           bordered
                           layout="horizontal"
@@ -201,7 +217,7 @@ const ViewUpdateBill = (props) => {
                       </Col>
                       <Col span={18}>
                         <PrintContainer>
-                          <Button
+                          {/* <Button
                             onClick={() => {
                               window.open(
                                 `/${homePageName}/printlayout/${BILLID}/${FISCALYEAR}`,
@@ -210,7 +226,12 @@ const ViewUpdateBill = (props) => {
                             }}
                           >
                             Print
-                          </Button>
+                          </Button> */}
+                          <AppButton
+                            buttonTitle="Print"
+                            buttonOnClick={windowopen}
+                            printprimarybutton
+                          ></AppButton>
                         </PrintContainer>
                       </Col>
                     </Row>

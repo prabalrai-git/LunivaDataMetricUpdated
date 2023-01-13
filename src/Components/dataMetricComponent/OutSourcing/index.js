@@ -53,6 +53,7 @@ const Index = () => {
       </div>
       <div className="mainContainer financeCards">
         <PageHeader
+          // className="exportcsvprint"
           pageTitle={"Out Sourcing Report"}
           printFileName
           csvDataName={"outsourcingReport.csv"}

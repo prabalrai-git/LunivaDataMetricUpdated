@@ -5,6 +5,13 @@ import {
   settingsMenu,
   dataMetricCon,
   qcControlNav,
+  tatNav,
+  marketinganalyticNav,
+  misreportNav,
+  outsourceNav,
+  settingsNav,
+  datametricNav,
+  labStatusNav,
 } from "../../Data/MenuRoute";
 import { NavLink } from "react-router-dom";
 import comlogo from "../../assets/images/logobig1.png";
@@ -13,6 +20,16 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { Layout, Menu } from "antd";
 import { useLocation } from "react-router-dom";
 import { useCareLabRoute } from "../../Data/CareLabRoute";
+import {
+  misStat,
+  tatStat,
+  marketingStat,
+  misreportStat,
+  outsourcingStat,
+  settingStat,
+  datametricStat,
+  labstatusStat,
+} from "./StateList";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -22,11 +39,13 @@ const SideNav = (props) => {
   const { statePass } = props;
   const data = MenuRoute;
   const menuData = settingsMenu;
+  const qcmenuData = qcControlNav;
   const dataMetricdata = dataMetricCon;
   const [collpsed, setcollpsed] = useState(false);
   const [showSettings, setShowSettings] = useState(true);
   const [dataMetric, setdataMetric] = useState(true);
   const [showinventory, setshowinventory] = useState(true);
+
   const carelabNavData = useCareLabRoute();
   function oncollpse() {
     setcollpsed(!collpsed);
@@ -90,7 +109,6 @@ const SideNav = (props) => {
                   })
                 ) : ''
             } */}
-
             {showinventory ? (
               // <SubMenu key="set0" title='Inventory' icon={<i className='icon-line2-settings'></i>}>
               //   {
@@ -122,7 +140,6 @@ const SideNav = (props) => {
               // </SubMenu>
               ""
             )}
-
             {showSettings ? (
               <>
                 {location.state === "inventory" && (
@@ -157,7 +174,6 @@ const SideNav = (props) => {
             ) : (
               ""
             )}
-
             {dataMetric &&
               location.state === "datametric" &&
               carelabNavData.mainRoute.map((e) =>
@@ -206,57 +222,311 @@ const SideNav = (props) => {
                   <></>
                 )
               )}
-
-            {/* {
-              dataMetric ? (
-                // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
-                //   {
-                <>
-                  {
-                    location.state === 'datametric' &&
-                    <>
-                    <SubMenu key="set4" title='Qc Control' icon={<i className='icon-line2-settings'></i>}>
-                        {
-                          qcControlNav.map(e => {
-                            if (e.isactive) {
-                              return (
-                                <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                                  <NavLink to={{
-                                    pathname: e?.path,
-                                    state: location.state
-                                  }} className='navLInk' >
-                                    {e.name}
-                                  </NavLink>
-                                </Menu.Item>
-                              )
-                            }
-                          })
-                        }
-                      </SubMenu>
-                      {
-                        dataMetricdata.map(e => {
-                          if (e.isactive) {
-                            return (
-                              <Menu.Item key={e.key} icon={<i className={e.icon}></i>}>
-                                <NavLink to={{
+            {misStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "misStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Qc Control"
+                      icon={<i className="icon-stack2"></i>}
+                    >
+                      {qcControlNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
                                   pathname: e?.path,
-                                  state: location.state
-                                }} className='navLInk' >
-                                  {e.name}
-                                </NavLink>
-                              </Menu.Item>
-                            )
-                          }
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
                         }
-                        )
-                      }
-                    </>
-                  }
-                </>
-                //   }
-                // </SubMenu>
-              ) : ''
-            } */}
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+            {tatStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "tatStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Tat Analytics"
+                      icon={<i className="icon-beaker"></i>}
+                    >
+                      {tatNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
+                                  pathname: e?.path,
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
+                        }
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+            {/* marketinganalyticNav */}
+            {marketingStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "marketingStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Marketing"
+                      icon={<i className="icon-stack2"></i>}
+                    >
+                      {marketinganalyticNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
+                                  pathname: e?.path,
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
+                        }
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+            {misreportStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "misreportStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Mis Reports"
+                      icon={<i className="icon-book"></i>}
+                    >
+                      {misreportNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
+                                  pathname: e?.path,
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
+                        }
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+            {outsourcingStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "outsourcingStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Outsource"
+                      icon={<i className="icon-line2-screen-desktop"></i>}
+                    >
+                      {outsourceNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
+                                  pathname: e?.path,
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
+                        }
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+            {settingStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "settingStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Settings"
+                      icon={<i className="icon-line2-settings"></i>}
+                    >
+                      {settingsNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
+                                  pathname: e?.path,
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
+                        }
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+            {datametricStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "datametricStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Datametric"
+                      icon={<i className="icon-line-shopping-bag"></i>}
+                    >
+                      {datametricNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
+                                  pathname: e?.path,
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
+                        }
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
+            {labstatusStat ? (
+              // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
+              //   {
+              <>
+                {location.state === "labstatusStat" && (
+                  <>
+                    <SubMenu
+                      key="set4"
+                      title="Lab Status"
+                      icon={<i className="icon-line2-screen-desktop"></i>}
+                    >
+                      {labStatusNav.map((e) => {
+                        if (e.isactive) {
+                          return (
+                            <Menu.Item
+                              key={e.key}
+                              icon={<i className={e.icon}></i>}
+                            >
+                              <NavLink
+                                to={{
+                                  pathname: e?.path,
+                                  state: location.state,
+                                }}
+                                className="navLInk"
+                              >
+                                {e.name}
+                              </NavLink>
+                            </Menu.Item>
+                          );
+                        }
+                      })}
+                    </SubMenu>
+                  </>
+                )}
+              </>
+            ) : (
+              ""
+            )}
           </Menu>
         </Sider>
       </Scrollbars>

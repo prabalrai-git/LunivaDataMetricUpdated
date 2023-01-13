@@ -114,7 +114,23 @@ h4 {
   letter-spacing: 1.2px;
   color: var(--titleTxt);
 }
-
+@media only screen and (max-width: 480px) {
+  .pageTtitle {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .pageTtitle {
+    font-size: 24px !important;
+    margin-bottom: 4px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .pageTtitle {
+    font-size: 25px !important;
+    margin-bottom: 4px;
+  }
+}
 a {
   color: var(--primary);
 }

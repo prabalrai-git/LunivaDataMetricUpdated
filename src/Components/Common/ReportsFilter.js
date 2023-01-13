@@ -235,11 +235,11 @@ function ReportsFilter({ ...props }) {
             </Col>
 
             {dateRange && (
-              <Col lg={8} md={12} sm={11} xs={24}>
+              <Col lg={8} md={10} sm={12} xs={22}>
                 <span className="labelTop">Date Range</span>
                 <Datepicker
-                  className
                   //   defaultValuer={fromDate}
+                  className="responsivedate"
                   onChanger={(value) => {
                     setDateRanges(value);
                     setFromDate(value[0].format("YYYY-MM-DD"));
@@ -297,10 +297,12 @@ function ReportsFilter({ ...props }) {
                 >
                   <CSVLink
                     filename={csvDataName}
-                    className="btn ant-btn btn-primary btn-primary--outline"
+                    className="csvbutton"
+                    // className="btn ant-btn btn-primary btn-primary--outline"
                     data={csvData}
                   >
-                    Export CSV
+                    {/* Export CSV */}
+                    <i class="icon-file">Export Csv</i>
                   </CSVLink>
                 </div>
               )}
@@ -397,6 +399,9 @@ const FilterContainer = styled.div`
     .filterRow {
       margin-top: 15px;
     }
+    .pageTtitle {
+      font-size: 24px !important;
+    }
   }
   @media only screen and (max-width: 576px) {
     .excelprint-section {
@@ -414,6 +419,9 @@ const FilterContainer = styled.div`
       top: -23px !important;
       display: flex;
       justify-content: space-between;
+    }
+    .ant-picker {
+      width: 137% !important;
     }
   }
 `;

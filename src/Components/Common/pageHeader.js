@@ -155,76 +155,78 @@ const PageHeader = ({
         </Link>
       </div> */}
       {/* for msi only end */}
-      <Row justify="space-between align-center">
-        <span className="pageTtitle">{pageTitle}</span>
-        {/* style={{ gap: '10px' }} */}
-        <Row>
-          <Space size={[8, 16]} wrap>
-            {forCon && (
-              <AppButton
-                buttonTitle={forCon}
-                buttonOnClick={forConButtonClick}
-                // primaryBtn
-                addprimarybutton
-              ></AppButton>
-            )}
+      <div>
+        <Row justify="space-between align-center">
+          <span className="pageTtitle">{pageTitle}</span>
+          {/* style={{ gap: '10px' }} */}
+          <Row className="exportcsvprint">
+            <Space size={[8, 16]} wrap>
+              {forCon && (
+                <AppButton
+                  buttonTitle={forCon}
+                  buttonOnClick={forConButtonClick}
+                  // primaryBtn
+                  addprimarybutton
+                ></AppButton>
+              )}
 
-            {buttonTitle && (
-              <AppButton
-                buttonTitle={buttonTitle}
-                buttonOnClick={buttonOnClick}
-                // primaryBtn
-                addprimarybutton
-              ></AppButton>
-            )}
+              {buttonTitle && (
+                <AppButton
+                  buttonTitle={buttonTitle}
+                  buttonOnClick={buttonOnClick}
+                  // primaryBtn
+                  addprimarybutton
+                ></AppButton>
+              )}
 
-            {forGroup && (
-              <AppButton
-                buttonTitle={forGroup}
-                buttonOnClick={forGroupButtonClick}
-                // primaryBtn
-                addprimarybutton
-              ></AppButton>
-            )}
+              {forGroup && (
+                <AppButton
+                  buttonTitle={forGroup}
+                  buttonOnClick={forGroupButtonClick}
+                  // primaryBtn
+                  addprimarybutton
+                ></AppButton>
+              )}
 
-            {forData && (
+              {forData && (
+                <AppButton
+                  buttonTitle={forData}
+                  buttonOnClick={forDataButtonClick}
+                  // primaryBtn
+                  addprimarybutton
+                ></AppButton>
+              )}
+            </Space>
+            {csvDataName && (
+              <div className="link">
+                <i class="fas fa-cloud">
+                  <CSVLink
+                    filename={csvDataName}
+                    // className="btn ant-btn btn-primary btn-primary--outline"
+                    className="csvbutton"
+                    data={csvData}
+                  >
+                    {/* <i class="icon-frown">Export CSV</i> */}
+                    <i class="icon-file">
+                      Export Csv
+                      {/* <span>Export CSV</span> */}
+                    </i>
+                  </CSVLink>
+                </i>
+              </div>
+            )}
+            {printFileName && (
               <AppButton
-                buttonTitle={forData}
-                buttonOnClick={forDataButtonClick}
+                buttonTitle="Print"
+                buttonOnClick={printHandle}
                 // primaryBtn
-                addprimarybutton
+                // addprimarybutton
+                printprimarybutton
               ></AppButton>
             )}
-          </Space>
-          {csvDataName && (
-            <div className="link">
-              <i class="fas fa-cloud">
-                <CSVLink
-                  filename={csvDataName}
-                  // className="btn ant-btn btn-primary btn-primary--outline"
-                  className="csvbutton"
-                  data={csvData}
-                >
-                  {/* <i class="icon-frown">Export CSV</i> */}
-                  <i class="icon-file">
-                    Export Csv
-                    {/* <span>Export CSV</span> */}
-                  </i>
-                </CSVLink>
-              </i>
-            </div>
-          )}
-          {printFileName && (
-            <AppButton
-              buttonTitle="Print"
-              buttonOnClick={printHandle}
-              // primaryBtn
-              // addprimarybutton
-              printprimarybutton
-            ></AppButton>
-          )}
+          </Row>
         </Row>
-      </Row>
+      </div>
     </PageHeaderContainer>
   );
 };
@@ -262,4 +264,6 @@ const PageHeaderContainer = styled.div`
 
   } */
   /* for MIS end */
+  /* exportcsvprint */
+  /* responsive for ousourcing report */
 `;

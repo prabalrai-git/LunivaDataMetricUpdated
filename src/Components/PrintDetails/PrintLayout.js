@@ -204,8 +204,8 @@ const PrintLayout = (props) => {
                     <tr>
                       <th>Total</th>
                       <th></th>
-                      <th className="money">{billDetails[0].Price}</th>
-                      {/* <th></th> */}
+                      {/* <th className="money">{billDetails[0].Price}</th> */}
+                      <th></th>
                       <th className="money grandTotalAmount">
                         {billDetails[0].TotalPrice}
                       </th>
@@ -222,17 +222,20 @@ const PrintLayout = (props) => {
                         <span>Paid Amount</span> <br></br>
                       </th>
                       <td className="money" colSpan="3">
-                        <span>{billDetails[0].TotalPrice}</span>
-                        <br></br>
+                        {/* <span>{billDetails[0].TotalPrice}</span>
+                        <br></br> */}
                         {billItemDetails.map((billItemVal, index) => (
                           <>
+                            <span>{billItemVal.BillPriceFinal}</span>
+                            <br></br>
                             <span>{billItemVal.BillDiscountAmount} </span>
                             <br></br>
                             <span>{billItemVal.RoundAmount}</span>
                             <br></br>
+                            <span>{billItemVal.BillPriceFinal}</span>
+                            <br></br>
                           </>
                         ))}
-                        <span>{billDetails[0].TotalPrice}</span> <br></br>
                         <span>{billDetails[0].BillAmtPaid}</span> <br></br>
                       </td>
                     </tr>
