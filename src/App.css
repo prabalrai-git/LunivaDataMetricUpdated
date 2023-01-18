@@ -276,3 +276,7 @@ a {
 .icon-file::before{
   margin-right: 4px;
 }
+
+.ant-input-group-wrapper{
+  width: 100% !important;
+}

@@ -214,7 +214,9 @@ const Index = () => {
                 <Col span={24}>
                   <div className={`dContainer ${cardBkg}`}>
                     <div className="detail ">
-                      <span>{daysNames[date.getDay()]}</span>
+                      <span className="dayname">
+                        {daysNames[date.getDay()]}
+                      </span>
                       <h2>
                         {date.getHours()} : {date.getMinutes()}
                       </h2>
@@ -286,6 +288,9 @@ const FinenceDashbordContainer = styled.div`
       border-bottom: 1px solid #c6c6cb;
     }
   }
+  /* .dayname {
+    font-size: 25px !important;
+  } */
 
   .dContainer {
     height: 200px;

@@ -304,7 +304,7 @@ const DashbordContainer = styled.div`
         padding: 0;
       }
       span{
-        font-size: 30px;
+        font-size: 24px;
         text-transform: capitalize;
         color: #232325;
         margin: 0px;
