@@ -22,7 +22,7 @@ import {
 } from "../../../services/qcService";
 import { formItemLayout } from "../../Common/FormItemLayout";
 import { tokenString } from "../../Common/HandleUser";
-import { carelabStat } from "../../Common/StateList";
+import { carelabStat, misStat } from "../../Common/StateList";
 import moment from "moment";
 
 const AddData = (props) => {
@@ -85,7 +85,8 @@ const AddData = (props) => {
           setTimeout(() => {
             history.push({
               pathname: "/lcchart",
-              state: carelabStat,
+              // state: carelabStat,
+              state: misStat,
             });
           }, 1000);
         } else {

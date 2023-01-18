@@ -1,73 +1,81 @@
 import React from "react";
-import styled from 'styled-components'
-import PageHeader from '../Common/pageHeader'
-import { NavLink } from 'react-router-dom'
-import { Row, Col } from 'antd'
-import { carelabStat } from "../Common/StateList";
+import styled from "styled-components";
+import PageHeader from "../Common/pageHeader";
+import { NavLink } from "react-router-dom";
+import { Row, Col } from "antd";
+import {
+  carelabStat,
+  marketingStat,
+  misreportStat,
+  misStat,
+} from "../Common/StateList";
 
 const data = [
-    {
-        name: 'Daily Summary',
-        pathName: 'dailysummary'
-    },
-    {
-        name: 'Daily Transaction',
-        pathName: 'dailytransaction'
-    },
-    {
-        name: 'Requestor Report',
-        pathName: 'requestor'
-    },
-    {
-        name: 'Referer Report',
-        pathName: 'referer'
-    },
-    {
-        name: 'Requestor Sales Summary',
-        pathName: 'requestorsales'
-    },
-    // {
-    //     name: 'Test Type Report',
-    //     pathName: 'testtype'
-    // },
-]
+  {
+    name: "Daily Summary",
+    pathName: "dailysummary",
+    state: misreportStat,
+  },
+  {
+    name: "Daily Transaction",
+    pathName: "dailytransaction",
+    state: misreportStat,
+  },
+  {
+    name: "Requestor Report",
+    pathName: "requestor",
+    state: misreportStat,
+  },
+  {
+    name: "Referer Report",
+    pathName: "referer",
+    state: misreportStat,
+  },
+  {
+    name: "Requestor Sales Summary",
+    pathName: "requestorsales",
+    state: misreportStat,
+  },
+  // {
+  //     name: 'Test Type Report',
+  //     pathName: 'testtype'
+  // },
+];
 
 const CareLab = () => {
+  return (
+    <CareLabContain>
+      <div className="maiTopContainer">
+        <PageHeader pageTitle="MIS Reports"></PageHeader>
+      </div>
+      <div className="contents">
+        <Row gutter={[16, 16]}>
+          {data.map((e) => (
+            <Col sm={24} md={8} xs={24} lg={6} key={e.pathName}>
+              <NavLink
+                key={e.pathName}
+                to={{
+                  pathname: `/datametric/${e.pathName}`,
+                  //   state: carelabStat,
+                  state: misreportStat,
+                }}
+              >
+                <div className="cButton">
+                  <span>{e.name}</span>
+                </div>
+              </NavLink>
+            </Col>
+          ))}
+        </Row>
+      </div>
+    </CareLabContain>
+  );
+};
 
-    return (
-        <CareLabContain>
-            <div className="maiTopContainer">
-                <PageHeader pageTitle="MIS Reports"></PageHeader>
-            </div>
-            <div className="contents">
-                <Row gutter={[16, 16]}>
-                    {
-                        data.map(e => (
-                            <Col sm={24} md={8} xs={24} lg={6} key={e.pathName}>
-                                <NavLink
-                                    key={e.pathName}
-                                    to={{
-                                        pathname: `/datametric/${e.pathName}`,
-                                        state: carelabStat
-                                    }}>
-                                    <div className="cButton">
-                                        <span>{e.name}</span>
-                                    </div>
-                                </NavLink>
-                            </Col>
-
-                        ))
-                    }
-                </Row>
-            </div>
-        </CareLabContain>
-    )
-}
-
-export default CareLab
+export default CareLab;
 
 const CareLabContain = styled.div`
-  .cButton{
+  .cButton {
     height: 120px;
     width: 100%;
     border-radius: 10px;
@@ -75,36 +83,35 @@ const CareLabContain = styled.div`
     justify-content: center;
     align-items: center;
     background: #fefefe;
-    box-shadow: 0 2px 22px 0 rgba( 31, 38, 135, 0.17 );
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
+    box-shadow: 0 2px 22px 0 rgba(31, 38, 135, 0.17);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border-radius: 10px;
-    span{
+    span {
       font-size: 16px;
       letter-spacing: 1.1px;
       text-transform: uppercase;
       color: var(--titleTxt);
       text-align: center;
-      i{
+      i {
         font-size: 25px;
         color: var(--primary);
       }
     }
-    
-    @media(max-width: 768px){
-      span{
-      font-size: 16px;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      margin-right: 10px;
-      i{
-        font-size: 25px;
+
+    @media (max-width: 768px) {
+      span {
+        font-size: 16px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        margin-right: 10px;
+        i {
+          font-size: 25px;
+        }
       }
     }
-    }
-    @media(max-width: 500px){
+    @media (max-width: 500px) {
       height: 80px;
     }
-   
   }
-  `
+`;

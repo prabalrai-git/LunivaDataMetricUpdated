@@ -16,7 +16,7 @@ import { Line } from "react-chartjs-2";
 import { useState } from "react";
 import CarelabFilter from "../../Common/CarelabFilter";
 import PageHeader from "../../Common/pageHeader";
-import { carelabStat } from "../../Common/StateList";
+import { carelabStat, misStat } from "../../Common/StateList";
 import { Table } from "antd";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -245,21 +245,21 @@ const NewLJChart = () => {
           buttonOnClick={() =>
             history.push({
               pathname: "/addtestcontrol",
-              state: carelabStat,
+              state: misStat,
             })
           }
           forCon={"Add Control"}
           forConButtonClick={() =>
             history.push({
               pathname: "/addcontroltest",
-              state: carelabStat,
+              state: misStat,
             })
           }
           forGroup={`Add Test`}
           forGroupButtonClick={() =>
             history.push({
               pathname: "/addcontroltesttest",
-              state: carelabStat,
+              state: misStat,
             })
           }
           forData={`Add Data`}

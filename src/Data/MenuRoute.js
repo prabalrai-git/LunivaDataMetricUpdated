@@ -1,4 +1,5 @@
 import { ItemName } from "../Components/Common/ItemToReagent";
+import { marketingStat, misStat } from "../Components/Common/StateList";
 import { MenuSettings } from "./MenuSettings";
 
 export const AfterLoginData = [
@@ -361,28 +362,29 @@ export const tatanalysis = [
 
 export const qcControlNav = [
   {
-    icon: "icon-line-shopping-bag",
+    icon: "icon-bar-chart",
     key: "lcchart",
     name: "LJ Chart",
     path: "/lcchart",
     isactive: MenuSettings.goodsout,
+    statePath: misStat,
   },
   {
-    icon: "icon-line-shopping-bag",
+    icon: "icon-lab2",
     key: "addtestcontrol",
     name: "Test Control",
     path: "/viewtestcontrol",
     isactive: MenuSettings.goodsout,
   },
   {
-    icon: "icon-line-shopping-bag",
+    icon: "icon-lab2",
     key: "viewcontroltest",
     name: "Control Test",
     path: "/viewcontroltest",
     isactive: MenuSettings.goodsout,
   },
   {
-    icon: "icon-line-shopping-bag",
+    icon: "icon-bars1",
     key: "viewcontroltesttest",
     name: "Tests",
     path: "/viewcontroltesttest",
@@ -393,6 +395,13 @@ export const qcControlNav = [
     key: "viewtestdata",
     name: "Test Data",
     path: "/viewtestdata",
+    isactive: MenuSettings.goodsout,
+  },
+  {
+    icon: "icon-line-shopping-bag",
+    key: "viewsdmean",
+    name: "Sd Mean",
+    path: "/viewcontrolsdmean",
     isactive: MenuSettings.goodsout,
   },
 ];
@@ -431,6 +440,7 @@ export const marketinganalyticNav = [
     name: "sms",
     path: "/sms",
     isactive: MenuSettings.sms,
+    statePath: marketingStat,
   },
 ];
 

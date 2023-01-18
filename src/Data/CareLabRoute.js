@@ -1,6 +1,11 @@
 // import useTokenHook from "../CustomHook/useTokenHook";
 
-import { datametricStat } from "../Components/Common/StateList";
+import {
+  datametricStat,
+  marketingStat,
+  misStat,
+  tatStat,
+} from "../Components/Common/StateList";
 import { MenuSettings } from "./MenuSettings";
 
 export const useCareLabRoute = () => {
@@ -111,7 +116,7 @@ export const useCareLabRoute = () => {
       key: "tatanalysis",
       name: "tat analysis",
       path: "/tatanalysis",
-      statePath: "tatStat",
+      statePath: tatStat,
     },
 
     // by me==========
@@ -120,7 +125,7 @@ export const useCareLabRoute = () => {
       key: "tatGetTestList",
       name: "Get Test List",
       path: "/testList",
-      statePath: "tatStat",
+      statePath: tatStat,
     },
   ];
   const dateChangeNav = [
@@ -151,36 +156,42 @@ export const useCareLabRoute = () => {
       key: "lcchart",
       name: "LJ Chart",
       path: "/lcchart",
+      statePath: misStat,
     },
     {
       icon: "icon-lab2",
       key: "addtestcontrol",
       name: "Test Control",
       path: "/viewtestcontrol",
+      statePath: misStat,
     },
     {
       icon: "icon-lab2",
       key: "viewcontroltest",
       name: "Control Test",
       path: "/viewcontroltest",
+      statePath: misStat,
     },
     {
       icon: "icon-lab2",
       key: "viewcontroltesttest",
       name: "Tests",
       path: "/viewcontroltesttest",
+      statePath: misStat,
     },
     {
       icon: "icon-bars1",
       key: "viewtestdata",
       name: "Test Data",
       path: "/viewtestdata",
+      statePath: misStat,
     },
     {
       icon: "icon-bars1",
       key: "viewcontrolsdmean",
       name: "SD Mean",
       path: "/viewcontrolsdmean",
+      statePath: misStat,
     },
   ];
 
@@ -443,7 +454,7 @@ export const useCareLabRoute = () => {
       key: "sms",
       name: "sms",
       path: "/sms",
-      statePath: "marketingStat",
+      statePath: marketingStat,
     },
     {
       icon: "icon-line2-settings",

@@ -10,7 +10,7 @@ import {
 } from "antd";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { carelabStat } from "../../Common/StateList";
+import { carelabStat, marketingStat, misStat } from "../../Common/StateList";
 import AppButton from "../../Common/AppButton";
 
 function AddSMSDetails() {
@@ -66,7 +66,7 @@ function AddSMSDetails() {
           newLoadings[index] = false;
           return history.push({
             pathname: "/sms",
-            state: carelabStat,
+            state: marketingStat,
           });
         });
       }, 2000);

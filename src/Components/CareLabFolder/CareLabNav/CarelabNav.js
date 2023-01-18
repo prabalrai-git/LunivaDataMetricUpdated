@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useCareLabRoute } from "../../../Data/CareLabRoute";
-import { carelabStat } from "../../Common/StateList";
+import { carelabStat, misreportStat } from "../../Common/StateList";
 
 const CarelabNavSettings = () => {
   const carelabNavData = useCareLabRoute();
@@ -42,7 +42,10 @@ const CarelabNavSettings = () => {
       rName = "testAnalysisNav";
     } else if (pathname[1] === "newReports") {
       rName = "newReportsNav";
+    } else if (pathname[1] === "misreportStat") {
+      rName = "misreportStat";
     }
+
     setReturnName(rName);
   }, [location.pathname]);
 
@@ -86,7 +89,8 @@ const CarelabNavSettings = () => {
                   <NavLink
                     to={{
                       pathname: e.path,
-                      state: carelabStat,
+                      // state: carelabStat,
+                      state: misreportStat,
                     }}
                   >
                     <div className="cButton">

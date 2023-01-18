@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Filter from "../../Common/Filter";
 import PageHeader from "../../Common/pageHeader";
-import { carelabStat, inventoryStat } from "../../Common/StateList";
+import {
+  carelabStat,
+  inventoryStat,
+  marketingStat,
+} from "../../Common/StateList";
 import { Table } from "antd";
 import CarelabFilter from "../../Common/CarelabFilter";
 import { GetSMSConsumptionDetail } from "../../../services/careLabService";
@@ -75,7 +79,8 @@ function Sms() {
           buttonOnClick={() =>
             history.push({
               pathname: "./sms/add",
-              state: carelabStat,
+              // state: carelabStat,
+              state: marketingStat,
             })
           }
         />

@@ -6,7 +6,7 @@ import BottomNav from "../Components/Common/BottomNav";
 import MobileNav from "../Components/Common/MobileNav";
 import { Layout } from "antd";
 import { Link, useLocation } from "react-router-dom";
-import { carelabStat } from "../Components/Common/StateList";
+import { carelabStat, marketingStat } from "../Components/Common/StateList";
 import CareLabNav from "../Components/Common/CareLabNav";
 // https://nepal-weather-api.herokuapp.com/api/?place=all
 
@@ -63,6 +63,15 @@ const AppLayout = (props) => {
 
             {props.showSider ? (
               location.state === carelabStat ? (
+                <CareLabNav />
+              ) : (
+                <BottomNav />
+              )
+            ) : (
+              ""
+            )}
+            {props.showSider ? (
+              location.state === marketingStat ? (
                 <CareLabNav />
               ) : (
                 <BottomNav />

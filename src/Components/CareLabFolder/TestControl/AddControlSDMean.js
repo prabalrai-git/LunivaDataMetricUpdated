@@ -24,7 +24,7 @@ import {
 import { formItemLayout } from "../../Common/FormItemLayout";
 import { tokenString } from "../../Common/HandleUser";
 import moment from "moment";
-import { carelabStat } from "../../Common/StateList";
+import { carelabStat, misStat } from "../../Common/StateList";
 import { useControlDetails } from "../../../CustomHook/useControlDetails";
 
 const AddControlSDMean = (props) => {
@@ -97,7 +97,7 @@ const AddControlSDMean = (props) => {
           setTimeout(() => {
             history.push({
               pathname: "/viewcontrolsdmean",
-              state: carelabStat,
+              state: misStat,
             });
           }, 1000);
         } else {

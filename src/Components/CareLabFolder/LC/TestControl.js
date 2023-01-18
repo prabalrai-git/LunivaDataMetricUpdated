@@ -22,7 +22,7 @@ import {
 import { formItemLayout } from "../../Common/FormItemLayout";
 import { tokenString } from "../../Common/HandleUser";
 import moment from "moment";
-import { carelabStat } from "../../Common/StateList";
+import { carelabStat, misStat } from "../../Common/StateList";
 
 const TestControl = (props) => {
   const history = useHistory();
@@ -97,7 +97,7 @@ const TestControl = (props) => {
           setTimeout(() => {
             history.push({
               pathname: "/viewtestcontrol",
-              state: carelabStat,
+              state: misStat,
             });
           }, 1000);
         } else {
