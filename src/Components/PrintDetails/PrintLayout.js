@@ -198,20 +198,23 @@ const PrintLayout = (props) => {
                           {billItemVal.BillDiscountAmount}
                         </td> */}
                         {/* <td className="money">{billItemVal.RoundAmount}</td> */}
-                        <td className="money">{billItemVal.BillPriceFinal}</td>
+                        <td className="money">{billItemVal.billPrice}</td>
                       </tr>
                     ))}
-                    <tr>
-                      <th>Total</th>
-                      <th></th>
-                      {/* <th className="money">{billDetails[0].Price}</th> */}
-                      <th></th>
-                      <th className="money grandTotalAmount">
-                        {billDetails[0].TotalPrice}
-                      </th>
-                      <th className="money"></th>
-                      {/* {billDetails[0].BillDiscountPrice} */}
-                    </tr>
+                    {billItemDetails.map((billItemVal, index) => (
+                      <tr>
+                        <th>Total</th>
+                        <th></th>
+                        {/* <th className="money">{billDetails[0].Price}</th> */}
+                        <th></th>
+                        <th className="money grandTotalAmount">
+                          {/* {billDetails[0].TotalPrice} */}
+                          {billItemVal.billPrice}
+                        </th>
+                        <th className="money"></th>
+                        {/* {billDetails[0].BillDiscountPrice} */}
+                      </tr>
+                    ))}
                     <tr>
                       <th></th>
                       <th className="total-below">
@@ -226,13 +229,13 @@ const PrintLayout = (props) => {
                         <br></br> */}
                         {billItemDetails.map((billItemVal, index) => (
                           <>
-                            <span>{billItemVal.BillPriceFinal}</span>
+                            <span>{billItemVal.billPrice}</span>
                             <br></br>
                             <span>{billItemVal.BillDiscountAmount} </span>
                             <br></br>
                             <span>{billItemVal.RoundAmount}</span>
                             <br></br>
-                            <span>{billItemVal.BillPriceFinal}</span>
+                            <span>{billItemVal.billPrice}</span>
                             <br></br>
                           </>
                         ))}
