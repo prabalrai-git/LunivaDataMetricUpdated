@@ -235,7 +235,8 @@ const PrintLayout = (props) => {
                             <br></br>
                             <span>{billItemVal.RoundAmount}</span>
                             <br></br>
-                            <span>{billItemVal.billPrice}</span>
+                            <span>{billItemVal.BillPriceFinal}</span>
+
                             <br></br>
                           </>
                         ))}
