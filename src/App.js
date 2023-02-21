@@ -271,7 +271,7 @@ function App() {
                 // new
                 <PrivateRouter
                   exact
-                  path="/addbill"
+                  path="/datametric/addbill"
                   component={AsyncAddBill}
                   layout={AsyncAppLayout}
                   showSider
@@ -1410,7 +1410,7 @@ function App() {
           />
           <PrivateRouter
             exact
-            path="/viewProvience&DistrictWise"
+            path="/datametric/viewProvience&DistrictWise"
             component={AsyncProvienceDistrictWise}
             layout={AsyncAppLayout}
             forEdit
@@ -1435,7 +1435,7 @@ function App() {
           />
           <PrivateRouter
             exact
-            path="/viewGeoGraphicalWise"
+            path="/datametric/viewGeoGraphicalWise"
             component={AsyncGeoGraphicalWise}
             layout={AsyncAppLayout}
             forEdit

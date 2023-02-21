@@ -11,7 +11,7 @@ const CarelabNavSettings = () => {
   const newPa = window.location.pathname.split("/")[3];
   const location = useLocation();
 
-  console.log(location.pathname);
+  // console.log(location.pathname, "this si spathat name");
 
   const handleClick = (e) => {
     // setNewPath(window.location.pathname.split('/')[2])
@@ -85,12 +85,17 @@ const CarelabNavSettings = () => {
           carelabNavData[returnName].map((e) =>
             e.showTab !== false ? (
               <Col sm={24} md={12} xs={12} lg={12} xl={8}>
-                <div key={e.name} onClick={() => handleClick(e.path)}>
+                <div
+                  key={e.name}
+                  onClick={() => {
+                    handleClick(e.path);
+                  }}
+                >
                   <NavLink
                     to={{
                       pathname: e.path,
                       // state: carelabStat,
-                      state: misreportStat,
+                      state: e.statePath,
                     }}
                   >
                     <div className="cButton">

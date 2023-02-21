@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { MenuRoute } from "../Data/MenuRoute";
 import imgOne from "../assets/images/logobig1.png";
 import { Col, Row } from "antd";
@@ -43,6 +43,9 @@ const DashBoardContainer = () => {
     "nov",
     "dec",
   ];
+
+  // const location = useLocation();
+  // console.log(location.pathname, "this si spathat name");
 
   useEffect(() => {
     var timerID = setInterval(() => tick(), 1000);
@@ -231,7 +234,7 @@ const DashbordContainer = styled.div`
     -webkit-backdrop-filter: blur( 4px );
     border-radius: 10px;
     span{
-      font-size: 20px;
+      font-size: 16px;
       letter-spacing: 1.4px;
       text-transform: uppercase;
       color: var(--titleTxt);

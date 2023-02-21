@@ -16,6 +16,7 @@ import {
 import PageHeader from "../../Common/pageHeader";
 import ReportsFilter from "../../Common/ReportsFilter";
 import MainPageChart from "./MainPageChart";
+import { NavLink, useLocation } from "react-router-dom";
 
 function ProvienceDistrictWise() {
   const [states, setStates] = useState([]);
@@ -132,6 +133,8 @@ function ProvienceDistrictWise() {
   //   todate: val[1].format("YYYY-MM-DD"),
   //   SearchType: val.SearchType !== undefined ? val.SearchType : 1,
   // };
+  const location = useLocation();
+  console.log(location, "123456");
 
   return (
     <>

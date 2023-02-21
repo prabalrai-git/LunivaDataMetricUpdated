@@ -101,7 +101,7 @@ function AllRoute() {
       />
       <PrivateRouter
         exact
-        path="/addbill"
+        path="/datametric/addbill"
         component={AsyncAddBill}
         layout={AsyncAppLayout}
       />

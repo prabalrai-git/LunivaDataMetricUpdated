@@ -25,12 +25,13 @@ const NewTableSummary = (props) => {
       <Row justify="space-between">
         {/* Col sm={24} md={12} xs={24} lg={12} xl={12} */}
         <Col>
-          <p>Id:{id}</p>
-          <p>Name:{names} </p>
-          <p>Code:{code} </p>
+          <p>Id: {id}</p>
+
+          <p>Name: {names} </p>
+          <p>Code: {code} </p>
         </Col>
         <Col>
-          <p>Phone No:{phone} </p>
+          <p>Phone No: {phone} </p>
           <p>Pan No:{pan} </p>
           <p>Address: {add}</p>
         </Col>
@@ -46,4 +47,5 @@ const NewSummaryContainer = styled.div`
   /* li {
     list-style: none;
   } */
+  margin-right: 8%;
 `;

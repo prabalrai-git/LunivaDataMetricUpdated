@@ -341,7 +341,7 @@ const SideNav = (props) => {
               // <SubMenu key="set2" title='datametric' icon={<i className='icon-line2-settings'></i>}>
               //   {
               <>
-                {location.state === "misreportStat" && (
+                {location.state === "misReportStat" && (
                   <>
                     <SubMenu
                       key="set4"
@@ -349,6 +349,7 @@ const SideNav = (props) => {
                       icon={<i className="icon-book"></i>}
                     >
                       {misreportNav.map((e) => {
+                        // console.log(e, "thse are test logs");
                         if (e.isactive) {
                           return (
                             <Menu.Item
@@ -564,9 +565,13 @@ const SideNavContainer = styled.div`
   .navLInk {
     display: flex;
     gap: 20px;
-    font-size: 16px;
+    font-size: 14px;
     align-items: center;
+    line-height: normal;
     text-transform: capitalize;
+
+    word-break: normal;
+    white-space: pre-wrap;
 
     i {
       font-size: 20px;

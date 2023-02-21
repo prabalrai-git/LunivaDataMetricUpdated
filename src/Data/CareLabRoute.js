@@ -47,10 +47,10 @@ export const useCareLabRoute = () => {
     },
     {
       icon: "icon-line2-doc",
-      key: "misreports",
+      key: "misReports",
       name: "MIS Reports",
       path: "/datametric",
-      statePath: "misreportStat",
+      statePath: "misReportStat",
     },
   ];
 

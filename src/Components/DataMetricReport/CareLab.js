@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PageHeader from "../Common/pageHeader";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Row, Col } from "antd";
 import {
   carelabStat,
@@ -37,12 +37,35 @@ const data = [
     state: misreportStat,
   },
   // {
+  //   name: "MIS Reports",
+  //   pathName: "/datametric",
+  //   isactive: MenuSettings.misreports,
+  // },
+  {
+    name: "Provience Wise Report",
+    pathName: "viewProvience&DistrictWise",
+    state: misreportStat,
+  },
+  {
+    name: "Geography Wise Report",
+    pathName: "viewGeoGraphicalWise",
+    state: misreportStat,
+  },
+  {
+    name: "View Bill ",
+    pathName: "addbill",
+    state: misreportStat,
+  },
+  // {
   //     name: 'Test Type Report',
   //     pathName: 'testtype'
   // },
 ];
 
 const CareLab = () => {
+  const location = useLocation();
+  console.log(location, "123456");
+
   return (
     <CareLabContain>
       <div className="maiTopContainer">
@@ -57,7 +80,7 @@ const CareLab = () => {
                 to={{
                   pathname: `/datametric/${e.pathName}`,
                   //   state: carelabStat,
-                  state: misreportStat,
+                  state: e.state,
                 }}
               >
                 <div className="cButton">

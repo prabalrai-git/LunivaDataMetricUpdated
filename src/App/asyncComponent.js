@@ -140,9 +140,9 @@ export const AsyncAddUnits = lazy(() =>
 export const AsyncAddEmailField = lazy(() =>
   pMinDelay(import("../Components/SettingsField/EmailAdditionField"), 300)
 );
-export const AsyncEditEmailField = lazy(() =>
-  pMinDelay(import("../Components/SettingsField/EmailEditField"), 300)
-);
+// export const AsyncEditEmailField = lazy(() =>
+//   pMinDelay(import("../Components/SettingsField/EmailEditField"), 300)
+// );
 export const AsyncAddReportSettings = lazy(() =>
   pMinDelay(import("../Components/SettingsField/ReportAdditonField"), 300)
 );
